@@ -1,0 +1,31 @@
+{
+  "name": "@onesignal/node-onesignal",
+  "version": "1.0.0-beta1",
+  "description": "OpenAPI client for node-onesignal",
+  "author": "rgomezp",
+  "keywords": [
+    "typescript",
+    "node",
+    "openapi-client",
+    "openapi-generator"
+  ],
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.0",
+    "@types/node-fetch": "^2.5.7",
+    "@types/node": "*",
+    "form-data": "^2.5.0",
+    "btoa": "^1.2.1",
+    "es6-promise": "^4.2.4",
+    "url-parse": "^1.4.3"
+  },
+  "devDependencies": {
+    "typescript": "^3.9.3"
+  }
+}
