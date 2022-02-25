@@ -1,14 +1,36 @@
-# Overview
+<h1 align="center">Welcome to @onesignal/node-onesignal 👋</h1>
+<p>
+  <a href="https://www.npmjs.com/package/@onesignal/node-onesignal" target="_blank">
+    <img alt="Version" src="https://img.shields.io/npm/v/@onesignal/node-onesignal.svg">
+  </a>
+  <a href="https://github.com/OneSignal/node-onesignal#readme" target="_blank">
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
+  </a>
+  <a href="https://github.com/OneSignal/node-onesignal/graphs/commit-activity" target="_blank">
+    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
+  </a>
+  <a href="https://twitter.com/onesignal" target="_blank">
+    <img alt="Twitter: onesignal" src="https://img.shields.io/twitter/follow/onesignal.svg?style=social" />
+  </a>
+</p>
+
+> OpenAPI client for node-onesignal
+
+### 🏠 [Homepage](https://github.com/OneSignal/node-onesignal#readme)
+### 🖤 [npm](https://www.npmjs.com/package/@onesignal/node-onesignal)
+
+## 🚧 In Beta 🚧
+## Overview
 This is a Node.js wrapper library over OneSignal REST API. You can create notifications, view apps, edit a device and all other actions you can take on OneSignal REST API. Includes Typescript support.
 
-# Installation
+# Install
 
-```
-npm install @onesignal/node-onesignal --save
-```
-
-```
+```sh
+// yarn
 yarn add @onesignal/node-onesignal
+
+// npm
+npm install @onesignal/node-onesignal --save
 ```
 
 # Usage
@@ -315,3 +337,23 @@ Outcome Data Limitations Outcomes are only accessible for around 30 days before 
 ```js
 client.getOutcomes(app.id, 'os__click.count,os_session_duration.count,my_outcome.sum');
 ```
+
+
+## Author
+
+* Website: https://onesignal.com
+* Twitter: [@onesignal](https://twitter.com/onesignal)
+* Github: [@OneSignal](https://github.com/OneSignal)
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/OneSignal/node-onesignal/issues).
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+## 📝 License
+
+Copyright © 2022 [OneSignal](https://github.com/OneSignal).<br />
+This project is [MIT](https://github.com/OneSignal/node-onesignal/blob/main/LICENSE) licensed.
