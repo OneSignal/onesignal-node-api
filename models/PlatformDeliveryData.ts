@@ -2,7 +2,7 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.0.0
+ * API Version: 1.0.2
  * Contact: devrel@onesignal.com
  */
 
@@ -63,7 +63,7 @@ export class PlatformDeliveryData {
     static getAttributeTypeMap() {
         return PlatformDeliveryData.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

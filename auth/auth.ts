@@ -66,6 +66,7 @@ export class UserKeyAuthentication implements SecurityAuthentication {
 
 
 export type AuthMethods = {
+    "default"?: SecurityAuthentication,
     "app_key"?: SecurityAuthentication,
     "user_key"?: SecurityAuthentication
 }
@@ -76,6 +77,7 @@ export type HttpBearerConfiguration = { tokenProvider: TokenProvider };
 export type OAuth2Configuration = { accessToken: string };
 
 export type AuthMethodsConfiguration = {
+    "default"?: SecurityAuthentication,
     "app_key"?: HttpBearerConfiguration,
     "user_key"?: HttpBearerConfiguration
 }
@@ -90,6 +92,7 @@ export function configureAuthMethods(config: AuthMethodsConfiguration | undefine
     if (!config) {
         return authMethods;
     }
+    authMethods["default"] = config["default"]
 
     if (config["app_key"]) {
         authMethods["app_key"] = new AppKeyAuthentication(

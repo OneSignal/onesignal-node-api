@@ -2,7 +2,7 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.0.0
+ * API Version: 1.0.2
  * Contact: devrel@onesignal.com
  */
 
@@ -14,7 +14,7 @@ export class PlayerNotificationTarget {
     */
     'include_player_ids'?: Array<string>;
     /**
-    * Target specific devices by custom user IDs assigned via API. Not compatible with any other targeting parameters Example: [“custom-id-assigned-by-api”] REQUIRED: REST API Key Authentication Limit of 2,000 entries per REST API call. Note: If targeting push, email, or sms subscribers with same ids, use with channel_for_external_user_ids to indicate you are sending a push or email or sms. 
+    * Target specific devices by custom user IDs assigned via API. Not compatible with any other targeting parameters Example: [\"custom-id-assigned-by-api\"] REQUIRED: REST API Key Authentication Limit of 2,000 entries per REST API call. Note: If targeting push, email, or sms subscribers with same ids, use with channel_for_external_user_ids to indicate you are sending a push or email or sms. 
     */
     'include_external_user_ids'?: Array<string>;
     /**
@@ -117,7 +117,7 @@ export class PlayerNotificationTarget {
     static getAttributeTypeMap() {
         return PlayerNotificationTarget.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -2,7 +2,7 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.0.0
+ * API Version: 1.0.2
  * Contact: devrel@onesignal.com
  */
 
@@ -16,8 +16,8 @@ export class App {
     'name'?: string;
     'players'?: number;
     'messageable_players'?: number;
-    'updated_at'?: Date;
-    'created_at'?: Date;
+    'updated_at'?: string;
+    'created_at'?: string;
     /**
     * Android: Your Google Project number.  Also known as Sender ID.
     */
@@ -87,7 +87,7 @@ export class App {
     */
     'organization_id'?: string;
     /**
-    * iOS: Notification data (additional data) values will be added to the root of the apns payload when sent to the device.  Ignore if you're not using any other plugins, or not using OneSignal SDK methods to read the payload.
+    * iOS: Notification data (additional data) values will be added to the root of the apns payload when sent to the device.  Ignore if you\'re not using any other plugins, or not using OneSignal SDK methods to read the payload.
     */
     'additional_data_is_root_payload'?: boolean;
 
@@ -121,13 +121,13 @@ export class App {
         {
             "name": "updated_at",
             "baseName": "updated_at",
-            "type": "Date",
+            "type": "string",
             "format": "date-time"
         },
         {
             "name": "created_at",
             "baseName": "created_at",
-            "type": "Date",
+            "type": "string",
             "format": "date-time"
         },
         {
@@ -278,7 +278,7 @@ export class App {
     static getAttributeTypeMap() {
         return App.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -2,7 +2,7 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.0.0
+ * API Version: 1.0.2
  * Contact: devrel@onesignal.com
  */
 
@@ -31,7 +31,7 @@ export class InlineResponse4001 {
     static getAttributeTypeMap() {
         return InlineResponse4001.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }
