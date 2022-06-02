@@ -2,7 +2,7 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.0.0
+ * API Version: 1.0.1
  * Contact: devrel@onesignal.com
  */
 
@@ -16,15 +16,15 @@ export class NotificationAllOf {
     'value'?: number;
     'aggregation'?: NotificationAllOfAggregationEnum;
     /**
-    * Indicates whether to send to all devices registered under your app's Apple iOS platform.
+    * Indicates whether to send to all devices registered under your app\'s Apple iOS platform.
     */
     'is_ios'?: boolean;
     /**
-    * Indicates whether to send to all devices registered under your app's Google Android platform.
+    * Indicates whether to send to all devices registered under your app\'s Google Android platform.
     */
     'is_android'?: boolean;
     /**
-    * Indicates whether to send to all devices registered under your app's Huawei Android platform.
+    * Indicates whether to send to all devices registered under your app\'s Huawei Android platform.
     */
     'is_huawei'?: boolean;
     /**
@@ -40,19 +40,19 @@ export class NotificationAllOf {
     */
     'is_firefox'?: boolean;
     /**
-    * Does not support iOS Safari. Indicates whether to send to all Apple's Safari desktop users registered under your Safari web push platform. Read more iOS Safari
+    * Does not support iOS Safari. Indicates whether to send to all Apple\'s Safari desktop users registered under your Safari web push platform. Read more iOS Safari
     */
     'is_safari'?: boolean;
     /**
-    * Indicates whether to send to all devices registered under your app's Windows platform.
+    * Indicates whether to send to all devices registered under your app\'s Windows platform.
     */
     'is_wp_wns'?: boolean;
     /**
-    * Indicates whether to send to all devices registered under your app's Amazon Fire platform.
+    * Indicates whether to send to all devices registered under your app\'s Amazon Fire platform.
     */
     'is_adm'?: boolean;
     /**
-    * This flag is not used for web push Please see isChromeWeb for sending to web push users. This flag only applies to Google Chrome Apps & Extensions. Indicates whether to send to all devices registered under your app's Google Chrome Apps & Extension platform. 
+    * This flag is not used for web push Please see isChromeWeb for sending to web push users. This flag only applies to Google Chrome Apps & Extensions. Indicates whether to send to all devices registered under your app\'s Google Chrome Apps & Extension platform. 
     */
     'is_chrome'?: boolean;
     /**
@@ -64,7 +64,7 @@ export class NotificationAllOf {
     */
     'app_id'?: string;
     /**
-    * Correlation and idempotency key. A request received with this parameter will first look for another notification with the same external_id. If one exists, a notification will not be sent, and result of the previous operation will instead be returned. Therefore, if you plan on using this feature, it's important to use a good source of randomness to generate the UUID passed here. This key is only idempotent for 30 days. After 30 days, the notification could be removed from our system and a notification with the same external_id will be sent again.   See Idempotent Notification Requests for more details writeOnly: true 
+    * Correlation and idempotency key. A request received with this parameter will first look for another notification with the same external_id. If one exists, a notification will not be sent, and result of the previous operation will instead be returned. Therefore, if you plan on using this feature, it\'s important to use a good source of randomness to generate the UUID passed here. This key is only idempotent for 30 days. After 30 days, the notification could be removed from our system and a notification with the same external_id will be sent again.   See Idempotent Notification Requests for more details writeOnly: true 
     */
     'external_id'?: string;
     'contents'?: StringMap;
@@ -73,7 +73,7 @@ export class NotificationAllOf {
     /**
     * Channel: Push Notifications Platform: Huawei A custom map of data that is passed back to your app. Same as using Additional Data within the dashboard. Can use up to 2048 bytes of data. Example: {\"abc\": 123, \"foo\": \"bar\", \"event_performed\": true, \"amount\": 12.1} 
     */
-    'data'?: any;
+    'data'?: object;
     /**
     * Channel: Push Notifications Platform: Huawei Use \"data\" or \"message\" depending on the type of notification you are sending. More details in Data & Background Notifications. 
     */
@@ -93,7 +93,7 @@ export class NotificationAllOf {
     /**
     * Channel: Push Notifications Platform: iOS 10+ Adds media attachments to notifications. Set as JSON object, key as a media id of your choice and the value as a valid local filename or URL. User must press and hold on the notification to view. Do not set mutable_content to download attachments. The OneSignal SDK does this automatically Example: {\"id1\": \"https://domain.com/image.jpg\"} 
     */
-    'ios_attachments'?: any;
+    'ios_attachments'?: object;
     /**
     * Channel: Push Notifications Platform: All Use a template you setup on our dashboard. The template_id is the UUID found in the URL when viewing a template on our dashboard. Example: be4a8044-bbd6-11e4-a581-000c2940e62c 
     */
@@ -127,7 +127,7 @@ export class NotificationAllOf {
     */
     'chrome_big_picture'?: string;
     /**
-    * Channel: Push Notifications Platform: Chrome 56+ Sets the web push notification's large image to be shown below the notification's title and text. Please see Web Push Notification Icons. 
+    * Channel: Push Notifications Platform: Chrome 56+ Sets the web push notification\'s large image to be shown below the notification\'s title and text. Please see Web Push Notification Icons. 
     */
     'chrome_web_image'?: string;
     /**
@@ -143,11 +143,11 @@ export class NotificationAllOf {
     */
     'ios_category'?: string;
     /**
-    * Channel: Push Notifications Platform: Android The Android Oreo Notification Category to send the notification under. See the Category documentation on creating one and getting it's id. 
+    * Channel: Push Notifications Platform: Android The Android Oreo Notification Category to send the notification under. See the Category documentation on creating one and getting it\'s id. 
     */
     'android_channel_id'?: string;
     /**
-    * Channel: Push Notifications Platform: Huawei The Android Oreo Notification Category to send the notification under. See the Category documentation on creating one and getting it's id. 
+    * Channel: Push Notifications Platform: Huawei The Android Oreo Notification Category to send the notification under. See the Category documentation on creating one and getting it\'s id. 
     */
     'huawei_channel_id'?: string;
     /**
@@ -184,7 +184,7 @@ export class NotificationAllOf {
     */
     'adm_large_icon'?: string;
     /**
-    * Channel: Push Notifications Platform: Chrome Sets the web push notification's icon. An image URL linking to a valid image. Common image types are supported; GIF will not animate. We recommend 256x256 (at least 80x80) to display well on high DPI devices. Firefox will also use this icon, unless you specify firefox_icon. 
+    * Channel: Push Notifications Platform: Chrome Sets the web push notification\'s icon. An image URL linking to a valid image. Common image types are supported; GIF will not animate. We recommend 256x256 (at least 80x80) to display well on high DPI devices. Firefox will also use this icon, unless you specify firefox_icon. 
     */
     'chrome_web_icon'?: string;
     /**
@@ -192,7 +192,7 @@ export class NotificationAllOf {
     */
     'chrome_web_badge'?: string;
     /**
-    * Channel: Push Notifications Platform: Firefox Not recommended Few people need to set Firefox-specific icons. We recommend setting chrome_web_icon instead, which Firefox will also use. Sets the web push notification's icon for Firefox. An image URL linking to a valid image. Common image types are supported; GIF will not animate. We recommend 256x256 (at least 80x80) to display well on high DPI devices. 
+    * Channel: Push Notifications Platform: Firefox Not recommended Few people need to set Firefox-specific icons. We recommend setting chrome_web_icon instead, which Firefox will also use. Sets the web push notification\'s icon for Firefox. An image URL linking to a valid image. Common image types are supported; GIF will not animate. We recommend 256x256 (at least 80x80) to display well on high DPI devices. 
     */
     'firefox_icon'?: string;
     /**
@@ -204,15 +204,15 @@ export class NotificationAllOf {
     */
     'ios_sound'?: string;
     /**
-    * Channel: Push Notifications Platform: Android ⚠Deprecated, this field doesn't work on Android 8 (Oreo) and newer devices! Please use Notification Categories / Channels noted above instead to support ALL versions of Android. Sound file that is included in your app to play instead of the default device notification sound. Pass nil to disable sound for the notification. NOTE: Leave off file extension for Android. Example: \"notification\" 
+    * Channel: Push Notifications Platform: Android &#9888;&#65039;Deprecated, this field doesn\'t work on Android 8 (Oreo) and newer devices! Please use Notification Categories / Channels noted above instead to support ALL versions of Android. Sound file that is included in your app to play instead of the default device notification sound. Pass nil to disable sound for the notification. NOTE: Leave off file extension for Android. Example: \"notification\" 
     */
     'android_sound'?: string;
     /**
-    * Channel: Push Notifications Platform: Huawei ⚠Deprecated, this field ONLY works on EMUI 5 (Android 7 based) and older devices. Please also set Notification Categories / Channels noted above to support EMUI 8 (Android 8 based) devices. Sound file that is included in your app to play instead of the default device notification sound. NOTE: Leave off file extension for and include the full path.  Example: \"/res/raw/notification\" 
+    * Channel: Push Notifications Platform: Huawei &#9888;&#65039;Deprecated, this field ONLY works on EMUI 5 (Android 7 based) and older devices. Please also set Notification Categories / Channels noted above to support EMUI 8 (Android 8 based) devices. Sound file that is included in your app to play instead of the default device notification sound. NOTE: Leave off file extension for and include the full path.  Example: \"/res/raw/notification\" 
     */
     'huawei_sound'?: string;
     /**
-    * Channel: Push Notifications Platform: Amazon ⚠Deprecated, this field doesn't work on Android 8 (Oreo) and newer devices! Please use Notification Categories / Channels noted above instead to support ALL versions of Android. Sound file that is included in your app to play instead of the default device notification sound. Pass nil to disable sound for the notification. NOTE: Leave off file extension for Android. Example: \"notification\" 
+    * Channel: Push Notifications Platform: Amazon &#9888;&#65039;Deprecated, this field doesn\'t work on Android 8 (Oreo) and newer devices! Please use Notification Categories / Channels noted above instead to support ALL versions of Android. Sound file that is included in your app to play instead of the default device notification sound. Pass nil to disable sound for the notification. NOTE: Leave off file extension for Android. Example: \"notification\" 
     */
     'adm_sound'?: string;
     /**
@@ -220,11 +220,11 @@ export class NotificationAllOf {
     */
     'wp_wns_sound'?: string;
     /**
-    * Channel: Push Notifications Platform: Android ⚠Deprecated, this field doesn't work on Android 8 (Oreo) and newer devices! Please use Notification Categories / Channels noted above instead to support ALL versions of Android. Sets the devices LED notification light if the device has one. ARGB Hex format. Example(Blue): \"FF0000FF\" 
+    * Channel: Push Notifications Platform: Android &#9888;&#65039;Deprecated, this field doesn\'t work on Android 8 (Oreo) and newer devices! Please use Notification Categories / Channels noted above instead to support ALL versions of Android. Sets the devices LED notification light if the device has one. ARGB Hex format. Example(Blue): \"FF0000FF\" 
     */
     'android_led_color'?: string;
     /**
-    * Channel: Push Notifications Platform: Huawei ⚠Deprecated, this field ONLY works on EMUI 5 (Android 7 based) and older devices. Please also set Notification Categories / Channels noted above to support EMUI 8 (Android 8 based) devices. Sets the devices LED notification light if the device has one. RGB Hex format. Example(Blue): \"0000FF\" 
+    * Channel: Push Notifications Platform: Huawei &#9888;&#65039;Deprecated, this field ONLY works on EMUI 5 (Android 7 based) and older devices. Please also set Notification Categories / Channels noted above to support EMUI 8 (Android 8 based) devices. Sets the devices LED notification light if the device has one. RGB Hex format. Example(Blue): \"0000FF\" 
     */
     'huawei_led_color'?: string;
     /**
@@ -232,23 +232,23 @@ export class NotificationAllOf {
     */
     'android_accent_color'?: string;
     /**
-    * Channel: Push Notifications Platform: Huawei Accent Color used on Action Buttons and Group overflow count. Uses RGB Hex value (E.g. #9900FF). Defaults to device’s theme color if not set. 
+    * Channel: Push Notifications Platform: Huawei Accent Color used on Action Buttons and Group overflow count. Uses RGB Hex value (E.g. #9900FF). Defaults to device\'s theme color if not set. 
     */
     'huawei_accent_color'?: string;
     /**
-    * Channel: Push Notifications Platform: Android 5.0_ ⚠Deprecated, this field doesn't work on Android 8 (Oreo) and newer devices! Please use Notification Categories / Channels noted above instead to support ALL versions of Android. 1 = Public (default) (Shows the full message on the lock screen unless the user has disabled all notifications from showing on the lock screen. Please consider the user and mark private if the contents are.) 0 = Private (Hides message contents on lock screen if the user set \"Hide sensitive notification content\" in the system settings) -1 = Secret (Notification does not show on the lock screen at all) 
+    * Channel: Push Notifications Platform: Android 5.0_ &#9888;&#65039;Deprecated, this field doesn\'t work on Android 8 (Oreo) and newer devices! Please use Notification Categories / Channels noted above instead to support ALL versions of Android. 1 = Public (default) (Shows the full message on the lock screen unless the user has disabled all notifications from showing on the lock screen. Please consider the user and mark private if the contents are.) 0 = Private (Hides message contents on lock screen if the user set \"Hide sensitive notification content\" in the system settings) -1 = Secret (Notification does not show on the lock screen at all) 
     */
     'android_visibility'?: number;
     /**
-    * Channel: Push Notifications Platform: Huawei ⚠Deprecated, this field ONLY works on EMUI 5 (Android 7 based) and older devices. Please also set Notification Categories / Channels noted above to support EMUI 8 (Android 8 based) devices. 1 = Public (default) (Shows the full message on the lock screen unless the user has disabled all notifications from showing on the lock screen. Please consider the user and mark private if the contents are.) 0 = Private (Hides message contents on lock screen if the user set \"Hide sensitive notification content\" in the system settings) -1 = Secret (Notification does not show on the lock screen at all) 
+    * Channel: Push Notifications Platform: Huawei &#9888;&#65039;Deprecated, this field ONLY works on EMUI 5 (Android 7 based) and older devices. Please also set Notification Categories / Channels noted above to support EMUI 8 (Android 8 based) devices. 1 = Public (default) (Shows the full message on the lock screen unless the user has disabled all notifications from showing on the lock screen. Please consider the user and mark private if the contents are.) 0 = Private (Hides message contents on lock screen if the user set \"Hide sensitive notification content\" in the system settings) -1 = Secret (Notification does not show on the lock screen at all) 
     */
     'huawei_visibility'?: number;
     /**
-    * Channel: Push Notifications Platform: iOS Describes whether to set or increase/decrease your app's iOS badge count by the ios_badgeCount specified count. Can specify None, SetTo, or Increase. `None` leaves the count unaffected. `SetTo` directly sets the badge count to the number specified in ios_badgeCount. `Increase` adds the number specified in ios_badgeCount to the total. Use a negative number to decrease the badge count. 
+    * Channel: Push Notifications Platform: iOS Describes whether to set or increase/decrease your app\'s iOS badge count by the ios_badgeCount specified count. Can specify None, SetTo, or Increase. `None` leaves the count unaffected. `SetTo` directly sets the badge count to the number specified in ios_badgeCount. `Increase` adds the number specified in ios_badgeCount to the total. Use a negative number to decrease the badge count. 
     */
     'ios_badge_type'?: string;
     /**
-    * Channel: Push Notifications Platform: iOS Used with ios_badgeType, describes the value to set or amount to increase/decrease your app's iOS badge count by. You can use a negative number to decrease the badge count when used with an ios_badgeType of Increase. 
+    * Channel: Push Notifications Platform: iOS Used with ios_badgeType, describes the value to set or amount to increase/decrease your app\'s iOS badge count by. You can use a negative number to decrease the badge count when used with an ios_badgeType of Increase. 
     */
     'ios_badge_count'?: number;
     /**
@@ -260,9 +260,9 @@ export class NotificationAllOf {
     */
     'web_push_topic'?: string;
     /**
-    * Channel: Push Notifications Platform: iOS 10+ iOS can localize push notification messages on the client using special parameters such as loc-key. When using the Create Notification endpoint, you must include these parameters inside of a field called apns_alert. Please see Apple's guide on localizing push notifications to learn more. 
+    * Channel: Push Notifications Platform: iOS 10+ iOS can localize push notification messages on the client using special parameters such as loc-key. When using the Create Notification endpoint, you must include these parameters inside of a field called apns_alert. Please see Apple\'s guide on localizing push notifications to learn more. 
     */
-    'apns_alert'?: any;
+    'apns_alert'?: object;
     /**
     * Channel: All Schedule notification for future delivery. API defaults to UTC -1100 Examples: All examples are the exact same date & time. \"Thu Sep 24 2015 14:00:00 GMT-0700 (PDT)\" \"September 24th 2015, 2:00:00 pm UTC-07:00\" \"2015-09-24 14:00:00 GMT-0700\" \"Sept 24 2015 14:00:00 GMT-0700\" \"Thu Sep 24 2015 14:00:00 GMT-0700 (Pacific Daylight Time)\" Note: SMS currently only supports send_after parameter. 
     */
@@ -292,7 +292,7 @@ export class NotificationAllOf {
     */
     'throttle_rate_per_minute'?: string;
     /**
-    * Channel: Push Notifications Platform: Android Notifications with the same group will be stacked together using Android's Notification Grouping feature. 
+    * Channel: Push Notifications Platform: Android Notifications with the same group will be stacked together using Android\'s Notification Grouping feature. 
     */
     'android_group'?: string;
     /**
@@ -300,13 +300,13 @@ export class NotificationAllOf {
     */
     'android_group_message'?: string;
     /**
-    * Channel: Push Notifications Platform: Amazon Notifications with the same group will be stacked together using Android's Notification Grouping feature. 
+    * Channel: Push Notifications Platform: Amazon Notifications with the same group will be stacked together using Android\'s Notification Grouping feature. 
     */
     'adm_group'?: string;
     /**
     * Channel: Push Notifications Platform: Amazon Summary message to display when 2+ notifications are stacked together. Default is \"# new messages\". Include $[notif_count] in your message and it will be replaced with the current number. \"en\" (English) is required. The key of each hash is either a a 2 character language code or one of zh-Hans/zh-Hant for Simplified or Traditional Chinese. The value of each key is the message that will be sent to users for that language. Example: {\"en\": \"You have $[notif_count] new messages\"} 
     */
-    'adm_group_message'?: any;
+    'adm_group_message'?: object;
     /**
     * Channel: Push Notifications Platform: iOS 12+ This parameter is supported in iOS 12 and above. It allows you to group related notifications together. If two notifications have the same thread-id, they will both be added to the same group. 
     */
@@ -322,7 +322,7 @@ export class NotificationAllOf {
     /**
     * Channel: Email Required.  The subject of the email. 
     */
-    'email_subect'?: string;
+    'email_subject'?: string;
     /**
     * Channel: Email Required unless template_id is set. HTML suported The body of the email you wish to send. Typically, customers include their own HTML templates here. Must include [unsubscribe_url] in an <a> tag somewhere in the email. Note: any malformed HTML content will be sent to users. Please double-check your HTML is valid. 
     */
@@ -464,7 +464,7 @@ export class NotificationAllOf {
         {
             "name": "data",
             "baseName": "data",
-            "type": "any",
+            "type": "object",
             "format": ""
         },
         {
@@ -494,7 +494,7 @@ export class NotificationAllOf {
         {
             "name": "ios_attachments",
             "baseName": "ios_attachments",
-            "type": "any",
+            "type": "object",
             "format": ""
         },
         {
@@ -752,14 +752,14 @@ export class NotificationAllOf {
         {
             "name": "apns_alert",
             "baseName": "apns_alert",
-            "type": "any",
+            "type": "object",
             "format": ""
         },
         {
             "name": "send_after",
             "baseName": "send_after",
             "type": "string",
-            "format": ""
+            "format": "date-time"
         },
         {
             "name": "delayed_option",
@@ -818,7 +818,7 @@ export class NotificationAllOf {
         {
             "name": "adm_group_message",
             "baseName": "adm_group_message",
-            "type": "any",
+            "type": "object",
             "format": ""
         },
         {
@@ -840,8 +840,8 @@ export class NotificationAllOf {
             "format": ""
         },
         {
-            "name": "email_subect",
-            "baseName": "email_subect",
+            "name": "email_subject",
+            "baseName": "email_subject",
             "type": "string",
             "format": ""
         },
@@ -879,7 +879,7 @@ export class NotificationAllOf {
     static getAttributeTypeMap() {
         return NotificationAllOf.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

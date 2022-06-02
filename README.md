@@ -20,7 +20,8 @@
 ### 🖤 [npm](https://www.npmjs.com/package/@onesignal/node-onesignal)
 
 # Node Client SDK
-The OneSignal Node client is a server OneSignal SDK for NodeJS. Integrate OneSignal with your backend events, data, and more.
+The OneSignal Node client is a server OneSignal SDK for NodeJS. Integrate OneSignal with your backend events, data, and 
+more.
 
 
 # Install
@@ -43,7 +44,8 @@ import * as OneSignal from '@onesignal/node-onesignal';
 
 ## Creating a client
 ### Configuration
-We can configure the client using the `createConfiguration` function. You can find more info on each configuration parameter [here](https://github.com/OpenAPITools/openapi-generator/pull/10283/files).
+We can configure the client using the `createConfiguration` function. You can find more info on each configuration 
+parameter [here](https://github.com/OpenAPITools/openapi-generator/pull/10283/files).
 
 ```js
 const configuration = OneSignal.createConfiguration(configParams);
@@ -55,102 +57,66 @@ const client = new OneSignal.DefaultApi(configuration);
 ```
 
 ### Authentication
-#### User
-For managing operations outside of a OneSignal app (e.g: creating a OneSignal app), you will need to use your OneSignal account [user auth key](https://documentation.onesignal.com/docs/accounts-and-keys#user-auth-key). Create a key provider object with a function `getToken` that returns your key.
-```js
-const user_key_provider = {
-    getToken() {
-        return  "************************************************";
-    }
-};
-```
-
-#### App
-Create a key provider object with a function `getToken` that returns your OneSignal [app's API key](https://documentation.onesignal.com/docs/accounts-and-keys#rest-api-key).
+You can configure auth parameters passing them like this:
 
 ```js
-const app_key_provider = {
-    getToken() {
-        return "************************************************";
-    }
-};
-```
-
-#### Putting it together
-```js
-// configuration object
-let configuration = OneSignal.createConfiguration({
-    authMethods: {
-        user_key: {
-            tokenProvider: user_key_provider
-        },
-        app_key: {
-            tokenProvider: app_key_provider
-        }
-    }
+const configuration = OneSignal.createConfiguration({
+    userKey: '<YOUR_USER_KEY_TOKEN>',
+    appKey: '<YOUR_APP_KEY_TOKEN>',
 });
 
-client = new OneSignal.DefaultApi(configuration);
+const client = new OneSignal.DefaultApi(configuration);
 ```
 
 #### Advanced Usage: Creating a brand new app
-If creating a new app via the client, the response will return the app's API key via the `basic_auth_key` response parameter. You can then use this to modify your configuration object and create a new client that will have both user-level and app-level authentication set up.
+If creating a new app via the client, the response will return the app's API key via the `basic_auth_key` response 
+parameter. You can then use this to modify your configuration object and create a new client that will have both user-level and app-level authentication set up.
 
 ```js
-let response = await client.createApp(newapp);
-const app_key_provider = {
-    getToken() {
-        return response.basic_auth_key;
-    }
-};
+const response = await client.createApp(newapp);
 
-configuration = OneSignal.createConfiguration({
-    authMethods: {
-        user_key: {
-            tokenProvider: user_key_provider
-        },
-        app_key: {
-            tokenProvider: app_key_provider
-        }
-    }
+const configuration = OneSignal.createConfiguration({
+    userKey: '<YOUR_USER_KEY_TOKEN>',
+    appKey: response.basic_auth_key,
 });
 
-client = new OneSignal.DefaultApi(configuration);
+const client = new OneSignal.DefaultApi(configuration);
 ```
 
 ---
 ## API Reference
 
-> To make stateful changes requests should take on the following pattern:
-> 1. create or get an object
-> 2. make changes to that object
-> 3. pass the object to the request function to make the changes
->
-> Examples of important OneSignal objects include `App`, `Notification`, `Player`, and `Segment`.
->
-> For example, see the section below on creating an app. First an app object is created via the instantiation of the `App` class. Then, the app instance is modified directly. Finally, we use the `client` to create the app via a remote request.
+To make stateful changes requests should take on the following pattern:
+1. create or get an object
+2. make changes to that object
+3. pass the object to the request function to make the changes
 
-| Function                                                                                                               | HTTP Request                                   | Description                                         |
-|------------------------------------------------------------------------------------------------------------------------|------------------------------------------------|-----------------------------------------------------|
-| [CancelNotification](#canceling-a-notification)         | Delete  /notifications/{notification_id}       | Stop a scheduled or currently outgoing notification |
-| [CreateApp](#creating-an-app)                           | Post  /apps                                    | Create an app                                       |
-| [CreateNotification](#creating-a-notification)          | Post  /notifications                           | Create notification                                 |
-| [CreatePlayer](#creating-a-player)                      | Post  /players                                 | Add a device                                        |
-| [CreateSegments](#creating-a-segment)                   | Post  /apps/{app_id}/segments                  | Create Segments                                     |
-| [DeletePlayer](#deleting-a-player)                      | Delete  /players/{player_id}                   | Delete a user record                                |
-| [DeleteSegments](#deleting-a-segment)                   | Delete  /apps/{app_id}/segments/{segment_id}   | Delete Segments                                     |
-| [ExportPlayers](#exporting-a-player)                    | Post  /players/csv_export?app_id={app_id}      | CSV export                                          |
-| [GetApp](#getting-an-app)                               | Get  /apps/{app_id}                            | View an app                                         |
-| [GetApps](#getting-multiple-apps)                       | Get  /apps                                     | View apps                                           |
-| [GetNotification](#getting-a-notification)              | Get  /notifications/{notification_id}          | View notification                                   |
-| [GetNotificationHistory](#getting-notification-history) | Post  /notifications/{notification_id}/history | Notification History                                |
-| [GetNotifications](#getting-a-notification)             | Get  /notifications                            | View notifications                                  |
-| [GetOutcomes](#getting-outcomes)                        | Get  /apps/{app_id}/outcomes                   | View Outcomes                                       |
-| [GetPlayer](#getting-a-player)                          | Get  /players/{player_id}                      | View device                                         |
-| [GetPlayers](#getting-players)                          | Get  /players                                  | View devices                                        |
-| [UpdateApp](#getting-an-app)                            | Put  /apps/{app_id}                            | Update an app                                       |
-| [UpdatePlayer](#updating-a-player)                      | Put  /players/{player_id}                      | Edit device                                         |
-| [UpdatePlayerTags](#updating-player-tags)               | Put  /apps/{app_id}/users/{external_user_id}   | Edit tags with external user id                     |
+Examples of important OneSignal objects include `App`, `Notification`, `Player`, and `Segment`.
+
+For example, see the section below on creating an app. First an app object is created via the instantiation of the `App`
+class. Then, the app instance is modified directly. Finally, we use the `client` to create the app via a remote request.
+
+| Function                                                | HTTP Request                                   | Description                                         |
+|---------------------------------------------------------|------------------------------------------------|-----------------------------------------------------|
+| [cancelNotification](#canceling-a-notification)         | Delete  `/notifications/{notification_id}`     | Stop a scheduled or currently outgoing notification |
+| [createApp](#creating-an-app)                           | Post  `/apps`                                  | Create an app                                       |
+| [createNotification](#creating-a-notification)          | Post  `/notifications`                         | Create notification                                 |
+| [createPlayer](#creating-a-player)                      | Post  `/players`                               | Add a device                                        |
+| [createSegments](#creating-a-segment)                   | Post  `/apps/{app_id}/segments`                  | Create Segments                                     |
+| [deletePlayer](#deleting-a-player)                      | Delete  `/players/{player_id}`                   | Delete a user record                                |
+| [deleteSegments](#deleting-a-segment)                   | Delete  `/apps/{app_id}/segments/{segment_id}`   | Delete Segments                                     |
+| [exportPlayers](#exporting-a-player)                    | Post  `/players/csv_export?app_id={app_id}`      | CSV export                                          |
+| [getApp](#getting-an-app)                               | Get  `/apps/{app_id}`                            | View an app                                         |
+| [getApps](#getting-multiple-apps)                       | Get  `/apps`                                     | View apps                                           |
+| [getNotification](#getting-a-notification)              | Get  `/notifications/{notification_id}`          | View notification                                   |
+| [getNotificationHistory](#getting-notification-history) | Post  `/notifications/{notification_id}/history` | Notification History                                |
+| [getNotifications](#getting-a-notification)             | Get  `/notifications`                            | View notifications                                  |
+| [getOutcomes](#getting-outcomes)                        | Get  `/apps/{app_id}/outcomes`                   | View Outcomes                                       |
+| [getPlayer](#getting-a-player)                          | Get  `/players/{player_id}`                      | View device                                         |
+| [getPlayers](#getting-players)                          | Get  `/players`                                  | View devices                                        |
+| [updateApp](#getting-an-app)                            | Put  `/apps/{app_id}`                            | Update an app                                       |
+| [updatePlayer](#updating-a-player)                      | Put  `/players/{player_id}`                      | Edit device                                         |
+| [updatePlayerTags](#updating-player-tags)               | Put  `/apps/{app_id}/users/{external_user_id}`   | Edit tags with external user id                     |
 
 ### Creating an app
 Creates a new OneSignal app.
@@ -172,7 +138,7 @@ View the details of a single OneSignal app.
 
 **Example**
 ```js
-await client.getApp('<app id>');
+const app = await client.getApp('<app id>');
 ```
 
 ### Getting multiple apps
@@ -180,7 +146,7 @@ View apps.
 
 **Example**
 ```js
-await client.getApps();
+const apps = await client.getApps();
 ```
 
 ### Updating an app
@@ -188,7 +154,10 @@ Updates the name or configuration settings of an existing OneSignal app.
 
 **Example**
 ```js
-await client.updateApp('<app id>', app);
+const app = new OneSignal.App();
+app.name = 'modified_app_name';
+
+const udpateAppResponse = await client.updateApp('<existing_app_id>', app);
 ```
 
 ### Creating a notification
@@ -207,7 +176,7 @@ notification.contents = {
 notification.headings = {
   en: "Gig'em Ags"
 }
-await client.createNotification(notification);
+const notification = await client.createNotification(notification);
 ```
 
 ### Canceling a notification
@@ -216,7 +185,7 @@ Stop a scheduled or currently outgoing notification.
 **Example**
 
 ```js
-await client.cancelNotification('<app id>', '<notification id>');
+const cancelNotificationResponse = await client.cancelNotification('<app id>', '<notification id>');
 ```
 
 
@@ -233,7 +202,7 @@ View the details of multiple notifications.
 
 | Param  | Type   | Description                                                                                                                                                                      |
 |--------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| app_id* | string | The OneSignal App ID for your app.  Available in Keys &amp; IDs.                                                                                                                 |
+| app_id | string | The OneSignal App ID for your app.  Available in Keys &amp; IDs.                                                                                                                 |
 | limit  | string | How many notifications to return.  Max is 50.  Default is 50.                                                                                                                    |
 | offset | number | Page offset. Default is 0. Results are sorted by queued_at in descending order. `queued_at` is a representation of the time that the notification was queued at.                 |
 | kind   | number | Kind of notifications returned:   * unset - All notification types (default)   * `0` - Dashboard only   * `1` - API only    * `3` - Automated only |
@@ -241,16 +210,17 @@ View the details of multiple notifications.
 
 **Example**
 ```js
-await client.getNotifications('<app id>', '50', 0, 1);
+const notifications = await client.getNotifications('<app id>', '50', 0, 1);
 ```
 
 ### Getting notification history
 View the devices sent a message - **OneSignal Paid Plan Required**
-This method will return all devices that were sent the given `notification_id` of an Email or Push Notification if used within 7 days of the date sent.
+This method will return all devices that were sent the given `notification_id` of an Email or Push Notification if used 
+within 7 days of the date sent.
 
 **Example**
 ```js
-await client.getNotificationHistory('<notification id>');
+const notificationHistory = await client.getNotificationHistory('<notification id>');
 ```
 
 ### Creating a segment
@@ -265,17 +235,18 @@ segment.filters = [
   { field: 'tag', key: 'my_tag', relation: 'exists' }
 ]
 
-await client.createSegments(app.id, segment)
+const segment = await client.createSegments(app.id, segment);
 ```
 
 ### Deleting a segment
 Delete segments (not user devices) - **Required: OneSignal Paid Plan**
-You can delete a segment under your app by calling this API. You must provide an API key in the Authorization header that has admin access on the app.
+You can delete a segment under your app by calling this API. You must provide an API key in the Authorization header 
+that has admin access on the app.
 The `segment_id` can be found in the URL of the segment when viewing it in the dashboard.
 
 **Example**
 ```js
-await client.deleteSegments('<app id>', '<segment id>');
+const deleteSegmentsResponse = await client.deleteSegments('<app id>', '<segment id>');
 ```
 
 ### Creating a player
@@ -287,40 +258,44 @@ const player = new OneSignal.Player();
 player.device_type = 1;
 player.app_id = app_id;
 player.identifier = '<identifier>';
-await client.createPlayer(player);
+const player = await client.createPlayer(player);
 ```
 
 ### Getting a player
-View the details of an existing device in one of your OneSignal apps. The email a th hash is **only required if you have enabled Identity Verification and `device_type` is email**.
+View the details of an existing device in one of your OneSignal apps.
+The email and the hash is **only required if you have enabled Identity Verification and `device_type` is email**.
 
 **Example**
 ```js
-await client.getPlayer('<app id>', '<player id>', '<email auth hash>');
+const player = await client.getPlayer('<app id>', '<player id>', '<email auth hash>');
 ```
 
 ### Getting players
-View the details of multiple devices in one of your OneSignal apps. Unavailable for Apps Over 80,000 Users.
+View the details of multiple devices in one of your OneSignal apps. 
 
-| Param   | Type   | Description                                                      |
-|---------|--------|------------------------------------------------------------------|
-| app_id* | string | The OneSignal App ID for your app.  Available in Keys &amp; IDs. |
-| limit   | string | How many devices to return. Max is 300. Default is 300           |
-| offset  | number | Result offset. Default is 0. Results are sorted by id;           |
+⚠️ Unavailable for Apps Over 80,000 Users.
+
+| Param  | Type   | Description                                                      |
+|--------|--------|------------------------------------------------------------------|
+| app_id | string | The OneSignal App ID for your app.  Available in Keys &amp; IDs. |
+| limit  | string | How many devices to return. Max is 300. Default is 300           |
+| offset | number | Result offset. Default is 0. Results are sorted by id;           |
 
 
 **Example**
 ```js
-await client.getPlayers('<app id>', '300', 0);
+const players = await client.getPlayers('<app id>', '300', 0);
 ```
 
 ### Exporting a player
-Generate a compressed CSV export of all of your current user data. This method can be used to generate a compressed CSV export of all of your current user data. It is a much faster alternative than retrieving this data using the /players API endpoint.
+Generate a compressed CSV export of all of your current user data. This method can be used to generate a compressed CSV
+export of all of your existing user data and is a better alternative to retrieving this data using the /players API endpoint.
 
 See [full CSV Export Reference](https://documentation.onesignal.com/reference/csv-export)
 
 **Example**
 ```js
-await client.exportPlayer('<app id>', {
+const exportPlayerResponse = await client.exportPlayer('<app id>', {
   extra_fields: ['location', 'external_user_id'],
   last_active_since: 1469392779,
   segment_name: "Subscribed Users"
@@ -333,24 +308,29 @@ Update an existing device in one of your OneSignal apps.
 
 **Example**
 ```js
-await client.updatePlayer('<player id>', player);
+const updatePlayerResponse = await client.updatePlayer('<player id>', player);
 ```
 
 ### Updating player tags
 Update an existing device's tags in one of your OneSignal apps using the External User ID.
-#### Warning - Android SDK Data Synchronization
+#### ⚠️ Android SDK Data Synchronization
 Tags added through the Android SDK tagging methods may not update if using the API to change or update the same tag.
-For example, if you use SDK method sendTag("key", "value1") then update the tag value to "value2" with this API endpoint. You will not be able to set the value back to "value1" through the SDK, you will need to change it to something different through the SDK to be reset.
+For example, if you use SDK method sendTag("key", "value1") then update the tag value to "value2" with this API endpoint.
+You will not be able to set the value back to "value1" through the SDK, you will need to change it to something different 
+through the SDK to be reset.
 
 Recommendations if using this Endpoint on Android Mobile Apps:
-1 - Do not use the same tag keys for SDK and API updates
-2 - If you want to use the same key for both SDK and API updates, call the SDK getTags method first to update the device's tags.
+1. Do not use the same tag keys for SDK and API updates
+2. If you want to use the same key for both SDK and API updates, call the SDK getTags method first to update the 
+device's tags.
 
-This is only applicable on the Android Mobile App SDKs.
+⚠️ This is only applicable on the Android Mobile App SDKs.
 
 #### Deleting Tags
-To delete a tag, include its key and set its value to blank. Omitting a key/value will not delete it.
-For example, if I wanted to delete two existing tags rank and category while simultaneously adding a new tag class, the tags JSON would look like the following:
+To delete a tag, include its key and set its value to blank (""). Omitting a key/value will not delete it.
+
+For example, if you wanted to delete two existing tags rank and category while simultaneously adding a new tag class, the 
+tags JSON would look like the following:
 
 **Example**
 ```json
@@ -366,19 +346,19 @@ Deletes a user record.
 
 **Example**
 ```js
-await client.deletePlayer(app.id, '<player id>')
+const deletePlayerResponse = await client.deletePlayer(app.id, '<player id>')
 ```
 
 ### Getting outcomes
 View the details of all the outcomes associated with your app.
 
-🚧  **Requires Authentication Key Requires your OneSignal App's REST API Key, available in Keys & IDs** 🚧
+🚧  **Requires your OneSignal App's REST API Key, available in Keys & IDs** 🚧
 
-Outcome Data Limitations Outcomes are only accessible for around 30 days before deleted from our servers. You will need to export this data every month if you want to keep it.
+Outcome data are accessible for 30 days before being deleted from our servers. You can export this data monthly if you need it for a more extended period.
 
 | Param               | Type   | Description                                                                                                                                                                                                                                                                                                                                                                                                     |
 |---------------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| app_id*              | string | The OneSignal App ID for your app.  Available in Keys &amp; IDs.                                                                                                                                                                                                                                                                                                                                                |
+| app_id              | string | The OneSignal App ID for your app.  Available in Keys &amp; IDs.                                                                                                                                                                                                                                                                                                                                                |
 | outcome_names       | string | Required Comma-separated list of names and the value (sum/count) for the returned outcome data. Note: Clicks only support count aggregation. For out-of-the-box OneSignal outcomes such as click and session duration, please use the “os” prefix with two underscores. For other outcomes, please use the name specified by the user. Example:os__session_duration.count,os__click.count,CustomOutcomeName.sum |
 | outcome_names2      | string | If outcome names contain any commas, then please specify only one value at a time. Example: `outcome_names[]=os__click.count&outcome_names[]=Sales, Purchase.count` where “Sales, Purchase” is the custom outcomes with a comma in the name.                                                                                                                                                                                                        |
 | outcome_time_range  | string | Optional Time range for the returned data. The values can be `1h` (for the last 1 hour data), `1d` (for the last 1 day data), or `1mo` (for the last 1 month data). Default is 1h if the parameter is omitted.                                                                                                                                                                                                        |
@@ -387,7 +367,7 @@ Outcome Data Limitations Outcomes are only accessible for around 30 days before 
 
 **Example**
 ```js
-await client.getOutcomes(app.id, 'os__click.count,os_session_duration.count,my_outcome.sum');
+const outcomes = await client.getOutcomes(app.id, 'os__click.count,os_session_duration.count,my_outcome.sum');
 ```
 
 ## Author
@@ -406,5 +386,6 @@ Give a ⭐️ if this project helped you!
 
 ## 📝 License
 
-Copyright © 2022 [OneSignal](https://github.com/OneSignal).<br />
+Copyright © 2022 [OneSignal](https://github.com/OneSignal).
+
 This project is [MIT](https://github.com/OneSignal/node-onesignal/blob/main/LICENSE) licensed.

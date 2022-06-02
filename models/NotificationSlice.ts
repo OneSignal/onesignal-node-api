@@ -2,18 +2,18 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.0.0
+ * API Version: 1.0.1
  * Contact: devrel@onesignal.com
  */
 
-import { Notification } from './Notification';
+import { NotificationWithMeta } from './NotificationWithMeta';
 import { HttpFile } from '../http/http';
 
 export class NotificationSlice {
     'total_count'?: number;
     'offset'?: number;
     'limit'?: number;
-    'notifications'?: Array<Notification>;
+    'notifications'?: Array<NotificationWithMeta>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -39,14 +39,14 @@ export class NotificationSlice {
         {
             "name": "notifications",
             "baseName": "notifications",
-            "type": "Array<Notification>",
+            "type": "Array<NotificationWithMeta>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
         return NotificationSlice.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

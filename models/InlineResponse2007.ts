@@ -8,12 +8,8 @@
 
 import { HttpFile } from '../http/http';
 
-export class InlineResponse201 {
-    'success'?: boolean;
-    /**
-    * UUID of created segment
-    */
-    'id'?: string;
+export class InlineResponse2007 {
+    'success'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -21,18 +17,12 @@ export class InlineResponse201 {
         {
             "name": "success",
             "baseName": "success",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "id",
-            "baseName": "id",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return InlineResponse201.attributeTypeMap;
+        return InlineResponse2007.attributeTypeMap;
     }
 
     public constructor() {

@@ -1,8 +1,5 @@
 // TODO: evaluate if we can easily get rid of this library
 import * as FormData from "form-data";
-// typings of url-parse are incorrect...
-// @ts-ignore 
-import * as URLParse from "url-parse";
 import { Observable, from } from '../rxjsStub';
 
 export * from './isomorphic-fetch';
@@ -48,16 +45,16 @@ export type RequestBody = undefined | string | FormData;
 export class RequestContext {
     private headers: { [key: string]: string } = {};
     private body: RequestBody = undefined;
-    private url: URLParse;
+    private url: URL;
 
-    /**
-     * Creates the request context using a http method and request resource url
-     *
-     * @param url url of the requested resource
-     * @param httpMethod http method
-     */
+	/**
+	 * Creates the request context using a http method and request resource url
+	 *
+	 * @param url url of the requested resource
+	 * @param httpMethod http method
+	 */
     public constructor(url: string, private httpMethod: HttpMethod) {
-        this.url = new URLParse(url, true);
+        this.url = new URL(url);
     }
 
     /*
@@ -65,7 +62,7 @@ export class RequestContext {
      *
      */
     public getUrl(): string {
-        return this.url.toString();
+    	return this.url.toString();
     }
 
     /**
@@ -73,7 +70,7 @@ export class RequestContext {
      *
      */
     public setUrl(url: string) {
-        this.url = new URLParse(url, true);
+        this.url = new URL(url);
     }
 
     /**
@@ -90,27 +87,25 @@ export class RequestContext {
     }
 
     public getHttpMethod(): HttpMethod {
-        return this.httpMethod;
+    	return this.httpMethod;
     }
 
     public getHeaders(): { [key: string]: string } {
-        return this.headers;
+    	return this.headers;
     }
 
     public getBody(): RequestBody {
         return this.body;
     }
 
-    public setQueryParam(name: string, value: string) {
-        let queryObj = this.url.query;
-        queryObj[name] = value;
-        this.url.set("query", queryObj);
+	public setQueryParam(name: string, value: string) {
+        this.url.searchParams.set(name, value);
     }
 
-    /**
-     * Sets a cookie with the name and value. NO check  for duplicate cookies is performed
-     *
-     */
+	/**
+	 *	Sets a cookie with the name and value. NO check  for duplicate cookies is performed
+	 *
+	 */
     public addCookie(name: string, value: string): void {
         if (!this.headers["Cookie"]) {
             this.headers["Cookie"] = "";
@@ -118,7 +113,7 @@ export class RequestContext {
         this.headers["Cookie"] += name + "=" + value + "; ";
     }
 
-    public setHeaderParam(key: string, value: string): void  { 
+    public setHeaderParam(key: string, value: string): void  {
         this.headers[key] = value;
     }
 }
@@ -127,6 +122,7 @@ export interface ResponseBody {
     text(): Promise<string>;
     binary(): Promise<Buffer>;
 }
+
 
 /**
  * Helper class to generate a `ResponseBody` from binary data
@@ -185,6 +181,10 @@ export class ResponseContext {
         const data = await this.body.binary();
         const fileName = this.getParsedHeader("content-disposition")["filename"] || "";
         return { data, name: fileName };
+    }
+
+    public async getBodyAsAny(): Promise<any> {
+        return this.body as any;
     }
 }
 

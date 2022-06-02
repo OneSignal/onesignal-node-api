@@ -6,33 +6,24 @@
  * Contact: devrel@onesignal.com
  */
 
+import { OutcomeData } from './OutcomeData';
 import { HttpFile } from '../http/http';
 
-export class InlineResponse201 {
-    'success'?: boolean;
-    /**
-    * UUID of created segment
-    */
-    'id'?: string;
+export class OutcomesData {
+    'outcomes'?: Array<OutcomeData>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "success",
-            "baseName": "success",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
+            "name": "outcomes",
+            "baseName": "outcomes",
+            "type": "Array<OutcomeData>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return InlineResponse201.attributeTypeMap;
+        return OutcomesData.attributeTypeMap;
     }
 
     public constructor() {
