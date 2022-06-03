@@ -9,21 +9,26 @@ export * from './GetNotificationRequestBody';
 export * from './InlineResponse200';
 export * from './InlineResponse2001';
 export * from './InlineResponse2002';
-export * from './InlineResponse2003';
-export * from './InlineResponse2004';
 export * from './InlineResponse2005';
+export * from './InlineResponse2007';
+export * from './InlineResponse2008';
 export * from './InlineResponse201';
 export * from './InlineResponse400';
 export * from './InlineResponse4001';
 export * from './InlineResponse4002';
-export * from './InlineResponse409';
+export * from './InlineResponse4003';
+export * from './InvalidIdentifierError';
 export * from './Notification';
+export * from './Notification200Errors';
 export * from './NotificationAllOf';
 export * from './NotificationAllOfAndroidBackgroundLayout';
 export * from './NotificationSlice';
 export * from './NotificationTarget';
+export * from './NotificationWithMeta';
+export * from './NotificationWithMetaAllOf';
 export * from './Operator';
 export * from './OutcomeData';
+export * from './OutcomesData';
 export * from './PlatformDeliveryData';
 export * from './Player';
 export * from './PlayerNotificationTarget';
@@ -45,21 +50,26 @@ import { GetNotificationRequestBody, GetNotificationRequestBodyEventsEnum     } 
 import { InlineResponse200 } from './InlineResponse200';
 import { InlineResponse2001 } from './InlineResponse2001';
 import { InlineResponse2002 } from './InlineResponse2002';
-import { InlineResponse2003 } from './InlineResponse2003';
-import { InlineResponse2004 } from './InlineResponse2004';
 import { InlineResponse2005 } from './InlineResponse2005';
+import { InlineResponse2007 } from './InlineResponse2007';
+import { InlineResponse2008 } from './InlineResponse2008';
 import { InlineResponse201 } from './InlineResponse201';
 import { InlineResponse400 } from './InlineResponse400';
 import { InlineResponse4001 } from './InlineResponse4001';
 import { InlineResponse4002 } from './InlineResponse4002';
-import { InlineResponse409 } from './InlineResponse409';
+import { InlineResponse4003 } from './InlineResponse4003';
+import { InvalidIdentifierError } from './InvalidIdentifierError';
 import { Notification                          , NotificationAggregationEnum                                                                                        } from './Notification';
+import { Notification200Errors } from './Notification200Errors';
 import { NotificationAllOf  , NotificationAllOfAggregationEnum                                                                                        } from './NotificationAllOf';
 import { NotificationAllOfAndroidBackgroundLayout } from './NotificationAllOfAndroidBackgroundLayout';
 import { NotificationSlice } from './NotificationSlice';
 import { NotificationTarget } from './NotificationTarget';
+import { NotificationWithMeta                          , NotificationWithMetaAggregationEnum                                                                                                  } from './NotificationWithMeta';
+import { NotificationWithMetaAllOf } from './NotificationWithMetaAllOf';
 import { Operator, OperatorOperatorEnum   } from './Operator';
 import { OutcomeData  , OutcomeDataAggregationEnum   } from './OutcomeData';
+import { OutcomesData } from './OutcomesData';
 import { PlatformDeliveryData } from './PlatformDeliveryData';
 import { Player } from './Player';
 import { PlayerNotificationTarget } from './PlayerNotificationTarget';
@@ -84,10 +94,11 @@ let primitives = [
 
 const supportedMediaTypes: { [mediaType: string]: number } = {
   "application/json": Infinity,
-  "application/octet-stream": 0
+  "application/octet-stream": 0,
+  "application/x-www-form-urlencoded": 0
 }
 
-                 
+
 let enumsMap: Set<string> = new Set<string>([
     "AppApnsEnvEnum",
     "FilterRelationEnum",
@@ -96,6 +107,7 @@ let enumsMap: Set<string> = new Set<string>([
     "GetNotificationRequestBodyEventsEnum",
     "NotificationAggregationEnum",
     "NotificationAllOfAggregationEnum",
+    "NotificationWithMetaAggregationEnum",
     "OperatorOperatorEnum",
     "OutcomeDataAggregationEnum",
 ]);
@@ -112,21 +124,26 @@ let typeMap: {[index: string]: any} = {
     "InlineResponse200": InlineResponse200,
     "InlineResponse2001": InlineResponse2001,
     "InlineResponse2002": InlineResponse2002,
-    "InlineResponse2003": InlineResponse2003,
-    "InlineResponse2004": InlineResponse2004,
     "InlineResponse2005": InlineResponse2005,
+    "InlineResponse2007": InlineResponse2007,
+    "InlineResponse2008": InlineResponse2008,
     "InlineResponse201": InlineResponse201,
     "InlineResponse400": InlineResponse400,
     "InlineResponse4001": InlineResponse4001,
     "InlineResponse4002": InlineResponse4002,
-    "InlineResponse409": InlineResponse409,
+    "InlineResponse4003": InlineResponse4003,
+    "InvalidIdentifierError": InvalidIdentifierError,
     "Notification": Notification,
+    "Notification200Errors": Notification200Errors,
     "NotificationAllOf": NotificationAllOf,
     "NotificationAllOfAndroidBackgroundLayout": NotificationAllOfAndroidBackgroundLayout,
     "NotificationSlice": NotificationSlice,
     "NotificationTarget": NotificationTarget,
+    "NotificationWithMeta": NotificationWithMeta,
+    "NotificationWithMetaAllOf": NotificationWithMetaAllOf,
     "Operator": Operator,
     "OutcomeData": OutcomeData,
+    "OutcomesData": OutcomesData,
     "PlatformDeliveryData": PlatformDeliveryData,
     "Player": Player,
     "PlayerNotificationTarget": PlayerNotificationTarget,
@@ -206,7 +223,7 @@ export class ObjectSerializer {
             if (!typeMap[type]) { // in case we dont know the type
                 return data;
             }
-            
+
             // Get the actual type of this object
             type = this.findCorrectType(data, type);
 
@@ -251,7 +268,10 @@ export class ObjectSerializer {
             let attributeTypes = typeMap[type].getAttributeTypeMap();
             for (let index in attributeTypes) {
                 let attributeType = attributeTypes[index];
-                instance[attributeType.name] = ObjectSerializer.deserialize(data[attributeType.baseName], attributeType.type, attributeType.format);
+                let value = ObjectSerializer.deserialize(data[attributeType.baseName], attributeType.type, attributeType.format);
+                if (value !== undefined) {
+                    instance[attributeType.name] = value;
+                }
             }
             return instance;
         }

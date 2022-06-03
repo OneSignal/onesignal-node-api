@@ -35,7 +35,12 @@ export interface ConfigurationParameters {
     /**
      * Configuration for the available authentication methods
      */
-    authMethods: AuthMethodsConfiguration
+    authMethods?: AuthMethodsConfiguration;
+    /**
+     * Faster way to configure authentication methods
+     */
+    appKey?: string;
+    userKey?: string;
 }
 
 /**
@@ -51,11 +56,25 @@ export interface ConfigurationParameters {
  * @param conf partial configuration
  */
 export function createConfiguration(conf: ConfigurationParameters): Configuration {
+
+    const authMethods: AuthMethodsConfiguration = {
+        'app_key': {
+            tokenProvider: {
+                getToken: () => conf.appKey || ''
+            }
+        },
+        'user_key': {
+            tokenProvider: {
+                getToken: () => conf.userKey || ''
+            }
+        },
+    }
+
     const configuration: Configuration = {
         baseServer: conf.baseServer !== undefined ? conf.baseServer : server1,
         httpApi: conf.httpApi || new DefaultHttpLibrary(),
         middleware: conf.middleware || [],
-        authMethods: configureAuthMethods(conf.authMethods)
+        authMethods: configureAuthMethods(Object.assign(authMethods, conf.authMethods || {}))
     };
     if (conf.promiseMiddleware) {
         conf.promiseMiddleware.forEach(

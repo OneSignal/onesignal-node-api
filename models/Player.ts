@@ -2,7 +2,7 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.0.0
+ * API Version: 1.0.1
  * Contact: devrel@onesignal.com
  */
 
@@ -10,16 +10,16 @@ import { HttpFile } from '../http/http';
 
 export class Player {
     /**
-    * The device's OneSignal ID
+    * The device\'s OneSignal ID
     */
     'id': string;
     /**
     * If true, this is the equivalent of a user being Unsubscribed
     */
     'invalid_identifier'?: boolean;
-    'app_id': string;
+    'app_id'?: string;
     /**
-    * Required The device's platform:   0 = iOS   1 = Android   2 = Amazon   3 = WindowsPhone (MPNS)   4 = Chrome Apps / Extensions   5 = Chrome Web Push   6 = Windows (WNS)   7 = Safari   8 = Firefox   9 = MacOS   10 = Alexa   11 = Email   13 = For Huawei App Gallery Builds SDK Setup. Not for Huawei Devices using FCM   14 = SMS 
+    * Required The device\'s platform:   0 = iOS   1 = Android   2 = Amazon   3 = WindowsPhone (MPNS)   4 = Chrome Apps / Extensions   5 = Chrome Web Push   6 = Windows (WNS)   7 = Safari   8 = Firefox   9 = MacOS   10 = Alexa   11 = Email   13 = For Huawei App Gallery Builds SDK Setup. Not for Huawei Devices using FCM   14 = SMS 
     */
     'device_type': number;
     /**
@@ -59,11 +59,11 @@ export class Player {
     */
     'device_os'?: string;
     /**
-    * The ad id for the device's platform: Android = Advertising Id iOS = identifierForVendor WP8.0 = DeviceUniqueId WP8.1 = AdvertisingId 
+    * The ad id for the device\'s platform: Android = Advertising Id iOS = identifierForVendor WP8.0 = DeviceUniqueId WP8.1 = AdvertisingId 
     */
     'ad_id'?: string;
     /**
-    * Name and version of the sdk/plugin that's calling this API method (if any)
+    * Name and version of the sdk/plugin that\'s calling this API method (if any)
     */
     'sdk'?: string;
     /**
@@ -73,11 +73,11 @@ export class Player {
     /**
     * Custom tags for the player. Only support string and integer key value pairs. Does not support arrays or other nested objects. Setting a tag value to null or an empty string will remove the tag. Example: {\"foo\":\"bar\",\"this\":\"that\"} Limitations: - 100 tags per call - Android SDK users: tags cannot be removed or changed via API if set through SDK sendTag methods. Recommended to only tag devices with 1 kilobyte of data Please consider using your own Database to save more than 1 kilobyte of data. See: Internal Database & CRM 
     */
-    'tags'?: any;
+    'tags'?: object;
     /**
     * Amount the user has spent in USD, up to two decimal places
     */
-    'amount_spent'?: string;
+    'amount_spent'?: number;
     /**
     * Unixtime when the player joined the game
     */
@@ -217,26 +217,26 @@ export class Player {
         {
             "name": "tags",
             "baseName": "tags",
-            "type": "any",
+            "type": "object",
             "format": ""
         },
         {
             "name": "amount_spent",
             "baseName": "amount_spent",
-            "type": "string",
+            "type": "number",
             "format": ""
         },
         {
             "name": "created_at",
             "baseName": "created_at",
             "type": "number",
-            "format": ""
+            "format": "int64"
         },
         {
             "name": "playtime",
             "baseName": "playtime",
             "type": "number",
-            "format": ""
+            "format": "int64"
         },
         {
             "name": "badge_count",
@@ -284,7 +284,7 @@ export class Player {
     static getAttributeTypeMap() {
         return Player.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

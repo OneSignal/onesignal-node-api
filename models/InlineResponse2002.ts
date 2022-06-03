@@ -2,14 +2,14 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.0.0
+ * API Version: 1.0.1
  * Contact: devrel@onesignal.com
  */
 
 import { HttpFile } from '../http/http';
 
 export class InlineResponse2002 {
-    'success'?: string;
+    'success'?: boolean;
     'destination_url'?: string;
 
     static readonly discriminator: string | undefined = undefined;
@@ -18,7 +18,7 @@ export class InlineResponse2002 {
         {
             "name": "success",
             "baseName": "success",
-            "type": "string",
+            "type": "boolean",
             "format": ""
         },
         {
@@ -31,7 +31,7 @@ export class InlineResponse2002 {
     static getAttributeTypeMap() {
         return InlineResponse2002.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

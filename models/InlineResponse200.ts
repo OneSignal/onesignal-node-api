@@ -2,10 +2,11 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.0.0
+ * API Version: 1.0.1
  * Contact: devrel@onesignal.com
  */
 
+import { Notification200Errors } from './Notification200Errors';
 import { HttpFile } from '../http/http';
 
 export class InlineResponse200 {
@@ -15,7 +16,7 @@ export class InlineResponse200 {
     */
     'recipients': number;
     'external_id'?: string;
-    'errors'?: any | Array<string>;
+    'errors'?: Notification200Errors;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -41,14 +42,14 @@ export class InlineResponse200 {
         {
             "name": "errors",
             "baseName": "errors",
-            "type": "any | Array<string>",
+            "type": "Notification200Errors",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
         return InlineResponse200.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

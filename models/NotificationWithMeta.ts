@@ -7,13 +7,17 @@
  */
 
 import { Button } from './Button';
-import { NotificationAllOf } from './NotificationAllOf';
+import { DeliveryData } from './DeliveryData';
+import { Notification } from './Notification';
 import { NotificationAllOfAndroidBackgroundLayout } from './NotificationAllOfAndroidBackgroundLayout';
-import { NotificationTarget } from './NotificationTarget';
+import { NotificationWithMetaAllOf } from './NotificationWithMetaAllOf';
+import { OutcomeData } from './OutcomeData';
+import { OutcomesData } from './OutcomesData';
+import { PlatformDeliveryData } from './PlatformDeliveryData';
 import { StringMap } from './StringMap';
 import { HttpFile } from '../http/http';
 
-export class Notification {
+export class NotificationWithMeta {
     /**
     * The segment names you want to target. Users in these segments will receive a notification. This targeting parameter is only compatible with excluded_segments. Example: [\"Active Users\", \"Inactive Users\"] 
     */
@@ -112,7 +116,7 @@ export class Notification {
     'include_android_reg_ids'?: Array<string>;
     'id'?: string;
     'value'?: number;
-    'aggregation'?: NotificationAggregationEnum;
+    'aggregation'?: NotificationWithMetaAggregationEnum;
     /**
     * Indicates whether to send to all devices registered under your app\'s Apple iOS platform.
     */
@@ -362,9 +366,9 @@ export class Notification {
     */
     'apns_alert'?: object;
     /**
-    * Channel: All Schedule notification for future delivery. API defaults to UTC -1100 Examples: All examples are the exact same date & time. \"Thu Sep 24 2015 14:00:00 GMT-0700 (PDT)\" \"September 24th 2015, 2:00:00 pm UTC-07:00\" \"2015-09-24 14:00:00 GMT-0700\" \"Sept 24 2015 14:00:00 GMT-0700\" \"Thu Sep 24 2015 14:00:00 GMT-0700 (Pacific Daylight Time)\" Note: SMS currently only supports send_after parameter. 
+    * Unix timestamp indicating when notification delivery should begin.
     */
-    'send_after'?: string;
+    'send_after'?: number;
     /**
     * Channel: All Possible values are: timezone (Deliver at a specific time-of-day in each users own timezone) last-active Same as Intelligent Delivery . (Deliver at the same time of day as each user last used your app). If send_after is used, this takes effect after the send_after time has elapsed. 
     */
@@ -386,9 +390,9 @@ export class Notification {
     */
     'apns_push_type_override'?: string;
     /**
-    * Channel: All Apps with throttling enabled:   - the parameter value will be used to override the default application throttling value set from the dashboard settings.   - parameter value 0 indicates not to apply throttling to the notification.   - if the parameter is not passed then the default app throttling value will be applied to the notification. Apps with throttling disabled:   - this parameter can be used to throttle delivery for the notification even though throttling is not enabled at the application level. Refer to throttling for more details. 
+    * number of push notifications sent per minute. Paid Feature Only. If throttling is not enabled for the app or the notification, and for free accounts, null is returned. Refer to Throttling for more details.
     */
-    'throttle_rate_per_minute'?: string;
+    'throttle_rate_per_minute'?: number;
     /**
     * Channel: Push Notifications Platform: Android Notifications with the same group will be stacked together using Android\'s Notification Grouping feature. 
     */
@@ -441,6 +445,40 @@ export class Notification {
     * Channel: SMS URLs for the media files to be attached to the SMS content. Limit: 10 media urls with a total max. size of 5MBs. 
     */
     'sms_media_urls'?: Array<string>;
+    /**
+    * Number of notifications that were successfully delivered.
+    */
+    'successful'?: number;
+    /**
+    * Number of notifications that could not be delivered due to those devices being unsubscribed.
+    */
+    'failed'?: number;
+    /**
+    * Number of notifications that could not be delivered due to an error. You can find more information by viewing the notification in the dashboard.
+    */
+    'errored'?: number;
+    /**
+    * Number of users who have clicked / tapped on your notification.
+    */
+    'converted'?: number;
+    /**
+    * Confirmed Deliveries number of devices that received the push notification. Paid Feature Only. Free accounts will see 0.
+    */
+    'received'?: number;
+    'outcomes'?: Array<OutcomeData>;
+    /**
+    * Number of notifications that have not been sent out yet. This can mean either our system is still processing the notification or you have delayed options set.
+    */
+    'remaining'?: number;
+    /**
+    * Unix timestamp indicating when the notification was created.
+    */
+    'queued_at'?: number;
+    /**
+    * Unix timestamp indicating when notification delivery completed. The delivery duration from start to finish can be calculated with completed_at - send_after.
+    */
+    'completed_at'?: number;
+    'platform_delivery_stats'?: PlatformDeliveryData;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -604,7 +642,7 @@ export class Notification {
         {
             "name": "aggregation",
             "baseName": "aggregation",
-            "type": "NotificationAggregationEnum",
+            "type": "NotificationWithMetaAggregationEnum",
             "format": ""
         },
         {
@@ -1000,8 +1038,8 @@ export class Notification {
         {
             "name": "send_after",
             "baseName": "send_after",
-            "type": "string",
-            "format": "date-time"
+            "type": "number",
+            "format": "int64"
         },
         {
             "name": "delayed_option",
@@ -1036,7 +1074,7 @@ export class Notification {
         {
             "name": "throttle_rate_per_minute",
             "baseName": "throttle_rate_per_minute",
-            "type": "string",
+            "type": "number",
             "format": ""
         },
         {
@@ -1116,10 +1154,70 @@ export class Notification {
             "baseName": "sms_media_urls",
             "type": "Array<string>",
             "format": ""
+        },
+        {
+            "name": "successful",
+            "baseName": "successful",
+            "type": "number",
+            "format": ""
+        },
+        {
+            "name": "failed",
+            "baseName": "failed",
+            "type": "number",
+            "format": ""
+        },
+        {
+            "name": "errored",
+            "baseName": "errored",
+            "type": "number",
+            "format": ""
+        },
+        {
+            "name": "converted",
+            "baseName": "converted",
+            "type": "number",
+            "format": ""
+        },
+        {
+            "name": "received",
+            "baseName": "received",
+            "type": "number",
+            "format": ""
+        },
+        {
+            "name": "outcomes",
+            "baseName": "outcomes",
+            "type": "Array<OutcomeData>",
+            "format": ""
+        },
+        {
+            "name": "remaining",
+            "baseName": "remaining",
+            "type": "number",
+            "format": ""
+        },
+        {
+            "name": "queued_at",
+            "baseName": "queued_at",
+            "type": "number",
+            "format": "int64"
+        },
+        {
+            "name": "completed_at",
+            "baseName": "completed_at",
+            "type": "number",
+            "format": "int64"
+        },
+        {
+            "name": "platform_delivery_stats",
+            "baseName": "platform_delivery_stats",
+            "type": "PlatformDeliveryData",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return Notification.attributeTypeMap;
+        return NotificationWithMeta.attributeTypeMap;
     }
 
     public constructor() {
@@ -1127,5 +1225,5 @@ export class Notification {
 }
 
 
-export type NotificationAggregationEnum = "sum" | "count" ;
+export type NotificationWithMetaAggregationEnum = "sum" | "count" ;
 
