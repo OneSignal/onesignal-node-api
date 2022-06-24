@@ -4,28 +4,33 @@ import { Configuration} from '../configuration'
 
 import { App } from '../models/App';
 import { Button } from '../models/Button';
+import { CancelNotificationSuccessResponse } from '../models/CancelNotificationSuccessResponse';
+import { CreateNotificationBadRequestResponse } from '../models/CreateNotificationBadRequestResponse';
+import { CreateNotificationSuccessResponse } from '../models/CreateNotificationSuccessResponse';
+import { CreatePlayerSuccessResponse } from '../models/CreatePlayerSuccessResponse';
+import { CreateSegmentBadRequestResponse } from '../models/CreateSegmentBadRequestResponse';
+import { CreateSegmentConflictResponse } from '../models/CreateSegmentConflictResponse';
+import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
+import { DeletePlayerBadRequestResponse } from '../models/DeletePlayerBadRequestResponse';
+import { DeletePlayerNotFoundResponse } from '../models/DeletePlayerNotFoundResponse';
+import { DeletePlayerSuccessResponse } from '../models/DeletePlayerSuccessResponse';
+import { DeleteSegmentBadRequestResponse } from '../models/DeleteSegmentBadRequestResponse';
+import { DeleteSegmentNotFoundResponse } from '../models/DeleteSegmentNotFoundResponse';
+import { DeleteSegmentSuccessResponse } from '../models/DeleteSegmentSuccessResponse';
 import { DeliveryData } from '../models/DeliveryData';
 import { ExportPlayersRequestBody } from '../models/ExportPlayersRequestBody';
+import { ExportPlayersSuccessResponse } from '../models/ExportPlayersSuccessResponse';
 import { Filter } from '../models/Filter';
 import { FilterExpressions } from '../models/FilterExpressions';
 import { FilterNotificationTarget } from '../models/FilterNotificationTarget';
 import { GetNotificationRequestBody } from '../models/GetNotificationRequestBody';
-import { InlineResponse200 } from '../models/InlineResponse200';
-import { InlineResponse2001 } from '../models/InlineResponse2001';
-import { InlineResponse2002 } from '../models/InlineResponse2002';
-import { InlineResponse2005 } from '../models/InlineResponse2005';
-import { InlineResponse2007 } from '../models/InlineResponse2007';
-import { InlineResponse2008 } from '../models/InlineResponse2008';
-import { InlineResponse201 } from '../models/InlineResponse201';
-import { InlineResponse400 } from '../models/InlineResponse400';
-import { InlineResponse4001 } from '../models/InlineResponse4001';
-import { InlineResponse4002 } from '../models/InlineResponse4002';
-import { InlineResponse4003 } from '../models/InlineResponse4003';
 import { InvalidIdentifierError } from '../models/InvalidIdentifierError';
 import { Notification } from '../models/Notification';
 import { Notification200Errors } from '../models/Notification200Errors';
 import { NotificationAllOf } from '../models/NotificationAllOf';
 import { NotificationAllOfAndroidBackgroundLayout } from '../models/NotificationAllOfAndroidBackgroundLayout';
+import { NotificationHistoryBadRequestResponse } from '../models/NotificationHistoryBadRequestResponse';
+import { NotificationHistorySuccessResponse } from '../models/NotificationHistorySuccessResponse';
 import { NotificationSlice } from '../models/NotificationSlice';
 import { NotificationTarget } from '../models/NotificationTarget';
 import { NotificationWithMeta } from '../models/NotificationWithMeta';
@@ -41,7 +46,9 @@ import { Purchase } from '../models/Purchase';
 import { Segment } from '../models/Segment';
 import { SegmentNotificationTarget } from '../models/SegmentNotificationTarget';
 import { StringMap } from '../models/StringMap';
+import { UpdatePlayerSuccessResponse } from '../models/UpdatePlayerSuccessResponse';
 import { UpdatePlayerTagsRequestBody } from '../models/UpdatePlayerTagsRequestBody';
+import { UpdatePlayerTagsSuccessResponse } from '../models/UpdatePlayerTagsSuccessResponse';
 
 import { ObservableDefaultApi } from "./ObservableAPI";
 import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
@@ -361,7 +368,7 @@ export class ObjectDefaultApi {
      * Stop a scheduled or currently outgoing notification
      * @param param the request object
      */
-    public cancelNotification(param: DefaultApiCancelNotificationRequest, options?: Configuration): Promise<InlineResponse2001> {
+    public cancelNotification(param: DefaultApiCancelNotificationRequest, options?: Configuration): Promise<CancelNotificationSuccessResponse> {
         return this.api.cancelNotification(param.appId, param.notificationId,  options).toPromise();
     }
 
@@ -379,7 +386,7 @@ export class ObjectDefaultApi {
      * Create notification
      * @param param the request object
      */
-    public createNotification(param: DefaultApiCreateNotificationRequest, options?: Configuration): Promise<InlineResponse200> {
+    public createNotification(param: DefaultApiCreateNotificationRequest, options?: Configuration): Promise<CreateNotificationSuccessResponse> {
         return this.api.createNotification(param.notification,  options).toPromise();
     }
 
@@ -388,7 +395,7 @@ export class ObjectDefaultApi {
      * Add a device
      * @param param the request object
      */
-    public createPlayer(param: DefaultApiCreatePlayerRequest, options?: Configuration): Promise<InlineResponse2005> {
+    public createPlayer(param: DefaultApiCreatePlayerRequest, options?: Configuration): Promise<CreatePlayerSuccessResponse> {
         return this.api.createPlayer(param.player,  options).toPromise();
     }
 
@@ -397,7 +404,7 @@ export class ObjectDefaultApi {
      * Create Segments
      * @param param the request object
      */
-    public createSegments(param: DefaultApiCreateSegmentsRequest, options?: Configuration): Promise<InlineResponse201> {
+    public createSegments(param: DefaultApiCreateSegmentsRequest, options?: Configuration): Promise<CreateSegmentSuccessResponse> {
         return this.api.createSegments(param.appId, param.segment,  options).toPromise();
     }
 
@@ -406,7 +413,7 @@ export class ObjectDefaultApi {
      * Delete a user record
      * @param param the request object
      */
-    public deletePlayer(param: DefaultApiDeletePlayerRequest, options?: Configuration): Promise<InlineResponse2007> {
+    public deletePlayer(param: DefaultApiDeletePlayerRequest, options?: Configuration): Promise<DeletePlayerSuccessResponse> {
         return this.api.deletePlayer(param.appId, param.playerId,  options).toPromise();
     }
 
@@ -415,7 +422,7 @@ export class ObjectDefaultApi {
      * Delete Segments
      * @param param the request object
      */
-    public deleteSegments(param: DefaultApiDeleteSegmentsRequest, options?: Configuration): Promise<InlineResponse2001> {
+    public deleteSegments(param: DefaultApiDeleteSegmentsRequest, options?: Configuration): Promise<DeleteSegmentSuccessResponse> {
         return this.api.deleteSegments(param.appId, param.segmentId,  options).toPromise();
     }
 
@@ -424,7 +431,7 @@ export class ObjectDefaultApi {
      * CSV export
      * @param param the request object
      */
-    public exportPlayers(param: DefaultApiExportPlayersRequest, options?: Configuration): Promise<InlineResponse2008> {
+    public exportPlayers(param: DefaultApiExportPlayersRequest, options?: Configuration): Promise<ExportPlayersSuccessResponse> {
         return this.api.exportPlayers(param.appId, param.exportPlayersRequestBody,  options).toPromise();
     }
 
@@ -460,7 +467,7 @@ export class ObjectDefaultApi {
      * Notification History
      * @param param the request object
      */
-    public getNotificationHistory(param: DefaultApiGetNotificationHistoryRequest, options?: Configuration): Promise<InlineResponse2002> {
+    public getNotificationHistory(param: DefaultApiGetNotificationHistoryRequest, options?: Configuration): Promise<NotificationHistorySuccessResponse> {
         return this.api.getNotificationHistory(param.notificationId, param.getNotificationRequestBody,  options).toPromise();
     }
 
@@ -514,7 +521,7 @@ export class ObjectDefaultApi {
      * Edit device
      * @param param the request object
      */
-    public updatePlayer(param: DefaultApiUpdatePlayerRequest, options?: Configuration): Promise<InlineResponse2001> {
+    public updatePlayer(param: DefaultApiUpdatePlayerRequest, options?: Configuration): Promise<UpdatePlayerSuccessResponse> {
         return this.api.updatePlayer(param.playerId, param.player,  options).toPromise();
     }
 
@@ -523,7 +530,7 @@ export class ObjectDefaultApi {
      * Edit tags with external user id
      * @param param the request object
      */
-    public updatePlayerTags(param: DefaultApiUpdatePlayerTagsRequest, options?: Configuration): Promise<InlineResponse2001> {
+    public updatePlayerTags(param: DefaultApiUpdatePlayerTagsRequest, options?: Configuration): Promise<UpdatePlayerTagsSuccessResponse> {
         return this.api.updatePlayerTags(param.appId, param.externalUserId, param.updatePlayerTagsRequestBody,  options).toPromise();
     }
 

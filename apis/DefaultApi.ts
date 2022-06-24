@@ -11,27 +11,34 @@ import {SecurityAuthentication} from '../auth/auth';
 
 
 import { App } from '../models/App';
+import { CancelNotificationSuccessResponse } from '../models/CancelNotificationSuccessResponse';
+import { CreateNotificationBadRequestResponse } from '../models/CreateNotificationBadRequestResponse';
+import { CreateNotificationSuccessResponse } from '../models/CreateNotificationSuccessResponse';
+import { CreatePlayerSuccessResponse } from '../models/CreatePlayerSuccessResponse';
+import { CreateSegmentBadRequestResponse } from '../models/CreateSegmentBadRequestResponse';
+import { CreateSegmentConflictResponse } from '../models/CreateSegmentConflictResponse';
+import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
+import { DeletePlayerBadRequestResponse } from '../models/DeletePlayerBadRequestResponse';
+import { DeletePlayerNotFoundResponse } from '../models/DeletePlayerNotFoundResponse';
+import { DeletePlayerSuccessResponse } from '../models/DeletePlayerSuccessResponse';
+import { DeleteSegmentBadRequestResponse } from '../models/DeleteSegmentBadRequestResponse';
+import { DeleteSegmentNotFoundResponse } from '../models/DeleteSegmentNotFoundResponse';
+import { DeleteSegmentSuccessResponse } from '../models/DeleteSegmentSuccessResponse';
 import { ExportPlayersRequestBody } from '../models/ExportPlayersRequestBody';
+import { ExportPlayersSuccessResponse } from '../models/ExportPlayersSuccessResponse';
 import { GetNotificationRequestBody } from '../models/GetNotificationRequestBody';
-import { InlineResponse200 } from '../models/InlineResponse200';
-import { InlineResponse2001 } from '../models/InlineResponse2001';
-import { InlineResponse2002 } from '../models/InlineResponse2002';
-import { InlineResponse2005 } from '../models/InlineResponse2005';
-import { InlineResponse2007 } from '../models/InlineResponse2007';
-import { InlineResponse2008 } from '../models/InlineResponse2008';
-import { InlineResponse201 } from '../models/InlineResponse201';
-import { InlineResponse400 } from '../models/InlineResponse400';
-import { InlineResponse4001 } from '../models/InlineResponse4001';
-import { InlineResponse4002 } from '../models/InlineResponse4002';
-import { InlineResponse4003 } from '../models/InlineResponse4003';
 import { Notification } from '../models/Notification';
+import { NotificationHistoryBadRequestResponse } from '../models/NotificationHistoryBadRequestResponse';
+import { NotificationHistorySuccessResponse } from '../models/NotificationHistorySuccessResponse';
 import { NotificationSlice } from '../models/NotificationSlice';
 import { NotificationWithMeta } from '../models/NotificationWithMeta';
 import { OutcomesData } from '../models/OutcomesData';
 import { Player } from '../models/Player';
 import { PlayerSlice } from '../models/PlayerSlice';
 import { Segment } from '../models/Segment';
+import { UpdatePlayerSuccessResponse } from '../models/UpdatePlayerSuccessResponse';
 import { UpdatePlayerTagsRequestBody } from '../models/UpdatePlayerTagsRequestBody';
+import { UpdatePlayerTagsSuccessResponse } from '../models/UpdatePlayerTagsSuccessResponse';
 
 /**
  * no description
@@ -1040,22 +1047,22 @@ export class DefaultApiResponseProcessor {
      * @params response Response returned by the server for a request to cancelNotification
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async cancelNotification(response: ResponseContext): Promise<InlineResponse2001 > {
+     public async cancelNotification(response: ResponseContext): Promise<CancelNotificationSuccessResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: InlineResponse2001 = ObjectSerializer.deserialize(
+            const body: CancelNotificationSuccessResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse2001", ""
-            ) as InlineResponse2001;
+                "CancelNotificationSuccessResponse", ""
+            ) as CancelNotificationSuccessResponse;
             return body;
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: InlineResponse2001 = ObjectSerializer.deserialize(
+            const body: CancelNotificationSuccessResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse2001", ""
-            ) as InlineResponse2001;
+                "CancelNotificationSuccessResponse", ""
+            ) as CancelNotificationSuccessResponse;
             return body;
         }
 
@@ -1098,29 +1105,29 @@ export class DefaultApiResponseProcessor {
      * @params response Response returned by the server for a request to createNotification
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createNotification(response: ResponseContext): Promise<InlineResponse200 > {
+     public async createNotification(response: ResponseContext): Promise<CreateNotificationSuccessResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: InlineResponse200 = ObjectSerializer.deserialize(
+            const body: CreateNotificationSuccessResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse200", ""
-            ) as InlineResponse200;
+                "CreateNotificationSuccessResponse", ""
+            ) as CreateNotificationSuccessResponse;
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: InlineResponse400 = ObjectSerializer.deserialize(
+            const body: CreateNotificationBadRequestResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse400", ""
-            ) as InlineResponse400;
-            throw new ApiException<InlineResponse400>(400, "Bad Request", body, response.headers);
+                "CreateNotificationBadRequestResponse", ""
+            ) as CreateNotificationBadRequestResponse;
+            throw new ApiException<CreateNotificationBadRequestResponse>(400, "Bad Request", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: InlineResponse200 = ObjectSerializer.deserialize(
+            const body: CreateNotificationSuccessResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse200", ""
-            ) as InlineResponse200;
+                "CreateNotificationSuccessResponse", ""
+            ) as CreateNotificationSuccessResponse;
             return body;
         }
 
@@ -1134,22 +1141,22 @@ export class DefaultApiResponseProcessor {
      * @params response Response returned by the server for a request to createPlayer
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createPlayer(response: ResponseContext): Promise<InlineResponse2005 > {
+     public async createPlayer(response: ResponseContext): Promise<CreatePlayerSuccessResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: InlineResponse2005 = ObjectSerializer.deserialize(
+            const body: CreatePlayerSuccessResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse2005", ""
-            ) as InlineResponse2005;
+                "CreatePlayerSuccessResponse", ""
+            ) as CreatePlayerSuccessResponse;
             return body;
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: InlineResponse2005 = ObjectSerializer.deserialize(
+            const body: CreatePlayerSuccessResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse2005", ""
-            ) as InlineResponse2005;
+                "CreatePlayerSuccessResponse", ""
+            ) as CreatePlayerSuccessResponse;
             return body;
         }
 
@@ -1163,36 +1170,36 @@ export class DefaultApiResponseProcessor {
      * @params response Response returned by the server for a request to createSegments
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createSegments(response: ResponseContext): Promise<InlineResponse201 > {
+     public async createSegments(response: ResponseContext): Promise<CreateSegmentSuccessResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
-            const body: InlineResponse201 = ObjectSerializer.deserialize(
+            const body: CreateSegmentSuccessResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse201", ""
-            ) as InlineResponse201;
+                "CreateSegmentSuccessResponse", ""
+            ) as CreateSegmentSuccessResponse;
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: InlineResponse4002 = ObjectSerializer.deserialize(
+            const body: CreateSegmentBadRequestResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse4002", ""
-            ) as InlineResponse4002;
-            throw new ApiException<InlineResponse4002>(400, "Bad Request", body, response.headers);
+                "CreateSegmentBadRequestResponse", ""
+            ) as CreateSegmentBadRequestResponse;
+            throw new ApiException<CreateSegmentBadRequestResponse>(400, "Bad Request", body, response.headers);
         }
         if (isCodeInRange("409", response.httpStatusCode)) {
-            const body: InlineResponse4002 = ObjectSerializer.deserialize(
+            const body: CreateSegmentConflictResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse4002", ""
-            ) as InlineResponse4002;
-            throw new ApiException<InlineResponse4002>(409, "Conflict", body, response.headers);
+                "CreateSegmentConflictResponse", ""
+            ) as CreateSegmentConflictResponse;
+            throw new ApiException<CreateSegmentConflictResponse>(409, "Conflict", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: InlineResponse201 = ObjectSerializer.deserialize(
+            const body: CreateSegmentSuccessResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse201", ""
-            ) as InlineResponse201;
+                "CreateSegmentSuccessResponse", ""
+            ) as CreateSegmentSuccessResponse;
             return body;
         }
 
@@ -1206,36 +1213,36 @@ export class DefaultApiResponseProcessor {
      * @params response Response returned by the server for a request to deletePlayer
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async deletePlayer(response: ResponseContext): Promise<InlineResponse2007 > {
+     public async deletePlayer(response: ResponseContext): Promise<DeletePlayerSuccessResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: InlineResponse2007 = ObjectSerializer.deserialize(
+            const body: DeletePlayerSuccessResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse2007", ""
-            ) as InlineResponse2007;
+                "DeletePlayerSuccessResponse", ""
+            ) as DeletePlayerSuccessResponse;
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: InlineResponse4003 = ObjectSerializer.deserialize(
+            const body: DeletePlayerBadRequestResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse4003", ""
-            ) as InlineResponse4003;
-            throw new ApiException<InlineResponse4003>(400, "Bad Request", body, response.headers);
+                "DeletePlayerBadRequestResponse", ""
+            ) as DeletePlayerBadRequestResponse;
+            throw new ApiException<DeletePlayerBadRequestResponse>(400, "Bad Request", body, response.headers);
         }
         if (isCodeInRange("404", response.httpStatusCode)) {
-            const body: InlineResponse2007 = ObjectSerializer.deserialize(
+            const body: DeletePlayerNotFoundResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse2007", ""
-            ) as InlineResponse2007;
-            throw new ApiException<InlineResponse2007>(404, "Not Found", body, response.headers);
+                "DeletePlayerNotFoundResponse", ""
+            ) as DeletePlayerNotFoundResponse;
+            throw new ApiException<DeletePlayerNotFoundResponse>(404, "Not Found", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: InlineResponse2007 = ObjectSerializer.deserialize(
+            const body: DeletePlayerSuccessResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse2007", ""
-            ) as InlineResponse2007;
+                "DeletePlayerSuccessResponse", ""
+            ) as DeletePlayerSuccessResponse;
             return body;
         }
 
@@ -1249,36 +1256,36 @@ export class DefaultApiResponseProcessor {
      * @params response Response returned by the server for a request to deleteSegments
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async deleteSegments(response: ResponseContext): Promise<InlineResponse2001 > {
+     public async deleteSegments(response: ResponseContext): Promise<DeleteSegmentSuccessResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: InlineResponse2001 = ObjectSerializer.deserialize(
+            const body: DeleteSegmentSuccessResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse2001", ""
-            ) as InlineResponse2001;
+                "DeleteSegmentSuccessResponse", ""
+            ) as DeleteSegmentSuccessResponse;
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: InlineResponse4003 = ObjectSerializer.deserialize(
+            const body: DeleteSegmentBadRequestResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse4003", ""
-            ) as InlineResponse4003;
-            throw new ApiException<InlineResponse4003>(400, "Bad Request", body, response.headers);
+                "DeleteSegmentBadRequestResponse", ""
+            ) as DeleteSegmentBadRequestResponse;
+            throw new ApiException<DeleteSegmentBadRequestResponse>(400, "Bad Request", body, response.headers);
         }
         if (isCodeInRange("404", response.httpStatusCode)) {
-            const body: InlineResponse2001 = ObjectSerializer.deserialize(
+            const body: DeleteSegmentNotFoundResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse2001", ""
-            ) as InlineResponse2001;
-            throw new ApiException<InlineResponse2001>(404, "Not Found", body, response.headers);
+                "DeleteSegmentNotFoundResponse", ""
+            ) as DeleteSegmentNotFoundResponse;
+            throw new ApiException<DeleteSegmentNotFoundResponse>(404, "Not Found", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: InlineResponse2001 = ObjectSerializer.deserialize(
+            const body: DeleteSegmentSuccessResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse2001", ""
-            ) as InlineResponse2001;
+                "DeleteSegmentSuccessResponse", ""
+            ) as DeleteSegmentSuccessResponse;
             return body;
         }
 
@@ -1292,13 +1299,13 @@ export class DefaultApiResponseProcessor {
      * @params response Response returned by the server for a request to exportPlayers
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async exportPlayers(response: ResponseContext): Promise<InlineResponse2008 > {
+     public async exportPlayers(response: ResponseContext): Promise<ExportPlayersSuccessResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: InlineResponse2008 = ObjectSerializer.deserialize(
+            const body: ExportPlayersSuccessResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse2008", ""
-            ) as InlineResponse2008;
+                "ExportPlayersSuccessResponse", ""
+            ) as ExportPlayersSuccessResponse;
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
@@ -1311,10 +1318,10 @@ export class DefaultApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: InlineResponse2008 = ObjectSerializer.deserialize(
+            const body: ExportPlayersSuccessResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse2008", ""
-            ) as InlineResponse2008;
+                "ExportPlayersSuccessResponse", ""
+            ) as ExportPlayersSuccessResponse;
             return body;
         }
 
@@ -1415,29 +1422,29 @@ export class DefaultApiResponseProcessor {
      * @params response Response returned by the server for a request to getNotificationHistory
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getNotificationHistory(response: ResponseContext): Promise<InlineResponse2002 > {
+     public async getNotificationHistory(response: ResponseContext): Promise<NotificationHistorySuccessResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: InlineResponse2002 = ObjectSerializer.deserialize(
+            const body: NotificationHistorySuccessResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse2002", ""
-            ) as InlineResponse2002;
+                "NotificationHistorySuccessResponse", ""
+            ) as NotificationHistorySuccessResponse;
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: InlineResponse4001 = ObjectSerializer.deserialize(
+            const body: NotificationHistoryBadRequestResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse4001", ""
-            ) as InlineResponse4001;
-            throw new ApiException<InlineResponse4001>(400, "Bad Request", body, response.headers);
+                "NotificationHistoryBadRequestResponse", ""
+            ) as NotificationHistoryBadRequestResponse;
+            throw new ApiException<NotificationHistoryBadRequestResponse>(400, "Bad Request", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: InlineResponse2002 = ObjectSerializer.deserialize(
+            const body: NotificationHistorySuccessResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse2002", ""
-            ) as InlineResponse2002;
+                "NotificationHistorySuccessResponse", ""
+            ) as NotificationHistorySuccessResponse;
             return body;
         }
 
@@ -1596,22 +1603,22 @@ export class DefaultApiResponseProcessor {
      * @params response Response returned by the server for a request to updatePlayer
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async updatePlayer(response: ResponseContext): Promise<InlineResponse2001 > {
+     public async updatePlayer(response: ResponseContext): Promise<UpdatePlayerSuccessResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: InlineResponse2001 = ObjectSerializer.deserialize(
+            const body: UpdatePlayerSuccessResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse2001", ""
-            ) as InlineResponse2001;
+                "UpdatePlayerSuccessResponse", ""
+            ) as UpdatePlayerSuccessResponse;
             return body;
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: InlineResponse2001 = ObjectSerializer.deserialize(
+            const body: UpdatePlayerSuccessResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse2001", ""
-            ) as InlineResponse2001;
+                "UpdatePlayerSuccessResponse", ""
+            ) as UpdatePlayerSuccessResponse;
             return body;
         }
 
@@ -1625,22 +1632,22 @@ export class DefaultApiResponseProcessor {
      * @params response Response returned by the server for a request to updatePlayerTags
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async updatePlayerTags(response: ResponseContext): Promise<InlineResponse2001 > {
+     public async updatePlayerTags(response: ResponseContext): Promise<UpdatePlayerTagsSuccessResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: InlineResponse2001 = ObjectSerializer.deserialize(
+            const body: UpdatePlayerTagsSuccessResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse2001", ""
-            ) as InlineResponse2001;
+                "UpdatePlayerTagsSuccessResponse", ""
+            ) as UpdatePlayerTagsSuccessResponse;
             return body;
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: InlineResponse2001 = ObjectSerializer.deserialize(
+            const body: UpdatePlayerTagsSuccessResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse2001", ""
-            ) as InlineResponse2001;
+                "UpdatePlayerTagsSuccessResponse", ""
+            ) as UpdatePlayerTagsSuccessResponse;
             return body;
         }
 

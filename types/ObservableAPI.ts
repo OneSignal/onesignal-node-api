@@ -5,28 +5,33 @@ import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
 import { App } from '../models/App';
 import { Button } from '../models/Button';
+import { CancelNotificationSuccessResponse } from '../models/CancelNotificationSuccessResponse';
+import { CreateNotificationBadRequestResponse } from '../models/CreateNotificationBadRequestResponse';
+import { CreateNotificationSuccessResponse } from '../models/CreateNotificationSuccessResponse';
+import { CreatePlayerSuccessResponse } from '../models/CreatePlayerSuccessResponse';
+import { CreateSegmentBadRequestResponse } from '../models/CreateSegmentBadRequestResponse';
+import { CreateSegmentConflictResponse } from '../models/CreateSegmentConflictResponse';
+import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
+import { DeletePlayerBadRequestResponse } from '../models/DeletePlayerBadRequestResponse';
+import { DeletePlayerNotFoundResponse } from '../models/DeletePlayerNotFoundResponse';
+import { DeletePlayerSuccessResponse } from '../models/DeletePlayerSuccessResponse';
+import { DeleteSegmentBadRequestResponse } from '../models/DeleteSegmentBadRequestResponse';
+import { DeleteSegmentNotFoundResponse } from '../models/DeleteSegmentNotFoundResponse';
+import { DeleteSegmentSuccessResponse } from '../models/DeleteSegmentSuccessResponse';
 import { DeliveryData } from '../models/DeliveryData';
 import { ExportPlayersRequestBody } from '../models/ExportPlayersRequestBody';
+import { ExportPlayersSuccessResponse } from '../models/ExportPlayersSuccessResponse';
 import { Filter } from '../models/Filter';
 import { FilterExpressions } from '../models/FilterExpressions';
 import { FilterNotificationTarget } from '../models/FilterNotificationTarget';
 import { GetNotificationRequestBody } from '../models/GetNotificationRequestBody';
-import { InlineResponse200 } from '../models/InlineResponse200';
-import { InlineResponse2001 } from '../models/InlineResponse2001';
-import { InlineResponse2002 } from '../models/InlineResponse2002';
-import { InlineResponse2005 } from '../models/InlineResponse2005';
-import { InlineResponse2007 } from '../models/InlineResponse2007';
-import { InlineResponse2008 } from '../models/InlineResponse2008';
-import { InlineResponse201 } from '../models/InlineResponse201';
-import { InlineResponse400 } from '../models/InlineResponse400';
-import { InlineResponse4001 } from '../models/InlineResponse4001';
-import { InlineResponse4002 } from '../models/InlineResponse4002';
-import { InlineResponse4003 } from '../models/InlineResponse4003';
 import { InvalidIdentifierError } from '../models/InvalidIdentifierError';
 import { Notification } from '../models/Notification';
 import { Notification200Errors } from '../models/Notification200Errors';
 import { NotificationAllOf } from '../models/NotificationAllOf';
 import { NotificationAllOfAndroidBackgroundLayout } from '../models/NotificationAllOfAndroidBackgroundLayout';
+import { NotificationHistoryBadRequestResponse } from '../models/NotificationHistoryBadRequestResponse';
+import { NotificationHistorySuccessResponse } from '../models/NotificationHistorySuccessResponse';
 import { NotificationSlice } from '../models/NotificationSlice';
 import { NotificationTarget } from '../models/NotificationTarget';
 import { NotificationWithMeta } from '../models/NotificationWithMeta';
@@ -42,7 +47,9 @@ import { Purchase } from '../models/Purchase';
 import { Segment } from '../models/Segment';
 import { SegmentNotificationTarget } from '../models/SegmentNotificationTarget';
 import { StringMap } from '../models/StringMap';
+import { UpdatePlayerSuccessResponse } from '../models/UpdatePlayerSuccessResponse';
 import { UpdatePlayerTagsRequestBody } from '../models/UpdatePlayerTagsRequestBody';
+import { UpdatePlayerTagsSuccessResponse } from '../models/UpdatePlayerTagsSuccessResponse';
 
 import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
 export class ObservableDefaultApi {
@@ -66,7 +73,7 @@ export class ObservableDefaultApi {
      * @param appId 
      * @param notificationId 
      */
-    public cancelNotification(appId: string, notificationId: string, _options?: Configuration): Observable<InlineResponse2001> {
+    public cancelNotification(appId: string, notificationId: string, _options?: Configuration): Observable<CancelNotificationSuccessResponse> {
         const requestContextPromise = this.requestFactory.cancelNotification(appId, notificationId, _options);
 
         // build promise chain
@@ -114,7 +121,7 @@ export class ObservableDefaultApi {
      * Create notification
      * @param notification 
      */
-    public createNotification(notification: Notification, _options?: Configuration): Observable<InlineResponse200> {
+    public createNotification(notification: Notification, _options?: Configuration): Observable<CreateNotificationSuccessResponse> {
         const requestContextPromise = this.requestFactory.createNotification(notification, _options);
 
         // build promise chain
@@ -138,7 +145,7 @@ export class ObservableDefaultApi {
      * Add a device
      * @param player 
      */
-    public createPlayer(player: Player, _options?: Configuration): Observable<InlineResponse2005> {
+    public createPlayer(player: Player, _options?: Configuration): Observable<CreatePlayerSuccessResponse> {
         const requestContextPromise = this.requestFactory.createPlayer(player, _options);
 
         // build promise chain
@@ -163,7 +170,7 @@ export class ObservableDefaultApi {
      * @param appId The OneSignal App ID for your app.  Available in Keys &amp; IDs.
      * @param segment 
      */
-    public createSegments(appId: string, segment?: Segment, _options?: Configuration): Observable<InlineResponse201> {
+    public createSegments(appId: string, segment?: Segment, _options?: Configuration): Observable<CreateSegmentSuccessResponse> {
         const requestContextPromise = this.requestFactory.createSegments(appId, segment, _options);
 
         // build promise chain
@@ -188,7 +195,7 @@ export class ObservableDefaultApi {
      * @param appId The OneSignal App ID for your app.  Available in Keys &amp; IDs.
      * @param playerId The OneSignal player_id
      */
-    public deletePlayer(appId: string, playerId: string, _options?: Configuration): Observable<InlineResponse2007> {
+    public deletePlayer(appId: string, playerId: string, _options?: Configuration): Observable<DeletePlayerSuccessResponse> {
         const requestContextPromise = this.requestFactory.deletePlayer(appId, playerId, _options);
 
         // build promise chain
@@ -213,7 +220,7 @@ export class ObservableDefaultApi {
      * @param appId The OneSignal App ID for your app.  Available in Keys &amp; IDs.
      * @param segmentId The segment_id can be found in the URL of the segment when viewing it in the dashboard.
      */
-    public deleteSegments(appId: string, segmentId: string, _options?: Configuration): Observable<InlineResponse2001> {
+    public deleteSegments(appId: string, segmentId: string, _options?: Configuration): Observable<DeleteSegmentSuccessResponse> {
         const requestContextPromise = this.requestFactory.deleteSegments(appId, segmentId, _options);
 
         // build promise chain
@@ -238,7 +245,7 @@ export class ObservableDefaultApi {
      * @param appId The app ID that you want to export devices from
      * @param exportPlayersRequestBody 
      */
-    public exportPlayers(appId: string, exportPlayersRequestBody?: ExportPlayersRequestBody, _options?: Configuration): Observable<InlineResponse2008> {
+    public exportPlayers(appId: string, exportPlayersRequestBody?: ExportPlayersRequestBody, _options?: Configuration): Observable<ExportPlayersSuccessResponse> {
         const requestContextPromise = this.requestFactory.exportPlayers(appId, exportPlayersRequestBody, _options);
 
         // build promise chain
@@ -335,7 +342,7 @@ export class ObservableDefaultApi {
      * @param notificationId The \&quot;id\&quot; of the message found in the Notification object
      * @param getNotificationRequestBody 
      */
-    public getNotificationHistory(notificationId: string, getNotificationRequestBody: GetNotificationRequestBody, _options?: Configuration): Observable<InlineResponse2002> {
+    public getNotificationHistory(notificationId: string, getNotificationRequestBody: GetNotificationRequestBody, _options?: Configuration): Observable<NotificationHistorySuccessResponse> {
         const requestContextPromise = this.requestFactory.getNotificationHistory(notificationId, getNotificationRequestBody, _options);
 
         // build promise chain
@@ -493,7 +500,7 @@ export class ObservableDefaultApi {
      * @param playerId Player\&#39;s OneSignal ID
      * @param player 
      */
-    public updatePlayer(playerId: string, player: Player, _options?: Configuration): Observable<InlineResponse2001> {
+    public updatePlayer(playerId: string, player: Player, _options?: Configuration): Observable<UpdatePlayerSuccessResponse> {
         const requestContextPromise = this.requestFactory.updatePlayer(playerId, player, _options);
 
         // build promise chain
@@ -519,7 +526,7 @@ export class ObservableDefaultApi {
      * @param externalUserId The External User ID mapped to teh device record in OneSignal.  Must be actively set on the device to be updated.
      * @param updatePlayerTagsRequestBody 
      */
-    public updatePlayerTags(appId: string, externalUserId: string, updatePlayerTagsRequestBody?: UpdatePlayerTagsRequestBody, _options?: Configuration): Observable<InlineResponse2001> {
+    public updatePlayerTags(appId: string, externalUserId: string, updatePlayerTagsRequestBody?: UpdatePlayerTagsRequestBody, _options?: Configuration): Observable<UpdatePlayerTagsSuccessResponse> {
         const requestContextPromise = this.requestFactory.updatePlayerTags(appId, externalUserId, updatePlayerTagsRequestBody, _options);
 
         // build promise chain

@@ -8,21 +8,21 @@
 
 import { HttpFile } from '../http/http';
 
-export class InlineResponse4003 {
-    'erorrs'?: Array<string>;
+export class ExportPlayersSuccessResponse {
+    'csv_file_url'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "erorrs",
-            "baseName": "erorrs",
-            "type": "Array<string>",
+            "name": "csv_file_url",
+            "baseName": "csv_file_url",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return InlineResponse4003.attributeTypeMap;
+        return ExportPlayersSuccessResponse.attributeTypeMap;
     }
 
     public constructor() {

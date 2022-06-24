@@ -8,21 +8,28 @@
 
 import { HttpFile } from '../http/http';
 
-export class InlineResponse2008 {
-    'csv_file_url'?: string;
+export class CreateSegmentConflictResponse {
+    'success'?: boolean;
+    'errors'?: Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "csv_file_url",
-            "baseName": "csv_file_url",
-            "type": "string",
+            "name": "success",
+            "baseName": "success",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<string>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return InlineResponse2008.attributeTypeMap;
+        return CreateSegmentConflictResponse.attributeTypeMap;
     }
 
     public constructor() {

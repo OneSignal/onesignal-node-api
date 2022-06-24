@@ -8,8 +8,9 @@
 
 import { HttpFile } from '../http/http';
 
-export class InlineResponse2001 {
+export class CreatePlayerSuccessResponse {
     'success'?: boolean;
+    'id'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -19,10 +20,16 @@ export class InlineResponse2001 {
             "baseName": "success",
             "type": "boolean",
             "format": ""
+        },
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return InlineResponse2001.attributeTypeMap;
+        return CreatePlayerSuccessResponse.attributeTypeMap;
     }
 
     public constructor() {

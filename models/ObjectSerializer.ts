@@ -1,27 +1,32 @@
 export * from './App';
 export * from './Button';
+export * from './CancelNotificationSuccessResponse';
+export * from './CreateNotificationBadRequestResponse';
+export * from './CreateNotificationSuccessResponse';
+export * from './CreatePlayerSuccessResponse';
+export * from './CreateSegmentBadRequestResponse';
+export * from './CreateSegmentConflictResponse';
+export * from './CreateSegmentSuccessResponse';
+export * from './DeletePlayerBadRequestResponse';
+export * from './DeletePlayerNotFoundResponse';
+export * from './DeletePlayerSuccessResponse';
+export * from './DeleteSegmentBadRequestResponse';
+export * from './DeleteSegmentNotFoundResponse';
+export * from './DeleteSegmentSuccessResponse';
 export * from './DeliveryData';
 export * from './ExportPlayersRequestBody';
+export * from './ExportPlayersSuccessResponse';
 export * from './Filter';
 export * from './FilterExpressions';
 export * from './FilterNotificationTarget';
 export * from './GetNotificationRequestBody';
-export * from './InlineResponse200';
-export * from './InlineResponse2001';
-export * from './InlineResponse2002';
-export * from './InlineResponse2005';
-export * from './InlineResponse2007';
-export * from './InlineResponse2008';
-export * from './InlineResponse201';
-export * from './InlineResponse400';
-export * from './InlineResponse4001';
-export * from './InlineResponse4002';
-export * from './InlineResponse4003';
 export * from './InvalidIdentifierError';
 export * from './Notification';
 export * from './Notification200Errors';
 export * from './NotificationAllOf';
 export * from './NotificationAllOfAndroidBackgroundLayout';
+export * from './NotificationHistoryBadRequestResponse';
+export * from './NotificationHistorySuccessResponse';
 export * from './NotificationSlice';
 export * from './NotificationTarget';
 export * from './NotificationWithMeta';
@@ -37,32 +42,39 @@ export * from './Purchase';
 export * from './Segment';
 export * from './SegmentNotificationTarget';
 export * from './StringMap';
+export * from './UpdatePlayerSuccessResponse';
 export * from './UpdatePlayerTagsRequestBody';
+export * from './UpdatePlayerTagsSuccessResponse';
 
 import { App            , AppApnsEnvEnum                    } from './App';
 import { Button } from './Button';
+import { CancelNotificationSuccessResponse } from './CancelNotificationSuccessResponse';
+import { CreateNotificationBadRequestResponse } from './CreateNotificationBadRequestResponse';
+import { CreateNotificationSuccessResponse } from './CreateNotificationSuccessResponse';
+import { CreatePlayerSuccessResponse } from './CreatePlayerSuccessResponse';
+import { CreateSegmentBadRequestResponse } from './CreateSegmentBadRequestResponse';
+import { CreateSegmentConflictResponse } from './CreateSegmentConflictResponse';
+import { CreateSegmentSuccessResponse } from './CreateSegmentSuccessResponse';
+import { DeletePlayerBadRequestResponse } from './DeletePlayerBadRequestResponse';
+import { DeletePlayerNotFoundResponse } from './DeletePlayerNotFoundResponse';
+import { DeletePlayerSuccessResponse } from './DeletePlayerSuccessResponse';
+import { DeleteSegmentBadRequestResponse } from './DeleteSegmentBadRequestResponse';
+import { DeleteSegmentNotFoundResponse } from './DeleteSegmentNotFoundResponse';
+import { DeleteSegmentSuccessResponse } from './DeleteSegmentSuccessResponse';
 import { DeliveryData } from './DeliveryData';
 import { ExportPlayersRequestBody } from './ExportPlayersRequestBody';
+import { ExportPlayersSuccessResponse } from './ExportPlayersSuccessResponse';
 import { Filter   , FilterRelationEnum   } from './Filter';
 import { FilterExpressions   , FilterExpressionsRelationEnum  , FilterExpressionsOperatorEnum   } from './FilterExpressions';
 import { FilterNotificationTarget } from './FilterNotificationTarget';
 import { GetNotificationRequestBody, GetNotificationRequestBodyEventsEnum     } from './GetNotificationRequestBody';
-import { InlineResponse200 } from './InlineResponse200';
-import { InlineResponse2001 } from './InlineResponse2001';
-import { InlineResponse2002 } from './InlineResponse2002';
-import { InlineResponse2005 } from './InlineResponse2005';
-import { InlineResponse2007 } from './InlineResponse2007';
-import { InlineResponse2008 } from './InlineResponse2008';
-import { InlineResponse201 } from './InlineResponse201';
-import { InlineResponse400 } from './InlineResponse400';
-import { InlineResponse4001 } from './InlineResponse4001';
-import { InlineResponse4002 } from './InlineResponse4002';
-import { InlineResponse4003 } from './InlineResponse4003';
 import { InvalidIdentifierError } from './InvalidIdentifierError';
 import { Notification                          , NotificationAggregationEnum                                                                                        } from './Notification';
 import { Notification200Errors } from './Notification200Errors';
 import { NotificationAllOf  , NotificationAllOfAggregationEnum                                                                                        } from './NotificationAllOf';
 import { NotificationAllOfAndroidBackgroundLayout } from './NotificationAllOfAndroidBackgroundLayout';
+import { NotificationHistoryBadRequestResponse } from './NotificationHistoryBadRequestResponse';
+import { NotificationHistorySuccessResponse } from './NotificationHistorySuccessResponse';
 import { NotificationSlice } from './NotificationSlice';
 import { NotificationTarget } from './NotificationTarget';
 import { NotificationWithMeta                          , NotificationWithMetaAggregationEnum                                                                                                  } from './NotificationWithMeta';
@@ -78,7 +90,9 @@ import { Purchase } from './Purchase';
 import { Segment } from './Segment';
 import { SegmentNotificationTarget } from './SegmentNotificationTarget';
 import { StringMap } from './StringMap';
+import { UpdatePlayerSuccessResponse } from './UpdatePlayerSuccessResponse';
 import { UpdatePlayerTagsRequestBody } from './UpdatePlayerTagsRequestBody';
+import { UpdatePlayerTagsSuccessResponse } from './UpdatePlayerTagsSuccessResponse';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -115,28 +129,33 @@ let enumsMap: Set<string> = new Set<string>([
 let typeMap: {[index: string]: any} = {
     "App": App,
     "Button": Button,
+    "CancelNotificationSuccessResponse": CancelNotificationSuccessResponse,
+    "CreateNotificationBadRequestResponse": CreateNotificationBadRequestResponse,
+    "CreateNotificationSuccessResponse": CreateNotificationSuccessResponse,
+    "CreatePlayerSuccessResponse": CreatePlayerSuccessResponse,
+    "CreateSegmentBadRequestResponse": CreateSegmentBadRequestResponse,
+    "CreateSegmentConflictResponse": CreateSegmentConflictResponse,
+    "CreateSegmentSuccessResponse": CreateSegmentSuccessResponse,
+    "DeletePlayerBadRequestResponse": DeletePlayerBadRequestResponse,
+    "DeletePlayerNotFoundResponse": DeletePlayerNotFoundResponse,
+    "DeletePlayerSuccessResponse": DeletePlayerSuccessResponse,
+    "DeleteSegmentBadRequestResponse": DeleteSegmentBadRequestResponse,
+    "DeleteSegmentNotFoundResponse": DeleteSegmentNotFoundResponse,
+    "DeleteSegmentSuccessResponse": DeleteSegmentSuccessResponse,
     "DeliveryData": DeliveryData,
     "ExportPlayersRequestBody": ExportPlayersRequestBody,
+    "ExportPlayersSuccessResponse": ExportPlayersSuccessResponse,
     "Filter": Filter,
     "FilterExpressions": FilterExpressions,
     "FilterNotificationTarget": FilterNotificationTarget,
     "GetNotificationRequestBody": GetNotificationRequestBody,
-    "InlineResponse200": InlineResponse200,
-    "InlineResponse2001": InlineResponse2001,
-    "InlineResponse2002": InlineResponse2002,
-    "InlineResponse2005": InlineResponse2005,
-    "InlineResponse2007": InlineResponse2007,
-    "InlineResponse2008": InlineResponse2008,
-    "InlineResponse201": InlineResponse201,
-    "InlineResponse400": InlineResponse400,
-    "InlineResponse4001": InlineResponse4001,
-    "InlineResponse4002": InlineResponse4002,
-    "InlineResponse4003": InlineResponse4003,
     "InvalidIdentifierError": InvalidIdentifierError,
     "Notification": Notification,
     "Notification200Errors": Notification200Errors,
     "NotificationAllOf": NotificationAllOf,
     "NotificationAllOfAndroidBackgroundLayout": NotificationAllOfAndroidBackgroundLayout,
+    "NotificationHistoryBadRequestResponse": NotificationHistoryBadRequestResponse,
+    "NotificationHistorySuccessResponse": NotificationHistorySuccessResponse,
     "NotificationSlice": NotificationSlice,
     "NotificationTarget": NotificationTarget,
     "NotificationWithMeta": NotificationWithMeta,
@@ -152,7 +171,9 @@ let typeMap: {[index: string]: any} = {
     "Segment": Segment,
     "SegmentNotificationTarget": SegmentNotificationTarget,
     "StringMap": StringMap,
+    "UpdatePlayerSuccessResponse": UpdatePlayerSuccessResponse,
     "UpdatePlayerTagsRequestBody": UpdatePlayerTagsRequestBody,
+    "UpdatePlayerTagsSuccessResponse": UpdatePlayerTagsSuccessResponse,
 }
 
 export class ObjectSerializer {
