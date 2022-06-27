@@ -9,7 +9,7 @@
 import { Notification200Errors } from './Notification200Errors';
 import { HttpFile } from '../http/http';
 
-export class InlineResponse200 {
+export class CreateNotificationSuccessResponse {
     'id': string;
     /**
     * Estimated number of subscribers targetted by notification.
@@ -47,7 +47,7 @@ export class InlineResponse200 {
         }    ];
 
     static getAttributeTypeMap() {
-        return InlineResponse200.attributeTypeMap;
+        return CreateNotificationSuccessResponse.attributeTypeMap;
     }
 
     public constructor() {

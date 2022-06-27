@@ -8,21 +8,31 @@
 
 import { HttpFile } from '../http/http';
 
-export class InlineResponse400 {
-    'errors'?: Array<string>;
+export class CreateSegmentSuccessResponse {
+    'success'?: boolean;
+    /**
+    * UUID of created segment
+    */
+    'id'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<string>",
+            "name": "success",
+            "baseName": "success",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return InlineResponse400.attributeTypeMap;
+        return CreateSegmentSuccessResponse.attributeTypeMap;
     }
 
     public constructor() {

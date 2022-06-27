@@ -8,9 +8,8 @@
 
 import { HttpFile } from '../http/http';
 
-export class InlineResponse2002 {
-    'success'?: boolean;
-    'destination_url'?: string;
+export class DeletePlayerSuccessResponse {
+    'success'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -18,18 +17,12 @@ export class InlineResponse2002 {
         {
             "name": "success",
             "baseName": "success",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "destination_url",
-            "baseName": "destination_url",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return InlineResponse2002.attributeTypeMap;
+        return DeletePlayerSuccessResponse.attributeTypeMap;
     }
 
     public constructor() {

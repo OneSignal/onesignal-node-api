@@ -8,9 +8,9 @@
 
 import { HttpFile } from '../http/http';
 
-export class InlineResponse4002 {
+export class NotificationHistorySuccessResponse {
     'success'?: boolean;
-    'errors'?: Array<string>;
+    'destination_url'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -22,14 +22,14 @@ export class InlineResponse4002 {
             "format": ""
         },
         {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<string>",
+            "name": "destination_url",
+            "baseName": "destination_url",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return InlineResponse4002.attributeTypeMap;
+        return NotificationHistorySuccessResponse.attributeTypeMap;
     }
 
     public constructor() {

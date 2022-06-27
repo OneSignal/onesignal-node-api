@@ -8,8 +8,8 @@
 
 import { HttpFile } from '../http/http';
 
-export class InlineResponse2007 {
-    'success'?: string;
+export class DeleteSegmentNotFoundResponse {
+    'success'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -17,12 +17,12 @@ export class InlineResponse2007 {
         {
             "name": "success",
             "baseName": "success",
-            "type": "string",
+            "type": "boolean",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return InlineResponse2007.attributeTypeMap;
+        return DeleteSegmentNotFoundResponse.attributeTypeMap;
     }
 
     public constructor() {

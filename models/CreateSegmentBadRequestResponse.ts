@@ -8,8 +8,8 @@
 
 import { HttpFile } from '../http/http';
 
-export class InlineResponse4001 {
-    'success'?: string;
+export class CreateSegmentBadRequestResponse {
+    'success'?: boolean;
     'errors'?: Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
@@ -18,7 +18,7 @@ export class InlineResponse4001 {
         {
             "name": "success",
             "baseName": "success",
-            "type": "string",
+            "type": "boolean",
             "format": ""
         },
         {
@@ -29,7 +29,7 @@ export class InlineResponse4001 {
         }    ];
 
     static getAttributeTypeMap() {
-        return InlineResponse4001.attributeTypeMap;
+        return CreateSegmentBadRequestResponse.attributeTypeMap;
     }
 
     public constructor() {
