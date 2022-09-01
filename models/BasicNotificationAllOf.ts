@@ -6,121 +6,19 @@
  * Contact: devrel@onesignal.com
  */
 
-import { BasicNotification } from './BasicNotification';
 import { BasicNotificationAllOfAndroidBackgroundLayout } from './BasicNotificationAllOfAndroidBackgroundLayout';
 import { Button } from './Button';
-import { DeliveryData } from './DeliveryData';
-import { NotificationWithMetaAllOf } from './NotificationWithMetaAllOf';
-import { OutcomeData } from './OutcomeData';
-import { OutcomesData } from './OutcomesData';
-import { PlatformDeliveryData } from './PlatformDeliveryData';
 import { StringMap } from './StringMap';
 import { HttpFile } from '../http/http';
 
-export class NotificationWithMeta {
-    /**
-    * The segment names you want to target. Users in these segments will receive a notification. This targeting parameter is only compatible with excluded_segments. Example: [\"Active Users\", \"Inactive Users\"] 
-    */
-    'included_segments'?: Array<string>;
-    /**
-    * Segment that will be excluded when sending. Users in these segments will not receive a notification, even if they were included in included_segments. This targeting parameter is only compatible with included_segments. Example: [\"Active Users\", \"Inactive Users\"] 
-    */
-    'excluded_segments'?: Array<string>;
-    /**
-    * relation = \">\" or \"<\" hours_ago = number of hours before or after the users last session. Example: \"1.1\" 
-    */
-    'last_session'?: string;
-    /**
-    * relation = \">\" or \"<\" hours_ago = number of hours before or after the users first session. Example: \"1.1\" 
-    */
-    'first_session'?: string;
-    /**
-    * relation = \">\", \"<\", \"=\" or \"!=\" value = number sessions. Example: \"1\" 
-    */
-    'session_count'?: string;
-    /**
-    * relation = \">\", \"<\", \"=\" or \"!=\" value = Time in seconds the user has been in your app. Example: \"3600\" 
-    */
-    'session_time'?: string;
-    /**
-    * relation = \">\", \"<\", or \"=\" value = Amount in USD a user has spent on IAP (In App Purchases). Example: \"0.99\" 
-    */
-    'amount_spent'?: string;
-    /**
-    * relation = \">\", \"<\" or \"=\" key = SKU purchased in your app as an IAP (In App Purchases). Example: \"com.domain.100coinpack\" value = value of SKU to compare to. Example: \"0.99\" 
-    */
-    'bought_sku'?: string;
-    /**
-    * relation = \">\", \"<\", \"=\", \"!=\", \"exists\", \"not_exists\", \"time_elapsed_gt\" (paid plan only) or \"time_elapsed_lt\" (paid plan only) See Time Operators key = Tag key to compare. value = Tag value to compare. Not required for \"exists\" or \"not_exists\". Example: See Formatting Filters 
-    */
-    'tag'?: string;
-    /**
-    * relation = \"=\" or \"!=\" value = 2 character language code. Example: \"en\". For a list of all language codes see Language & Localization. 
-    */
-    'language'?: string;
-    /**
-    * relation = \">\", \"<\", \"=\" or \"!=\" value = app version. Example: \"1.0.0\" 
-    */
-    'app_version'?: string;
-    /**
-    * radius = in meters lat = latitude long = longitude 
-    */
-    'location'?: string;
-    /**
-    * value = email address Only for sending Push Notifications Use this for targeting push subscribers associated with an email set with all SDK setEmail methods To send emails to specific email addresses use include_email_tokens parameter 
-    */
-    'email'?: string;
-    /**
-    * relation = \"=\" value = 2-digit Country code Example: \"field\": \"country\", \"relation\": \"=\", \"value\", \"US\" 
-    */
-    'country'?: string;
-    /**
-    * Specific playerids to send your notification to. _Does not require API Auth Key. Do not combine with other targeting parameters. Not compatible with any other targeting parameters. Example: [\"1dd608f2-c6a1-11e3-851d-000c2940e62c\"] Limit of 2,000 entries per REST API call 
-    */
-    'include_player_ids'?: Array<string>;
-    /**
-    * Target specific devices by custom user IDs assigned via API. Not compatible with any other targeting parameters Example: [\"custom-id-assigned-by-api\"] REQUIRED: REST API Key Authentication Limit of 2,000 entries per REST API call. Note: If targeting push, email, or sms subscribers with same ids, use with channel_for_external_user_ids to indicate you are sending a push or email or sms. 
-    */
-    'include_external_user_ids'?: Array<string>;
-    /**
-    * Recommended for Sending Emails - Target specific email addresses. If an email does not correspond to an existing user, a new user will be created. Example: nick@catfac.ts Limit of 2,000 entries per REST API call 
-    */
-    'include_email_tokens'?: Array<string>;
-    /**
-    * Recommended for Sending SMS - Target specific phone numbers. The phone number should be in the E.164 format. Phone number should be an existing subscriber on OneSignal. Refer our docs to learn how to add phone numbers to OneSignal. Example phone number: +1999999999 Limit of 2,000 entries per REST API call 
-    */
-    'include_phone_numbers'?: Array<string>;
-    /**
-    * Not Recommended: Please consider using include_player_ids or include_external_user_ids instead. Target using iOS device tokens. Warning: Only works with Production tokens. All non-alphanumeric characters must be removed from each token. If a token does not correspond to an existing user, a new user will be created. Example: ce777617da7f548fe7a9ab6febb56cf39fba6d38203... Limit of 2,000 entries per REST API call 
-    */
-    'include_ios_tokens'?: Array<string>;
-    /**
-    * Not Recommended: Please consider using include_player_ids or include_external_user_ids instead. Target using Windows URIs. If a token does not correspond to an existing user, a new user will be created. Example: http://s.notify.live.net/u/1/bn1/HmQAAACPaLDr-... Limit of 2,000 entries per REST API call 
-    */
-    'include_wp_wns_uris'?: Array<string>;
-    /**
-    * Not Recommended: Please consider using include_player_ids or include_external_user_ids instead. Target using Amazon ADM registration IDs. If a token does not correspond to an existing user, a new user will be created. Example: amzn1.adm-registration.v1.XpvSSUk0Rc3hTVVV... Limit of 2,000 entries per REST API call 
-    */
-    'include_amazon_reg_ids'?: Array<string>;
-    /**
-    * Not Recommended: Please consider using include_player_ids or include_external_user_ids instead. Target using Chrome App registration IDs. If a token does not correspond to an existing user, a new user will be created. Example: APA91bEeiUeSukAAUdnw3O2RB45FWlSpgJ7Ji_... Limit of 2,000 entries per REST API call 
-    */
-    'include_chrome_reg_ids'?: Array<string>;
-    /**
-    * Not Recommended: Please consider using include_player_ids or include_external_user_ids instead. Target using Chrome Web Push registration IDs. If a token does not correspond to an existing user, a new user will be created. Example: APA91bEeiUeSukAAUdnw3O2RB45FWlSpgJ7Ji_... Limit of 2,000 entries per REST API call 
-    */
-    'include_chrome_web_reg_ids'?: Array<string>;
-    /**
-    * Not Recommended: Please consider using include_player_ids or include_external_user_ids instead. Target using Android device registration IDs. If a token does not correspond to an existing user, a new user will be created. Example: APA91bEeiUeSukAAUdnw3O2RB45FWlSpgJ7Ji_... Limit of 2,000 entries per REST API call 
-    */
-    'include_android_reg_ids'?: Array<string>;
+export class BasicNotificationAllOf {
     'id'?: string;
     'value'?: number;
     /**
     * Required for SMS Messages. An identifier for tracking message within the OneSignal dashboard or export analytics. Not shown to end user.
     */
     'name'?: string;
-    'aggregation'?: NotificationWithMetaAggregationEnum;
+    'aggregation'?: BasicNotificationAllOfAggregationEnum;
     /**
     * Indicates whether to send to all devices registered under your app\'s Apple iOS platform.
     */
@@ -168,7 +66,7 @@ export class NotificationWithMeta {
     /**
     * Required: Your OneSignal Application ID, which can be found in Keys & IDs. It is a UUID and looks similar to 8250eaf6-1a58-489e-b136-7c74a864b434. 
     */
-    'app_id': string;
+    'app_id'?: string;
     /**
     * Correlation and idempotency key. A request received with this parameter will first look for another notification with the same external_id. If one exists, a notification will not be sent, and result of the previous operation will instead be returned. Therefore, if you plan on using this feature, it\'s important to use a good source of randomness to generate the UUID passed here. This key is only idempotent for 30 days. After 30 days, the notification could be removed from our system and a notification with the same external_id will be sent again.   See Idempotent Notification Requests for more details writeOnly: true 
     */
@@ -390,9 +288,9 @@ export class NotificationWithMeta {
     */
     'apns_push_type_override'?: string;
     /**
-    * number of push notifications sent per minute. Paid Feature Only. If throttling is not enabled for the app or the notification, and for free accounts, null is returned. Refer to Throttling for more details.
+    * Channel: All Apps with throttling enabled:   - the parameter value will be used to override the default application throttling value set from the dashboard settings.   - parameter value 0 indicates not to apply throttling to the notification.   - if the parameter is not passed then the default app throttling value will be applied to the notification. Apps with throttling disabled:   - this parameter can be used to throttle delivery for the notification even though throttling is not enabled at the application level. Refer to throttling for more details. 
     */
-    'throttle_rate_per_minute'?: number;
+    'throttle_rate_per_minute'?: string;
     /**
     * Channel: Push Notifications Platform: Android Notifications with the same group will be stacked together using Android\'s Notification Grouping feature. 
     */
@@ -445,192 +343,10 @@ export class NotificationWithMeta {
     * Channel: SMS URLs for the media files to be attached to the SMS content. Limit: 10 media urls with a total max. size of 5MBs. 
     */
     'sms_media_urls'?: Array<string>;
-    /**
-    * Number of notifications that were successfully delivered.
-    */
-    'successful'?: number;
-    /**
-    * Number of notifications that could not be delivered due to those devices being unsubscribed.
-    */
-    'failed'?: number;
-    /**
-    * Number of notifications that could not be delivered due to an error. You can find more information by viewing the notification in the dashboard.
-    */
-    'errored'?: number;
-    /**
-    * Number of users who have clicked / tapped on your notification.
-    */
-    'converted'?: number;
-    /**
-    * Confirmed Deliveries number of devices that received the push notification. Paid Feature Only. Free accounts will see 0.
-    */
-    'received'?: number;
-    'outcomes'?: Array<OutcomeData>;
-    /**
-    * Number of notifications that have not been sent out yet. This can mean either our system is still processing the notification or you have delayed options set.
-    */
-    'remaining'?: number;
-    /**
-    * Unix timestamp indicating when the notification was created.
-    */
-    'queued_at'?: number;
-    /**
-    * Unix timestamp indicating when notification delivery should begin.
-    */
-    'send_after'?: number;
-    /**
-    * Unix timestamp indicating when notification delivery completed. The delivery duration from start to finish can be calculated with completed_at - send_after.
-    */
-    'completed_at'?: number;
-    'platform_delivery_stats'?: PlatformDeliveryData;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "included_segments",
-            "baseName": "included_segments",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "excluded_segments",
-            "baseName": "excluded_segments",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "last_session",
-            "baseName": "last_session",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "first_session",
-            "baseName": "first_session",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "session_count",
-            "baseName": "session_count",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "session_time",
-            "baseName": "session_time",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "amount_spent",
-            "baseName": "amount_spent",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "bought_sku",
-            "baseName": "bought_sku",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "tag",
-            "baseName": "tag",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "language",
-            "baseName": "language",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "app_version",
-            "baseName": "app_version",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "location",
-            "baseName": "location",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "email",
-            "baseName": "email",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "country",
-            "baseName": "country",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "include_player_ids",
-            "baseName": "include_player_ids",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "include_external_user_ids",
-            "baseName": "include_external_user_ids",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "include_email_tokens",
-            "baseName": "include_email_tokens",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "include_phone_numbers",
-            "baseName": "include_phone_numbers",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "include_ios_tokens",
-            "baseName": "include_ios_tokens",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "include_wp_wns_uris",
-            "baseName": "include_wp_wns_uris",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "include_amazon_reg_ids",
-            "baseName": "include_amazon_reg_ids",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "include_chrome_reg_ids",
-            "baseName": "include_chrome_reg_ids",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "include_chrome_web_reg_ids",
-            "baseName": "include_chrome_web_reg_ids",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "include_android_reg_ids",
-            "baseName": "include_android_reg_ids",
-            "type": "Array<string>",
-            "format": ""
-        },
         {
             "name": "id",
             "baseName": "id",
@@ -652,7 +368,7 @@ export class NotificationWithMeta {
         {
             "name": "aggregation",
             "baseName": "aggregation",
-            "type": "NotificationWithMetaAggregationEnum",
+            "type": "BasicNotificationAllOfAggregationEnum",
             "format": ""
         },
         {
@@ -1078,7 +794,7 @@ export class NotificationWithMeta {
         {
             "name": "throttle_rate_per_minute",
             "baseName": "throttle_rate_per_minute",
-            "type": "number",
+            "type": "string",
             "format": ""
         },
         {
@@ -1158,76 +874,10 @@ export class NotificationWithMeta {
             "baseName": "sms_media_urls",
             "type": "Array<string>",
             "format": ""
-        },
-        {
-            "name": "successful",
-            "baseName": "successful",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "failed",
-            "baseName": "failed",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "errored",
-            "baseName": "errored",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "converted",
-            "baseName": "converted",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "received",
-            "baseName": "received",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "outcomes",
-            "baseName": "outcomes",
-            "type": "Array<OutcomeData>",
-            "format": ""
-        },
-        {
-            "name": "remaining",
-            "baseName": "remaining",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "queued_at",
-            "baseName": "queued_at",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "send_after",
-            "baseName": "send_after",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "completed_at",
-            "baseName": "completed_at",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "platform_delivery_stats",
-            "baseName": "platform_delivery_stats",
-            "type": "PlatformDeliveryData",
-            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return NotificationWithMeta.attributeTypeMap;
+        return BasicNotificationAllOf.attributeTypeMap;
     }
 
     public constructor() {
@@ -1235,5 +885,5 @@ export class NotificationWithMeta {
 }
 
 
-export type NotificationWithMetaAggregationEnum = "sum" | "count" ;
+export type BasicNotificationAllOfAggregationEnum = "sum" | "count" ;
 

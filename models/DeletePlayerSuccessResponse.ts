@@ -9,7 +9,7 @@
 import { HttpFile } from '../http/http';
 
 export class DeletePlayerSuccessResponse {
-    'success'?: string;
+    'success'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -17,7 +17,7 @@ export class DeletePlayerSuccessResponse {
         {
             "name": "success",
             "baseName": "success",
-            "type": "string",
+            "type": "boolean",
             "format": ""
         }    ];
 

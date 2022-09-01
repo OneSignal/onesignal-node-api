@@ -1,4 +1,7 @@
 export * from './App';
+export * from './BasicNotification';
+export * from './BasicNotificationAllOf';
+export * from './BasicNotificationAllOfAndroidBackgroundLayout';
 export * from './Button';
 export * from './CancelNotificationSuccessResponse';
 export * from './CreateNotificationBadRequestResponse';
@@ -24,7 +27,6 @@ export * from './InvalidIdentifierError';
 export * from './Notification';
 export * from './Notification200Errors';
 export * from './NotificationAllOf';
-export * from './NotificationAllOfAndroidBackgroundLayout';
 export * from './NotificationHistoryBadRequestResponse';
 export * from './NotificationHistorySuccessResponse';
 export * from './NotificationSlice';
@@ -35,6 +37,8 @@ export * from './Operator';
 export * from './OutcomeData';
 export * from './OutcomesData';
 export * from './PlatformDeliveryData';
+export * from './PlatformDeliveryDataEmailAllOf';
+export * from './PlatformDeliveryDataSmsAllOf';
 export * from './Player';
 export * from './PlayerNotificationTarget';
 export * from './PlayerSlice';
@@ -47,6 +51,9 @@ export * from './UpdatePlayerTagsRequestBody';
 export * from './UpdatePlayerTagsSuccessResponse';
 
 import { App            , AppApnsEnvEnum                    } from './App';
+import { BasicNotification                           , BasicNotificationAggregationEnum                                                                                       } from './BasicNotification';
+import { BasicNotificationAllOf   , BasicNotificationAllOfAggregationEnum                                                                                       } from './BasicNotificationAllOf';
+import { BasicNotificationAllOfAndroidBackgroundLayout } from './BasicNotificationAllOfAndroidBackgroundLayout';
 import { Button } from './Button';
 import { CancelNotificationSuccessResponse } from './CancelNotificationSuccessResponse';
 import { CreateNotificationBadRequestResponse } from './CreateNotificationBadRequestResponse';
@@ -71,8 +78,7 @@ import { GetNotificationRequestBody, GetNotificationRequestBodyEventsEnum     } 
 import { InvalidIdentifierError } from './InvalidIdentifierError';
 import { Notification                           , NotificationAggregationEnum                                                                                        } from './Notification';
 import { Notification200Errors } from './Notification200Errors';
-import { NotificationAllOf   , NotificationAllOfAggregationEnum                                                                                        } from './NotificationAllOf';
-import { NotificationAllOfAndroidBackgroundLayout } from './NotificationAllOfAndroidBackgroundLayout';
+import { NotificationAllOf } from './NotificationAllOf';
 import { NotificationHistoryBadRequestResponse } from './NotificationHistoryBadRequestResponse';
 import { NotificationHistorySuccessResponse } from './NotificationHistorySuccessResponse';
 import { NotificationSlice } from './NotificationSlice';
@@ -83,6 +89,8 @@ import { Operator, OperatorOperatorEnum   } from './Operator';
 import { OutcomeData  , OutcomeDataAggregationEnum   } from './OutcomeData';
 import { OutcomesData } from './OutcomesData';
 import { PlatformDeliveryData } from './PlatformDeliveryData';
+import { PlatformDeliveryDataEmailAllOf } from './PlatformDeliveryDataEmailAllOf';
+import { PlatformDeliveryDataSmsAllOf } from './PlatformDeliveryDataSmsAllOf';
 import { Player } from './Player';
 import { PlayerNotificationTarget } from './PlayerNotificationTarget';
 import { PlayerSlice } from './PlayerSlice';
@@ -115,12 +123,13 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 
 let enumsMap: Set<string> = new Set<string>([
     "AppApnsEnvEnum",
+    "BasicNotificationAggregationEnum",
+    "BasicNotificationAllOfAggregationEnum",
     "FilterRelationEnum",
     "FilterExpressionsRelationEnum",
     "FilterExpressionsOperatorEnum",
     "GetNotificationRequestBodyEventsEnum",
     "NotificationAggregationEnum",
-    "NotificationAllOfAggregationEnum",
     "NotificationWithMetaAggregationEnum",
     "OperatorOperatorEnum",
     "OutcomeDataAggregationEnum",
@@ -128,6 +137,9 @@ let enumsMap: Set<string> = new Set<string>([
 
 let typeMap: {[index: string]: any} = {
     "App": App,
+    "BasicNotification": BasicNotification,
+    "BasicNotificationAllOf": BasicNotificationAllOf,
+    "BasicNotificationAllOfAndroidBackgroundLayout": BasicNotificationAllOfAndroidBackgroundLayout,
     "Button": Button,
     "CancelNotificationSuccessResponse": CancelNotificationSuccessResponse,
     "CreateNotificationBadRequestResponse": CreateNotificationBadRequestResponse,
@@ -153,7 +165,6 @@ let typeMap: {[index: string]: any} = {
     "Notification": Notification,
     "Notification200Errors": Notification200Errors,
     "NotificationAllOf": NotificationAllOf,
-    "NotificationAllOfAndroidBackgroundLayout": NotificationAllOfAndroidBackgroundLayout,
     "NotificationHistoryBadRequestResponse": NotificationHistoryBadRequestResponse,
     "NotificationHistorySuccessResponse": NotificationHistorySuccessResponse,
     "NotificationSlice": NotificationSlice,
@@ -164,6 +175,8 @@ let typeMap: {[index: string]: any} = {
     "OutcomeData": OutcomeData,
     "OutcomesData": OutcomesData,
     "PlatformDeliveryData": PlatformDeliveryData,
+    "PlatformDeliveryDataEmailAllOf": PlatformDeliveryDataEmailAllOf,
+    "PlatformDeliveryDataSmsAllOf": PlatformDeliveryDataSmsAllOf,
     "Player": Player,
     "PlayerNotificationTarget": PlayerNotificationTarget,
     "PlayerSlice": PlayerSlice,

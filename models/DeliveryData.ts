@@ -9,10 +9,25 @@
 import { HttpFile } from '../http/http';
 
 export class DeliveryData {
+    /**
+    * Number of messages delivered to push servers, mobile carriers, or email service providers.
+    */
     'successful'?: number;
+    /**
+    * Number of messages sent to unsubscribed devices.
+    */
     'failed'?: number;
+    /**
+    * Number of errors reported.
+    */
     'errored'?: number;
+    /**
+    * Number of messages that were clicked.
+    */
     'converted'?: number;
+    /**
+    * Number of devices that received the message.
+    */
     'received'?: number;
 
     static readonly discriminator: string | undefined = undefined;
