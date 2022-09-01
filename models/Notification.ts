@@ -6,10 +6,10 @@
  * Contact: devrel@onesignal.com
  */
 
+import { BasicNotification } from './BasicNotification';
+import { BasicNotificationAllOfAndroidBackgroundLayout } from './BasicNotificationAllOfAndroidBackgroundLayout';
 import { Button } from './Button';
 import { NotificationAllOf } from './NotificationAllOf';
-import { NotificationAllOfAndroidBackgroundLayout } from './NotificationAllOfAndroidBackgroundLayout';
-import { NotificationTarget } from './NotificationTarget';
 import { StringMap } from './StringMap';
 import { HttpFile } from '../http/http';
 
@@ -260,7 +260,7 @@ export class Notification {
     * Channel: Push Notifications Platform: Huawei Use this if you have client side Android Oreo Channels you have already defined in your app with code. 
     */
     'huawei_existing_channel_id'?: string;
-    'android_background_layout'?: NotificationAllOfAndroidBackgroundLayout;
+    'android_background_layout'?: BasicNotificationAllOfAndroidBackgroundLayout;
     /**
     * Channel: Push Notifications Platform: Android Icon shown in the status bar and on the top left of the notification. If not set a bell icon will be used or ic_stat_onesignal_default if you have set this resource name. See: How to create small icons 
     */
@@ -366,10 +366,6 @@ export class Notification {
     */
     'apns_alert'?: object;
     /**
-    * Channel: All Schedule notification for future delivery. API defaults to UTC -1100 Examples: All examples are the exact same date & time. \"Thu Sep 24 2015 14:00:00 GMT-0700 (PDT)\" \"September 24th 2015, 2:00:00 pm UTC-07:00\" \"2015-09-24 14:00:00 GMT-0700\" \"Sept 24 2015 14:00:00 GMT-0700\" \"Thu Sep 24 2015 14:00:00 GMT-0700 (Pacific Daylight Time)\" Note: SMS currently only supports send_after parameter. 
-    */
-    'send_after'?: string;
-    /**
     * Channel: All Possible values are: timezone (Deliver at a specific time-of-day in each users own timezone) last-active Same as Intelligent Delivery . (Deliver at the same time of day as each user last used your app). If send_after is used, this takes effect after the send_after time has elapsed. 
     */
     'delayed_option'?: string;
@@ -445,6 +441,10 @@ export class Notification {
     * Channel: SMS URLs for the media files to be attached to the SMS content. Limit: 10 media urls with a total max. size of 5MBs. 
     */
     'sms_media_urls'?: Array<string>;
+    /**
+    * Channel: All Schedule notification for future delivery. API defaults to UTC -1100 Examples: All examples are the exact same date & time. \"Thu Sep 24 2015 14:00:00 GMT-0700 (PDT)\" \"September 24th 2015, 2:00:00 pm UTC-07:00\" \"2015-09-24 14:00:00 GMT-0700\" \"Sept 24 2015 14:00:00 GMT-0700\" \"Thu Sep 24 2015 14:00:00 GMT-0700 (Pacific Daylight Time)\" Note: SMS currently only supports send_after parameter. 
+    */
+    'send_after'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -848,7 +848,7 @@ export class Notification {
         {
             "name": "android_background_layout",
             "baseName": "android_background_layout",
-            "type": "NotificationAllOfAndroidBackgroundLayout",
+            "type": "BasicNotificationAllOfAndroidBackgroundLayout",
             "format": ""
         },
         {
@@ -1008,12 +1008,6 @@ export class Notification {
             "format": ""
         },
         {
-            "name": "send_after",
-            "baseName": "send_after",
-            "type": "string",
-            "format": "date-time"
-        },
-        {
             "name": "delayed_option",
             "baseName": "delayed_option",
             "type": "string",
@@ -1126,6 +1120,12 @@ export class Notification {
             "baseName": "sms_media_urls",
             "type": "Array<string>",
             "format": ""
+        },
+        {
+            "name": "send_after",
+            "baseName": "send_after",
+            "type": "string",
+            "format": "date-time"
         }    ];
 
     static getAttributeTypeMap() {

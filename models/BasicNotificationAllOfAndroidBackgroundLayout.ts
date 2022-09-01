@@ -11,7 +11,7 @@ import { HttpFile } from '../http/http';
 /**
 * Channel: Push Notifications Platform: Android Allowing setting a background image for the notification. This is a JSON object containing the following keys. See our Background Image documentation for image sizes. 
 */
-export class NotificationAllOfAndroidBackgroundLayout {
+export class BasicNotificationAllOfAndroidBackgroundLayout {
     /**
     * Asset file, android resource name, or URL to remote image.
     */
@@ -48,7 +48,7 @@ export class NotificationAllOfAndroidBackgroundLayout {
         }    ];
 
     static getAttributeTypeMap() {
-        return NotificationAllOfAndroidBackgroundLayout.attributeTypeMap;
+        return BasicNotificationAllOfAndroidBackgroundLayout.attributeTypeMap;
     }
 
     public constructor() {

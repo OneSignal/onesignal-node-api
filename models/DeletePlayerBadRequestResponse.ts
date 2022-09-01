@@ -9,7 +9,7 @@
 import { HttpFile } from '../http/http';
 
 export class DeletePlayerBadRequestResponse {
-    'erorrs'?: Array<string>;
+    'erorrs'?: Array<boolean>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -17,7 +17,7 @@ export class DeletePlayerBadRequestResponse {
         {
             "name": "erorrs",
             "baseName": "erorrs",
-            "type": "Array<string>",
+            "type": "Array<boolean>",
             "format": ""
         }    ];
 

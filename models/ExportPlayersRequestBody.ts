@@ -16,7 +16,7 @@ export class ExportPlayersRequestBody {
     /**
     * Export all devices with a last_active timestamp greater than this time.  Unixtime in seconds.
     */
-    'last_active_since'?: number;
+    'last_active_since'?: string;
     /**
     * Export al ldevices belonging to the segment.
     */
@@ -34,7 +34,7 @@ export class ExportPlayersRequestBody {
         {
             "name": "last_active_since",
             "baseName": "last_active_since",
-            "type": "number",
+            "type": "string",
             "format": ""
         },
         {

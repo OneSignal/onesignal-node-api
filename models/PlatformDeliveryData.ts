@@ -7,6 +7,8 @@
  */
 
 import { DeliveryData } from './DeliveryData';
+import { PlatformDeliveryDataEmailAllOf } from './PlatformDeliveryDataEmailAllOf';
+import { PlatformDeliveryDataSmsAllOf } from './PlatformDeliveryDataSmsAllOf';
 import { HttpFile } from '../http/http';
 
 /**
@@ -19,6 +21,8 @@ export class PlatformDeliveryData {
     'safari_web_push'?: DeliveryData;
     'android'?: DeliveryData;
     'ios'?: DeliveryData;
+    'sms'?: DeliveryData & PlatformDeliveryDataSmsAllOf;
+    'email'?: DeliveryData & PlatformDeliveryDataEmailAllOf;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -57,6 +61,18 @@ export class PlatformDeliveryData {
             "name": "ios",
             "baseName": "ios",
             "type": "DeliveryData",
+            "format": ""
+        },
+        {
+            "name": "sms",
+            "baseName": "sms",
+            "type": "DeliveryData & PlatformDeliveryDataSmsAllOf",
+            "format": ""
+        },
+        {
+            "name": "email",
+            "baseName": "email",
+            "type": "DeliveryData & PlatformDeliveryDataEmailAllOf",
             "format": ""
         }    ];
 

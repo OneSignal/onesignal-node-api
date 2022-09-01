@@ -495,7 +495,7 @@ let body:.DefaultApiExportPlayersRequest = {
     extra_fields: [
       "extra_fields_example",
     ],
-    last_active_since: 1,
+    last_active_since: "last_active_since_example",
     segment_name: "segment_name_example",
   },
 };
