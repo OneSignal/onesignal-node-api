@@ -19,6 +19,7 @@
     "lib": [ "es6" ],
   },
   "exclude": [
+    "example",
     "dist",
     "node_modules"
   ],
