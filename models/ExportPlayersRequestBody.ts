@@ -18,7 +18,7 @@ export class ExportPlayersRequestBody {
     */
     'last_active_since'?: string;
     /**
-    * Export al ldevices belonging to the segment.
+    * Export all devices belonging to the segment.
     */
     'segment_name'?: string;
 
