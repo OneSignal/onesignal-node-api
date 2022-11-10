@@ -20,7 +20,7 @@ export class FilterExpressions {
     */
     'key'?: string;
     /**
-    * Constant value to use as the second operand in the filter expression.  This value is *required* when the relation operator is a binary operator.
+    * Constant value to use as the second operand in the filter expression. This value is *required* when the relation operator is a binary operator.
     */
     'value'?: string;
     /**
@@ -75,6 +75,6 @@ export class FilterExpressions {
 }
 
 
-export type FilterExpressionsRelationEnum = "&gt;" | "&lt;" | "&#x3D;" | "!&#x3D;" | "exists" | "not_exists" | "time_elapsed_gt" | "time_elapsed_lt" ;
+export type FilterExpressionsRelationEnum = ">" | "<" | "=" | "!=" | "exists" | "not_exists" | "time_elapsed_gt" | "time_elapsed_lt" ;
 export type FilterExpressionsOperatorEnum = "OR" | "AND" ;
 

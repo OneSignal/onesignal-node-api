@@ -8,6 +8,7 @@
 
 import { BasicNotificationAllOfAndroidBackgroundLayout } from './BasicNotificationAllOfAndroidBackgroundLayout';
 import { Button } from './Button';
+import { Filter } from './Filter';
 import { StringMap } from './StringMap';
 import { HttpFile } from '../http/http';
 
@@ -343,6 +344,7 @@ export class BasicNotificationAllOf {
     * Channel: SMS URLs for the media files to be attached to the SMS content. Limit: 10 media urls with a total max. size of 5MBs. 
     */
     'sms_media_urls'?: Array<string>;
+    'filters'?: Array<Filter>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -873,6 +875,12 @@ export class BasicNotificationAllOf {
             "name": "sms_media_urls",
             "baseName": "sms_media_urls",
             "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "filters",
+            "baseName": "filters",
+            "type": "Array<Filter>",
             "format": ""
         }    ];
 

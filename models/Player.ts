@@ -12,7 +12,7 @@ export class Player {
     /**
     * The device\'s OneSignal ID
     */
-    'id': string;
+    'id'?: string;
     /**
     * If true, this is the equivalent of a user being Unsubscribed
     */

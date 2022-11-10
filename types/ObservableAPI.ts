@@ -26,7 +26,6 @@ import { ExportPlayersRequestBody } from '../models/ExportPlayersRequestBody';
 import { ExportPlayersSuccessResponse } from '../models/ExportPlayersSuccessResponse';
 import { Filter } from '../models/Filter';
 import { FilterExpressions } from '../models/FilterExpressions';
-import { FilterNotificationTarget } from '../models/FilterNotificationTarget';
 import { GetNotificationRequestBody } from '../models/GetNotificationRequestBody';
 import { InvalidIdentifierError } from '../models/InvalidIdentifierError';
 import { Notification } from '../models/Notification';
