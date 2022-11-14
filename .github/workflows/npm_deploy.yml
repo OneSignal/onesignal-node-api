@@ -3,6 +3,7 @@ name: NPM Publish
 on:
   release:
     types: [created]
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -10,7 +11,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 19
+          node-version: 18
       - name: Publish package
         if: github.event_name == 'release' && github.event.action == 'created'
         uses: JS-DevTools/npm-publish@v1
