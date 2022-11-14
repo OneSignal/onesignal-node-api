@@ -9,7 +9,7 @@
 import { HttpFile } from '../http/http';
 
 export class App {
-    'id': string;
+    'id'?: string;
     /**
     * The name of your app, as displayed on your apps list on the dashboard.  This can be renamed.
     */

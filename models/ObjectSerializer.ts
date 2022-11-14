@@ -21,7 +21,6 @@ export * from './ExportPlayersRequestBody';
 export * from './ExportPlayersSuccessResponse';
 export * from './Filter';
 export * from './FilterExpressions';
-export * from './FilterNotificationTarget';
 export * from './GetNotificationRequestBody';
 export * from './InvalidIdentifierError';
 export * from './Notification';
@@ -51,8 +50,8 @@ export * from './UpdatePlayerTagsRequestBody';
 export * from './UpdatePlayerTagsSuccessResponse';
 
 import { App            , AppApnsEnvEnum                    } from './App';
-import { BasicNotification                           , BasicNotificationAggregationEnum                                                                                       } from './BasicNotification';
-import { BasicNotificationAllOf   , BasicNotificationAllOfAggregationEnum                                                                                       } from './BasicNotificationAllOf';
+import { BasicNotification               , BasicNotificationAggregationEnum                                                                                        } from './BasicNotification';
+import { BasicNotificationAllOf   , BasicNotificationAllOfAggregationEnum                                                                                        } from './BasicNotificationAllOf';
 import { BasicNotificationAllOfAndroidBackgroundLayout } from './BasicNotificationAllOfAndroidBackgroundLayout';
 import { Button } from './Button';
 import { CancelNotificationSuccessResponse } from './CancelNotificationSuccessResponse';
@@ -73,17 +72,16 @@ import { ExportPlayersRequestBody } from './ExportPlayersRequestBody';
 import { ExportPlayersSuccessResponse } from './ExportPlayersSuccessResponse';
 import { Filter   , FilterRelationEnum   } from './Filter';
 import { FilterExpressions   , FilterExpressionsRelationEnum  , FilterExpressionsOperatorEnum   } from './FilterExpressions';
-import { FilterNotificationTarget } from './FilterNotificationTarget';
 import { GetNotificationRequestBody, GetNotificationRequestBodyEventsEnum     } from './GetNotificationRequestBody';
 import { InvalidIdentifierError } from './InvalidIdentifierError';
-import { Notification                           , NotificationAggregationEnum                                                                                        } from './Notification';
+import { Notification               , NotificationAggregationEnum                                                                                         } from './Notification';
 import { Notification200Errors } from './Notification200Errors';
 import { NotificationAllOf } from './NotificationAllOf';
 import { NotificationHistoryBadRequestResponse } from './NotificationHistoryBadRequestResponse';
 import { NotificationHistorySuccessResponse } from './NotificationHistorySuccessResponse';
 import { NotificationSlice } from './NotificationSlice';
 import { NotificationTarget } from './NotificationTarget';
-import { NotificationWithMeta                           , NotificationWithMetaAggregationEnum                                                                                                  } from './NotificationWithMeta';
+import { NotificationWithMeta               , NotificationWithMetaAggregationEnum                                                                                                   } from './NotificationWithMeta';
 import { NotificationWithMetaAllOf } from './NotificationWithMetaAllOf';
 import { Operator, OperatorOperatorEnum   } from './Operator';
 import { OutcomeData  , OutcomeDataAggregationEnum   } from './OutcomeData';
@@ -159,7 +157,6 @@ let typeMap: {[index: string]: any} = {
     "ExportPlayersSuccessResponse": ExportPlayersSuccessResponse,
     "Filter": Filter,
     "FilterExpressions": FilterExpressions,
-    "FilterNotificationTarget": FilterNotificationTarget,
     "GetNotificationRequestBody": GetNotificationRequestBody,
     "InvalidIdentifierError": InvalidIdentifierError,
     "Notification": Notification,

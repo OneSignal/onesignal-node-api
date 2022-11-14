@@ -167,6 +167,25 @@ Sends a notification to your users.
 ```js
 const notification = new OneSignal.Notification();
 notification.app_id = app.id;
+// Name property may be required in some case, for instance when sending an SMS.
+notification.name = "test_notification_name";
+notification.contents = {
+  en: "Gig'em Ags"
+}
+
+// required for Huawei
+notification.headings = {
+  en: "Gig'em Ags"
+}
+const notification = await client.createNotification(notification);
+```
+### Creating a notification using Filters
+Sends a notification to your users filtered by specific criteria.
+
+**Example**
+```js
+const notification = new OneSignal.Notification();
+notification.app_id = app.id;
 
 notification.contents = {
   en: "Gig'em Ags"
@@ -176,6 +195,17 @@ notification.contents = {
 notification.headings = {
   en: "Gig'em Ags"
 }
+
+// Find all the users that have not spent any amount in USD on IAP.
+// https://documentation.onesignal.com/reference/create-notification#send-to-users-based-on-filters
+notification.filters = [
+    {
+        field: 'amount_spent',
+        relation: '=',
+        value: "0"
+    },
+];
+
 const notification = await client.createNotification(notification);
 ```
 
@@ -313,19 +343,18 @@ const updatePlayerResponse = await client.updatePlayer('<player id>', player);
 
 ### Updating player tags
 Update an existing device's tags in one of your OneSignal apps using the External User ID.
-#### ⚠️ Android SDK Data Synchronization
-Tags added through the Android SDK tagging methods may not update if using the API to change or update the same tag.
-For example, if you use SDK method sendTag("key", "value1") then update the tag value to "value2" with this API endpoint.
-You will not be able to set the value back to "value1" through the SDK, you will need to change it to something different 
-through the SDK to be reset.
 
-Recommendations if using this Endpoint on Android Mobile Apps:
-1. Do not use the same tag keys for SDK and API updates
-2. If you want to use the same key for both SDK and API updates, call the SDK getTags method first to update the 
-device's tags.
+```js
+const playerToUpdate = new OneSignal.Player();
 
-⚠️ This is only applicable on the Android Mobile App SDKs.
+player.app_id = APP_ID;
+player.device_type = 1;
 
+playerToUpdate.external_user_id = 'your_player_external_id'; // setting the same external_user_id as before
+const updatePlayerTagsRequestBody = new OneSignal.UpdatePlayerTagsRequestBody();
+updatePlayerTagsRequestBody.tags = {'typescript_test_tag': 1};
+const updatePlayerResponse = await api.updatePlayerTags(APP_ID, PLAYER_EXTERNAL_USER_ID, updatePlayerTagsRequestBody);
+```
 #### Deleting Tags
 To delete a tag, include its key and set its value to blank (""). Omitting a key/value will not delete it.
 

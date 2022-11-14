@@ -9,6 +9,7 @@
 import { BasicNotificationAllOf } from './BasicNotificationAllOf';
 import { BasicNotificationAllOfAndroidBackgroundLayout } from './BasicNotificationAllOfAndroidBackgroundLayout';
 import { Button } from './Button';
+import { Filter } from './Filter';
 import { NotificationTarget } from './NotificationTarget';
 import { StringMap } from './StringMap';
 import { HttpFile } from '../http/http';
@@ -22,54 +23,6 @@ export class BasicNotification {
     * Segment that will be excluded when sending. Users in these segments will not receive a notification, even if they were included in included_segments. This targeting parameter is only compatible with included_segments. Example: [\"Active Users\", \"Inactive Users\"] 
     */
     'excluded_segments'?: Array<string>;
-    /**
-    * relation = \">\" or \"<\" hours_ago = number of hours before or after the users last session. Example: \"1.1\" 
-    */
-    'last_session'?: string;
-    /**
-    * relation = \">\" or \"<\" hours_ago = number of hours before or after the users first session. Example: \"1.1\" 
-    */
-    'first_session'?: string;
-    /**
-    * relation = \">\", \"<\", \"=\" or \"!=\" value = number sessions. Example: \"1\" 
-    */
-    'session_count'?: string;
-    /**
-    * relation = \">\", \"<\", \"=\" or \"!=\" value = Time in seconds the user has been in your app. Example: \"3600\" 
-    */
-    'session_time'?: string;
-    /**
-    * relation = \">\", \"<\", or \"=\" value = Amount in USD a user has spent on IAP (In App Purchases). Example: \"0.99\" 
-    */
-    'amount_spent'?: string;
-    /**
-    * relation = \">\", \"<\" or \"=\" key = SKU purchased in your app as an IAP (In App Purchases). Example: \"com.domain.100coinpack\" value = value of SKU to compare to. Example: \"0.99\" 
-    */
-    'bought_sku'?: string;
-    /**
-    * relation = \">\", \"<\", \"=\", \"!=\", \"exists\", \"not_exists\", \"time_elapsed_gt\" (paid plan only) or \"time_elapsed_lt\" (paid plan only) See Time Operators key = Tag key to compare. value = Tag value to compare. Not required for \"exists\" or \"not_exists\". Example: See Formatting Filters 
-    */
-    'tag'?: string;
-    /**
-    * relation = \"=\" or \"!=\" value = 2 character language code. Example: \"en\". For a list of all language codes see Language & Localization. 
-    */
-    'language'?: string;
-    /**
-    * relation = \">\", \"<\", \"=\" or \"!=\" value = app version. Example: \"1.0.0\" 
-    */
-    'app_version'?: string;
-    /**
-    * radius = in meters lat = latitude long = longitude 
-    */
-    'location'?: string;
-    /**
-    * value = email address Only for sending Push Notifications Use this for targeting push subscribers associated with an email set with all SDK setEmail methods To send emails to specific email addresses use include_email_tokens parameter 
-    */
-    'email'?: string;
-    /**
-    * relation = \"=\" value = 2-digit Country code Example: \"field\": \"country\", \"relation\": \"=\", \"value\", \"US\" 
-    */
-    'country'?: string;
     /**
     * Specific playerids to send your notification to. _Does not require API Auth Key. Do not combine with other targeting parameters. Not compatible with any other targeting parameters. Example: [\"1dd608f2-c6a1-11e3-851d-000c2940e62c\"] Limit of 2,000 entries per REST API call 
     */
@@ -441,6 +394,7 @@ export class BasicNotification {
     * Channel: SMS URLs for the media files to be attached to the SMS content. Limit: 10 media urls with a total max. size of 5MBs. 
     */
     'sms_media_urls'?: Array<string>;
+    'filters'?: Array<Filter>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -455,78 +409,6 @@ export class BasicNotification {
             "name": "excluded_segments",
             "baseName": "excluded_segments",
             "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "last_session",
-            "baseName": "last_session",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "first_session",
-            "baseName": "first_session",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "session_count",
-            "baseName": "session_count",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "session_time",
-            "baseName": "session_time",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "amount_spent",
-            "baseName": "amount_spent",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "bought_sku",
-            "baseName": "bought_sku",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "tag",
-            "baseName": "tag",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "language",
-            "baseName": "language",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "app_version",
-            "baseName": "app_version",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "location",
-            "baseName": "location",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "email",
-            "baseName": "email",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "country",
-            "baseName": "country",
-            "type": "string",
             "format": ""
         },
         {
@@ -1115,6 +997,12 @@ export class BasicNotification {
             "name": "sms_media_urls",
             "baseName": "sms_media_urls",
             "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "filters",
+            "baseName": "filters",
+            "type": "Array<Filter>",
             "format": ""
         }    ];
 
