@@ -14,10 +14,9 @@ jobs:
           node-version: 18
       - name: Install Node types
         run: npm install @types/node
-      - name: Run build
-        run: npm run build
-      - name: Publish package
-        if: github.event_name == 'release' && github.event.action == 'created'
-        uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.NPM }}
+      - name: Install dependencies and build
+        run: npm ci && npm run build
+      - name: Publish package on NPM
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM }}
