@@ -12,6 +12,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+      - name: Install Node types
+        run: npm install @types/node
       - name: Publish package
         if: github.event_name == 'release' && github.event.action == 'created'
         uses: JS-DevTools/npm-publish@v1
