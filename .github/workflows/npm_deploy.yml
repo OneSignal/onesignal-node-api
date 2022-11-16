@@ -12,12 +12,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-          registry-url: 'https://registry.npmjs.org'
       - name: Install Node types
         run: npm install @types/node
-      - name: Install dependencies and build
-        run: npm ci && npm run build
-      - name: Publish package on NPM
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM }}
+      - name: Run build
+        run: npm run build
+      - name: Publish package
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM }}
