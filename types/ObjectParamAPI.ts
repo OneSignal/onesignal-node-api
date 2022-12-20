@@ -3,21 +3,19 @@ import * as models from '../models/all';
 import { Configuration} from '../configuration'
 
 import { App } from '../models/App';
+import { BadRequestError } from '../models/BadRequestError';
 import { BasicNotification } from '../models/BasicNotification';
 import { BasicNotificationAllOf } from '../models/BasicNotificationAllOf';
 import { BasicNotificationAllOfAndroidBackgroundLayout } from '../models/BasicNotificationAllOfAndroidBackgroundLayout';
+import { BeginLiveActivityRequest } from '../models/BeginLiveActivityRequest';
 import { Button } from '../models/Button';
 import { CancelNotificationSuccessResponse } from '../models/CancelNotificationSuccessResponse';
-import { CreateNotificationBadRequestResponse } from '../models/CreateNotificationBadRequestResponse';
 import { CreateNotificationSuccessResponse } from '../models/CreateNotificationSuccessResponse';
 import { CreatePlayerSuccessResponse } from '../models/CreatePlayerSuccessResponse';
-import { CreateSegmentBadRequestResponse } from '../models/CreateSegmentBadRequestResponse';
 import { CreateSegmentConflictResponse } from '../models/CreateSegmentConflictResponse';
 import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
-import { DeletePlayerBadRequestResponse } from '../models/DeletePlayerBadRequestResponse';
 import { DeletePlayerNotFoundResponse } from '../models/DeletePlayerNotFoundResponse';
 import { DeletePlayerSuccessResponse } from '../models/DeletePlayerSuccessResponse';
-import { DeleteSegmentBadRequestResponse } from '../models/DeleteSegmentBadRequestResponse';
 import { DeleteSegmentNotFoundResponse } from '../models/DeleteSegmentNotFoundResponse';
 import { DeleteSegmentSuccessResponse } from '../models/DeleteSegmentSuccessResponse';
 import { DeliveryData } from '../models/DeliveryData';
@@ -30,7 +28,6 @@ import { InvalidIdentifierError } from '../models/InvalidIdentifierError';
 import { Notification } from '../models/Notification';
 import { Notification200Errors } from '../models/Notification200Errors';
 import { NotificationAllOf } from '../models/NotificationAllOf';
-import { NotificationHistoryBadRequestResponse } from '../models/NotificationHistoryBadRequestResponse';
 import { NotificationHistorySuccessResponse } from '../models/NotificationHistorySuccessResponse';
 import { NotificationSlice } from '../models/NotificationSlice';
 import { NotificationTarget } from '../models/NotificationTarget';
@@ -49,12 +46,35 @@ import { Purchase } from '../models/Purchase';
 import { Segment } from '../models/Segment';
 import { SegmentNotificationTarget } from '../models/SegmentNotificationTarget';
 import { StringMap } from '../models/StringMap';
+import { UpdateLiveActivityRequest } from '../models/UpdateLiveActivityRequest';
+import { UpdateLiveActivitySuccessResponse } from '../models/UpdateLiveActivitySuccessResponse';
 import { UpdatePlayerSuccessResponse } from '../models/UpdatePlayerSuccessResponse';
 import { UpdatePlayerTagsRequestBody } from '../models/UpdatePlayerTagsRequestBody';
 import { UpdatePlayerTagsSuccessResponse } from '../models/UpdatePlayerTagsSuccessResponse';
 
 import { ObservableDefaultApi } from "./ObservableAPI";
 import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
+
+export interface DefaultApiBeginLiveActivityRequest {
+    /**
+     * The OneSignal App ID for your app.  Available in Keys &amp; IDs.
+     * @type string
+     * @memberof DefaultApibeginLiveActivity
+     */
+    appId: string
+    /**
+     * Live Activity record ID
+     * @type string
+     * @memberof DefaultApibeginLiveActivity
+     */
+    activityId: string
+    /**
+     * 
+     * @type BeginLiveActivityRequest
+     * @memberof DefaultApibeginLiveActivity
+     */
+    beginLiveActivityRequest: BeginLiveActivityRequest
+}
 
 export interface DefaultApiCancelNotificationRequest {
     /**
@@ -141,6 +161,27 @@ export interface DefaultApiDeleteSegmentsRequest {
      * @memberof DefaultApideleteSegments
      */
     segmentId: string
+}
+
+export interface DefaultApiEndLiveActivityRequest {
+    /**
+     * The OneSignal App ID for your app.  Available in Keys &amp; IDs.
+     * @type string
+     * @memberof DefaultApiendLiveActivity
+     */
+    appId: string
+    /**
+     * Live Activity record ID
+     * @type string
+     * @memberof DefaultApiendLiveActivity
+     */
+    activityId: string
+    /**
+     * Subscription ID
+     * @type string
+     * @memberof DefaultApiendLiveActivity
+     */
+    subscriptionId: string
 }
 
 export interface DefaultApiExportPlayersRequest {
@@ -323,6 +364,27 @@ export interface DefaultApiUpdateAppRequest {
     app: App
 }
 
+export interface DefaultApiUpdateLiveActivityRequest {
+    /**
+     * The OneSignal App ID for your app.  Available in Keys &amp; IDs.
+     * @type string
+     * @memberof DefaultApiupdateLiveActivity
+     */
+    appId: string
+    /**
+     * Live Activity record ID
+     * @type string
+     * @memberof DefaultApiupdateLiveActivity
+     */
+    activityId: string
+    /**
+     * 
+     * @type UpdateLiveActivityRequest
+     * @memberof DefaultApiupdateLiveActivity
+     */
+    updateLiveActivityRequest: UpdateLiveActivityRequest
+}
+
 export interface DefaultApiUpdatePlayerRequest {
     /**
      * Player\&#39;s OneSignal ID
@@ -364,6 +426,15 @@ export class ObjectDefaultApi {
 
     public constructor(configuration: Configuration, requestFactory?: DefaultApiRequestFactory, responseProcessor?: DefaultApiResponseProcessor) {
         this.api = new ObservableDefaultApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Starts a Live Activity
+     * Start Live Activity
+     * @param param the request object
+     */
+    public beginLiveActivity(param: DefaultApiBeginLiveActivityRequest, options?: Configuration): Promise<void> {
+        return this.api.beginLiveActivity(param.appId, param.activityId, param.beginLiveActivityRequest,  options).toPromise();
     }
 
     /**
@@ -427,6 +498,15 @@ export class ObjectDefaultApi {
      */
     public deleteSegments(param: DefaultApiDeleteSegmentsRequest, options?: Configuration): Promise<DeleteSegmentSuccessResponse> {
         return this.api.deleteSegments(param.appId, param.segmentId,  options).toPromise();
+    }
+
+    /**
+     * Stops a Live Activity
+     * Stop Live Activity
+     * @param param the request object
+     */
+    public endLiveActivity(param: DefaultApiEndLiveActivityRequest, options?: Configuration): Promise<void> {
+        return this.api.endLiveActivity(param.appId, param.activityId, param.subscriptionId,  options).toPromise();
     }
 
     /**
@@ -517,6 +597,15 @@ export class ObjectDefaultApi {
      */
     public updateApp(param: DefaultApiUpdateAppRequest, options?: Configuration): Promise<App> {
         return this.api.updateApp(param.appId, param.app,  options).toPromise();
+    }
+
+    /**
+     * Updates a specified live activity.
+     * Update a Live Activity via Push
+     * @param param the request object
+     */
+    public updateLiveActivity(param: DefaultApiUpdateLiveActivityRequest, options?: Configuration): Promise<UpdateLiveActivitySuccessResponse> {
+        return this.api.updateLiveActivity(param.appId, param.activityId, param.updateLiveActivityRequest,  options).toPromise();
     }
 
     /**

@@ -4,21 +4,19 @@ import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
 import { App } from '../models/App';
+import { BadRequestError } from '../models/BadRequestError';
 import { BasicNotification } from '../models/BasicNotification';
 import { BasicNotificationAllOf } from '../models/BasicNotificationAllOf';
 import { BasicNotificationAllOfAndroidBackgroundLayout } from '../models/BasicNotificationAllOfAndroidBackgroundLayout';
+import { BeginLiveActivityRequest } from '../models/BeginLiveActivityRequest';
 import { Button } from '../models/Button';
 import { CancelNotificationSuccessResponse } from '../models/CancelNotificationSuccessResponse';
-import { CreateNotificationBadRequestResponse } from '../models/CreateNotificationBadRequestResponse';
 import { CreateNotificationSuccessResponse } from '../models/CreateNotificationSuccessResponse';
 import { CreatePlayerSuccessResponse } from '../models/CreatePlayerSuccessResponse';
-import { CreateSegmentBadRequestResponse } from '../models/CreateSegmentBadRequestResponse';
 import { CreateSegmentConflictResponse } from '../models/CreateSegmentConflictResponse';
 import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
-import { DeletePlayerBadRequestResponse } from '../models/DeletePlayerBadRequestResponse';
 import { DeletePlayerNotFoundResponse } from '../models/DeletePlayerNotFoundResponse';
 import { DeletePlayerSuccessResponse } from '../models/DeletePlayerSuccessResponse';
-import { DeleteSegmentBadRequestResponse } from '../models/DeleteSegmentBadRequestResponse';
 import { DeleteSegmentNotFoundResponse } from '../models/DeleteSegmentNotFoundResponse';
 import { DeleteSegmentSuccessResponse } from '../models/DeleteSegmentSuccessResponse';
 import { DeliveryData } from '../models/DeliveryData';
@@ -31,7 +29,6 @@ import { InvalidIdentifierError } from '../models/InvalidIdentifierError';
 import { Notification } from '../models/Notification';
 import { Notification200Errors } from '../models/Notification200Errors';
 import { NotificationAllOf } from '../models/NotificationAllOf';
-import { NotificationHistoryBadRequestResponse } from '../models/NotificationHistoryBadRequestResponse';
 import { NotificationHistorySuccessResponse } from '../models/NotificationHistorySuccessResponse';
 import { NotificationSlice } from '../models/NotificationSlice';
 import { NotificationTarget } from '../models/NotificationTarget';
@@ -50,6 +47,8 @@ import { Purchase } from '../models/Purchase';
 import { Segment } from '../models/Segment';
 import { SegmentNotificationTarget } from '../models/SegmentNotificationTarget';
 import { StringMap } from '../models/StringMap';
+import { UpdateLiveActivityRequest } from '../models/UpdateLiveActivityRequest';
+import { UpdateLiveActivitySuccessResponse } from '../models/UpdateLiveActivitySuccessResponse';
 import { UpdatePlayerSuccessResponse } from '../models/UpdatePlayerSuccessResponse';
 import { UpdatePlayerTagsRequestBody } from '../models/UpdatePlayerTagsRequestBody';
 import { UpdatePlayerTagsSuccessResponse } from '../models/UpdatePlayerTagsSuccessResponse';
@@ -68,6 +67,32 @@ export class ObservableDefaultApi {
         this.configuration = configuration;
         this.requestFactory = requestFactory || new DefaultApiRequestFactory(configuration);
         this.responseProcessor = responseProcessor || new DefaultApiResponseProcessor();
+    }
+
+    /**
+     * Starts a Live Activity
+     * Start Live Activity
+     * @param appId The OneSignal App ID for your app.  Available in Keys &amp; IDs.
+     * @param activityId Live Activity record ID
+     * @param beginLiveActivityRequest 
+     */
+    public beginLiveActivity(appId: string, activityId: string, beginLiveActivityRequest: BeginLiveActivityRequest, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.beginLiveActivity(appId, activityId, beginLiveActivityRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.beginLiveActivity(rsp)));
+            }));
     }
 
     /**
@@ -239,6 +264,32 @@ export class ObservableDefaultApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteSegments(rsp)));
+            }));
+    }
+
+    /**
+     * Stops a Live Activity
+     * Stop Live Activity
+     * @param appId The OneSignal App ID for your app.  Available in Keys &amp; IDs.
+     * @param activityId Live Activity record ID
+     * @param subscriptionId Subscription ID
+     */
+    public endLiveActivity(appId: string, activityId: string, subscriptionId: string, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.endLiveActivity(appId, activityId, subscriptionId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.endLiveActivity(rsp)));
             }));
     }
 
@@ -494,6 +545,32 @@ export class ObservableDefaultApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateApp(rsp)));
+            }));
+    }
+
+    /**
+     * Updates a specified live activity.
+     * Update a Live Activity via Push
+     * @param appId The OneSignal App ID for your app.  Available in Keys &amp; IDs.
+     * @param activityId Live Activity record ID
+     * @param updateLiveActivityRequest 
+     */
+    public updateLiveActivity(appId: string, activityId: string, updateLiveActivityRequest: UpdateLiveActivityRequest, _options?: Configuration): Observable<UpdateLiveActivitySuccessResponse> {
+        const requestContextPromise = this.requestFactory.updateLiveActivity(appId, activityId, updateLiveActivityRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateLiveActivity(rsp)));
             }));
     }
 

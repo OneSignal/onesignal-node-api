@@ -1,6 +1,6 @@
 {
   "name": "@onesignal/node-onesignal",
-  "version": "1.0.0-beta7",
+  "version": "1.0.0-beta8",
   "description": "OpenAPI client for @onesignal/node-onesignal",
   "author": "OpenAPI-Generator Contributors",
   "keywords": [
@@ -9,7 +9,7 @@
     "openapi-client",
     "openapi-generator"
   ],
-  "license": "Unlicense",
+  "license": "MIT",
   "main": "./dist/index.js",
   "type": "commonjs",
   "exports": {
@@ -21,7 +21,7 @@
     "prepare": "npm run build"
   },
   "dependencies": {
-    "@types/node": "^18.11.9",
+    "@types/node": "^18.11.17",
     "@types/node-fetch": "^2.5.7",
     "btoa": "^1.2.1",
     "es6-promise": "^4.2.4",

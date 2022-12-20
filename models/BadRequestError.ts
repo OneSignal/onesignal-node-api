@@ -8,28 +8,21 @@
 
 import { HttpFile } from '../http/http';
 
-export class CreatePlayerSuccessResponse {
-    'success'?: boolean;
-    'id'?: string;
+export class BadRequestError {
+    'errors'?: Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "success",
-            "baseName": "success",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<string>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CreatePlayerSuccessResponse.attributeTypeMap;
+        return BadRequestError.attributeTypeMap;
     }
 
     public constructor() {

@@ -1,19 +1,17 @@
 export * from './App';
+export * from './BadRequestError';
 export * from './BasicNotification';
 export * from './BasicNotificationAllOf';
 export * from './BasicNotificationAllOfAndroidBackgroundLayout';
+export * from './BeginLiveActivityRequest';
 export * from './Button';
 export * from './CancelNotificationSuccessResponse';
-export * from './CreateNotificationBadRequestResponse';
 export * from './CreateNotificationSuccessResponse';
 export * from './CreatePlayerSuccessResponse';
-export * from './CreateSegmentBadRequestResponse';
 export * from './CreateSegmentConflictResponse';
 export * from './CreateSegmentSuccessResponse';
-export * from './DeletePlayerBadRequestResponse';
 export * from './DeletePlayerNotFoundResponse';
 export * from './DeletePlayerSuccessResponse';
-export * from './DeleteSegmentBadRequestResponse';
 export * from './DeleteSegmentNotFoundResponse';
 export * from './DeleteSegmentSuccessResponse';
 export * from './DeliveryData';
@@ -26,7 +24,6 @@ export * from './InvalidIdentifierError';
 export * from './Notification';
 export * from './Notification200Errors';
 export * from './NotificationAllOf';
-export * from './NotificationHistoryBadRequestResponse';
 export * from './NotificationHistorySuccessResponse';
 export * from './NotificationSlice';
 export * from './NotificationTarget';
@@ -45,26 +42,26 @@ export * from './Purchase';
 export * from './Segment';
 export * from './SegmentNotificationTarget';
 export * from './StringMap';
+export * from './UpdateLiveActivityRequest';
+export * from './UpdateLiveActivitySuccessResponse';
 export * from './UpdatePlayerSuccessResponse';
 export * from './UpdatePlayerTagsRequestBody';
 export * from './UpdatePlayerTagsSuccessResponse';
 
-import { App            , AppApnsEnvEnum                    } from './App';
+import { App            , AppApnsEnvEnum                        } from './App';
+import { BadRequestError } from './BadRequestError';
 import { BasicNotification               , BasicNotificationAggregationEnum                                                                                        } from './BasicNotification';
 import { BasicNotificationAllOf   , BasicNotificationAllOfAggregationEnum                                                                                        } from './BasicNotificationAllOf';
 import { BasicNotificationAllOfAndroidBackgroundLayout } from './BasicNotificationAllOfAndroidBackgroundLayout';
+import { BeginLiveActivityRequest } from './BeginLiveActivityRequest';
 import { Button } from './Button';
 import { CancelNotificationSuccessResponse } from './CancelNotificationSuccessResponse';
-import { CreateNotificationBadRequestResponse } from './CreateNotificationBadRequestResponse';
 import { CreateNotificationSuccessResponse } from './CreateNotificationSuccessResponse';
 import { CreatePlayerSuccessResponse } from './CreatePlayerSuccessResponse';
-import { CreateSegmentBadRequestResponse } from './CreateSegmentBadRequestResponse';
 import { CreateSegmentConflictResponse } from './CreateSegmentConflictResponse';
 import { CreateSegmentSuccessResponse } from './CreateSegmentSuccessResponse';
-import { DeletePlayerBadRequestResponse } from './DeletePlayerBadRequestResponse';
 import { DeletePlayerNotFoundResponse } from './DeletePlayerNotFoundResponse';
 import { DeletePlayerSuccessResponse } from './DeletePlayerSuccessResponse';
-import { DeleteSegmentBadRequestResponse } from './DeleteSegmentBadRequestResponse';
 import { DeleteSegmentNotFoundResponse } from './DeleteSegmentNotFoundResponse';
 import { DeleteSegmentSuccessResponse } from './DeleteSegmentSuccessResponse';
 import { DeliveryData } from './DeliveryData';
@@ -77,7 +74,6 @@ import { InvalidIdentifierError } from './InvalidIdentifierError';
 import { Notification               , NotificationAggregationEnum                                                                                         } from './Notification';
 import { Notification200Errors } from './Notification200Errors';
 import { NotificationAllOf } from './NotificationAllOf';
-import { NotificationHistoryBadRequestResponse } from './NotificationHistoryBadRequestResponse';
 import { NotificationHistorySuccessResponse } from './NotificationHistorySuccessResponse';
 import { NotificationSlice } from './NotificationSlice';
 import { NotificationTarget } from './NotificationTarget';
@@ -96,6 +92,8 @@ import { Purchase } from './Purchase';
 import { Segment } from './Segment';
 import { SegmentNotificationTarget } from './SegmentNotificationTarget';
 import { StringMap } from './StringMap';
+import { UpdateLiveActivityRequest, UpdateLiveActivityRequestNameEnum  , UpdateLiveActivityRequestEventEnum     } from './UpdateLiveActivityRequest';
+import { UpdateLiveActivitySuccessResponse } from './UpdateLiveActivitySuccessResponse';
 import { UpdatePlayerSuccessResponse } from './UpdatePlayerSuccessResponse';
 import { UpdatePlayerTagsRequestBody } from './UpdatePlayerTagsRequestBody';
 import { UpdatePlayerTagsSuccessResponse } from './UpdatePlayerTagsSuccessResponse';
@@ -131,25 +129,25 @@ let enumsMap: Set<string> = new Set<string>([
     "NotificationWithMetaAggregationEnum",
     "OperatorOperatorEnum",
     "OutcomeDataAggregationEnum",
+    "UpdateLiveActivityRequestNameEnum",
+    "UpdateLiveActivityRequestEventEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
     "App": App,
+    "BadRequestError": BadRequestError,
     "BasicNotification": BasicNotification,
     "BasicNotificationAllOf": BasicNotificationAllOf,
     "BasicNotificationAllOfAndroidBackgroundLayout": BasicNotificationAllOfAndroidBackgroundLayout,
+    "BeginLiveActivityRequest": BeginLiveActivityRequest,
     "Button": Button,
     "CancelNotificationSuccessResponse": CancelNotificationSuccessResponse,
-    "CreateNotificationBadRequestResponse": CreateNotificationBadRequestResponse,
     "CreateNotificationSuccessResponse": CreateNotificationSuccessResponse,
     "CreatePlayerSuccessResponse": CreatePlayerSuccessResponse,
-    "CreateSegmentBadRequestResponse": CreateSegmentBadRequestResponse,
     "CreateSegmentConflictResponse": CreateSegmentConflictResponse,
     "CreateSegmentSuccessResponse": CreateSegmentSuccessResponse,
-    "DeletePlayerBadRequestResponse": DeletePlayerBadRequestResponse,
     "DeletePlayerNotFoundResponse": DeletePlayerNotFoundResponse,
     "DeletePlayerSuccessResponse": DeletePlayerSuccessResponse,
-    "DeleteSegmentBadRequestResponse": DeleteSegmentBadRequestResponse,
     "DeleteSegmentNotFoundResponse": DeleteSegmentNotFoundResponse,
     "DeleteSegmentSuccessResponse": DeleteSegmentSuccessResponse,
     "DeliveryData": DeliveryData,
@@ -162,7 +160,6 @@ let typeMap: {[index: string]: any} = {
     "Notification": Notification,
     "Notification200Errors": Notification200Errors,
     "NotificationAllOf": NotificationAllOf,
-    "NotificationHistoryBadRequestResponse": NotificationHistoryBadRequestResponse,
     "NotificationHistorySuccessResponse": NotificationHistorySuccessResponse,
     "NotificationSlice": NotificationSlice,
     "NotificationTarget": NotificationTarget,
@@ -181,6 +178,8 @@ let typeMap: {[index: string]: any} = {
     "Segment": Segment,
     "SegmentNotificationTarget": SegmentNotificationTarget,
     "StringMap": StringMap,
+    "UpdateLiveActivityRequest": UpdateLiveActivityRequest,
+    "UpdateLiveActivitySuccessResponse": UpdateLiveActivitySuccessResponse,
     "UpdatePlayerSuccessResponse": UpdatePlayerSuccessResponse,
     "UpdatePlayerTagsRequestBody": UpdatePlayerTagsRequestBody,
     "UpdatePlayerTagsSuccessResponse": UpdatePlayerTagsSuccessResponse,

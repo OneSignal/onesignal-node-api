@@ -399,6 +399,47 @@ Outcome data are accessible for 30 days before being deleted from our servers. Y
 const outcomes = await client.getOutcomes(app.id, 'os__click.count,os_session_duration.count,my_outcome.sum');
 ```
 
+### Begin Live Activity
+Starts a Live Activity event
+```js
+// Create a player first
+const player = new OneSignal.Player();
+player.device_type = 0;
+player.app_id = '<app id>';
+const playerResponse = await api.createPlayer(player);
+
+// Prepare a request
+const beginLiveActivityRequest: BeginLiveActivityRequest = {
+    push_token: '<push_token>',
+    subscription_id: playerResponse.id!,
+};
+const activityId = '<activity_id>'; // any string
+
+// Begin activity
+await api.beginLiveActivity('<app_id>', activityId, beginLiveActivityRequest);
+```
+
+### Update Live Activity
+Updates a Live Activity event
+```js
+const updateLiveActivityRequest: UpdateLiveActivityRequest = {
+    event_updates: {
+        data: 'test'
+    },
+    event: "update",
+    name: "contents"
+};
+
+await api.updateLiveActivity('<app_id>', '<activity_id>', updateLiveActivityRequest);
+```
+
+### End Live Activity
+Stops a Live Activity event
+```js
+const subscriptionId = '<subscription_id>'; // player id
+await api.endLiveActivity('<app_id>', '<activity_id>', subscriptionId);
+```
+
 ## Author
 
 * Website: https://onesignal.com

@@ -6,30 +6,31 @@
  * Contact: devrel@onesignal.com
  */
 
+import { Notification200Errors } from './Notification200Errors';
 import { HttpFile } from '../http/http';
 
-export class CreatePlayerSuccessResponse {
-    'success'?: boolean;
-    'id'?: string;
+export class UpdateLiveActivitySuccessResponse {
+    'notification_id'?: string;
+    'errors'?: Notification200Errors;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "success",
-            "baseName": "success",
-            "type": "boolean",
+            "name": "notification_id",
+            "baseName": "notification_id",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Notification200Errors",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CreatePlayerSuccessResponse.attributeTypeMap;
+        return UpdateLiveActivitySuccessResponse.attributeTypeMap;
     }
 
     public constructor() {
