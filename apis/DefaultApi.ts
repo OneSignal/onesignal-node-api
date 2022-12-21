@@ -11,24 +11,21 @@ import {SecurityAuthentication} from '../auth/auth';
 
 
 import { App } from '../models/App';
+import { BadRequestError } from '../models/BadRequestError';
+import { BeginLiveActivityRequest } from '../models/BeginLiveActivityRequest';
 import { CancelNotificationSuccessResponse } from '../models/CancelNotificationSuccessResponse';
-import { CreateNotificationBadRequestResponse } from '../models/CreateNotificationBadRequestResponse';
 import { CreateNotificationSuccessResponse } from '../models/CreateNotificationSuccessResponse';
 import { CreatePlayerSuccessResponse } from '../models/CreatePlayerSuccessResponse';
-import { CreateSegmentBadRequestResponse } from '../models/CreateSegmentBadRequestResponse';
 import { CreateSegmentConflictResponse } from '../models/CreateSegmentConflictResponse';
 import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
-import { DeletePlayerBadRequestResponse } from '../models/DeletePlayerBadRequestResponse';
 import { DeletePlayerNotFoundResponse } from '../models/DeletePlayerNotFoundResponse';
 import { DeletePlayerSuccessResponse } from '../models/DeletePlayerSuccessResponse';
-import { DeleteSegmentBadRequestResponse } from '../models/DeleteSegmentBadRequestResponse';
 import { DeleteSegmentNotFoundResponse } from '../models/DeleteSegmentNotFoundResponse';
 import { DeleteSegmentSuccessResponse } from '../models/DeleteSegmentSuccessResponse';
 import { ExportPlayersRequestBody } from '../models/ExportPlayersRequestBody';
 import { ExportPlayersSuccessResponse } from '../models/ExportPlayersSuccessResponse';
 import { GetNotificationRequestBody } from '../models/GetNotificationRequestBody';
 import { Notification } from '../models/Notification';
-import { NotificationHistoryBadRequestResponse } from '../models/NotificationHistoryBadRequestResponse';
 import { NotificationHistorySuccessResponse } from '../models/NotificationHistorySuccessResponse';
 import { NotificationSlice } from '../models/NotificationSlice';
 import { NotificationWithMeta } from '../models/NotificationWithMeta';
@@ -36,6 +33,8 @@ import { OutcomesData } from '../models/OutcomesData';
 import { Player } from '../models/Player';
 import { PlayerSlice } from '../models/PlayerSlice';
 import { Segment } from '../models/Segment';
+import { UpdateLiveActivityRequest } from '../models/UpdateLiveActivityRequest';
+import { UpdateLiveActivitySuccessResponse } from '../models/UpdateLiveActivitySuccessResponse';
 import { UpdatePlayerSuccessResponse } from '../models/UpdatePlayerSuccessResponse';
 import { UpdatePlayerTagsRequestBody } from '../models/UpdatePlayerTagsRequestBody';
 import { UpdatePlayerTagsSuccessResponse } from '../models/UpdatePlayerTagsSuccessResponse';
@@ -44,6 +43,70 @@ import { UpdatePlayerTagsSuccessResponse } from '../models/UpdatePlayerTagsSucce
  * no description
  */
 export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
+
+    /**
+     * Starts a Live Activity
+     * Start Live Activity
+     * @param appId The OneSignal App ID for your app.  Available in Keys &amp; IDs.
+     * @param activityId Live Activity record ID
+     * @param beginLiveActivityRequest 
+     */
+    public async beginLiveActivity(appId: string, activityId: string, beginLiveActivityRequest: BeginLiveActivityRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("DefaultApi", "beginLiveActivity", "appId");
+        }
+
+
+        // verify required parameter 'activityId' is not null or undefined
+        if (activityId === null || activityId === undefined) {
+            throw new RequiredError("DefaultApi", "beginLiveActivity", "activityId");
+        }
+
+
+        // verify required parameter 'beginLiveActivityRequest' is not null or undefined
+        if (beginLiveActivityRequest === null || beginLiveActivityRequest === undefined) {
+            throw new RequiredError("DefaultApi", "beginLiveActivity", "beginLiveActivityRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/apps/{app_id}/live_activities/{activity_id}/token'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'activity_id' + '}', encodeURIComponent(String(activityId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(beginLiveActivityRequest, "BeginLiveActivityRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["app_key"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
 
     /**
      * Used to stop a scheduled or currently outgoing notification
@@ -365,6 +428,60 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         const localVarPath = '/apps/{app_id}/segments/{segment_id}'
             .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)))
             .replace('{' + 'segment_id' + '}', encodeURIComponent(String(segmentId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["app_key"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Stops a Live Activity
+     * Stop Live Activity
+     * @param appId The OneSignal App ID for your app.  Available in Keys &amp; IDs.
+     * @param activityId Live Activity record ID
+     * @param subscriptionId Subscription ID
+     */
+    public async endLiveActivity(appId: string, activityId: string, subscriptionId: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("DefaultApi", "endLiveActivity", "appId");
+        }
+
+
+        // verify required parameter 'activityId' is not null or undefined
+        if (activityId === null || activityId === undefined) {
+            throw new RequiredError("DefaultApi", "endLiveActivity", "activityId");
+        }
+
+
+        // verify required parameter 'subscriptionId' is not null or undefined
+        if (subscriptionId === null || subscriptionId === undefined) {
+            throw new RequiredError("DefaultApi", "endLiveActivity", "subscriptionId");
+        }
+
+
+        // Path Params
+        const localVarPath = '/apps/{app_id}/live_activities/{activity_id}/token/{subscription_id}'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'activity_id' + '}', encodeURIComponent(String(activityId)))
+            .replace('{' + 'subscription_id' + '}', encodeURIComponent(String(subscriptionId)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
@@ -922,6 +1039,70 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Updates a specified live activity.
+     * Update a Live Activity via Push
+     * @param appId The OneSignal App ID for your app.  Available in Keys &amp; IDs.
+     * @param activityId Live Activity record ID
+     * @param updateLiveActivityRequest 
+     */
+    public async updateLiveActivity(appId: string, activityId: string, updateLiveActivityRequest: UpdateLiveActivityRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("DefaultApi", "updateLiveActivity", "appId");
+        }
+
+
+        // verify required parameter 'activityId' is not null or undefined
+        if (activityId === null || activityId === undefined) {
+            throw new RequiredError("DefaultApi", "updateLiveActivity", "activityId");
+        }
+
+
+        // verify required parameter 'updateLiveActivityRequest' is not null or undefined
+        if (updateLiveActivityRequest === null || updateLiveActivityRequest === undefined) {
+            throw new RequiredError("DefaultApi", "updateLiveActivity", "updateLiveActivityRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/apps/{app_id}/live_activities/{activity_id}/notifications'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'activity_id' + '}', encodeURIComponent(String(activityId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(updateLiveActivityRequest, "UpdateLiveActivityRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["app_key"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
      * Update an existing device in one of your OneSignal apps
      * Edit device
      * @param playerId Player\&#39;s OneSignal ID
@@ -1044,6 +1225,38 @@ export class DefaultApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to beginLiveActivity
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async beginLiveActivity(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: BadRequestError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BadRequestError", ""
+            ) as BadRequestError;
+            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to cancelNotification
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -1055,6 +1268,13 @@ export class DefaultApiResponseProcessor {
                 "CancelNotificationSuccessResponse", ""
             ) as CancelNotificationSuccessResponse;
             return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: BadRequestError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BadRequestError", ""
+            ) as BadRequestError;
+            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1084,6 +1304,13 @@ export class DefaultApiResponseProcessor {
                 "App", ""
             ) as App;
             return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: BadRequestError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BadRequestError", ""
+            ) as BadRequestError;
+            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1115,11 +1342,11 @@ export class DefaultApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: CreateNotificationBadRequestResponse = ObjectSerializer.deserialize(
+            const body: BadRequestError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CreateNotificationBadRequestResponse", ""
-            ) as CreateNotificationBadRequestResponse;
-            throw new ApiException<CreateNotificationBadRequestResponse>(400, "Bad Request", body, response.headers);
+                "BadRequestError", ""
+            ) as BadRequestError;
+            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1149,6 +1376,13 @@ export class DefaultApiResponseProcessor {
                 "CreatePlayerSuccessResponse", ""
             ) as CreatePlayerSuccessResponse;
             return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: BadRequestError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BadRequestError", ""
+            ) as BadRequestError;
+            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1180,11 +1414,11 @@ export class DefaultApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: CreateSegmentBadRequestResponse = ObjectSerializer.deserialize(
+            const body: BadRequestError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CreateSegmentBadRequestResponse", ""
-            ) as CreateSegmentBadRequestResponse;
-            throw new ApiException<CreateSegmentBadRequestResponse>(400, "Bad Request", body, response.headers);
+                "BadRequestError", ""
+            ) as BadRequestError;
+            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
         }
         if (isCodeInRange("409", response.httpStatusCode)) {
             const body: CreateSegmentConflictResponse = ObjectSerializer.deserialize(
@@ -1223,11 +1457,11 @@ export class DefaultApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: DeletePlayerBadRequestResponse = ObjectSerializer.deserialize(
+            const body: BadRequestError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "DeletePlayerBadRequestResponse", ""
-            ) as DeletePlayerBadRequestResponse;
-            throw new ApiException<DeletePlayerBadRequestResponse>(400, "Bad Request", body, response.headers);
+                "BadRequestError", ""
+            ) as BadRequestError;
+            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
         }
         if (isCodeInRange("404", response.httpStatusCode)) {
             const body: DeletePlayerNotFoundResponse = ObjectSerializer.deserialize(
@@ -1266,11 +1500,11 @@ export class DefaultApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: DeleteSegmentBadRequestResponse = ObjectSerializer.deserialize(
+            const body: BadRequestError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "DeleteSegmentBadRequestResponse", ""
-            ) as DeleteSegmentBadRequestResponse;
-            throw new ApiException<DeleteSegmentBadRequestResponse>(400, "Bad Request", body, response.headers);
+                "BadRequestError", ""
+            ) as BadRequestError;
+            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
         }
         if (isCodeInRange("404", response.httpStatusCode)) {
             const body: DeleteSegmentNotFoundResponse = ObjectSerializer.deserialize(
@@ -1296,6 +1530,38 @@ export class DefaultApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to endLiveActivity
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async endLiveActivity(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: BadRequestError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BadRequestError", ""
+            ) as BadRequestError;
+            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to exportPlayers
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -1309,11 +1575,11 @@ export class DefaultApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: object = ObjectSerializer.deserialize(
+            const body: BadRequestError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "object", ""
-            ) as object;
-            throw new ApiException<object>(400, "Bad Request", body, response.headers);
+                "BadRequestError", ""
+            ) as BadRequestError;
+            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1344,6 +1610,13 @@ export class DefaultApiResponseProcessor {
             ) as App;
             return body;
         }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: BadRequestError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BadRequestError", ""
+            ) as BadRequestError;
+            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+        }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
@@ -1373,6 +1646,13 @@ export class DefaultApiResponseProcessor {
             ) as Array<App>;
             return body;
         }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: BadRequestError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BadRequestError", ""
+            ) as BadRequestError;
+            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+        }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
@@ -1401,6 +1681,13 @@ export class DefaultApiResponseProcessor {
                 "NotificationWithMeta", ""
             ) as NotificationWithMeta;
             return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: BadRequestError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BadRequestError", ""
+            ) as BadRequestError;
+            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1432,11 +1719,11 @@ export class DefaultApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: NotificationHistoryBadRequestResponse = ObjectSerializer.deserialize(
+            const body: BadRequestError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "NotificationHistoryBadRequestResponse", ""
-            ) as NotificationHistoryBadRequestResponse;
-            throw new ApiException<NotificationHistoryBadRequestResponse>(400, "Bad Request", body, response.headers);
+                "BadRequestError", ""
+            ) as BadRequestError;
+            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1467,6 +1754,13 @@ export class DefaultApiResponseProcessor {
             ) as NotificationSlice;
             return body;
         }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: BadRequestError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BadRequestError", ""
+            ) as BadRequestError;
+            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+        }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
@@ -1495,6 +1789,13 @@ export class DefaultApiResponseProcessor {
                 "OutcomesData", ""
             ) as OutcomesData;
             return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: BadRequestError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BadRequestError", ""
+            ) as BadRequestError;
+            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1525,6 +1826,13 @@ export class DefaultApiResponseProcessor {
             ) as Player;
             return body;
         }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: BadRequestError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BadRequestError", ""
+            ) as BadRequestError;
+            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+        }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
@@ -1553,6 +1861,13 @@ export class DefaultApiResponseProcessor {
                 "PlayerSlice", ""
             ) as PlayerSlice;
             return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: BadRequestError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BadRequestError", ""
+            ) as BadRequestError;
+            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1583,6 +1898,13 @@ export class DefaultApiResponseProcessor {
             ) as App;
             return body;
         }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: BadRequestError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BadRequestError", ""
+            ) as BadRequestError;
+            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+        }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
@@ -1590,6 +1912,42 @@ export class DefaultApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "App", ""
             ) as App;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to updateLiveActivity
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async updateLiveActivity(response: ResponseContext): Promise<UpdateLiveActivitySuccessResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: UpdateLiveActivitySuccessResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "UpdateLiveActivitySuccessResponse", ""
+            ) as UpdateLiveActivitySuccessResponse;
+            return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: BadRequestError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BadRequestError", ""
+            ) as BadRequestError;
+            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: UpdateLiveActivitySuccessResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "UpdateLiveActivitySuccessResponse", ""
+            ) as UpdateLiveActivitySuccessResponse;
             return body;
         }
 
@@ -1611,6 +1969,13 @@ export class DefaultApiResponseProcessor {
                 "UpdatePlayerSuccessResponse", ""
             ) as UpdatePlayerSuccessResponse;
             return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: BadRequestError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BadRequestError", ""
+            ) as BadRequestError;
+            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1640,6 +2005,13 @@ export class DefaultApiResponseProcessor {
                 "UpdatePlayerTagsSuccessResponse", ""
             ) as UpdatePlayerTagsSuccessResponse;
             return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: BadRequestError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BadRequestError", ""
+            ) as BadRequestError;
+            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml

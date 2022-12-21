@@ -1,5 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+## December 2022
+### `1.0.0-beta8` - 11/14/2022
+- Added Live Activity endpoints
+- Fixed various bugs
 
 ## November 2022
 ### `1.0.0-beta5` - 11/14/2022

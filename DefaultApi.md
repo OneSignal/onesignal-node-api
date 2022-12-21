@@ -4,6 +4,7 @@ All URIs are relative to *https://onesignal.com/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**beginLiveActivity**](DefaultApi.md#beginLiveActivity) | **POST** /apps/{app_id}/live_activities/{activity_id}/token | Start Live Activity
 [**cancelNotification**](DefaultApi.md#cancelNotification) | **DELETE** /notifications/{notification_id} | Stop a scheduled or currently outgoing notification
 [**createApp**](DefaultApi.md#createApp) | **POST** /apps | Create an app
 [**createNotification**](DefaultApi.md#createNotification) | **POST** /notifications | Create notification
@@ -11,6 +12,7 @@ Method | HTTP request | Description
 [**createSegments**](DefaultApi.md#createSegments) | **POST** /apps/{app_id}/segments | Create Segments
 [**deletePlayer**](DefaultApi.md#deletePlayer) | **DELETE** /players/{player_id} | Delete a user record
 [**deleteSegments**](DefaultApi.md#deleteSegments) | **DELETE** /apps/{app_id}/segments/{segment_id} | Delete Segments
+[**endLiveActivity**](DefaultApi.md#endLiveActivity) | **DELETE** /apps/{app_id}/live_activities/{activity_id}/token/{subscription_id} | Stop Live Activity
 [**exportPlayers**](DefaultApi.md#exportPlayers) | **POST** /players/csv_export?app_id&#x3D;{app_id} | CSV export
 [**getApp**](DefaultApi.md#getApp) | **GET** /apps/{app_id} | View an app
 [**getApps**](DefaultApi.md#getApps) | **GET** /apps | View apps
@@ -21,9 +23,74 @@ Method | HTTP request | Description
 [**getPlayer**](DefaultApi.md#getPlayer) | **GET** /players/{player_id} | View device
 [**getPlayers**](DefaultApi.md#getPlayers) | **GET** /players | View devices
 [**updateApp**](DefaultApi.md#updateApp) | **PUT** /apps/{app_id} | Update an app
+[**updateLiveActivity**](DefaultApi.md#updateLiveActivity) | **POST** /apps/{app_id}/live_activities/{activity_id}/notifications | Update a Live Activity via Push
 [**updatePlayer**](DefaultApi.md#updatePlayer) | **PUT** /players/{player_id} | Edit device
 [**updatePlayerTags**](DefaultApi.md#updatePlayerTags) | **PUT** /apps/{app_id}/users/{external_user_id} | Edit tags with external user id
 
+
+# **beginLiveActivity**
+> void beginLiveActivity(beginLiveActivityRequest)
+
+Starts a Live Activity
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .DefaultApi(configuration);
+
+let body:.DefaultApiBeginLiveActivityRequest = {
+  // string | The OneSignal App ID for your app.  Available in Keys & IDs.
+  appId: "app_id_example",
+  // string | Live Activity record ID
+  activityId: "activity_id_example",
+  // BeginLiveActivityRequest
+  beginLiveActivityRequest: {
+    push_token: "push_token_example",
+    subscription_id: "subscription_id_example",
+  },
+};
+
+apiInstance.beginLiveActivity(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **beginLiveActivityRequest** | **BeginLiveActivityRequest**|  |
+ **appId** | [**string**] | The OneSignal App ID for your app.  Available in Keys &amp; IDs. | defaults to undefined
+ **activityId** | [**string**] | Live Activity record ID | defaults to undefined
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[app_key](README.md#app_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | OK |  -  |
+**400** | Bad Request |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **cancelNotification**
 > CancelNotificationSuccessResponse cancelNotification()
@@ -79,6 +146,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -112,6 +180,10 @@ let body:.DefaultApiCreateAppRequest = {
     apns_p12_password: "apns_p12_password_example",
     safari_apns_p12: "safari_apns_p12_example",
     safari_apns_p12_password: "safari_apns_p12_password_example",
+    apns_key_id: "apns_key_id_example",
+    apns_team_id: "apns_team_id_example",
+    apns_bundle_id: "apns_bundle_id_example",
+    apns_p8: "apns_p8_example",
     safari_site_origin: "safari_site_origin_example",
     safari_icon_256_256: "safari_icon_256_256_example",
     site_name: "site_name_example",
@@ -151,6 +223,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -286,6 +359,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -472,6 +546,67 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
+# **endLiveActivity**
+> void endLiveActivity()
+
+Stops a Live Activity
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .DefaultApi(configuration);
+
+let body:.DefaultApiEndLiveActivityRequest = {
+  // string | The OneSignal App ID for your app.  Available in Keys & IDs.
+  appId: "app_id_example",
+  // string | Live Activity record ID
+  activityId: "activity_id_example",
+  // string | Subscription ID
+  subscriptionId: "subscription_id_example",
+};
+
+apiInstance.endLiveActivity(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **appId** | [**string**] | The OneSignal App ID for your app.  Available in Keys &amp; IDs. | defaults to undefined
+ **activityId** | [**string**] | Live Activity record ID | defaults to undefined
+ **subscriptionId** | [**string**] | Subscription ID | defaults to undefined
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[app_key](README.md#app_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | OK |  -  |
+**400** | Bad Request |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 # **exportPlayers**
 > ExportPlayersSuccessResponse exportPlayers()
 
@@ -587,6 +722,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -635,6 +771,7 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -692,6 +829,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -817,6 +955,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -886,6 +1025,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -946,6 +1086,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -1006,6 +1147,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -1041,6 +1183,10 @@ let body:.DefaultApiUpdateAppRequest = {
     apns_p12_password: "apns_p12_password_example",
     safari_apns_p12: "safari_apns_p12_example",
     safari_apns_p12_password: "safari_apns_p12_password_example",
+    apns_key_id: "apns_key_id_example",
+    apns_team_id: "apns_team_id_example",
+    apns_bundle_id: "apns_bundle_id_example",
+    apns_p8: "apns_p8_example",
     safari_site_origin: "safari_site_origin_example",
     safari_icon_256_256: "safari_icon_256_256_example",
     site_name: "site_name_example",
@@ -1081,6 +1227,73 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **updateLiveActivity**
+> UpdateLiveActivitySuccessResponse updateLiveActivity(updateLiveActivityRequest)
+
+Updates a specified live activity.
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .DefaultApi(configuration);
+
+let body:.DefaultApiUpdateLiveActivityRequest = {
+  // string | The OneSignal App ID for your app.  Available in Keys & IDs.
+  appId: "app_id_example",
+  // string | Live Activity record ID
+  activityId: "activity_id_example",
+  // UpdateLiveActivityRequest
+  updateLiveActivityRequest: {
+    name: "headings",
+    event: "update",
+    event_updates: {},
+    dismiss_at: 3.14,
+  },
+};
+
+apiInstance.updateLiveActivity(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **updateLiveActivityRequest** | **UpdateLiveActivityRequest**|  |
+ **appId** | [**string**] | The OneSignal App ID for your app.  Available in Keys &amp; IDs. | defaults to undefined
+ **activityId** | [**string**] | Live Activity record ID | defaults to undefined
+
+
+### Return type
+
+**UpdateLiveActivitySuccessResponse**
+
+### Authorization
+
+[app_key](README.md#app_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -1164,6 +1377,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -1226,6 +1440,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Bad Request |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
