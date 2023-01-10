@@ -2,7 +2,7 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.0.2
+ * API Version: 1.1.0
  * Contact: devrel@onesignal.com
  */
 
@@ -11,6 +11,7 @@ import { BasicNotificationAllOfAndroidBackgroundLayout } from './BasicNotificati
 import { Button } from './Button';
 import { Filter } from './Filter';
 import { NotificationTarget } from './NotificationTarget';
+import { PlayerNotificationTargetIncludeAliases } from './PlayerNotificationTargetIncludeAliases';
 import { StringMap } from './StringMap';
 import { HttpFile } from '../http/http';
 
@@ -63,6 +64,8 @@ export class BasicNotification {
     * Not Recommended: Please consider using include_player_ids or include_external_user_ids instead. Target using Android device registration IDs. If a token does not correspond to an existing user, a new user will be created. Example: APA91bEeiUeSukAAUdnw3O2RB45FWlSpgJ7Ji_... Limit of 2,000 entries per REST API call 
     */
     'include_android_reg_ids'?: Array<string>;
+    'include_aliases'?: PlayerNotificationTargetIncludeAliases;
+    'target_channel'?: BasicNotificationTargetChannelEnum;
     'id'?: string;
     'value'?: number;
     /**
@@ -469,6 +472,18 @@ export class BasicNotification {
             "name": "include_android_reg_ids",
             "baseName": "include_android_reg_ids",
             "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "include_aliases",
+            "baseName": "include_aliases",
+            "type": "PlayerNotificationTargetIncludeAliases",
+            "format": ""
+        },
+        {
+            "name": "target_channel",
+            "baseName": "target_channel",
+            "type": "BasicNotificationTargetChannelEnum",
             "format": ""
         },
         {
@@ -1015,5 +1030,6 @@ export class BasicNotification {
 }
 
 
+export type BasicNotificationTargetChannelEnum = "push" | "email" | "sms" ;
 export type BasicNotificationAggregationEnum = "sum" | "count" ;
 

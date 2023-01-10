@@ -2,7 +2,7 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.0.2
+ * API Version: 1.1.0
  * Contact: devrel@onesignal.com
  */
 
@@ -16,7 +16,7 @@ export class Purchase {
     /**
     * The amount, in USD, spent purchasing the item.
     */
-    'amount': number;
+    'amount': string;
     /**
     * The 3-letter ISO 4217 currency code. Required for correct storage and conversion of amount.
     */
@@ -34,7 +34,7 @@ export class Purchase {
         {
             "name": "amount",
             "baseName": "amount",
-            "type": "number",
+            "type": "string",
             "format": ""
         },
         {

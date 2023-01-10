@@ -14,6 +14,10 @@ import { CreateNotificationSuccessResponse } from '../models/CreateNotificationS
 import { CreatePlayerSuccessResponse } from '../models/CreatePlayerSuccessResponse';
 import { CreateSegmentConflictResponse } from '../models/CreateSegmentConflictResponse';
 import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
+import { CreateSubscriptionRequestBody } from '../models/CreateSubscriptionRequestBody';
+import { CreateUserConflictResponse } from '../models/CreateUserConflictResponse';
+import { CreateUserConflictResponseErrorsInner } from '../models/CreateUserConflictResponseErrorsInner';
+import { CreateUserConflictResponseErrorsItemsMeta } from '../models/CreateUserConflictResponseErrorsItemsMeta';
 import { DeletePlayerNotFoundResponse } from '../models/DeletePlayerNotFoundResponse';
 import { DeletePlayerSuccessResponse } from '../models/DeletePlayerSuccessResponse';
 import { DeleteSegmentNotFoundResponse } from '../models/DeleteSegmentNotFoundResponse';
@@ -24,6 +28,12 @@ import { ExportPlayersSuccessResponse } from '../models/ExportPlayersSuccessResp
 import { Filter } from '../models/Filter';
 import { FilterExpressions } from '../models/FilterExpressions';
 import { GetNotificationRequestBody } from '../models/GetNotificationRequestBody';
+import { IdentifyUserConflictResponse } from '../models/IdentifyUserConflictResponse';
+import { IdentifyUserConflictResponseErrorsInner } from '../models/IdentifyUserConflictResponseErrorsInner';
+import { InlineResponse200 } from '../models/InlineResponse200';
+import { InlineResponse2003 } from '../models/InlineResponse2003';
+import { InlineResponse201 } from '../models/InlineResponse201';
+import { InlineResponse202 } from '../models/InlineResponse202';
 import { InvalidIdentifierError } from '../models/InvalidIdentifierError';
 import { Notification } from '../models/Notification';
 import { Notification200Errors } from '../models/Notification200Errors';
@@ -41,16 +51,27 @@ import { PlatformDeliveryDataEmailAllOf } from '../models/PlatformDeliveryDataEm
 import { PlatformDeliveryDataSmsAllOf } from '../models/PlatformDeliveryDataSmsAllOf';
 import { Player } from '../models/Player';
 import { PlayerNotificationTarget } from '../models/PlayerNotificationTarget';
+import { PlayerNotificationTargetIncludeAliases } from '../models/PlayerNotificationTargetIncludeAliases';
 import { PlayerSlice } from '../models/PlayerSlice';
+import { PropertiesDeltas } from '../models/PropertiesDeltas';
+import { PropertiesObject } from '../models/PropertiesObject';
 import { Purchase } from '../models/Purchase';
 import { Segment } from '../models/Segment';
 import { SegmentNotificationTarget } from '../models/SegmentNotificationTarget';
 import { StringMap } from '../models/StringMap';
+import { SubscriptionObject } from '../models/SubscriptionObject';
+import { TransferSubscriptionRequestBody } from '../models/TransferSubscriptionRequestBody';
 import { UpdateLiveActivityRequest } from '../models/UpdateLiveActivityRequest';
 import { UpdateLiveActivitySuccessResponse } from '../models/UpdateLiveActivitySuccessResponse';
 import { UpdatePlayerSuccessResponse } from '../models/UpdatePlayerSuccessResponse';
 import { UpdatePlayerTagsRequestBody } from '../models/UpdatePlayerTagsRequestBody';
 import { UpdatePlayerTagsSuccessResponse } from '../models/UpdatePlayerTagsSuccessResponse';
+import { UpdateSubscriptionRequestBody } from '../models/UpdateSubscriptionRequestBody';
+import { UpdateUserRequest } from '../models/UpdateUserRequest';
+import { User } from '../models/User';
+import { UserIdentityRequestBody } from '../models/UserIdentityRequestBody';
+import { UserIdentityResponse } from '../models/UserIdentityResponse';
+import { UserSubscriptionOptions } from '../models/UserSubscriptionOptions';
 import { ObservableDefaultApi } from './ObservableAPI';
 
 import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
@@ -130,6 +151,40 @@ export class PromiseDefaultApi {
     }
 
     /**
+     * Creates a new Subscription under the User provided. Useful to add email addresses and SMS numbers to the User.
+     * @param appId 
+     * @param aliasLabel 
+     * @param aliasId 
+     * @param createSubscriptionRequestBody 
+     */
+    public createSubscription(appId: string, aliasLabel: string, aliasId: string, createSubscriptionRequestBody: CreateSubscriptionRequestBody, _options?: Configuration): Promise<InlineResponse201> {
+        const result = this.api.createSubscription(appId, aliasLabel, aliasId, createSubscriptionRequestBody, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Creates a User, optionally Subscriptions owned by the User as well as Aliases. Aliases provided in the payload will be used to look up an existing User.
+     * @param appId 
+     * @param user 
+     */
+    public createUser(appId: string, user: User, _options?: Configuration): Promise<User> {
+        const result = this.api.createUser(appId, user, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Deletes an alias by alias label
+     * @param appId 
+     * @param aliasLabel 
+     * @param aliasId 
+     * @param aliasLabelToDelete 
+     */
+    public deleteAlias(appId: string, aliasLabel: string, aliasId: string, aliasLabelToDelete: string, _options?: Configuration): Promise<InlineResponse200> {
+        const result = this.api.deleteAlias(appId, aliasLabel, aliasId, aliasLabelToDelete, _options);
+        return result.toPromise();
+    }
+
+    /**
      * Delete player - Required: Used to delete a single, specific Player ID record from a specific OneSignal app. 
      * Delete a user record
      * @param appId The OneSignal App ID for your app.  Available in Keys &amp; IDs.
@@ -148,6 +203,27 @@ export class PromiseDefaultApi {
      */
     public deleteSegments(appId: string, segmentId: string, _options?: Configuration): Promise<DeleteSegmentSuccessResponse> {
         const result = this.api.deleteSegments(appId, segmentId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Deletes the Subscription.
+     * @param appId 
+     * @param subscriptionId 
+     */
+    public deleteSubscription(appId: string, subscriptionId: string, _options?: Configuration): Promise<void> {
+        const result = this.api.deleteSubscription(appId, subscriptionId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Removes the User identified by (:alias_label, :alias_id), and all Subscriptions and Aliases
+     * @param appId 
+     * @param aliasLabel 
+     * @param aliasId 
+     */
+    public deleteUser(appId: string, aliasLabel: string, aliasId: string, _options?: Configuration): Promise<void> {
+        const result = this.api.deleteUser(appId, aliasLabel, aliasId, _options);
         return result.toPromise();
     }
 
@@ -175,6 +251,38 @@ export class PromiseDefaultApi {
     }
 
     /**
+     * Lists all Aliases for the User identified by :subscription_id.
+     * @param appId 
+     * @param subscriptionId 
+     */
+    public fetchAliases(appId: string, subscriptionId: string, _options?: Configuration): Promise<UserIdentityResponse> {
+        const result = this.api.fetchAliases(appId, subscriptionId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Returns the User’s properties, Aliases, and Subscriptions.
+     * @param appId 
+     * @param aliasLabel 
+     * @param aliasId 
+     */
+    public fetchUser(appId: string, aliasLabel: string, aliasId: string, _options?: Configuration): Promise<User> {
+        const result = this.api.fetchUser(appId, aliasLabel, aliasId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Lists all Aliases for the User identified by (:alias_label, :alias_id).
+     * @param appId 
+     * @param aliasLabel 
+     * @param aliasId 
+     */
+    public fetchUserIdentity(appId: string, aliasLabel: string, aliasId: string, _options?: Configuration): Promise<InlineResponse200> {
+        const result = this.api.fetchUserIdentity(appId, aliasLabel, aliasId, _options);
+        return result.toPromise();
+    }
+
+    /**
      * View the details of a single OneSignal app
      * View an app
      * @param appId An app id
@@ -190,6 +298,16 @@ export class PromiseDefaultApi {
      */
     public getApps(_options?: Configuration): Promise<Array<App>> {
         const result = this.api.getApps(_options);
+        return result.toPromise();
+    }
+
+    /**
+     * Manifest of In-App Messages the Subscription is eligible to display by the SDK.
+     * @param appId 
+     * @param subscriptionId 
+     */
+    public getEligibleIams(appId: string, subscriptionId: string, _options?: Configuration): Promise<InlineResponse2003> {
+        const result = this.api.getEligibleIams(appId, subscriptionId, _options);
         return result.toPromise();
     }
 
@@ -268,6 +386,40 @@ export class PromiseDefaultApi {
     }
 
     /**
+     * Upserts one or more Aliases to an existing User identified by (:alias_label, :alias_id).
+     * @param appId 
+     * @param aliasLabel 
+     * @param aliasId 
+     * @param userIdentityRequestBody 
+     */
+    public identifyUserByAlias(appId: string, aliasLabel: string, aliasId: string, userIdentityRequestBody: UserIdentityRequestBody, _options?: Configuration): Promise<InlineResponse200> {
+        const result = this.api.identifyUserByAlias(appId, aliasLabel, aliasId, userIdentityRequestBody, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Upserts one or more Aliases for the User identified by :subscription_id.
+     * @param appId 
+     * @param subscriptionId 
+     * @param userIdentityRequestBody 
+     */
+    public identifyUserBySubscriptionId(appId: string, subscriptionId: string, userIdentityRequestBody: UserIdentityRequestBody, _options?: Configuration): Promise<UserIdentityResponse> {
+        const result = this.api.identifyUserBySubscriptionId(appId, subscriptionId, userIdentityRequestBody, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Transfers this Subscription to the User identified by the identity in the payload.
+     * @param appId 
+     * @param subscriptionId 
+     * @param transferSubscriptionRequestBody 
+     */
+    public transferSubscription(appId: string, subscriptionId: string, transferSubscriptionRequestBody: TransferSubscriptionRequestBody, _options?: Configuration): Promise<UserIdentityResponse> {
+        const result = this.api.transferSubscription(appId, subscriptionId, transferSubscriptionRequestBody, _options);
+        return result.toPromise();
+    }
+
+    /**
      * Updates the name or configuration settings of an existing OneSignal app
      * Update an app
      * @param appId An app id
@@ -310,6 +462,30 @@ export class PromiseDefaultApi {
      */
     public updatePlayerTags(appId: string, externalUserId: string, updatePlayerTagsRequestBody?: UpdatePlayerTagsRequestBody, _options?: Configuration): Promise<UpdatePlayerTagsSuccessResponse> {
         const result = this.api.updatePlayerTags(appId, externalUserId, updatePlayerTagsRequestBody, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Updates an existing Subscription’s properties.
+     * @param appId 
+     * @param subscriptionId 
+     * @param updateSubscriptionRequestBody 
+     */
+    public updateSubscription(appId: string, subscriptionId: string, updateSubscriptionRequestBody: UpdateSubscriptionRequestBody, _options?: Configuration): Promise<void> {
+        const result = this.api.updateSubscription(appId, subscriptionId, updateSubscriptionRequestBody, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Updates an existing User’s properties.
+     * @param appId 
+     * @param aliasLabel 
+     * @param aliasId 
+     * @param updateUserRequest 
+     * @param subscriptionId 
+     */
+    public updateUser(appId: string, aliasLabel: string, aliasId: string, updateUserRequest: UpdateUserRequest, subscriptionId?: string, _options?: Configuration): Promise<InlineResponse202> {
+        const result = this.api.updateUser(appId, aliasLabel, aliasId, updateUserRequest, subscriptionId, _options);
         return result.toPromise();
     }
 

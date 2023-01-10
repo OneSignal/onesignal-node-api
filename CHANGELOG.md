@@ -1,5 +1,20 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+
+## January 2023
+### `1.0.0-beta9` - 09/06/2023
+- Added User model endpoints
+  - Limitations
+    - Recommend using only in development and staging environments for Alpha releases.
+    - Aliases will be available in a future release
+    - Outcomes will be available in a future release
+    - Users are deleted when the last subscription is removed
+  - Known issues
+    - User properties may not update when Subscriptions are transferred
+    - Identity Verification
+    - We will be introducing JWT in follow up Alpha or Beta release
+    - Extra disabled subscriptions are created when switching Users in the SDK.
+
 ## December 2022
 ### `1.0.0-beta8` - 11/14/2022
 - Added Live Activity endpoints
