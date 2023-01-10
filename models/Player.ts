@@ -2,7 +2,7 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.0.2
+ * API Version: 1.1.0
  * Contact: devrel@onesignal.com
  */
 
@@ -105,7 +105,7 @@ export class Player {
     /**
     * Longitude of the device, used for geotagging to segment on.
     */
-    '_long'?: number;
+    'long'?: number;
     /**
     * Latitude of the device, used for geotagging to segment on.
     */
@@ -263,7 +263,7 @@ export class Player {
             "format": ""
         },
         {
-            "name": "_long",
+            "name": "long",
             "baseName": "long",
             "type": "number",
             "format": ""

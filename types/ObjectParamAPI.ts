@@ -14,6 +14,10 @@ import { CreateNotificationSuccessResponse } from '../models/CreateNotificationS
 import { CreatePlayerSuccessResponse } from '../models/CreatePlayerSuccessResponse';
 import { CreateSegmentConflictResponse } from '../models/CreateSegmentConflictResponse';
 import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
+import { CreateSubscriptionRequestBody } from '../models/CreateSubscriptionRequestBody';
+import { CreateUserConflictResponse } from '../models/CreateUserConflictResponse';
+import { CreateUserConflictResponseErrorsInner } from '../models/CreateUserConflictResponseErrorsInner';
+import { CreateUserConflictResponseErrorsItemsMeta } from '../models/CreateUserConflictResponseErrorsItemsMeta';
 import { DeletePlayerNotFoundResponse } from '../models/DeletePlayerNotFoundResponse';
 import { DeletePlayerSuccessResponse } from '../models/DeletePlayerSuccessResponse';
 import { DeleteSegmentNotFoundResponse } from '../models/DeleteSegmentNotFoundResponse';
@@ -24,6 +28,12 @@ import { ExportPlayersSuccessResponse } from '../models/ExportPlayersSuccessResp
 import { Filter } from '../models/Filter';
 import { FilterExpressions } from '../models/FilterExpressions';
 import { GetNotificationRequestBody } from '../models/GetNotificationRequestBody';
+import { IdentifyUserConflictResponse } from '../models/IdentifyUserConflictResponse';
+import { IdentifyUserConflictResponseErrorsInner } from '../models/IdentifyUserConflictResponseErrorsInner';
+import { InlineResponse200 } from '../models/InlineResponse200';
+import { InlineResponse2003 } from '../models/InlineResponse2003';
+import { InlineResponse201 } from '../models/InlineResponse201';
+import { InlineResponse202 } from '../models/InlineResponse202';
 import { InvalidIdentifierError } from '../models/InvalidIdentifierError';
 import { Notification } from '../models/Notification';
 import { Notification200Errors } from '../models/Notification200Errors';
@@ -41,16 +51,27 @@ import { PlatformDeliveryDataEmailAllOf } from '../models/PlatformDeliveryDataEm
 import { PlatformDeliveryDataSmsAllOf } from '../models/PlatformDeliveryDataSmsAllOf';
 import { Player } from '../models/Player';
 import { PlayerNotificationTarget } from '../models/PlayerNotificationTarget';
+import { PlayerNotificationTargetIncludeAliases } from '../models/PlayerNotificationTargetIncludeAliases';
 import { PlayerSlice } from '../models/PlayerSlice';
+import { PropertiesDeltas } from '../models/PropertiesDeltas';
+import { PropertiesObject } from '../models/PropertiesObject';
 import { Purchase } from '../models/Purchase';
 import { Segment } from '../models/Segment';
 import { SegmentNotificationTarget } from '../models/SegmentNotificationTarget';
 import { StringMap } from '../models/StringMap';
+import { SubscriptionObject } from '../models/SubscriptionObject';
+import { TransferSubscriptionRequestBody } from '../models/TransferSubscriptionRequestBody';
 import { UpdateLiveActivityRequest } from '../models/UpdateLiveActivityRequest';
 import { UpdateLiveActivitySuccessResponse } from '../models/UpdateLiveActivitySuccessResponse';
 import { UpdatePlayerSuccessResponse } from '../models/UpdatePlayerSuccessResponse';
 import { UpdatePlayerTagsRequestBody } from '../models/UpdatePlayerTagsRequestBody';
 import { UpdatePlayerTagsSuccessResponse } from '../models/UpdatePlayerTagsSuccessResponse';
+import { UpdateSubscriptionRequestBody } from '../models/UpdateSubscriptionRequestBody';
+import { UpdateUserRequest } from '../models/UpdateUserRequest';
+import { User } from '../models/User';
+import { UserIdentityRequestBody } from '../models/UserIdentityRequestBody';
+import { UserIdentityResponse } from '../models/UserIdentityResponse';
+import { UserSubscriptionOptions } from '../models/UserSubscriptionOptions';
 
 import { ObservableDefaultApi } from "./ObservableAPI";
 import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
@@ -133,6 +154,75 @@ export interface DefaultApiCreateSegmentsRequest {
     segment?: Segment
 }
 
+export interface DefaultApiCreateSubscriptionRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApicreateSubscription
+     */
+    appId: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApicreateSubscription
+     */
+    aliasLabel: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApicreateSubscription
+     */
+    aliasId: string
+    /**
+     * 
+     * @type CreateSubscriptionRequestBody
+     * @memberof DefaultApicreateSubscription
+     */
+    createSubscriptionRequestBody: CreateSubscriptionRequestBody
+}
+
+export interface DefaultApiCreateUserRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApicreateUser
+     */
+    appId: string
+    /**
+     * 
+     * @type User
+     * @memberof DefaultApicreateUser
+     */
+    user: User
+}
+
+export interface DefaultApiDeleteAliasRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApideleteAlias
+     */
+    appId: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApideleteAlias
+     */
+    aliasLabel: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApideleteAlias
+     */
+    aliasId: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApideleteAlias
+     */
+    aliasLabelToDelete: string
+}
+
 export interface DefaultApiDeletePlayerRequest {
     /**
      * The OneSignal App ID for your app.  Available in Keys &amp; IDs.
@@ -161,6 +251,42 @@ export interface DefaultApiDeleteSegmentsRequest {
      * @memberof DefaultApideleteSegments
      */
     segmentId: string
+}
+
+export interface DefaultApiDeleteSubscriptionRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApideleteSubscription
+     */
+    appId: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApideleteSubscription
+     */
+    subscriptionId: string
+}
+
+export interface DefaultApiDeleteUserRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApideleteUser
+     */
+    appId: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApideleteUser
+     */
+    aliasLabel: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApideleteUser
+     */
+    aliasId: string
 }
 
 export interface DefaultApiEndLiveActivityRequest {
@@ -199,6 +325,63 @@ export interface DefaultApiExportPlayersRequest {
     exportPlayersRequestBody?: ExportPlayersRequestBody
 }
 
+export interface DefaultApiFetchAliasesRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApifetchAliases
+     */
+    appId: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApifetchAliases
+     */
+    subscriptionId: string
+}
+
+export interface DefaultApiFetchUserRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApifetchUser
+     */
+    appId: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApifetchUser
+     */
+    aliasLabel: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApifetchUser
+     */
+    aliasId: string
+}
+
+export interface DefaultApiFetchUserIdentityRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApifetchUserIdentity
+     */
+    appId: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApifetchUserIdentity
+     */
+    aliasLabel: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApifetchUserIdentity
+     */
+    aliasId: string
+}
+
 export interface DefaultApiGetAppRequest {
     /**
      * An app id
@@ -209,6 +392,21 @@ export interface DefaultApiGetAppRequest {
 }
 
 export interface DefaultApiGetAppsRequest {
+}
+
+export interface DefaultApiGetEligibleIamsRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApigetEligibleIams
+     */
+    appId: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApigetEligibleIams
+     */
+    subscriptionId: string
 }
 
 export interface DefaultApiGetNotificationRequest {
@@ -349,6 +547,75 @@ export interface DefaultApiGetPlayersRequest {
     offset?: number
 }
 
+export interface DefaultApiIdentifyUserByAliasRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApiidentifyUserByAlias
+     */
+    appId: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApiidentifyUserByAlias
+     */
+    aliasLabel: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApiidentifyUserByAlias
+     */
+    aliasId: string
+    /**
+     * 
+     * @type UserIdentityRequestBody
+     * @memberof DefaultApiidentifyUserByAlias
+     */
+    userIdentityRequestBody: UserIdentityRequestBody
+}
+
+export interface DefaultApiIdentifyUserBySubscriptionIdRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApiidentifyUserBySubscriptionId
+     */
+    appId: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApiidentifyUserBySubscriptionId
+     */
+    subscriptionId: string
+    /**
+     * 
+     * @type UserIdentityRequestBody
+     * @memberof DefaultApiidentifyUserBySubscriptionId
+     */
+    userIdentityRequestBody: UserIdentityRequestBody
+}
+
+export interface DefaultApiTransferSubscriptionRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApitransferSubscription
+     */
+    appId: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApitransferSubscription
+     */
+    subscriptionId: string
+    /**
+     * 
+     * @type TransferSubscriptionRequestBody
+     * @memberof DefaultApitransferSubscription
+     */
+    transferSubscriptionRequestBody: TransferSubscriptionRequestBody
+}
+
 export interface DefaultApiUpdateAppRequest {
     /**
      * An app id
@@ -421,6 +688,60 @@ export interface DefaultApiUpdatePlayerTagsRequest {
     updatePlayerTagsRequestBody?: UpdatePlayerTagsRequestBody
 }
 
+export interface DefaultApiUpdateSubscriptionRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApiupdateSubscription
+     */
+    appId: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApiupdateSubscription
+     */
+    subscriptionId: string
+    /**
+     * 
+     * @type UpdateSubscriptionRequestBody
+     * @memberof DefaultApiupdateSubscription
+     */
+    updateSubscriptionRequestBody: UpdateSubscriptionRequestBody
+}
+
+export interface DefaultApiUpdateUserRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApiupdateUser
+     */
+    appId: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApiupdateUser
+     */
+    aliasLabel: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApiupdateUser
+     */
+    aliasId: string
+    /**
+     * 
+     * @type UpdateUserRequest
+     * @memberof DefaultApiupdateUser
+     */
+    updateUserRequest: UpdateUserRequest
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApiupdateUser
+     */
+    subscriptionId?: string
+}
+
 export class ObjectDefaultApi {
     private api: ObservableDefaultApi
 
@@ -483,6 +804,30 @@ export class ObjectDefaultApi {
     }
 
     /**
+     * Creates a new Subscription under the User provided. Useful to add email addresses and SMS numbers to the User.
+     * @param param the request object
+     */
+    public createSubscription(param: DefaultApiCreateSubscriptionRequest, options?: Configuration): Promise<InlineResponse201> {
+        return this.api.createSubscription(param.appId, param.aliasLabel, param.aliasId, param.createSubscriptionRequestBody,  options).toPromise();
+    }
+
+    /**
+     * Creates a User, optionally Subscriptions owned by the User as well as Aliases. Aliases provided in the payload will be used to look up an existing User.
+     * @param param the request object
+     */
+    public createUser(param: DefaultApiCreateUserRequest, options?: Configuration): Promise<User> {
+        return this.api.createUser(param.appId, param.user,  options).toPromise();
+    }
+
+    /**
+     * Deletes an alias by alias label
+     * @param param the request object
+     */
+    public deleteAlias(param: DefaultApiDeleteAliasRequest, options?: Configuration): Promise<InlineResponse200> {
+        return this.api.deleteAlias(param.appId, param.aliasLabel, param.aliasId, param.aliasLabelToDelete,  options).toPromise();
+    }
+
+    /**
      * Delete player - Required: Used to delete a single, specific Player ID record from a specific OneSignal app. 
      * Delete a user record
      * @param param the request object
@@ -498,6 +843,22 @@ export class ObjectDefaultApi {
      */
     public deleteSegments(param: DefaultApiDeleteSegmentsRequest, options?: Configuration): Promise<DeleteSegmentSuccessResponse> {
         return this.api.deleteSegments(param.appId, param.segmentId,  options).toPromise();
+    }
+
+    /**
+     * Deletes the Subscription.
+     * @param param the request object
+     */
+    public deleteSubscription(param: DefaultApiDeleteSubscriptionRequest, options?: Configuration): Promise<void> {
+        return this.api.deleteSubscription(param.appId, param.subscriptionId,  options).toPromise();
+    }
+
+    /**
+     * Removes the User identified by (:alias_label, :alias_id), and all Subscriptions and Aliases
+     * @param param the request object
+     */
+    public deleteUser(param: DefaultApiDeleteUserRequest, options?: Configuration): Promise<void> {
+        return this.api.deleteUser(param.appId, param.aliasLabel, param.aliasId,  options).toPromise();
     }
 
     /**
@@ -519,6 +880,30 @@ export class ObjectDefaultApi {
     }
 
     /**
+     * Lists all Aliases for the User identified by :subscription_id.
+     * @param param the request object
+     */
+    public fetchAliases(param: DefaultApiFetchAliasesRequest, options?: Configuration): Promise<UserIdentityResponse> {
+        return this.api.fetchAliases(param.appId, param.subscriptionId,  options).toPromise();
+    }
+
+    /**
+     * Returns the User’s properties, Aliases, and Subscriptions.
+     * @param param the request object
+     */
+    public fetchUser(param: DefaultApiFetchUserRequest, options?: Configuration): Promise<User> {
+        return this.api.fetchUser(param.appId, param.aliasLabel, param.aliasId,  options).toPromise();
+    }
+
+    /**
+     * Lists all Aliases for the User identified by (:alias_label, :alias_id).
+     * @param param the request object
+     */
+    public fetchUserIdentity(param: DefaultApiFetchUserIdentityRequest, options?: Configuration): Promise<InlineResponse200> {
+        return this.api.fetchUserIdentity(param.appId, param.aliasLabel, param.aliasId,  options).toPromise();
+    }
+
+    /**
      * View the details of a single OneSignal app
      * View an app
      * @param param the request object
@@ -534,6 +919,14 @@ export class ObjectDefaultApi {
      */
     public getApps(param: DefaultApiGetAppsRequest = {}, options?: Configuration): Promise<Array<App>> {
         return this.api.getApps( options).toPromise();
+    }
+
+    /**
+     * Manifest of In-App Messages the Subscription is eligible to display by the SDK.
+     * @param param the request object
+     */
+    public getEligibleIams(param: DefaultApiGetEligibleIamsRequest, options?: Configuration): Promise<InlineResponse2003> {
+        return this.api.getEligibleIams(param.appId, param.subscriptionId,  options).toPromise();
     }
 
     /**
@@ -591,6 +984,30 @@ export class ObjectDefaultApi {
     }
 
     /**
+     * Upserts one or more Aliases to an existing User identified by (:alias_label, :alias_id).
+     * @param param the request object
+     */
+    public identifyUserByAlias(param: DefaultApiIdentifyUserByAliasRequest, options?: Configuration): Promise<InlineResponse200> {
+        return this.api.identifyUserByAlias(param.appId, param.aliasLabel, param.aliasId, param.userIdentityRequestBody,  options).toPromise();
+    }
+
+    /**
+     * Upserts one or more Aliases for the User identified by :subscription_id.
+     * @param param the request object
+     */
+    public identifyUserBySubscriptionId(param: DefaultApiIdentifyUserBySubscriptionIdRequest, options?: Configuration): Promise<UserIdentityResponse> {
+        return this.api.identifyUserBySubscriptionId(param.appId, param.subscriptionId, param.userIdentityRequestBody,  options).toPromise();
+    }
+
+    /**
+     * Transfers this Subscription to the User identified by the identity in the payload.
+     * @param param the request object
+     */
+    public transferSubscription(param: DefaultApiTransferSubscriptionRequest, options?: Configuration): Promise<UserIdentityResponse> {
+        return this.api.transferSubscription(param.appId, param.subscriptionId, param.transferSubscriptionRequestBody,  options).toPromise();
+    }
+
+    /**
      * Updates the name or configuration settings of an existing OneSignal app
      * Update an app
      * @param param the request object
@@ -624,6 +1041,22 @@ export class ObjectDefaultApi {
      */
     public updatePlayerTags(param: DefaultApiUpdatePlayerTagsRequest, options?: Configuration): Promise<UpdatePlayerTagsSuccessResponse> {
         return this.api.updatePlayerTags(param.appId, param.externalUserId, param.updatePlayerTagsRequestBody,  options).toPromise();
+    }
+
+    /**
+     * Updates an existing Subscription’s properties.
+     * @param param the request object
+     */
+    public updateSubscription(param: DefaultApiUpdateSubscriptionRequest, options?: Configuration): Promise<void> {
+        return this.api.updateSubscription(param.appId, param.subscriptionId, param.updateSubscriptionRequestBody,  options).toPromise();
+    }
+
+    /**
+     * Updates an existing User’s properties.
+     * @param param the request object
+     */
+    public updateUser(param: DefaultApiUpdateUserRequest, options?: Configuration): Promise<InlineResponse202> {
+        return this.api.updateUser(param.appId, param.aliasLabel, param.aliasId, param.updateUserRequest, param.subscriptionId,  options).toPromise();
     }
 
 }

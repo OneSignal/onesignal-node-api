@@ -440,6 +440,154 @@ const subscriptionId = '<subscription_id>'; // player id
 await api.endLiveActivity('<app_id>', '<activity_id>', subscriptionId);
 ```
 
+### Subscription types
+* iOSPush
+* AndroidPush
+* FireOSPush
+* ChromeExtensionPush
+* ChromePush
+* WindowsPush
+* SafariLegacyPush
+* FirefoxPush
+* macOSPush
+* HuaweiPush
+* SafariPush
+* Email
+* SMS
+
+## Users
+### Creating a OneSignal User
+```js
+const user = new OneSignal.User();
+
+const aliasLabel = '<alias_label>';
+const aliasId = '<alias_id>';
+const subscriptionToken = '<subscription_token>';
+
+user.identity = {
+    [aliasLabel]: aliasId,
+};
+
+user.subscriptions = [
+  {
+    type: "iOSPush",
+    token: subscriptionToken,
+  }
+];
+
+const createdUser = await api.createUser('<app_id>', user);
+assert(createdUser.identity!['onesignal_id'] != null);
+```
+
+### Getting a user by `onesignal_id`
+```js
+const oneisgnalAliasLabel = "onesignal_id";
+const onesignalAliasId = createdUser.identity!['onesignal_id'];
+
+const fetchedUser = await api.fetchUser('<app_id>', oneisgnalAliasLabel, onesignalAliasId);
+```
+
+### Getting a user by an alias
+```js
+const fetchedUser = await api.fetchUser('<app_id>', alias_label, alias_id);
+```
+
+### Updating a user
+```js
+const updateUserRequest: UpdateUserRequest = {
+    properties: {
+        language: 'fr'
+    }
+};
+
+const updatedUser = await api.updateUser('<app_id>', aliasLabel, aliasId, updateUserRequest);
+```
+
+### Deleting a user
+```js
+await api.deleteUser('<app_id>', aliasLabel, aliasId);
+```
+
+## Subscriptions
+### Creating a subscription for existing user
+```js
+const createSubscriptionRequestBody: CreateSubscriptionRequestBody = {
+    subscription: {
+        type: "AndroidPush",
+        token: '<subscription_token>',
+    }
+};
+
+const response = await api.createSubscription('<app_id>', '<alias_label>', '<alias_id>', createSubscriptionRequestBody);
+```
+
+### Updating a subscription
+```js
+const updateSubscriptionRequestBody: UpdateSubscriptionRequestBody = {
+    subscription: {
+        type: "iOSPush",
+        token: '<new-subscription-token>',
+    }
+};
+
+await api.updateSubscription('<app_id>', '<existing_subscription_id>', updateSubscriptionRequestBody);
+```
+
+### Deleting a subscription
+```js
+await api.deleteSubscription('<app_id>', '<subscription_id>');
+```
+
+### Transfer subscription ownership
+Transfers the subscription from one user to another.
+```js
+// Setting the user for transfering the subscription to. User is identyfied by an IdentityObject.
+const transferSubscriptionRequestBody: TransferSubscriptionRequestBody = {
+    identity: otherUserIdentityObject
+};
+
+const transferResponse = await api.transferSubscription('<app_id>', '<subscription_id>', transferSubscriptionRequestBody);
+```
+
+## Aliases
+### Fetching aliases for a user
+```js
+const fetchResponse = await api.fetchAliases('<app_id>', '<subscription_id>');
+```
+
+### Fetching user identity
+```js
+const fetchResponse = await api.fetchUserIdentity('<app_id>', '<alias_label>', '<alias_id>');
+```
+### Identifying user by alias
+```js
+const userIdentityRequestBody: UserIdentityRequestBody = {
+    identity: {
+        ['<new_alias_label>']: '<new_alias_id>'
+    }
+};
+
+const identifyResponse = await api.identifyUserByAlias('<app_id>', 
+                                                       '<existing_alias_label>', 
+                                                       '<existing_alias_id>',
+                                                       userIdentityRequestBody);
+```
+
+### Identifying user by subscription id
+```js
+const userIdentityRequestBody: UserIdentityRequestBody = {
+    identity: {
+        ['<new_alias_label>']: '<new_alias_id>'
+    }
+};
+
+const identifyResponse = await api.identifyUserBySubscriptionId('<app_id>', '<existing_subscription_id>', userIdentityRequestBody);
+```
+
+### Deleting an alias
+```js
+await api.deleteAlias('<app_id>', '<alias_label>', '<alias_id>', '<alias_label_to_delete>');
+```
 ## Author
 
 * Website: https://onesignal.com

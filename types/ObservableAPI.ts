@@ -15,6 +15,10 @@ import { CreateNotificationSuccessResponse } from '../models/CreateNotificationS
 import { CreatePlayerSuccessResponse } from '../models/CreatePlayerSuccessResponse';
 import { CreateSegmentConflictResponse } from '../models/CreateSegmentConflictResponse';
 import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
+import { CreateSubscriptionRequestBody } from '../models/CreateSubscriptionRequestBody';
+import { CreateUserConflictResponse } from '../models/CreateUserConflictResponse';
+import { CreateUserConflictResponseErrorsInner } from '../models/CreateUserConflictResponseErrorsInner';
+import { CreateUserConflictResponseErrorsItemsMeta } from '../models/CreateUserConflictResponseErrorsItemsMeta';
 import { DeletePlayerNotFoundResponse } from '../models/DeletePlayerNotFoundResponse';
 import { DeletePlayerSuccessResponse } from '../models/DeletePlayerSuccessResponse';
 import { DeleteSegmentNotFoundResponse } from '../models/DeleteSegmentNotFoundResponse';
@@ -25,6 +29,12 @@ import { ExportPlayersSuccessResponse } from '../models/ExportPlayersSuccessResp
 import { Filter } from '../models/Filter';
 import { FilterExpressions } from '../models/FilterExpressions';
 import { GetNotificationRequestBody } from '../models/GetNotificationRequestBody';
+import { IdentifyUserConflictResponse } from '../models/IdentifyUserConflictResponse';
+import { IdentifyUserConflictResponseErrorsInner } from '../models/IdentifyUserConflictResponseErrorsInner';
+import { InlineResponse200 } from '../models/InlineResponse200';
+import { InlineResponse2003 } from '../models/InlineResponse2003';
+import { InlineResponse201 } from '../models/InlineResponse201';
+import { InlineResponse202 } from '../models/InlineResponse202';
 import { InvalidIdentifierError } from '../models/InvalidIdentifierError';
 import { Notification } from '../models/Notification';
 import { Notification200Errors } from '../models/Notification200Errors';
@@ -42,16 +52,27 @@ import { PlatformDeliveryDataEmailAllOf } from '../models/PlatformDeliveryDataEm
 import { PlatformDeliveryDataSmsAllOf } from '../models/PlatformDeliveryDataSmsAllOf';
 import { Player } from '../models/Player';
 import { PlayerNotificationTarget } from '../models/PlayerNotificationTarget';
+import { PlayerNotificationTargetIncludeAliases } from '../models/PlayerNotificationTargetIncludeAliases';
 import { PlayerSlice } from '../models/PlayerSlice';
+import { PropertiesDeltas } from '../models/PropertiesDeltas';
+import { PropertiesObject } from '../models/PropertiesObject';
 import { Purchase } from '../models/Purchase';
 import { Segment } from '../models/Segment';
 import { SegmentNotificationTarget } from '../models/SegmentNotificationTarget';
 import { StringMap } from '../models/StringMap';
+import { SubscriptionObject } from '../models/SubscriptionObject';
+import { TransferSubscriptionRequestBody } from '../models/TransferSubscriptionRequestBody';
 import { UpdateLiveActivityRequest } from '../models/UpdateLiveActivityRequest';
 import { UpdateLiveActivitySuccessResponse } from '../models/UpdateLiveActivitySuccessResponse';
 import { UpdatePlayerSuccessResponse } from '../models/UpdatePlayerSuccessResponse';
 import { UpdatePlayerTagsRequestBody } from '../models/UpdatePlayerTagsRequestBody';
 import { UpdatePlayerTagsSuccessResponse } from '../models/UpdatePlayerTagsSuccessResponse';
+import { UpdateSubscriptionRequestBody } from '../models/UpdateSubscriptionRequestBody';
+import { UpdateUserRequest } from '../models/UpdateUserRequest';
+import { User } from '../models/User';
+import { UserIdentityRequestBody } from '../models/UserIdentityRequestBody';
+import { UserIdentityResponse } from '../models/UserIdentityResponse';
+import { UserSubscriptionOptions } from '../models/UserSubscriptionOptions';
 
 import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
 export class ObservableDefaultApi {
@@ -218,6 +239,82 @@ export class ObservableDefaultApi {
     }
 
     /**
+     * Creates a new Subscription under the User provided. Useful to add email addresses and SMS numbers to the User.
+     * @param appId 
+     * @param aliasLabel 
+     * @param aliasId 
+     * @param createSubscriptionRequestBody 
+     */
+    public createSubscription(appId: string, aliasLabel: string, aliasId: string, createSubscriptionRequestBody: CreateSubscriptionRequestBody, _options?: Configuration): Observable<InlineResponse201> {
+        const requestContextPromise = this.requestFactory.createSubscription(appId, aliasLabel, aliasId, createSubscriptionRequestBody, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createSubscription(rsp)));
+            }));
+    }
+
+    /**
+     * Creates a User, optionally Subscriptions owned by the User as well as Aliases. Aliases provided in the payload will be used to look up an existing User.
+     * @param appId 
+     * @param user 
+     */
+    public createUser(appId: string, user: User, _options?: Configuration): Observable<User> {
+        const requestContextPromise = this.requestFactory.createUser(appId, user, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createUser(rsp)));
+            }));
+    }
+
+    /**
+     * Deletes an alias by alias label
+     * @param appId 
+     * @param aliasLabel 
+     * @param aliasId 
+     * @param aliasLabelToDelete 
+     */
+    public deleteAlias(appId: string, aliasLabel: string, aliasId: string, aliasLabelToDelete: string, _options?: Configuration): Observable<InlineResponse200> {
+        const requestContextPromise = this.requestFactory.deleteAlias(appId, aliasLabel, aliasId, aliasLabelToDelete, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteAlias(rsp)));
+            }));
+    }
+
+    /**
      * Delete player - Required: Used to delete a single, specific Player ID record from a specific OneSignal app. 
      * Delete a user record
      * @param appId The OneSignal App ID for your app.  Available in Keys &amp; IDs.
@@ -264,6 +361,55 @@ export class ObservableDefaultApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteSegments(rsp)));
+            }));
+    }
+
+    /**
+     * Deletes the Subscription.
+     * @param appId 
+     * @param subscriptionId 
+     */
+    public deleteSubscription(appId: string, subscriptionId: string, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.deleteSubscription(appId, subscriptionId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteSubscription(rsp)));
+            }));
+    }
+
+    /**
+     * Removes the User identified by (:alias_label, :alias_id), and all Subscriptions and Aliases
+     * @param appId 
+     * @param aliasLabel 
+     * @param aliasId 
+     */
+    public deleteUser(appId: string, aliasLabel: string, aliasId: string, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.deleteUser(appId, aliasLabel, aliasId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteUser(rsp)));
             }));
     }
 
@@ -319,6 +465,80 @@ export class ObservableDefaultApi {
     }
 
     /**
+     * Lists all Aliases for the User identified by :subscription_id.
+     * @param appId 
+     * @param subscriptionId 
+     */
+    public fetchAliases(appId: string, subscriptionId: string, _options?: Configuration): Observable<UserIdentityResponse> {
+        const requestContextPromise = this.requestFactory.fetchAliases(appId, subscriptionId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.fetchAliases(rsp)));
+            }));
+    }
+
+    /**
+     * Returns the User’s properties, Aliases, and Subscriptions.
+     * @param appId 
+     * @param aliasLabel 
+     * @param aliasId 
+     */
+    public fetchUser(appId: string, aliasLabel: string, aliasId: string, _options?: Configuration): Observable<User> {
+        const requestContextPromise = this.requestFactory.fetchUser(appId, aliasLabel, aliasId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.fetchUser(rsp)));
+            }));
+    }
+
+    /**
+     * Lists all Aliases for the User identified by (:alias_label, :alias_id).
+     * @param appId 
+     * @param aliasLabel 
+     * @param aliasId 
+     */
+    public fetchUserIdentity(appId: string, aliasLabel: string, aliasId: string, _options?: Configuration): Observable<InlineResponse200> {
+        const requestContextPromise = this.requestFactory.fetchUserIdentity(appId, aliasLabel, aliasId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.fetchUserIdentity(rsp)));
+            }));
+    }
+
+    /**
      * View the details of a single OneSignal app
      * View an app
      * @param appId An app id
@@ -362,6 +582,30 @@ export class ObservableDefaultApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getApps(rsp)));
+            }));
+    }
+
+    /**
+     * Manifest of In-App Messages the Subscription is eligible to display by the SDK.
+     * @param appId 
+     * @param subscriptionId 
+     */
+    public getEligibleIams(appId: string, subscriptionId: string, _options?: Configuration): Observable<InlineResponse2003> {
+        const requestContextPromise = this.requestFactory.getEligibleIams(appId, subscriptionId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getEligibleIams(rsp)));
             }));
     }
 
@@ -524,6 +768,82 @@ export class ObservableDefaultApi {
     }
 
     /**
+     * Upserts one or more Aliases to an existing User identified by (:alias_label, :alias_id).
+     * @param appId 
+     * @param aliasLabel 
+     * @param aliasId 
+     * @param userIdentityRequestBody 
+     */
+    public identifyUserByAlias(appId: string, aliasLabel: string, aliasId: string, userIdentityRequestBody: UserIdentityRequestBody, _options?: Configuration): Observable<InlineResponse200> {
+        const requestContextPromise = this.requestFactory.identifyUserByAlias(appId, aliasLabel, aliasId, userIdentityRequestBody, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.identifyUserByAlias(rsp)));
+            }));
+    }
+
+    /**
+     * Upserts one or more Aliases for the User identified by :subscription_id.
+     * @param appId 
+     * @param subscriptionId 
+     * @param userIdentityRequestBody 
+     */
+    public identifyUserBySubscriptionId(appId: string, subscriptionId: string, userIdentityRequestBody: UserIdentityRequestBody, _options?: Configuration): Observable<UserIdentityResponse> {
+        const requestContextPromise = this.requestFactory.identifyUserBySubscriptionId(appId, subscriptionId, userIdentityRequestBody, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.identifyUserBySubscriptionId(rsp)));
+            }));
+    }
+
+    /**
+     * Transfers this Subscription to the User identified by the identity in the payload.
+     * @param appId 
+     * @param subscriptionId 
+     * @param transferSubscriptionRequestBody 
+     */
+    public transferSubscription(appId: string, subscriptionId: string, transferSubscriptionRequestBody: TransferSubscriptionRequestBody, _options?: Configuration): Observable<UserIdentityResponse> {
+        const requestContextPromise = this.requestFactory.transferSubscription(appId, subscriptionId, transferSubscriptionRequestBody, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.transferSubscription(rsp)));
+            }));
+    }
+
+    /**
      * Updates the name or configuration settings of an existing OneSignal app
      * Update an app
      * @param appId An app id
@@ -622,6 +942,58 @@ export class ObservableDefaultApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updatePlayerTags(rsp)));
+            }));
+    }
+
+    /**
+     * Updates an existing Subscription’s properties.
+     * @param appId 
+     * @param subscriptionId 
+     * @param updateSubscriptionRequestBody 
+     */
+    public updateSubscription(appId: string, subscriptionId: string, updateSubscriptionRequestBody: UpdateSubscriptionRequestBody, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.updateSubscription(appId, subscriptionId, updateSubscriptionRequestBody, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateSubscription(rsp)));
+            }));
+    }
+
+    /**
+     * Updates an existing User’s properties.
+     * @param appId 
+     * @param aliasLabel 
+     * @param aliasId 
+     * @param updateUserRequest 
+     * @param subscriptionId 
+     */
+    public updateUser(appId: string, aliasLabel: string, aliasId: string, updateUserRequest: UpdateUserRequest, subscriptionId?: string, _options?: Configuration): Observable<InlineResponse202> {
+        const requestContextPromise = this.requestFactory.updateUser(appId, aliasLabel, aliasId, updateUserRequest, subscriptionId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateUser(rsp)));
             }));
     }
 

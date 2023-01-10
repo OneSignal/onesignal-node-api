@@ -2,10 +2,11 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.0.2
+ * API Version: 1.1.0
  * Contact: devrel@onesignal.com
  */
 
+import { PlayerNotificationTargetIncludeAliases } from './PlayerNotificationTargetIncludeAliases';
 import { HttpFile } from '../http/http';
 
 export class PlayerNotificationTarget {
@@ -49,6 +50,8 @@ export class PlayerNotificationTarget {
     * Not Recommended: Please consider using include_player_ids or include_external_user_ids instead. Target using Android device registration IDs. If a token does not correspond to an existing user, a new user will be created. Example: APA91bEeiUeSukAAUdnw3O2RB45FWlSpgJ7Ji_... Limit of 2,000 entries per REST API call 
     */
     'include_android_reg_ids'?: Array<string>;
+    'include_aliases'?: PlayerNotificationTargetIncludeAliases;
+    'target_channel'?: PlayerNotificationTargetTargetChannelEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -112,6 +115,18 @@ export class PlayerNotificationTarget {
             "baseName": "include_android_reg_ids",
             "type": "Array<string>",
             "format": ""
+        },
+        {
+            "name": "include_aliases",
+            "baseName": "include_aliases",
+            "type": "PlayerNotificationTargetIncludeAliases",
+            "format": ""
+        },
+        {
+            "name": "target_channel",
+            "baseName": "target_channel",
+            "type": "PlayerNotificationTargetTargetChannelEnum",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -121,4 +136,7 @@ export class PlayerNotificationTarget {
     public constructor() {
     }
 }
+
+
+export type PlayerNotificationTargetTargetChannelEnum = "push" | "email" | "sms" ;
 

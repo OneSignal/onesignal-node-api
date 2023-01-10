@@ -10,22 +10,36 @@ Method | HTTP request | Description
 [**createNotification**](DefaultApi.md#createNotification) | **POST** /notifications | Create notification
 [**createPlayer**](DefaultApi.md#createPlayer) | **POST** /players | Add a device
 [**createSegments**](DefaultApi.md#createSegments) | **POST** /apps/{app_id}/segments | Create Segments
+[**createSubscription**](DefaultApi.md#createSubscription) | **POST** /apps/{app_id}/users/by/{alias_label}/{alias_id}/subscriptions | 
+[**createUser**](DefaultApi.md#createUser) | **POST** /apps/{app_id}/users | 
+[**deleteAlias**](DefaultApi.md#deleteAlias) | **DELETE** /apps/{app_id}/users/by/{alias_label}/{alias_id}/identity/{alias_label_to_delete} | 
 [**deletePlayer**](DefaultApi.md#deletePlayer) | **DELETE** /players/{player_id} | Delete a user record
 [**deleteSegments**](DefaultApi.md#deleteSegments) | **DELETE** /apps/{app_id}/segments/{segment_id} | Delete Segments
+[**deleteSubscription**](DefaultApi.md#deleteSubscription) | **DELETE** /apps/{app_id}/subscriptions/{subscription_id} | 
+[**deleteUser**](DefaultApi.md#deleteUser) | **DELETE** /apps/{app_id}/users/by/{alias_label}/{alias_id} | 
 [**endLiveActivity**](DefaultApi.md#endLiveActivity) | **DELETE** /apps/{app_id}/live_activities/{activity_id}/token/{subscription_id} | Stop Live Activity
 [**exportPlayers**](DefaultApi.md#exportPlayers) | **POST** /players/csv_export?app_id&#x3D;{app_id} | CSV export
+[**fetchAliases**](DefaultApi.md#fetchAliases) | **GET** /apps/{app_id}/subscriptions/{subscription_id}/user/identity | 
+[**fetchUser**](DefaultApi.md#fetchUser) | **GET** /apps/{app_id}/users/by/{alias_label}/{alias_id} | 
+[**fetchUserIdentity**](DefaultApi.md#fetchUserIdentity) | **GET** /apps/{app_id}/users/by/{alias_label}/{alias_id}/identity | 
 [**getApp**](DefaultApi.md#getApp) | **GET** /apps/{app_id} | View an app
 [**getApps**](DefaultApi.md#getApps) | **GET** /apps | View apps
+[**getEligibleIams**](DefaultApi.md#getEligibleIams) | **GET** /apps/{app_id}/subscriptions/{subscription_id}/iams | 
 [**getNotification**](DefaultApi.md#getNotification) | **GET** /notifications/{notification_id} | View notification
 [**getNotificationHistory**](DefaultApi.md#getNotificationHistory) | **POST** /notifications/{notification_id}/history | Notification History
 [**getNotifications**](DefaultApi.md#getNotifications) | **GET** /notifications | View notifications
 [**getOutcomes**](DefaultApi.md#getOutcomes) | **GET** /apps/{app_id}/outcomes | View Outcomes
 [**getPlayer**](DefaultApi.md#getPlayer) | **GET** /players/{player_id} | View device
 [**getPlayers**](DefaultApi.md#getPlayers) | **GET** /players | View devices
+[**identifyUserByAlias**](DefaultApi.md#identifyUserByAlias) | **PATCH** /apps/{app_id}/users/by/{alias_label}/{alias_id}/identity | 
+[**identifyUserBySubscriptionId**](DefaultApi.md#identifyUserBySubscriptionId) | **PATCH** /apps/{app_id}/subscriptions/{subscription_id}/user/identity | 
+[**transferSubscription**](DefaultApi.md#transferSubscription) | **PATCH** /apps/{app_id}/subscriptions/{subscription_id}/owner | 
 [**updateApp**](DefaultApi.md#updateApp) | **PUT** /apps/{app_id} | Update an app
 [**updateLiveActivity**](DefaultApi.md#updateLiveActivity) | **POST** /apps/{app_id}/live_activities/{activity_id}/notifications | Update a Live Activity via Push
 [**updatePlayer**](DefaultApi.md#updatePlayer) | **PUT** /players/{player_id} | Edit device
 [**updatePlayerTags**](DefaultApi.md#updatePlayerTags) | **PUT** /apps/{app_id}/users/{external_user_id} | Edit tags with external user id
+[**updateSubscription**](DefaultApi.md#updateSubscription) | **PATCH** /apps/{app_id}/subscriptions/{subscription_id} | 
+[**updateUser**](DefaultApi.md#updateUser) | **PATCH** /apps/{app_id}/users/by/{alias_label}/{alias_id} | 
 
 
 # **beginLiveActivity**
@@ -322,7 +336,7 @@ let body:.DefaultApiCreatePlayerRequest = {
     last_active: 1,
     notification_types: 1,
     test_type: 1,
-    _long: 3.14,
+    long: 3.14,
     lat: 3.14,
     country: "country_example",
   },
@@ -425,6 +439,258 @@ Name | Type | Description  | Notes
 **201** | Created |  -  |
 **400** | Bad Request |  -  |
 **409** | Conflict |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **createSubscription**
+> InlineResponse201 createSubscription(createSubscriptionRequestBody)
+
+Creates a new Subscription under the User provided. Useful to add email addresses and SMS numbers to the User.
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .DefaultApi(configuration);
+
+let body:.DefaultApiCreateSubscriptionRequest = {
+  // string
+  appId: "app_id_example",
+  // string
+  aliasLabel: "alias_label_example",
+  // string
+  aliasId: "alias_id_example",
+  // CreateSubscriptionRequestBody
+  createSubscriptionRequestBody: {
+    subscription: {
+      id: "id_example",
+      type: "iOSPush",
+      token: "token_example",
+      enabled: true,
+      notification_types: 3.14,
+      session_time: 3.14,
+      session_count: 3.14,
+      sdk: "sdk_example",
+      device_model: "device_model_example",
+      device_os: "device_os_example",
+      rooted: true,
+      test_type: 3.14,
+      app_version: "app_version_example",
+      net_type: 3.14,
+      carrier: "carrier_example",
+      web_auth: "web_auth_example",
+      web_p256: "web_p256_example",
+    },
+    retain_previous_owner: true,
+  },
+};
+
+apiInstance.createSubscription(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createSubscriptionRequestBody** | **CreateSubscriptionRequestBody**|  |
+ **appId** | [**string**] |  | defaults to undefined
+ **aliasLabel** | [**string**] |  | defaults to undefined
+ **aliasId** | [**string**] |  | defaults to undefined
+
+
+### Return type
+
+**InlineResponse201**
+
+### Authorization
+
+[app_key](README.md#app_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | CREATED |  -  |
+**202** | ACCEPTED |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **createUser**
+> User createUser(user)
+
+Creates a User, optionally Subscriptions owned by the User as well as Aliases. Aliases provided in the payload will be used to look up an existing User.
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .DefaultApi(configuration);
+
+let body:.DefaultApiCreateUserRequest = {
+  // string
+  appId: "app_id_example",
+  // User
+  user: {
+    properties: {
+      tags: {},
+      language: "language_example",
+      timezone_id: "timezone_id_example",
+      lat: 3.14,
+      long: 3.14,
+      country: "country_example",
+      first_active: 3.14,
+      last_active: 3.14,
+      amount_spent: 3.14,
+      purchases: [
+        {
+          sku: "sku_example",
+          amount: "amount_example",
+          iso: "iso_example",
+        },
+      ],
+      ip: "ip_example",
+    },
+    identity: {},
+    subscriptions: [
+      {
+        id: "id_example",
+        type: "iOSPush",
+        token: "token_example",
+        enabled: true,
+        notification_types: 3.14,
+        session_time: 3.14,
+        session_count: 3.14,
+        sdk: "sdk_example",
+        device_model: "device_model_example",
+        device_os: "device_os_example",
+        rooted: true,
+        test_type: 3.14,
+        app_version: "app_version_example",
+        net_type: 3.14,
+        carrier: "carrier_example",
+        web_auth: "web_auth_example",
+        web_p256: "web_p256_example",
+      },
+    ],
+    subscription_options: {
+      retain_previous_owner: true,
+    },
+  },
+};
+
+apiInstance.createUser(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user** | **User**|  |
+ **appId** | [**string**] |  | defaults to undefined
+
+
+### Return type
+
+**User**
+
+### Authorization
+
+[app_key](README.md#app_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | CREATED |  -  |
+**202** | ACCEPTED |  -  |
+**409** | Multiple User Identity Conflict |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **deleteAlias**
+> InlineResponse200 deleteAlias()
+
+Deletes an alias by alias label
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .DefaultApi(configuration);
+
+let body:.DefaultApiDeleteAliasRequest = {
+  // string
+  appId: "app_id_example",
+  // string
+  aliasLabel: "alias_label_example",
+  // string
+  aliasId: "alias_id_example",
+  // string
+  aliasLabelToDelete: "alias_label_to_delete_example",
+};
+
+apiInstance.deleteAlias(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **appId** | [**string**] |  | defaults to undefined
+ **aliasLabel** | [**string**] |  | defaults to undefined
+ **aliasId** | [**string**] |  | defaults to undefined
+ **aliasLabelToDelete** | [**string**] |  | defaults to undefined
+
+
+### Return type
+
+**InlineResponse200**
+
+### Authorization
+
+[app_key](README.md#app_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -543,6 +809,123 @@ Name | Type | Description  | Notes
 **200** | OK |  -  |
 **400** | Bad Request |  -  |
 **404** | Not Found |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **deleteSubscription**
+> void deleteSubscription()
+
+Deletes the Subscription.
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .DefaultApi(configuration);
+
+let body:.DefaultApiDeleteSubscriptionRequest = {
+  // string
+  appId: "app_id_example",
+  // string
+  subscriptionId: "subscription_id_example",
+};
+
+apiInstance.deleteSubscription(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **appId** | [**string**] |  | defaults to undefined
+ **subscriptionId** | [**string**] |  | defaults to undefined
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[app_key](README.md#app_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | ACCEPTED |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **deleteUser**
+> void deleteUser()
+
+Removes the User identified by (:alias_label, :alias_id), and all Subscriptions and Aliases
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .DefaultApi(configuration);
+
+let body:.DefaultApiDeleteUserRequest = {
+  // string
+  appId: "app_id_example",
+  // string
+  aliasLabel: "alias_label_example",
+  // string
+  aliasId: "alias_id_example",
+};
+
+apiInstance.deleteUser(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **appId** | [**string**] |  | defaults to undefined
+ **aliasLabel** | [**string**] |  | defaults to undefined
+ **aliasId** | [**string**] |  | defaults to undefined
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -671,6 +1054,183 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
+# **fetchAliases**
+> UserIdentityResponse fetchAliases()
+
+Lists all Aliases for the User identified by :subscription_id.
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .DefaultApi(configuration);
+
+let body:.DefaultApiFetchAliasesRequest = {
+  // string
+  appId: "app_id_example",
+  // string
+  subscriptionId: "subscription_id_example",
+};
+
+apiInstance.fetchAliases(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **appId** | [**string**] |  | defaults to undefined
+ **subscriptionId** | [**string**] |  | defaults to undefined
+
+
+### Return type
+
+**UserIdentityResponse**
+
+### Authorization
+
+[app_key](README.md#app_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **fetchUser**
+> User fetchUser()
+
+Returns the User’s properties, Aliases, and Subscriptions.
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .DefaultApi(configuration);
+
+let body:.DefaultApiFetchUserRequest = {
+  // string
+  appId: "app_id_example",
+  // string
+  aliasLabel: "alias_label_example",
+  // string
+  aliasId: "alias_id_example",
+};
+
+apiInstance.fetchUser(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **appId** | [**string**] |  | defaults to undefined
+ **aliasLabel** | [**string**] |  | defaults to undefined
+ **aliasId** | [**string**] |  | defaults to undefined
+
+
+### Return type
+
+**User**
+
+### Authorization
+
+[app_key](README.md#app_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **fetchUserIdentity**
+> InlineResponse200 fetchUserIdentity()
+
+Lists all Aliases for the User identified by (:alias_label, :alias_id).
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .DefaultApi(configuration);
+
+let body:.DefaultApiFetchUserIdentityRequest = {
+  // string
+  appId: "app_id_example",
+  // string
+  aliasLabel: "alias_label_example",
+  // string
+  aliasId: "alias_id_example",
+};
+
+apiInstance.fetchUserIdentity(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **appId** | [**string**] |  | defaults to undefined
+ **aliasLabel** | [**string**] |  | defaults to undefined
+ **aliasId** | [**string**] |  | defaults to undefined
+
+
+### Return type
+
+**InlineResponse200**
+
+### Authorization
+
+[app_key](README.md#app_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 # **getApp**
 > App getApp()
 
@@ -772,6 +1332,63 @@ This endpoint does not need any parameter.
 |-------------|-------------|------------------|
 **200** | OK |  -  |
 **400** | Bad Request |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **getEligibleIams**
+> InlineResponse2003 getEligibleIams()
+
+Manifest of In-App Messages the Subscription is eligible to display by the SDK.
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .DefaultApi(configuration);
+
+let body:.DefaultApiGetEligibleIamsRequest = {
+  // string
+  appId: "app_id_example",
+  // string
+  subscriptionId: "subscription_id_example",
+};
+
+apiInstance.getEligibleIams(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **appId** | [**string**] |  | defaults to undefined
+ **subscriptionId** | [**string**] |  | defaults to undefined
+
+
+### Return type
+
+**InlineResponse2003**
+
+### Authorization
+
+[app_key](README.md#app_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -1151,6 +1768,197 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
+# **identifyUserByAlias**
+> InlineResponse200 identifyUserByAlias(userIdentityRequestBody)
+
+Upserts one or more Aliases to an existing User identified by (:alias_label, :alias_id).
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .DefaultApi(configuration);
+
+let body:.DefaultApiIdentifyUserByAliasRequest = {
+  // string
+  appId: "app_id_example",
+  // string
+  aliasLabel: "alias_label_example",
+  // string
+  aliasId: "alias_id_example",
+  // UserIdentityRequestBody
+  userIdentityRequestBody: {
+    identity: {},
+  },
+};
+
+apiInstance.identifyUserByAlias(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userIdentityRequestBody** | **UserIdentityRequestBody**|  |
+ **appId** | [**string**] |  | defaults to undefined
+ **aliasLabel** | [**string**] |  | defaults to undefined
+ **aliasId** | [**string**] |  | defaults to undefined
+
+
+### Return type
+
+**InlineResponse200**
+
+### Authorization
+
+[app_key](README.md#app_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**409** | Conflict |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **identifyUserBySubscriptionId**
+> UserIdentityResponse identifyUserBySubscriptionId(userIdentityRequestBody)
+
+Upserts one or more Aliases for the User identified by :subscription_id.
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .DefaultApi(configuration);
+
+let body:.DefaultApiIdentifyUserBySubscriptionIdRequest = {
+  // string
+  appId: "app_id_example",
+  // string
+  subscriptionId: "subscription_id_example",
+  // UserIdentityRequestBody
+  userIdentityRequestBody: {
+    identity: {},
+  },
+};
+
+apiInstance.identifyUserBySubscriptionId(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userIdentityRequestBody** | **UserIdentityRequestBody**|  |
+ **appId** | [**string**] |  | defaults to undefined
+ **subscriptionId** | [**string**] |  | defaults to undefined
+
+
+### Return type
+
+**UserIdentityResponse**
+
+### Authorization
+
+[app_key](README.md#app_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**409** | Conflict |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **transferSubscription**
+> UserIdentityResponse transferSubscription(transferSubscriptionRequestBody)
+
+Transfers this Subscription to the User identified by the identity in the payload.
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .DefaultApi(configuration);
+
+let body:.DefaultApiTransferSubscriptionRequest = {
+  // string
+  appId: "app_id_example",
+  // string
+  subscriptionId: "subscription_id_example",
+  // TransferSubscriptionRequestBody
+  transferSubscriptionRequestBody: {
+    identity: {},
+  },
+};
+
+apiInstance.transferSubscription(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **transferSubscriptionRequestBody** | **TransferSubscriptionRequestBody**|  |
+ **appId** | [**string**] |  | defaults to undefined
+ **subscriptionId** | [**string**] |  | defaults to undefined
+
+
+### Return type
+
+**UserIdentityResponse**
+
+### Authorization
+
+[app_key](README.md#app_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 # **updateApp**
 > App updateApp(app)
 
@@ -1339,7 +2147,7 @@ let body:.DefaultApiUpdatePlayerRequest = {
     last_active: 1,
     notification_types: 1,
     test_type: 1,
-    _long: 3.14,
+    long: 3.14,
     lat: 3.14,
     country: "country_example",
   },
@@ -1440,7 +2248,185 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
-**400** | Bad Request |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **updateSubscription**
+> void updateSubscription(updateSubscriptionRequestBody)
+
+Updates an existing Subscription’s properties.
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .DefaultApi(configuration);
+
+let body:.DefaultApiUpdateSubscriptionRequest = {
+  // string
+  appId: "app_id_example",
+  // string
+  subscriptionId: "subscription_id_example",
+  // UpdateSubscriptionRequestBody
+  updateSubscriptionRequestBody: {
+    subscription: {
+      id: "id_example",
+      type: "iOSPush",
+      token: "token_example",
+      enabled: true,
+      notification_types: 3.14,
+      session_time: 3.14,
+      session_count: 3.14,
+      sdk: "sdk_example",
+      device_model: "device_model_example",
+      device_os: "device_os_example",
+      rooted: true,
+      test_type: 3.14,
+      app_version: "app_version_example",
+      net_type: 3.14,
+      carrier: "carrier_example",
+      web_auth: "web_auth_example",
+      web_p256: "web_p256_example",
+    },
+  },
+};
+
+apiInstance.updateSubscription(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **updateSubscriptionRequestBody** | **UpdateSubscriptionRequestBody**|  |
+ **appId** | [**string**] |  | defaults to undefined
+ **subscriptionId** | [**string**] |  | defaults to undefined
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[app_key](README.md#app_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | ACCEPTED |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **updateUser**
+> InlineResponse202 updateUser(updateUserRequest)
+
+Updates an existing User’s properties.
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .DefaultApi(configuration);
+
+let body:.DefaultApiUpdateUserRequest = {
+  // string
+  appId: "app_id_example",
+  // string
+  aliasLabel: "alias_label_example",
+  // string
+  aliasId: "alias_id_example",
+  // UpdateUserRequest
+  updateUserRequest: {
+    properties: {
+      tags: {},
+      language: "language_example",
+      timezone_id: "timezone_id_example",
+      lat: 3.14,
+      long: 3.14,
+      country: "country_example",
+      first_active: 3.14,
+      last_active: 3.14,
+      amount_spent: 3.14,
+      purchases: [
+        {
+          sku: "sku_example",
+          amount: "amount_example",
+          iso: "iso_example",
+        },
+      ],
+      ip: "ip_example",
+    },
+    refresh_device_metadata: false,
+    deltas: {
+      session_time: 3.14,
+      session_count: 3.14,
+      amount_spent: 3.14,
+      purchases: [
+        {
+          sku: "sku_example",
+          amount: "amount_example",
+          iso: "iso_example",
+        },
+      ],
+    },
+  },
+  // string (optional)
+  subscriptionId: "subscription_id_example",
+};
+
+apiInstance.updateUser(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **updateUserRequest** | **UpdateUserRequest**|  |
+ **appId** | [**string**] |  | defaults to undefined
+ **aliasLabel** | [**string**] |  | defaults to undefined
+ **aliasId** | [**string**] |  | defaults to undefined
+ **subscriptionId** | [**string**] |  | (optional) defaults to undefined
+
+
+### Return type
+
+**InlineResponse202**
+
+### Authorization
+
+[app_key](README.md#app_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | ACCEPTED |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 

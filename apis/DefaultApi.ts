@@ -18,6 +18,8 @@ import { CreateNotificationSuccessResponse } from '../models/CreateNotificationS
 import { CreatePlayerSuccessResponse } from '../models/CreatePlayerSuccessResponse';
 import { CreateSegmentConflictResponse } from '../models/CreateSegmentConflictResponse';
 import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
+import { CreateSubscriptionRequestBody } from '../models/CreateSubscriptionRequestBody';
+import { CreateUserConflictResponse } from '../models/CreateUserConflictResponse';
 import { DeletePlayerNotFoundResponse } from '../models/DeletePlayerNotFoundResponse';
 import { DeletePlayerSuccessResponse } from '../models/DeletePlayerSuccessResponse';
 import { DeleteSegmentNotFoundResponse } from '../models/DeleteSegmentNotFoundResponse';
@@ -25,6 +27,11 @@ import { DeleteSegmentSuccessResponse } from '../models/DeleteSegmentSuccessResp
 import { ExportPlayersRequestBody } from '../models/ExportPlayersRequestBody';
 import { ExportPlayersSuccessResponse } from '../models/ExportPlayersSuccessResponse';
 import { GetNotificationRequestBody } from '../models/GetNotificationRequestBody';
+import { IdentifyUserConflictResponse } from '../models/IdentifyUserConflictResponse';
+import { InlineResponse200 } from '../models/InlineResponse200';
+import { InlineResponse2003 } from '../models/InlineResponse2003';
+import { InlineResponse201 } from '../models/InlineResponse201';
+import { InlineResponse202 } from '../models/InlineResponse202';
 import { Notification } from '../models/Notification';
 import { NotificationHistorySuccessResponse } from '../models/NotificationHistorySuccessResponse';
 import { NotificationSlice } from '../models/NotificationSlice';
@@ -33,11 +40,17 @@ import { OutcomesData } from '../models/OutcomesData';
 import { Player } from '../models/Player';
 import { PlayerSlice } from '../models/PlayerSlice';
 import { Segment } from '../models/Segment';
+import { TransferSubscriptionRequestBody } from '../models/TransferSubscriptionRequestBody';
 import { UpdateLiveActivityRequest } from '../models/UpdateLiveActivityRequest';
 import { UpdateLiveActivitySuccessResponse } from '../models/UpdateLiveActivitySuccessResponse';
 import { UpdatePlayerSuccessResponse } from '../models/UpdatePlayerSuccessResponse';
 import { UpdatePlayerTagsRequestBody } from '../models/UpdatePlayerTagsRequestBody';
 import { UpdatePlayerTagsSuccessResponse } from '../models/UpdatePlayerTagsSuccessResponse';
+import { UpdateSubscriptionRequestBody } from '../models/UpdateSubscriptionRequestBody';
+import { UpdateUserRequest } from '../models/UpdateUserRequest';
+import { User } from '../models/User';
+import { UserIdentityRequestBody } from '../models/UserIdentityRequestBody';
+import { UserIdentityResponse } from '../models/UserIdentityResponse';
 
 /**
  * no description
@@ -354,6 +367,193 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Creates a new Subscription under the User provided. Useful to add email addresses and SMS numbers to the User.
+     * @param appId 
+     * @param aliasLabel 
+     * @param aliasId 
+     * @param createSubscriptionRequestBody 
+     */
+    public async createSubscription(appId: string, aliasLabel: string, aliasId: string, createSubscriptionRequestBody: CreateSubscriptionRequestBody, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("DefaultApi", "createSubscription", "appId");
+        }
+
+
+        // verify required parameter 'aliasLabel' is not null or undefined
+        if (aliasLabel === null || aliasLabel === undefined) {
+            throw new RequiredError("DefaultApi", "createSubscription", "aliasLabel");
+        }
+
+
+        // verify required parameter 'aliasId' is not null or undefined
+        if (aliasId === null || aliasId === undefined) {
+            throw new RequiredError("DefaultApi", "createSubscription", "aliasId");
+        }
+
+
+        // verify required parameter 'createSubscriptionRequestBody' is not null or undefined
+        if (createSubscriptionRequestBody === null || createSubscriptionRequestBody === undefined) {
+            throw new RequiredError("DefaultApi", "createSubscription", "createSubscriptionRequestBody");
+        }
+
+
+        // Path Params
+        const localVarPath = '/apps/{app_id}/users/by/{alias_label}/{alias_id}/subscriptions'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'alias_label' + '}', encodeURIComponent(String(aliasLabel)))
+            .replace('{' + 'alias_id' + '}', encodeURIComponent(String(aliasId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(createSubscriptionRequestBody, "CreateSubscriptionRequestBody", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["app_key"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Creates a User, optionally Subscriptions owned by the User as well as Aliases. Aliases provided in the payload will be used to look up an existing User.
+     * @param appId 
+     * @param user 
+     */
+    public async createUser(appId: string, user: User, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("DefaultApi", "createUser", "appId");
+        }
+
+
+        // verify required parameter 'user' is not null or undefined
+        if (user === null || user === undefined) {
+            throw new RequiredError("DefaultApi", "createUser", "user");
+        }
+
+
+        // Path Params
+        const localVarPath = '/apps/{app_id}/users'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(user, "User", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["app_key"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Deletes an alias by alias label
+     * @param appId 
+     * @param aliasLabel 
+     * @param aliasId 
+     * @param aliasLabelToDelete 
+     */
+    public async deleteAlias(appId: string, aliasLabel: string, aliasId: string, aliasLabelToDelete: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("DefaultApi", "deleteAlias", "appId");
+        }
+
+
+        // verify required parameter 'aliasLabel' is not null or undefined
+        if (aliasLabel === null || aliasLabel === undefined) {
+            throw new RequiredError("DefaultApi", "deleteAlias", "aliasLabel");
+        }
+
+
+        // verify required parameter 'aliasId' is not null or undefined
+        if (aliasId === null || aliasId === undefined) {
+            throw new RequiredError("DefaultApi", "deleteAlias", "aliasId");
+        }
+
+
+        // verify required parameter 'aliasLabelToDelete' is not null or undefined
+        if (aliasLabelToDelete === null || aliasLabelToDelete === undefined) {
+            throw new RequiredError("DefaultApi", "deleteAlias", "aliasLabelToDelete");
+        }
+
+
+        // Path Params
+        const localVarPath = '/apps/{app_id}/users/by/{alias_label}/{alias_id}/identity/{alias_label_to_delete}'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'alias_label' + '}', encodeURIComponent(String(aliasLabel)))
+            .replace('{' + 'alias_id' + '}', encodeURIComponent(String(aliasId)))
+            .replace('{' + 'alias_label_to_delete' + '}', encodeURIComponent(String(aliasLabelToDelete)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["app_key"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
      * Delete player - Required: Used to delete a single, specific Player ID record from a specific OneSignal app. 
      * Delete a user record
      * @param appId The OneSignal App ID for your app.  Available in Keys &amp; IDs.
@@ -440,6 +640,98 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Deletes the Subscription.
+     * @param appId 
+     * @param subscriptionId 
+     */
+    public async deleteSubscription(appId: string, subscriptionId: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("DefaultApi", "deleteSubscription", "appId");
+        }
+
+
+        // verify required parameter 'subscriptionId' is not null or undefined
+        if (subscriptionId === null || subscriptionId === undefined) {
+            throw new RequiredError("DefaultApi", "deleteSubscription", "subscriptionId");
+        }
+
+
+        // Path Params
+        const localVarPath = '/apps/{app_id}/subscriptions/{subscription_id}'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'subscription_id' + '}', encodeURIComponent(String(subscriptionId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["app_key"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Removes the User identified by (:alias_label, :alias_id), and all Subscriptions and Aliases
+     * @param appId 
+     * @param aliasLabel 
+     * @param aliasId 
+     */
+    public async deleteUser(appId: string, aliasLabel: string, aliasId: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("DefaultApi", "deleteUser", "appId");
+        }
+
+
+        // verify required parameter 'aliasLabel' is not null or undefined
+        if (aliasLabel === null || aliasLabel === undefined) {
+            throw new RequiredError("DefaultApi", "deleteUser", "aliasLabel");
+        }
+
+
+        // verify required parameter 'aliasId' is not null or undefined
+        if (aliasId === null || aliasId === undefined) {
+            throw new RequiredError("DefaultApi", "deleteUser", "aliasId");
+        }
+
+
+        // Path Params
+        const localVarPath = '/apps/{app_id}/users/by/{alias_label}/{alias_id}'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'alias_label' + '}', encodeURIComponent(String(aliasLabel)))
+            .replace('{' + 'alias_id' + '}', encodeURIComponent(String(aliasId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
@@ -555,6 +847,157 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Lists all Aliases for the User identified by :subscription_id.
+     * @param appId 
+     * @param subscriptionId 
+     */
+    public async fetchAliases(appId: string, subscriptionId: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("DefaultApi", "fetchAliases", "appId");
+        }
+
+
+        // verify required parameter 'subscriptionId' is not null or undefined
+        if (subscriptionId === null || subscriptionId === undefined) {
+            throw new RequiredError("DefaultApi", "fetchAliases", "subscriptionId");
+        }
+
+
+        // Path Params
+        const localVarPath = '/apps/{app_id}/subscriptions/{subscription_id}/user/identity'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'subscription_id' + '}', encodeURIComponent(String(subscriptionId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["app_key"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Returns the User’s properties, Aliases, and Subscriptions.
+     * @param appId 
+     * @param aliasLabel 
+     * @param aliasId 
+     */
+    public async fetchUser(appId: string, aliasLabel: string, aliasId: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("DefaultApi", "fetchUser", "appId");
+        }
+
+
+        // verify required parameter 'aliasLabel' is not null or undefined
+        if (aliasLabel === null || aliasLabel === undefined) {
+            throw new RequiredError("DefaultApi", "fetchUser", "aliasLabel");
+        }
+
+
+        // verify required parameter 'aliasId' is not null or undefined
+        if (aliasId === null || aliasId === undefined) {
+            throw new RequiredError("DefaultApi", "fetchUser", "aliasId");
+        }
+
+
+        // Path Params
+        const localVarPath = '/apps/{app_id}/users/by/{alias_label}/{alias_id}'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'alias_label' + '}', encodeURIComponent(String(aliasLabel)))
+            .replace('{' + 'alias_id' + '}', encodeURIComponent(String(aliasId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["app_key"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Lists all Aliases for the User identified by (:alias_label, :alias_id).
+     * @param appId 
+     * @param aliasLabel 
+     * @param aliasId 
+     */
+    public async fetchUserIdentity(appId: string, aliasLabel: string, aliasId: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("DefaultApi", "fetchUserIdentity", "appId");
+        }
+
+
+        // verify required parameter 'aliasLabel' is not null or undefined
+        if (aliasLabel === null || aliasLabel === undefined) {
+            throw new RequiredError("DefaultApi", "fetchUserIdentity", "aliasLabel");
+        }
+
+
+        // verify required parameter 'aliasId' is not null or undefined
+        if (aliasId === null || aliasId === undefined) {
+            throw new RequiredError("DefaultApi", "fetchUserIdentity", "aliasId");
+        }
+
+
+        // Path Params
+        const localVarPath = '/apps/{app_id}/users/by/{alias_label}/{alias_id}/identity'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'alias_label' + '}', encodeURIComponent(String(aliasLabel)))
+            .replace('{' + 'alias_id' + '}', encodeURIComponent(String(aliasId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["app_key"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
      * View the details of a single OneSignal app
      * View an app
      * @param appId An app id
@@ -610,6 +1053,51 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
         authMethod = _config.authMethods["user_key"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Manifest of In-App Messages the Subscription is eligible to display by the SDK.
+     * @param appId 
+     * @param subscriptionId 
+     */
+    public async getEligibleIams(appId: string, subscriptionId: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("DefaultApi", "getEligibleIams", "appId");
+        }
+
+
+        // verify required parameter 'subscriptionId' is not null or undefined
+        if (subscriptionId === null || subscriptionId === undefined) {
+            throw new RequiredError("DefaultApi", "getEligibleIams", "subscriptionId");
+        }
+
+
+        // Path Params
+        const localVarPath = '/apps/{app_id}/subscriptions/{subscription_id}/iams'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'subscription_id' + '}', encodeURIComponent(String(subscriptionId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["app_key"]
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
@@ -983,6 +1471,203 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Upserts one or more Aliases to an existing User identified by (:alias_label, :alias_id).
+     * @param appId 
+     * @param aliasLabel 
+     * @param aliasId 
+     * @param userIdentityRequestBody 
+     */
+    public async identifyUserByAlias(appId: string, aliasLabel: string, aliasId: string, userIdentityRequestBody: UserIdentityRequestBody, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("DefaultApi", "identifyUserByAlias", "appId");
+        }
+
+
+        // verify required parameter 'aliasLabel' is not null or undefined
+        if (aliasLabel === null || aliasLabel === undefined) {
+            throw new RequiredError("DefaultApi", "identifyUserByAlias", "aliasLabel");
+        }
+
+
+        // verify required parameter 'aliasId' is not null or undefined
+        if (aliasId === null || aliasId === undefined) {
+            throw new RequiredError("DefaultApi", "identifyUserByAlias", "aliasId");
+        }
+
+
+        // verify required parameter 'userIdentityRequestBody' is not null or undefined
+        if (userIdentityRequestBody === null || userIdentityRequestBody === undefined) {
+            throw new RequiredError("DefaultApi", "identifyUserByAlias", "userIdentityRequestBody");
+        }
+
+
+        // Path Params
+        const localVarPath = '/apps/{app_id}/users/by/{alias_label}/{alias_id}/identity'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'alias_label' + '}', encodeURIComponent(String(aliasLabel)))
+            .replace('{' + 'alias_id' + '}', encodeURIComponent(String(aliasId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PATCH);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(userIdentityRequestBody, "UserIdentityRequestBody", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["app_key"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Upserts one or more Aliases for the User identified by :subscription_id.
+     * @param appId 
+     * @param subscriptionId 
+     * @param userIdentityRequestBody 
+     */
+    public async identifyUserBySubscriptionId(appId: string, subscriptionId: string, userIdentityRequestBody: UserIdentityRequestBody, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("DefaultApi", "identifyUserBySubscriptionId", "appId");
+        }
+
+
+        // verify required parameter 'subscriptionId' is not null or undefined
+        if (subscriptionId === null || subscriptionId === undefined) {
+            throw new RequiredError("DefaultApi", "identifyUserBySubscriptionId", "subscriptionId");
+        }
+
+
+        // verify required parameter 'userIdentityRequestBody' is not null or undefined
+        if (userIdentityRequestBody === null || userIdentityRequestBody === undefined) {
+            throw new RequiredError("DefaultApi", "identifyUserBySubscriptionId", "userIdentityRequestBody");
+        }
+
+
+        // Path Params
+        const localVarPath = '/apps/{app_id}/subscriptions/{subscription_id}/user/identity'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'subscription_id' + '}', encodeURIComponent(String(subscriptionId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PATCH);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(userIdentityRequestBody, "UserIdentityRequestBody", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["app_key"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Transfers this Subscription to the User identified by the identity in the payload.
+     * @param appId 
+     * @param subscriptionId 
+     * @param transferSubscriptionRequestBody 
+     */
+    public async transferSubscription(appId: string, subscriptionId: string, transferSubscriptionRequestBody: TransferSubscriptionRequestBody, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("DefaultApi", "transferSubscription", "appId");
+        }
+
+
+        // verify required parameter 'subscriptionId' is not null or undefined
+        if (subscriptionId === null || subscriptionId === undefined) {
+            throw new RequiredError("DefaultApi", "transferSubscription", "subscriptionId");
+        }
+
+
+        // verify required parameter 'transferSubscriptionRequestBody' is not null or undefined
+        if (transferSubscriptionRequestBody === null || transferSubscriptionRequestBody === undefined) {
+            throw new RequiredError("DefaultApi", "transferSubscription", "transferSubscriptionRequestBody");
+        }
+
+
+        // Path Params
+        const localVarPath = '/apps/{app_id}/subscriptions/{subscription_id}/owner'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'subscription_id' + '}', encodeURIComponent(String(subscriptionId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PATCH);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(transferSubscriptionRequestBody, "TransferSubscriptionRequestBody", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["app_key"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
      * Updates the name or configuration settings of an existing OneSignal app
      * Update an app
      * @param appId An app id
@@ -1198,6 +1883,145 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
             ObjectSerializer.serialize(updatePlayerTagsRequestBody, "UpdatePlayerTagsRequestBody", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["app_key"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Updates an existing Subscription’s properties.
+     * @param appId 
+     * @param subscriptionId 
+     * @param updateSubscriptionRequestBody 
+     */
+    public async updateSubscription(appId: string, subscriptionId: string, updateSubscriptionRequestBody: UpdateSubscriptionRequestBody, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("DefaultApi", "updateSubscription", "appId");
+        }
+
+
+        // verify required parameter 'subscriptionId' is not null or undefined
+        if (subscriptionId === null || subscriptionId === undefined) {
+            throw new RequiredError("DefaultApi", "updateSubscription", "subscriptionId");
+        }
+
+
+        // verify required parameter 'updateSubscriptionRequestBody' is not null or undefined
+        if (updateSubscriptionRequestBody === null || updateSubscriptionRequestBody === undefined) {
+            throw new RequiredError("DefaultApi", "updateSubscription", "updateSubscriptionRequestBody");
+        }
+
+
+        // Path Params
+        const localVarPath = '/apps/{app_id}/subscriptions/{subscription_id}'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'subscription_id' + '}', encodeURIComponent(String(subscriptionId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PATCH);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(updateSubscriptionRequestBody, "UpdateSubscriptionRequestBody", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["app_key"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Updates an existing User’s properties.
+     * @param appId 
+     * @param aliasLabel 
+     * @param aliasId 
+     * @param updateUserRequest 
+     * @param subscriptionId 
+     */
+    public async updateUser(appId: string, aliasLabel: string, aliasId: string, updateUserRequest: UpdateUserRequest, subscriptionId?: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("DefaultApi", "updateUser", "appId");
+        }
+
+
+        // verify required parameter 'aliasLabel' is not null or undefined
+        if (aliasLabel === null || aliasLabel === undefined) {
+            throw new RequiredError("DefaultApi", "updateUser", "aliasLabel");
+        }
+
+
+        // verify required parameter 'aliasId' is not null or undefined
+        if (aliasId === null || aliasId === undefined) {
+            throw new RequiredError("DefaultApi", "updateUser", "aliasId");
+        }
+
+
+        // verify required parameter 'updateUserRequest' is not null or undefined
+        if (updateUserRequest === null || updateUserRequest === undefined) {
+            throw new RequiredError("DefaultApi", "updateUser", "updateUserRequest");
+        }
+
+
+
+        // Path Params
+        const localVarPath = '/apps/{app_id}/users/by/{alias_label}/{alias_id}'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'alias_label' + '}', encodeURIComponent(String(aliasLabel)))
+            .replace('{' + 'alias_id' + '}', encodeURIComponent(String(aliasId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PATCH);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Header Params
+        requestContext.setHeaderParam("subscription_id", ObjectSerializer.serialize(subscriptionId, "string", ""));
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(updateUserRequest, "UpdateUserRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -1444,6 +2268,114 @@ export class DefaultApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to createSubscription
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async createSubscription(response: ResponseContext): Promise<InlineResponse201 > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("201", response.httpStatusCode)) {
+            const body: InlineResponse201 = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "InlineResponse201", ""
+            ) as InlineResponse201;
+            return body;
+        }
+        if (isCodeInRange("202", response.httpStatusCode)) {
+            const body: InlineResponse201 = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "InlineResponse201", ""
+            ) as InlineResponse201;
+            return body;
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: InlineResponse201 = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "InlineResponse201", ""
+            ) as InlineResponse201;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to createUser
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async createUser(response: ResponseContext): Promise<User > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("201", response.httpStatusCode)) {
+            const body: User = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "User", ""
+            ) as User;
+            return body;
+        }
+        if (isCodeInRange("202", response.httpStatusCode)) {
+            const body: User = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "User", ""
+            ) as User;
+            return body;
+        }
+        if (isCodeInRange("409", response.httpStatusCode)) {
+            const body: CreateUserConflictResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "CreateUserConflictResponse", ""
+            ) as CreateUserConflictResponse;
+            throw new ApiException<CreateUserConflictResponse>(409, "Multiple User Identity Conflict", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: User = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "User", ""
+            ) as User;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to deleteAlias
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async deleteAlias(response: ResponseContext): Promise<InlineResponse200 > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: InlineResponse200 = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "InlineResponse200", ""
+            ) as InlineResponse200;
+            return body;
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: InlineResponse200 = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "InlineResponse200", ""
+            ) as InlineResponse200;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to deletePlayer
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -1530,6 +2462,56 @@ export class DefaultApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to deleteSubscription
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async deleteSubscription(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("202", response.httpStatusCode)) {
+            return;
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to deleteUser
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async deleteUser(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            return;
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to endLiveActivity
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -1588,6 +2570,93 @@ export class DefaultApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ExportPlayersSuccessResponse", ""
             ) as ExportPlayersSuccessResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to fetchAliases
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async fetchAliases(response: ResponseContext): Promise<UserIdentityResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: UserIdentityResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "UserIdentityResponse", ""
+            ) as UserIdentityResponse;
+            return body;
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: UserIdentityResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "UserIdentityResponse", ""
+            ) as UserIdentityResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to fetchUser
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async fetchUser(response: ResponseContext): Promise<User > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: User = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "User", ""
+            ) as User;
+            return body;
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: User = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "User", ""
+            ) as User;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to fetchUserIdentity
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async fetchUserIdentity(response: ResponseContext): Promise<InlineResponse200 > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: InlineResponse200 = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "InlineResponse200", ""
+            ) as InlineResponse200;
+            return body;
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: InlineResponse200 = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "InlineResponse200", ""
+            ) as InlineResponse200;
             return body;
         }
 
@@ -1660,6 +2729,35 @@ export class DefaultApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Array<App>", ""
             ) as Array<App>;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to getEligibleIams
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async getEligibleIams(response: ResponseContext): Promise<InlineResponse2003 > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: InlineResponse2003 = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "InlineResponse2003", ""
+            ) as InlineResponse2003;
+            return body;
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: InlineResponse2003 = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "InlineResponse2003", ""
+            ) as InlineResponse2003;
             return body;
         }
 
@@ -1886,6 +2984,107 @@ export class DefaultApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to identifyUserByAlias
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async identifyUserByAlias(response: ResponseContext): Promise<InlineResponse200 > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: InlineResponse200 = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "InlineResponse200", ""
+            ) as InlineResponse200;
+            return body;
+        }
+        if (isCodeInRange("409", response.httpStatusCode)) {
+            const body: IdentifyUserConflictResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "IdentifyUserConflictResponse", ""
+            ) as IdentifyUserConflictResponse;
+            throw new ApiException<IdentifyUserConflictResponse>(409, "Conflict", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: InlineResponse200 = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "InlineResponse200", ""
+            ) as InlineResponse200;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to identifyUserBySubscriptionId
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async identifyUserBySubscriptionId(response: ResponseContext): Promise<UserIdentityResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: UserIdentityResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "UserIdentityResponse", ""
+            ) as UserIdentityResponse;
+            return body;
+        }
+        if (isCodeInRange("409", response.httpStatusCode)) {
+            const body: IdentifyUserConflictResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "IdentifyUserConflictResponse", ""
+            ) as IdentifyUserConflictResponse;
+            throw new ApiException<IdentifyUserConflictResponse>(409, "Conflict", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: UserIdentityResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "UserIdentityResponse", ""
+            ) as UserIdentityResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to transferSubscription
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async transferSubscription(response: ResponseContext): Promise<UserIdentityResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: UserIdentityResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "UserIdentityResponse", ""
+            ) as UserIdentityResponse;
+            return body;
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: UserIdentityResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "UserIdentityResponse", ""
+            ) as UserIdentityResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to updateApp
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -2006,13 +3205,6 @@ export class DefaultApiResponseProcessor {
             ) as UpdatePlayerTagsSuccessResponse;
             return body;
         }
-        if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: BadRequestError = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "BadRequestError", ""
-            ) as BadRequestError;
-            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
-        }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
@@ -2020,6 +3212,60 @@ export class DefaultApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "UpdatePlayerTagsSuccessResponse", ""
             ) as UpdatePlayerTagsSuccessResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to updateSubscription
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async updateSubscription(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("202", response.httpStatusCode)) {
+            return;
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to updateUser
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async updateUser(response: ResponseContext): Promise<InlineResponse202 > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("202", response.httpStatusCode)) {
+            const body: InlineResponse202 = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "InlineResponse202", ""
+            ) as InlineResponse202;
+            return body;
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: InlineResponse202 = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "InlineResponse202", ""
+            ) as InlineResponse202;
             return body;
         }
 
