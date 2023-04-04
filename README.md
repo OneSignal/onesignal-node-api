@@ -347,8 +347,8 @@ Update an existing device's tags in one of your OneSignal apps using the Externa
 ```js
 const playerToUpdate = new OneSignal.Player();
 
-player.app_id = APP_ID;
-player.device_type = 1;
+playerToUpdate.app_id = APP_ID;
+playerToUpdate.device_type = 1;
 
 playerToUpdate.external_user_id = 'your_player_external_id'; // setting the same external_user_id as before
 const updatePlayerTagsRequestBody = new OneSignal.UpdatePlayerTagsRequestBody();
