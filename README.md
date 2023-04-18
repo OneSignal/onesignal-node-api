@@ -68,7 +68,7 @@ const configuration = OneSignal.createConfiguration({
 const client = new OneSignal.DefaultApi(configuration);
 ```
 
-#### Advanced Usage: Creating a brand new app
+#### Advanced Usage: Creating a brand-new app
 If creating a new app via the client, the response will return the app's API key via the `basic_auth_key` response 
 parameter. You can then use this to modify your configuration object and create a new client that will have both user-level and app-level authentication set up.
 
@@ -86,6 +86,8 @@ const client = new OneSignal.DefaultApi(configuration);
 ---
 ## API Reference
 
+> See the full list of [API Endpoints](DefaultApi.MD).
+
 To make stateful changes requests should take on the following pattern:
 1. create or get an object
 2. make changes to that object
@@ -95,28 +97,6 @@ Examples of important OneSignal objects include `App`, `Notification`, `Player`,
 
 For example, see the section below on creating an app. First an app object is created via the instantiation of the `App`
 class. Then, the app instance is modified directly. Finally, we use the `client` to create the app via a remote request.
-
-| Function                                                | HTTP Request                                   | Description                                         |
-|---------------------------------------------------------|------------------------------------------------|-----------------------------------------------------|
-| [cancelNotification](#canceling-a-notification)         | Delete  `/notifications/{notification_id}`     | Stop a scheduled or currently outgoing notification |
-| [createApp](#creating-an-app)                           | Post  `/apps`                                  | Create an app                                       |
-| [createNotification](#creating-a-notification)          | Post  `/notifications`                         | Create notification                                 |
-| [createPlayer](#creating-a-player)                      | Post  `/players`                               | Add a device                                        |
-| [createSegments](#creating-a-segment)                   | Post  `/apps/{app_id}/segments`                  | Create Segments                                     |
-| [deletePlayer](#deleting-a-player)                      | Delete  `/players/{player_id}`                   | Delete a user record                                |
-| [deleteSegments](#deleting-a-segment)                   | Delete  `/apps/{app_id}/segments/{segment_id}`   | Delete Segments                                     |
-| [exportPlayers](#exporting-a-player)                    | Post  `/players/csv_export?app_id={app_id}`      | CSV export                                          |
-| [getApp](#getting-an-app)                               | Get  `/apps/{app_id}`                            | View an app                                         |
-| [getApps](#getting-multiple-apps)                       | Get  `/apps`                                     | View apps                                           |
-| [getNotification](#getting-a-notification)              | Get  `/notifications/{notification_id}`          | View notification                                   |
-| [getNotificationHistory](#getting-notification-history) | Post  `/notifications/{notification_id}/history` | Notification History                                |
-| [getNotifications](#getting-a-notification)             | Get  `/notifications`                            | View notifications                                  |
-| [getOutcomes](#getting-outcomes)                        | Get  `/apps/{app_id}/outcomes`                   | View Outcomes                                       |
-| [getPlayer](#getting-a-player)                          | Get  `/players/{player_id}`                      | View device                                         |
-| [getPlayers](#getting-players)                          | Get  `/players`                                  | View devices                                        |
-| [updateApp](#getting-an-app)                            | Put  `/apps/{app_id}`                            | Update an app                                       |
-| [updatePlayer](#updating-a-player)                      | Put  `/players/{player_id}`                      | Edit device                                         |
-| [updatePlayerTags](#updating-player-tags)               | Put  `/apps/{app_id}/users/{external_user_id}`   | Edit tags with external user id                     |
 
 ### Creating an app
 Creates a new OneSignal app.
@@ -604,6 +584,6 @@ Give a ⭐️ if this project helped you!
 
 ## 📝 License
 
-Copyright © 2022 [OneSignal](https://github.com/OneSignal).
+Copyright © 2023 [OneSignal](https://github.com/OneSignal).
 
 This project is [MIT](https://github.com/OneSignal/node-onesignal/blob/main/LICENSE) licensed.

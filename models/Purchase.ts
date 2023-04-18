@@ -2,7 +2,7 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.1.0
+ * API Version: 1.2.1
  * Contact: devrel@onesignal.com
  */
 
@@ -21,6 +21,7 @@ export class Purchase {
     * The 3-letter ISO 4217 currency code. Required for correct storage and conversion of amount.
     */
     'iso': string;
+    'count'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -41,6 +42,12 @@ export class Purchase {
             "name": "iso",
             "baseName": "iso",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "count",
+            "baseName": "count",
+            "type": "number",
             "format": ""
         }    ];
 

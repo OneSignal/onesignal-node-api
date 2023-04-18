@@ -976,10 +976,9 @@ export class ObservableDefaultApi {
      * @param aliasLabel 
      * @param aliasId 
      * @param updateUserRequest 
-     * @param subscriptionId 
      */
-    public updateUser(appId: string, aliasLabel: string, aliasId: string, updateUserRequest: UpdateUserRequest, subscriptionId?: string, _options?: Configuration): Observable<InlineResponse202> {
-        const requestContextPromise = this.requestFactory.updateUser(appId, aliasLabel, aliasId, updateUserRequest, subscriptionId, _options);
+    public updateUser(appId: string, aliasLabel: string, aliasId: string, updateUserRequest: UpdateUserRequest, _options?: Configuration): Observable<InlineResponse202> {
+        const requestContextPromise = this.requestFactory.updateUser(appId, aliasLabel, aliasId, updateUserRequest, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
