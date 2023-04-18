@@ -1971,9 +1971,8 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
      * @param aliasLabel 
      * @param aliasId 
      * @param updateUserRequest 
-     * @param subscriptionId 
      */
-    public async updateUser(appId: string, aliasLabel: string, aliasId: string, updateUserRequest: UpdateUserRequest, subscriptionId?: string, _options?: Configuration): Promise<RequestContext> {
+    public async updateUser(appId: string, aliasLabel: string, aliasId: string, updateUserRequest: UpdateUserRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'appId' is not null or undefined
@@ -2000,7 +1999,6 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
-
         // Path Params
         const localVarPath = '/apps/{app_id}/users/by/{alias_label}/{alias_id}'
             .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)))
@@ -2010,9 +2008,6 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PATCH);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-        // Header Params
-        requestContext.setHeaderParam("subscription_id", ObjectSerializer.serialize(subscriptionId, "string", ""));
 
 
         // Body Params

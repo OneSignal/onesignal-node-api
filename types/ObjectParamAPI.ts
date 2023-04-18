@@ -734,12 +734,6 @@ export interface DefaultApiUpdateUserRequest {
      * @memberof DefaultApiupdateUser
      */
     updateUserRequest: UpdateUserRequest
-    /**
-     * 
-     * @type string
-     * @memberof DefaultApiupdateUser
-     */
-    subscriptionId?: string
 }
 
 export class ObjectDefaultApi {
@@ -1056,7 +1050,7 @@ export class ObjectDefaultApi {
      * @param param the request object
      */
     public updateUser(param: DefaultApiUpdateUserRequest, options?: Configuration): Promise<InlineResponse202> {
-        return this.api.updateUser(param.appId, param.aliasLabel, param.aliasId, param.updateUserRequest, param.subscriptionId,  options).toPromise();
+        return this.api.updateUser(param.appId, param.aliasLabel, param.aliasId, param.updateUserRequest,  options).toPromise();
     }
 
 }

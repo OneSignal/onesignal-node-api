@@ -482,10 +482,9 @@ export class PromiseDefaultApi {
      * @param aliasLabel 
      * @param aliasId 
      * @param updateUserRequest 
-     * @param subscriptionId 
      */
-    public updateUser(appId: string, aliasLabel: string, aliasId: string, updateUserRequest: UpdateUserRequest, subscriptionId?: string, _options?: Configuration): Promise<InlineResponse202> {
-        const result = this.api.updateUser(appId, aliasLabel, aliasId, updateUserRequest, subscriptionId, _options);
+    public updateUser(appId: string, aliasLabel: string, aliasId: string, updateUserRequest: UpdateUserRequest, _options?: Configuration): Promise<InlineResponse202> {
+        const result = this.api.updateUser(appId, aliasLabel, aliasId, updateUserRequest, _options);
         return result.toPromise();
     }
 

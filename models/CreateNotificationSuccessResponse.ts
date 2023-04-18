@@ -2,7 +2,7 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.1.0
+ * API Version: 1.2.1
  * Contact: devrel@onesignal.com
  */
 
@@ -10,11 +10,11 @@ import { Notification200Errors } from './Notification200Errors';
 import { HttpFile } from '../http/http';
 
 export class CreateNotificationSuccessResponse {
-    'id': string;
+    'id'?: string;
     /**
     * Estimated number of subscribers targetted by notification.
     */
-    'recipients': number;
+    'recipients'?: number;
     'external_id'?: string;
     'errors'?: Notification200Errors;
 

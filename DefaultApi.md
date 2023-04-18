@@ -562,6 +562,7 @@ let body:.DefaultApiCreateUserRequest = {
           sku: "sku_example",
           amount: "amount_example",
           iso: "iso_example",
+          count: 3.14,
         },
       ],
       ip: "ip_example",
@@ -2370,6 +2371,7 @@ let body:.DefaultApiUpdateUserRequest = {
           sku: "sku_example",
           amount: "amount_example",
           iso: "iso_example",
+          count: 3.14,
         },
       ],
       ip: "ip_example",
@@ -2378,18 +2380,16 @@ let body:.DefaultApiUpdateUserRequest = {
     deltas: {
       session_time: 3.14,
       session_count: 3.14,
-      amount_spent: 3.14,
       purchases: [
         {
           sku: "sku_example",
           amount: "amount_example",
           iso: "iso_example",
+          count: 3.14,
         },
       ],
     },
   },
-  // string (optional)
-  subscriptionId: "subscription_id_example",
 };
 
 apiInstance.updateUser(body).then((data:any) => {
@@ -2406,7 +2406,6 @@ Name | Type | Description  | Notes
  **appId** | [**string**] |  | defaults to undefined
  **aliasLabel** | [**string**] |  | defaults to undefined
  **aliasId** | [**string**] |  | defaults to undefined
- **subscriptionId** | [**string**] |  | (optional) defaults to undefined
 
 
 ### Return type
