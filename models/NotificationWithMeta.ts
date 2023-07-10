@@ -394,6 +394,14 @@ export class NotificationWithMeta {
     */
     'email_from_address'?: string;
     /**
+    * Channel: Email The preheader text of the email. Preheader is the preview text displayed immediately after an email subject that provides additional context about the email content. If not specified, will default to null. 
+    */
+    'email_preheader'?: string;
+    /**
+    * Channel: Email Default is `false`. This field is used to send transactional notifications. If set to `true`, this notification will also be sent to unsubscribed emails. If a `template_id` is provided, the `include_unsubscribed` value from the template will be inherited. If you are using a third-party ESP, this field requires the ESP\'s list of unsubscribed emails to be cleared.
+    */
+    'include_unsubscribed'?: boolean;
+    /**
     * Channel: SMS Phone Number used to send SMS. Should be a registered Twilio phone number in E.164 format. 
     */
     'sms_from'?: string;
@@ -402,6 +410,10 @@ export class NotificationWithMeta {
     */
     'sms_media_urls'?: Array<string>;
     'filters'?: Array<Filter>;
+    /**
+    * Channel: All JSON object that can be used as a source of message personalization data for fields that support tag variable substitution. Push, SMS: Can accept up to 2048 bytes of valid JSON. Email: Can accept up to 10000 bytes of valid JSON. Example: {\"order_id\": 123, \"currency\": \"USD\", \"amount\": 25} 
+    */
+    'custom_data'?: object;
     /**
     * Number of notifications that were successfully delivered.
     */
@@ -1045,6 +1057,18 @@ export class NotificationWithMeta {
             "format": ""
         },
         {
+            "name": "email_preheader",
+            "baseName": "email_preheader",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "include_unsubscribed",
+            "baseName": "include_unsubscribed",
+            "type": "boolean",
+            "format": ""
+        },
+        {
             "name": "sms_from",
             "baseName": "sms_from",
             "type": "string",
@@ -1060,6 +1084,12 @@ export class NotificationWithMeta {
             "name": "filters",
             "baseName": "filters",
             "type": "Array<Filter>",
+            "format": ""
+        },
+        {
+            "name": "custom_data",
+            "baseName": "custom_data",
+            "type": "object",
             "format": ""
         },
         {
