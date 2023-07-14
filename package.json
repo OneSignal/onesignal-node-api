@@ -1,6 +1,6 @@
 {
   "name": "@onesignal/node-onesignal",
-  "version": "2.0.0-beta1",
+  "version": "2.0.1-beta1",
   "description": "OpenAPI client for @onesignal/node-onesignal",
   "author": "OpenAPI-Generator Contributors",
   "keywords": [
@@ -21,7 +21,7 @@
     "prepare": "npm run build"
   },
   "dependencies": {
-    "@types/node": "^18.15.11",
+    "@types/node": "^20.4.1",
     "@types/node-fetch": "^2.5.7",
     "btoa": "^1.2.1",
     "es6-promise": "^4.2.4",
