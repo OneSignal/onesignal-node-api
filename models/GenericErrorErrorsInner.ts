@@ -2,28 +2,34 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.2.1
+ * API Version: 1.2.2
  * Contact: devrel@onesignal.com
  */
 
-import { IdentifyUserConflictResponseErrorsInner } from './IdentifyUserConflictResponseErrorsInner';
 import { HttpFile } from '../http/http';
 
-export class IdentifyUserConflictResponse {
-    'errors'?: Array<IdentifyUserConflictResponseErrorsInner>;
+export class GenericErrorErrorsInner {
+    'code'?: string;
+    'title'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<IdentifyUserConflictResponseErrorsInner>",
+            "name": "code",
+            "baseName": "code",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "title",
+            "baseName": "title",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return IdentifyUserConflictResponse.attributeTypeMap;
+        return GenericErrorErrorsInner.attributeTypeMap;
     }
 
     public constructor() {

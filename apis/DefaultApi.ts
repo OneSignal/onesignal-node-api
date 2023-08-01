@@ -11,7 +11,6 @@ import {SecurityAuthentication} from '../auth/auth';
 
 
 import { App } from '../models/App';
-import { BadRequestError } from '../models/BadRequestError';
 import { BeginLiveActivityRequest } from '../models/BeginLiveActivityRequest';
 import { CancelNotificationSuccessResponse } from '../models/CancelNotificationSuccessResponse';
 import { CreateNotificationSuccessResponse } from '../models/CreateNotificationSuccessResponse';
@@ -24,10 +23,11 @@ import { DeletePlayerNotFoundResponse } from '../models/DeletePlayerNotFoundResp
 import { DeletePlayerSuccessResponse } from '../models/DeletePlayerSuccessResponse';
 import { DeleteSegmentNotFoundResponse } from '../models/DeleteSegmentNotFoundResponse';
 import { DeleteSegmentSuccessResponse } from '../models/DeleteSegmentSuccessResponse';
+import { ExportEventsSuccessResponse } from '../models/ExportEventsSuccessResponse';
 import { ExportPlayersRequestBody } from '../models/ExportPlayersRequestBody';
 import { ExportPlayersSuccessResponse } from '../models/ExportPlayersSuccessResponse';
+import { GenericError } from '../models/GenericError';
 import { GetNotificationRequestBody } from '../models/GetNotificationRequestBody';
-import { IdentifyUserConflictResponse } from '../models/IdentifyUserConflictResponse';
 import { InlineResponse200 } from '../models/InlineResponse200';
 import { InlineResponse2003 } from '../models/InlineResponse2003';
 import { InlineResponse201 } from '../models/InlineResponse201';
@@ -39,6 +39,7 @@ import { NotificationWithMeta } from '../models/NotificationWithMeta';
 import { OutcomesData } from '../models/OutcomesData';
 import { Player } from '../models/Player';
 import { PlayerSlice } from '../models/PlayerSlice';
+import { RateLimiterError } from '../models/RateLimiterError';
 import { Segment } from '../models/Segment';
 import { TransferSubscriptionRequestBody } from '../models/TransferSubscriptionRequestBody';
 import { UpdateLiveActivityRequest } from '../models/UpdateLiveActivityRequest';
@@ -796,8 +797,58 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Generate a compressed CSV report of all of the events data for a notification. This will return a URL immediately upon success but it may take several minutes for the CSV to become available at that URL depending on the volume of data. Only one export can be in-progress per OneSignal account at any given time.
+     * Export CSV of Events
+     * @param notificationId The ID of the notification to export events from.
+     * @param appId The ID of the app that the notification belongs to.
+     */
+    public async exportEvents(notificationId: string, appId: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'notificationId' is not null or undefined
+        if (notificationId === null || notificationId === undefined) {
+            throw new RequiredError("DefaultApi", "exportEvents", "notificationId");
+        }
+
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("DefaultApi", "exportEvents", "appId");
+        }
+
+
+        // Path Params
+        const localVarPath = '/notifications/{notification_id}/export_events?app_id={app_id}'
+            .replace('{' + 'notification_id' + '}', encodeURIComponent(String(notificationId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Query Params
+        if (appId !== undefined) {
+            requestContext.setQueryParam("app_id", ObjectSerializer.serialize(appId, "string", ""));
+        }
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["app_key"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
      * Generate a compressed CSV export of all of your current user data This method can be used to generate a compressed CSV export of all of your current user data. It is a much faster alternative than retrieving this data using the /players API endpoint. The file will be compressed using GZip. The file may take several minutes to generate depending on the number of users in your app. The URL generated will be available for 3 days and includes random v4 uuid as part of the resource name to be unguessable. &#x1F6A7; 403 Error Responses          You can test if it is complete by making a GET request to the csv_file_url value. This file may take time to generate depending on how many device records are being pulled. If the file is not ready, a 403 error will be returned. Otherwise the file itself will be returned. &#x1F6A7; Requires Authentication Key Requires your OneSignal App\'s REST API Key, available in Keys & IDs. &#x1F6A7; Concurrent Exports Only one concurrent export is allowed per OneSignal account. Please ensure you have successfully downloaded the .csv.gz file before exporting another app. CSV File Format: - Default Columns:   | Field | Details |   | --- | --- |   | id | OneSignal Player Id |   | identifier | Push Token |   | session_count | Number of times they visited the app or site   | language | Device language code |   | timezone | Number of seconds away from UTC. Example: -28800 |   | game_version | Version of your mobile app gathered from Android Studio versionCode in your App/build.gradle and iOS uses kCFBundleVersionKey in Xcode. |   | device_os | Device Operating System Version. Example: 80 = Chrome 80, 9 = Android 9 |   | device_type | Device Operating System Type |   | device_model | Device Hardware String Code. Example: Mobile Web Subscribers will have `Linux armv` |   | ad_id | Based on the Google Advertising Id for Android, identifierForVendor for iOS. OptedOut means user turned off Advertising tracking on the device. |   | tags | Current OneSignal Data Tags on the device. |   | last_active | Date and time the user last opened the mobile app or visited the site. |   | playtime | Total amount of time in seconds the user had the mobile app open. |   | amount_spent |  Mobile only - amount spent in USD on In-App Purchases. |    | created_at | Date and time the device record was created in OneSignal. Mobile - first time they opened the app with OneSignal SDK. Web - first time the user subscribed to the site. |   | invalid_identifier | t = unsubscribed, f = subscibed |   | badge_count | Current number of badges on the device | - Extra Columns:   | Field | Details |   | --- | --- |   | external_user_id | Your User Id set on the device |   | notification_types | Notification types |   | location | Location points (Latitude and Longitude) set on the device. |   | country | Country code |   | rooted | Android device rooted or not |   | ip | IP Address of the device if being tracked. See Handling Personal Data. |   | web_auth | Web Only authorization key. |   | web_p256 | Web Only p256 key. | 
-     * CSV export
+     * Export CSV of Players
      * @param appId The app ID that you want to export devices from
      * @param exportPlayersRequestBody 
      */
@@ -2053,11 +2104,18 @@ export class DefaultApiResponseProcessor {
             return;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: BadRequestError = ObjectSerializer.deserialize(
+            const body: GenericError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BadRequestError", ""
-            ) as BadRequestError;
-            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -2089,11 +2147,18 @@ export class DefaultApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: BadRequestError = ObjectSerializer.deserialize(
+            const body: GenericError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BadRequestError", ""
-            ) as BadRequestError;
-            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -2125,11 +2190,18 @@ export class DefaultApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: BadRequestError = ObjectSerializer.deserialize(
+            const body: GenericError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BadRequestError", ""
-            ) as BadRequestError;
-            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -2161,11 +2233,18 @@ export class DefaultApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: BadRequestError = ObjectSerializer.deserialize(
+            const body: GenericError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BadRequestError", ""
-            ) as BadRequestError;
-            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -2197,11 +2276,25 @@ export class DefaultApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: BadRequestError = ObjectSerializer.deserialize(
+            const body: GenericError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BadRequestError", ""
-            ) as BadRequestError;
-            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("409", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(409, "Conflict", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -2233,11 +2326,11 @@ export class DefaultApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: BadRequestError = ObjectSerializer.deserialize(
+            const body: GenericError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BadRequestError", ""
-            ) as BadRequestError;
-            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
         }
         if (isCodeInRange("409", response.httpStatusCode)) {
             const body: CreateSegmentConflictResponse = ObjectSerializer.deserialize(
@@ -2245,6 +2338,13 @@ export class DefaultApiResponseProcessor {
                 "CreateSegmentConflictResponse", ""
             ) as CreateSegmentConflictResponse;
             throw new ApiException<CreateSegmentConflictResponse>(409, "Conflict", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -2282,6 +2382,27 @@ export class DefaultApiResponseProcessor {
             ) as InlineResponse201;
             return body;
         }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("409", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(409, "Operation is not permitted due to user having the maximum number of subscriptions assigned", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
+        }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
@@ -2304,6 +2425,13 @@ export class DefaultApiResponseProcessor {
      */
      public async createUser(response: ResponseContext): Promise<User > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: User = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "User", ""
+            ) as User;
+            return body;
+        }
         if (isCodeInRange("201", response.httpStatusCode)) {
             const body: User = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
@@ -2318,12 +2446,26 @@ export class DefaultApiResponseProcessor {
             ) as User;
             return body;
         }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
         if (isCodeInRange("409", response.httpStatusCode)) {
             const body: CreateUserConflictResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CreateUserConflictResponse", ""
             ) as CreateUserConflictResponse;
             throw new ApiException<CreateUserConflictResponse>(409, "Multiple User Identity Conflict", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -2353,6 +2495,27 @@ export class DefaultApiResponseProcessor {
                 "InlineResponse200", ""
             ) as InlineResponse200;
             return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("409", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(409, "Conflict", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -2384,11 +2547,11 @@ export class DefaultApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: BadRequestError = ObjectSerializer.deserialize(
+            const body: GenericError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BadRequestError", ""
-            ) as BadRequestError;
-            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
         }
         if (isCodeInRange("404", response.httpStatusCode)) {
             const body: DeletePlayerNotFoundResponse = ObjectSerializer.deserialize(
@@ -2396,6 +2559,13 @@ export class DefaultApiResponseProcessor {
                 "DeletePlayerNotFoundResponse", ""
             ) as DeletePlayerNotFoundResponse;
             throw new ApiException<DeletePlayerNotFoundResponse>(404, "Not Found", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -2427,11 +2597,11 @@ export class DefaultApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: BadRequestError = ObjectSerializer.deserialize(
+            const body: GenericError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BadRequestError", ""
-            ) as BadRequestError;
-            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
         }
         if (isCodeInRange("404", response.httpStatusCode)) {
             const body: DeleteSegmentNotFoundResponse = ObjectSerializer.deserialize(
@@ -2439,6 +2609,13 @@ export class DefaultApiResponseProcessor {
                 "DeleteSegmentNotFoundResponse", ""
             ) as DeleteSegmentNotFoundResponse;
             throw new ApiException<DeleteSegmentNotFoundResponse>(404, "Not Found", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -2465,6 +2642,27 @@ export class DefaultApiResponseProcessor {
         if (isCodeInRange("202", response.httpStatusCode)) {
             return;
         }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("409", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(409, "Conflict", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
+        }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
@@ -2489,6 +2687,27 @@ export class DefaultApiResponseProcessor {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             return;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("409", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(409, "Conflict", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -2516,11 +2735,18 @@ export class DefaultApiResponseProcessor {
             return;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: BadRequestError = ObjectSerializer.deserialize(
+            const body: GenericError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BadRequestError", ""
-            ) as BadRequestError;
-            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -2529,6 +2755,56 @@ export class DefaultApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to exportEvents
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async exportEvents(response: ResponseContext): Promise<ExportEventsSuccessResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: ExportEventsSuccessResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ExportEventsSuccessResponse", ""
+            ) as ExportEventsSuccessResponse;
+            return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("404", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(404, "Not Found", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: ExportEventsSuccessResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ExportEventsSuccessResponse", ""
+            ) as ExportEventsSuccessResponse;
             return body;
         }
 
@@ -2552,11 +2828,18 @@ export class DefaultApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: BadRequestError = ObjectSerializer.deserialize(
+            const body: GenericError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BadRequestError", ""
-            ) as BadRequestError;
-            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -2587,6 +2870,13 @@ export class DefaultApiResponseProcessor {
             ) as UserIdentityResponse;
             return body;
         }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
@@ -2616,6 +2906,20 @@ export class DefaultApiResponseProcessor {
             ) as User;
             return body;
         }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
+        }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
@@ -2644,6 +2948,20 @@ export class DefaultApiResponseProcessor {
                 "InlineResponse200", ""
             ) as InlineResponse200;
             return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -2675,11 +2993,18 @@ export class DefaultApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: BadRequestError = ObjectSerializer.deserialize(
+            const body: GenericError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BadRequestError", ""
-            ) as BadRequestError;
-            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -2711,11 +3036,18 @@ export class DefaultApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: BadRequestError = ObjectSerializer.deserialize(
+            const body: GenericError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BadRequestError", ""
-            ) as BadRequestError;
-            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -2745,6 +3077,20 @@ export class DefaultApiResponseProcessor {
                 "InlineResponse2003", ""
             ) as InlineResponse2003;
             return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -2776,11 +3122,18 @@ export class DefaultApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: BadRequestError = ObjectSerializer.deserialize(
+            const body: GenericError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BadRequestError", ""
-            ) as BadRequestError;
-            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -2812,11 +3165,18 @@ export class DefaultApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: BadRequestError = ObjectSerializer.deserialize(
+            const body: GenericError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BadRequestError", ""
-            ) as BadRequestError;
-            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -2848,11 +3208,18 @@ export class DefaultApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: BadRequestError = ObjectSerializer.deserialize(
+            const body: GenericError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BadRequestError", ""
-            ) as BadRequestError;
-            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -2884,11 +3251,18 @@ export class DefaultApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: BadRequestError = ObjectSerializer.deserialize(
+            const body: GenericError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BadRequestError", ""
-            ) as BadRequestError;
-            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -2920,11 +3294,18 @@ export class DefaultApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: BadRequestError = ObjectSerializer.deserialize(
+            const body: GenericError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BadRequestError", ""
-            ) as BadRequestError;
-            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -2956,11 +3337,18 @@ export class DefaultApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: BadRequestError = ObjectSerializer.deserialize(
+            const body: GenericError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BadRequestError", ""
-            ) as BadRequestError;
-            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -2991,12 +3379,26 @@ export class DefaultApiResponseProcessor {
             ) as InlineResponse200;
             return body;
         }
-        if (isCodeInRange("409", response.httpStatusCode)) {
-            const body: IdentifyUserConflictResponse = ObjectSerializer.deserialize(
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "IdentifyUserConflictResponse", ""
-            ) as IdentifyUserConflictResponse;
-            throw new ApiException<IdentifyUserConflictResponse>(409, "Conflict", body, response.headers);
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("409", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(409, "Conflict", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -3027,12 +3429,26 @@ export class DefaultApiResponseProcessor {
             ) as UserIdentityResponse;
             return body;
         }
-        if (isCodeInRange("409", response.httpStatusCode)) {
-            const body: IdentifyUserConflictResponse = ObjectSerializer.deserialize(
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "IdentifyUserConflictResponse", ""
-            ) as IdentifyUserConflictResponse;
-            throw new ApiException<IdentifyUserConflictResponse>(409, "Conflict", body, response.headers);
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("409", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(409, "Conflict", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -3062,6 +3478,27 @@ export class DefaultApiResponseProcessor {
                 "UserIdentityResponse", ""
             ) as UserIdentityResponse;
             return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("409", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(409, "Conflict", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -3093,11 +3530,18 @@ export class DefaultApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: BadRequestError = ObjectSerializer.deserialize(
+            const body: GenericError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BadRequestError", ""
-            ) as BadRequestError;
-            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -3129,11 +3573,18 @@ export class DefaultApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: BadRequestError = ObjectSerializer.deserialize(
+            const body: GenericError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BadRequestError", ""
-            ) as BadRequestError;
-            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -3165,11 +3616,25 @@ export class DefaultApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: BadRequestError = ObjectSerializer.deserialize(
+            const body: GenericError = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BadRequestError", ""
-            ) as BadRequestError;
-            throw new ApiException<BadRequestError>(400, "Bad Request", body, response.headers);
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("409", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(409, "Conflict", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -3200,6 +3665,27 @@ export class DefaultApiResponseProcessor {
             ) as UpdatePlayerTagsSuccessResponse;
             return body;
         }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("409", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(409, "Conflict", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
+        }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
@@ -3224,6 +3710,27 @@ export class DefaultApiResponseProcessor {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("202", response.httpStatusCode)) {
             return;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("409", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(409, "Conflict", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -3253,6 +3760,27 @@ export class DefaultApiResponseProcessor {
                 "InlineResponse202", ""
             ) as InlineResponse202;
             return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("409", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(409, "Conflict", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimiterError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimiterError", ""
+            ) as RateLimiterError;
+            throw new ApiException<RateLimiterError>(429, "Rate Limit Exceeded", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml

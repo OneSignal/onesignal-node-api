@@ -4,7 +4,6 @@ import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
 import { App } from '../models/App';
-import { BadRequestError } from '../models/BadRequestError';
 import { BasicNotification } from '../models/BasicNotification';
 import { BasicNotificationAllOf } from '../models/BasicNotificationAllOf';
 import { BasicNotificationAllOfAndroidBackgroundLayout } from '../models/BasicNotificationAllOfAndroidBackgroundLayout';
@@ -24,13 +23,14 @@ import { DeletePlayerSuccessResponse } from '../models/DeletePlayerSuccessRespon
 import { DeleteSegmentNotFoundResponse } from '../models/DeleteSegmentNotFoundResponse';
 import { DeleteSegmentSuccessResponse } from '../models/DeleteSegmentSuccessResponse';
 import { DeliveryData } from '../models/DeliveryData';
+import { ExportEventsSuccessResponse } from '../models/ExportEventsSuccessResponse';
 import { ExportPlayersRequestBody } from '../models/ExportPlayersRequestBody';
 import { ExportPlayersSuccessResponse } from '../models/ExportPlayersSuccessResponse';
 import { Filter } from '../models/Filter';
 import { FilterExpressions } from '../models/FilterExpressions';
+import { GenericError } from '../models/GenericError';
+import { GenericErrorErrorsInner } from '../models/GenericErrorErrorsInner';
 import { GetNotificationRequestBody } from '../models/GetNotificationRequestBody';
-import { IdentifyUserConflictResponse } from '../models/IdentifyUserConflictResponse';
-import { IdentifyUserConflictResponseErrorsInner } from '../models/IdentifyUserConflictResponseErrorsInner';
 import { InlineResponse200 } from '../models/InlineResponse200';
 import { InlineResponse2003 } from '../models/InlineResponse2003';
 import { InlineResponse201 } from '../models/InlineResponse201';
@@ -57,6 +57,7 @@ import { PlayerSlice } from '../models/PlayerSlice';
 import { PropertiesDeltas } from '../models/PropertiesDeltas';
 import { PropertiesObject } from '../models/PropertiesObject';
 import { Purchase } from '../models/Purchase';
+import { RateLimiterError } from '../models/RateLimiterError';
 import { Segment } from '../models/Segment';
 import { SegmentNotificationTarget } from '../models/SegmentNotificationTarget';
 import { StringMap } from '../models/StringMap';
@@ -440,8 +441,33 @@ export class ObservableDefaultApi {
     }
 
     /**
+     * Generate a compressed CSV report of all of the events data for a notification. This will return a URL immediately upon success but it may take several minutes for the CSV to become available at that URL depending on the volume of data. Only one export can be in-progress per OneSignal account at any given time.
+     * Export CSV of Events
+     * @param notificationId The ID of the notification to export events from.
+     * @param appId The ID of the app that the notification belongs to.
+     */
+    public exportEvents(notificationId: string, appId: string, _options?: Configuration): Observable<ExportEventsSuccessResponse> {
+        const requestContextPromise = this.requestFactory.exportEvents(notificationId, appId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.exportEvents(rsp)));
+            }));
+    }
+
+    /**
      * Generate a compressed CSV export of all of your current user data This method can be used to generate a compressed CSV export of all of your current user data. It is a much faster alternative than retrieving this data using the /players API endpoint. The file will be compressed using GZip. The file may take several minutes to generate depending on the number of users in your app. The URL generated will be available for 3 days and includes random v4 uuid as part of the resource name to be unguessable. &#x1F6A7; 403 Error Responses          You can test if it is complete by making a GET request to the csv_file_url value. This file may take time to generate depending on how many device records are being pulled. If the file is not ready, a 403 error will be returned. Otherwise the file itself will be returned. &#x1F6A7; Requires Authentication Key Requires your OneSignal App\'s REST API Key, available in Keys & IDs. &#x1F6A7; Concurrent Exports Only one concurrent export is allowed per OneSignal account. Please ensure you have successfully downloaded the .csv.gz file before exporting another app. CSV File Format: - Default Columns:   | Field | Details |   | --- | --- |   | id | OneSignal Player Id |   | identifier | Push Token |   | session_count | Number of times they visited the app or site   | language | Device language code |   | timezone | Number of seconds away from UTC. Example: -28800 |   | game_version | Version of your mobile app gathered from Android Studio versionCode in your App/build.gradle and iOS uses kCFBundleVersionKey in Xcode. |   | device_os | Device Operating System Version. Example: 80 = Chrome 80, 9 = Android 9 |   | device_type | Device Operating System Type |   | device_model | Device Hardware String Code. Example: Mobile Web Subscribers will have `Linux armv` |   | ad_id | Based on the Google Advertising Id for Android, identifierForVendor for iOS. OptedOut means user turned off Advertising tracking on the device. |   | tags | Current OneSignal Data Tags on the device. |   | last_active | Date and time the user last opened the mobile app or visited the site. |   | playtime | Total amount of time in seconds the user had the mobile app open. |   | amount_spent |  Mobile only - amount spent in USD on In-App Purchases. |    | created_at | Date and time the device record was created in OneSignal. Mobile - first time they opened the app with OneSignal SDK. Web - first time the user subscribed to the site. |   | invalid_identifier | t = unsubscribed, f = subscibed |   | badge_count | Current number of badges on the device | - Extra Columns:   | Field | Details |   | --- | --- |   | external_user_id | Your User Id set on the device |   | notification_types | Notification types |   | location | Location points (Latitude and Longitude) set on the device. |   | country | Country code |   | rooted | Android device rooted or not |   | ip | IP Address of the device if being tracked. See Handling Personal Data. |   | web_auth | Web Only authorization key. |   | web_p256 | Web Only p256 key. | 
-     * CSV export
+     * Export CSV of Players
      * @param appId The app ID that you want to export devices from
      * @param exportPlayersRequestBody 
      */
