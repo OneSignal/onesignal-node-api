@@ -1,5 +1,4 @@
 export * from './App';
-export * from './BadRequestError';
 export * from './BasicNotification';
 export * from './BasicNotificationAllOf';
 export * from './BasicNotificationAllOfAndroidBackgroundLayout';
@@ -19,13 +18,14 @@ export * from './DeletePlayerSuccessResponse';
 export * from './DeleteSegmentNotFoundResponse';
 export * from './DeleteSegmentSuccessResponse';
 export * from './DeliveryData';
+export * from './ExportEventsSuccessResponse';
 export * from './ExportPlayersRequestBody';
 export * from './ExportPlayersSuccessResponse';
 export * from './Filter';
 export * from './FilterExpressions';
+export * from './GenericError';
+export * from './GenericErrorErrorsInner';
 export * from './GetNotificationRequestBody';
-export * from './IdentifyUserConflictResponse';
-export * from './IdentifyUserConflictResponseErrorsInner';
 export * from './InlineResponse200';
 export * from './InlineResponse2003';
 export * from './InlineResponse201';
@@ -52,6 +52,7 @@ export * from './PlayerSlice';
 export * from './PropertiesDeltas';
 export * from './PropertiesObject';
 export * from './Purchase';
+export * from './RateLimiterError';
 export * from './Segment';
 export * from './SegmentNotificationTarget';
 export * from './StringMap';
@@ -70,7 +71,6 @@ export * from './UserIdentityResponse';
 export * from './UserSubscriptionOptions';
 
 import { App            , AppApnsEnvEnum                        } from './App';
-import { BadRequestError } from './BadRequestError';
 import { BasicNotification             , BasicNotificationTargetChannelEnum     , BasicNotificationAggregationEnum                                                                                           } from './BasicNotification';
 import { BasicNotificationAllOf   , BasicNotificationAllOfAggregationEnum                                                                                           } from './BasicNotificationAllOf';
 import { BasicNotificationAllOfAndroidBackgroundLayout } from './BasicNotificationAllOfAndroidBackgroundLayout';
@@ -90,13 +90,14 @@ import { DeletePlayerSuccessResponse } from './DeletePlayerSuccessResponse';
 import { DeleteSegmentNotFoundResponse } from './DeleteSegmentNotFoundResponse';
 import { DeleteSegmentSuccessResponse } from './DeleteSegmentSuccessResponse';
 import { DeliveryData } from './DeliveryData';
+import { ExportEventsSuccessResponse } from './ExportEventsSuccessResponse';
 import { ExportPlayersRequestBody } from './ExportPlayersRequestBody';
 import { ExportPlayersSuccessResponse } from './ExportPlayersSuccessResponse';
 import { Filter   , FilterRelationEnum   } from './Filter';
 import { FilterExpressions   , FilterExpressionsRelationEnum  , FilterExpressionsOperatorEnum   } from './FilterExpressions';
+import { GenericError } from './GenericError';
+import { GenericErrorErrorsInner } from './GenericErrorErrorsInner';
 import { GetNotificationRequestBody, GetNotificationRequestBodyEventsEnum     } from './GetNotificationRequestBody';
-import { IdentifyUserConflictResponse } from './IdentifyUserConflictResponse';
-import { IdentifyUserConflictResponseErrorsInner } from './IdentifyUserConflictResponseErrorsInner';
 import { InlineResponse200 } from './InlineResponse200';
 import { InlineResponse2003 } from './InlineResponse2003';
 import { InlineResponse201 } from './InlineResponse201';
@@ -123,6 +124,7 @@ import { PlayerSlice } from './PlayerSlice';
 import { PropertiesDeltas } from './PropertiesDeltas';
 import { PropertiesObject } from './PropertiesObject';
 import { Purchase } from './Purchase';
+import { RateLimiterError } from './RateLimiterError';
 import { Segment } from './Segment';
 import { SegmentNotificationTarget } from './SegmentNotificationTarget';
 import { StringMap } from './StringMap';
@@ -183,7 +185,6 @@ let enumsMap: Set<string> = new Set<string>([
 
 let typeMap: {[index: string]: any} = {
     "App": App,
-    "BadRequestError": BadRequestError,
     "BasicNotification": BasicNotification,
     "BasicNotificationAllOf": BasicNotificationAllOf,
     "BasicNotificationAllOfAndroidBackgroundLayout": BasicNotificationAllOfAndroidBackgroundLayout,
@@ -203,13 +204,14 @@ let typeMap: {[index: string]: any} = {
     "DeleteSegmentNotFoundResponse": DeleteSegmentNotFoundResponse,
     "DeleteSegmentSuccessResponse": DeleteSegmentSuccessResponse,
     "DeliveryData": DeliveryData,
+    "ExportEventsSuccessResponse": ExportEventsSuccessResponse,
     "ExportPlayersRequestBody": ExportPlayersRequestBody,
     "ExportPlayersSuccessResponse": ExportPlayersSuccessResponse,
     "Filter": Filter,
     "FilterExpressions": FilterExpressions,
+    "GenericError": GenericError,
+    "GenericErrorErrorsInner": GenericErrorErrorsInner,
     "GetNotificationRequestBody": GetNotificationRequestBody,
-    "IdentifyUserConflictResponse": IdentifyUserConflictResponse,
-    "IdentifyUserConflictResponseErrorsInner": IdentifyUserConflictResponseErrorsInner,
     "InlineResponse200": InlineResponse200,
     "InlineResponse2003": InlineResponse2003,
     "InlineResponse201": InlineResponse201,
@@ -236,6 +238,7 @@ let typeMap: {[index: string]: any} = {
     "PropertiesDeltas": PropertiesDeltas,
     "PropertiesObject": PropertiesObject,
     "Purchase": Purchase,
+    "RateLimiterError": RateLimiterError,
     "Segment": Segment,
     "SegmentNotificationTarget": SegmentNotificationTarget,
     "StringMap": StringMap,

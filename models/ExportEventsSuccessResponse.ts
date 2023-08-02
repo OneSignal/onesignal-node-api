@@ -2,34 +2,27 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.0.1
+ * API Version: 1.2.2
  * Contact: devrel@onesignal.com
  */
 
 import { HttpFile } from '../http/http';
 
-export class CreateSegmentBadRequestResponse {
-    'success'?: boolean;
-    'errors'?: Array<string>;
+export class ExportEventsSuccessResponse {
+    'csv_file_url'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "success",
-            "baseName": "success",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<string>",
+            "name": "csv_file_url",
+            "baseName": "csv_file_url",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CreateSegmentBadRequestResponse.attributeTypeMap;
+        return ExportEventsSuccessResponse.attributeTypeMap;
     }
 
     public constructor() {
