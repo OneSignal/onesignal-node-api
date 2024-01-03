@@ -10,6 +10,8 @@ import { HttpFile } from '../http/http';
 
 export class PlayerNotificationTargetIncludeAliases {
     'alias_label'?: Array<string>;
+    'external_id'?: Array<string>;
+    'onesignal_id'?: Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -19,7 +21,20 @@ export class PlayerNotificationTargetIncludeAliases {
             "baseName": "alias_label",
             "type": "Array<string>",
             "format": ""
-        }    ];
+        },
+        {
+            "name": "external_id",
+            "baseName": "external_id",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "onesignal_id",
+            "baseName": "onesignal_id",
+            "type": "Array<string>",
+            "format": ""
+        }
+    ];
 
     static getAttributeTypeMap() {
         return PlayerNotificationTargetIncludeAliases.attributeTypeMap;
