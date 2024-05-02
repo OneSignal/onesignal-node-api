@@ -1,6 +1,6 @@
 {
   "name": "@onesignal/node-onesignal",
-  "version": "2.0.1-beta2",
+  "version": "5.0.0-alpha-01",
   "description": "OpenAPI client for @onesignal/node-onesignal",
   "author": "OpenAPI-Generator Contributors",
   "keywords": [
