@@ -2,15 +2,16 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.2.2
+ * API Version: 5.0.0-alpha-01
  * Contact: devrel@onesignal.com
  */
 
-import { GenericErrorErrorsInner } from './GenericErrorErrorsInner';
 import { HttpFile } from '../http/http';
 
 export class GenericError {
-    'errors'?: Array<GenericErrorErrorsInner>;
+    'errors'?: any;
+    'success'?: boolean;
+    'reference'?: any;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -18,7 +19,19 @@ export class GenericError {
         {
             "name": "errors",
             "baseName": "errors",
-            "type": "Array<GenericErrorErrorsInner>",
+            "type": "any",
+            "format": ""
+        },
+        {
+            "name": "success",
+            "baseName": "success",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "reference",
+            "baseName": "reference",
+            "type": "any",
             "format": ""
         }    ];
 

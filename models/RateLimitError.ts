@@ -6,38 +6,30 @@
  * Contact: devrel@onesignal.com
  */
 
-import { CreateUserConflictResponseErrorsItemsMeta } from './CreateUserConflictResponseErrorsItemsMeta';
 import { HttpFile } from '../http/http';
 
-export class CreateUserConflictResponseErrorsInner {
-    'code'?: string;
-    'title'?: string;
-    'meta'?: CreateUserConflictResponseErrorsItemsMeta;
+export class RateLimitError {
+    'errors'?: Array<string>;
+    'limit'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "code",
-            "baseName": "code",
-            "type": "string",
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<string>",
             "format": ""
         },
         {
-            "name": "title",
-            "baseName": "title",
+            "name": "limit",
+            "baseName": "limit",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "meta",
-            "baseName": "meta",
-            "type": "CreateUserConflictResponseErrorsItemsMeta",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CreateUserConflictResponseErrorsInner.attributeTypeMap;
+        return RateLimitError.attributeTypeMap;
     }
 
     public constructor() {

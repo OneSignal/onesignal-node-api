@@ -6,45 +6,44 @@
  * Contact: devrel@onesignal.com
  */
 
-import { NotificationWithMeta } from './NotificationWithMeta';
 import { HttpFile } from '../http/http';
 
-export class NotificationSlice {
-    'total_count'?: number;
-    'offset'?: number;
-    'limit'?: number;
-    'notifications'?: Array<NotificationWithMeta>;
+export class WebButton {
+    'id': string;
+    'text'?: string;
+    'icon'?: string;
+    'url'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "total_count",
-            "baseName": "total_count",
-            "type": "number",
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "offset",
-            "baseName": "offset",
-            "type": "number",
+            "name": "text",
+            "baseName": "text",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "limit",
-            "baseName": "limit",
-            "type": "number",
+            "name": "icon",
+            "baseName": "icon",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "notifications",
-            "baseName": "notifications",
-            "type": "Array<NotificationWithMeta>",
+            "name": "url",
+            "baseName": "url",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return NotificationSlice.attributeTypeMap;
+        return WebButton.attributeTypeMap;
     }
 
     public constructor() {

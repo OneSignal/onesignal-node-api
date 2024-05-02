@@ -6,24 +6,23 @@
  * Contact: devrel@onesignal.com
  */
 
-import { OutcomeData } from './OutcomeData';
 import { HttpFile } from '../http/http';
 
-export class OutcomesData {
-    'outcomes'?: Array<OutcomeData>;
+export class GenericSuccessBoolResponse {
+    'success'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "outcomes",
-            "baseName": "outcomes",
-            "type": "Array<OutcomeData>",
+            "name": "success",
+            "baseName": "success",
+            "type": "boolean",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return OutcomesData.attributeTypeMap;
+        return GenericSuccessBoolResponse.attributeTypeMap;
     }
 
     public constructor() {

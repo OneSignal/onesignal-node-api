@@ -2,21 +2,19 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.2.2
+ * API Version: 5.0.0-alpha-01
  * Contact: devrel@onesignal.com
  */
 
-import { Notification200Errors } from './Notification200Errors';
 import { HttpFile } from '../http/http';
 
 export class CreateNotificationSuccessResponse {
     'id'?: string;
-    /**
-    * Estimated number of subscribers targetted by notification.
-    */
-    'recipients'?: number;
     'external_id'?: string;
-    'errors'?: Notification200Errors;
+    /**
+    * Errors include the identifiers that are invalid, or that there are no subscribers.
+    */
+    'errors'?: any;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -28,12 +26,6 @@ export class CreateNotificationSuccessResponse {
             "format": ""
         },
         {
-            "name": "recipients",
-            "baseName": "recipients",
-            "type": "number",
-            "format": ""
-        },
-        {
             "name": "external_id",
             "baseName": "external_id",
             "type": "string",
@@ -42,7 +34,7 @@ export class CreateNotificationSuccessResponse {
         {
             "name": "errors",
             "baseName": "errors",
-            "type": "Notification200Errors",
+            "type": "any",
             "format": ""
         }    ];
 

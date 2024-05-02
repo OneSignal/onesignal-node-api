@@ -2,7 +2,7 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.2.2
+ * API Version: 5.0.0-alpha-01
  * Contact: devrel@onesignal.com
  */
 
@@ -10,11 +10,11 @@ import { HttpFile } from '../http/http';
 
 export class InvalidIdentifierError {
     /**
-    * Returned if using include_external_user_ids
+    * Returned if using include_aliases
     */
-    'invalid_external_user_ids'?: Array<string>;
+    'invalid_aliases'?: Array<string>;
     /**
-    * Returned if using include_player_ids and some were valid and others were not.
+    * Returned if using include_subscription_ids and some were valid and others were not.
     */
     'invalid_player_ids'?: Array<string>;
 
@@ -22,8 +22,8 @@ export class InvalidIdentifierError {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "invalid_external_user_ids",
-            "baseName": "invalid_external_user_ids",
+            "name": "invalid_aliases",
+            "baseName": "invalid_aliases",
             "type": "Array<string>",
             "format": ""
         },

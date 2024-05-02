@@ -2,14 +2,14 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.2.2
+ * API Version: 5.0.0-alpha-01
  * Contact: devrel@onesignal.com
  */
 
 import { HttpFile } from '../http/http';
 
 export class TransferSubscriptionRequestBody {
-    'identity'?: { [key: string]: any; };
+    'identity'?: { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -17,7 +17,7 @@ export class TransferSubscriptionRequestBody {
         {
             "name": "identity",
             "baseName": "identity",
-            "type": "{ [key: string]: any; }",
+            "type": "{ [key: string]: string; }",
             "format": ""
         }    ];
 

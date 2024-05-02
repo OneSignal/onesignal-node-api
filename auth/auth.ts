@@ -27,7 +27,7 @@ export interface TokenProvider {
 /**
  * Applies http authentication to the request context.
  */
-export class AppKeyAuthentication implements SecurityAuthentication {
+export class RestApiKeyAuthentication implements SecurityAuthentication {
     /**
      * Configures the http authentication with the required details.
      *
@@ -36,7 +36,7 @@ export class AppKeyAuthentication implements SecurityAuthentication {
     public constructor(private tokenProvider: TokenProvider) {}
 
     public getName(): string {
-        return "app_key";
+        return "rest_api_key";
     }
 
     public async applySecurityAuthentication(context: RequestContext) {
@@ -47,7 +47,7 @@ export class AppKeyAuthentication implements SecurityAuthentication {
 /**
  * Applies http authentication to the request context.
  */
-export class UserKeyAuthentication implements SecurityAuthentication {
+export class UserAuthKeyAuthentication implements SecurityAuthentication {
     /**
      * Configures the http authentication with the required details.
      *
@@ -56,7 +56,7 @@ export class UserKeyAuthentication implements SecurityAuthentication {
     public constructor(private tokenProvider: TokenProvider) {}
 
     public getName(): string {
-        return "user_key";
+        return "user_auth_key";
     }
 
     public async applySecurityAuthentication(context: RequestContext) {
@@ -67,8 +67,8 @@ export class UserKeyAuthentication implements SecurityAuthentication {
 
 export type AuthMethods = {
     "default"?: SecurityAuthentication,
-    "app_key"?: SecurityAuthentication,
-    "user_key"?: SecurityAuthentication
+    "rest_api_key"?: SecurityAuthentication,
+    "user_auth_key"?: SecurityAuthentication
 }
 
 export type ApiKeyConfiguration = string;
@@ -78,8 +78,8 @@ export type OAuth2Configuration = { accessToken: string };
 
 export type AuthMethodsConfiguration = {
     "default"?: SecurityAuthentication,
-    "app_key"?: HttpBearerConfiguration,
-    "user_key"?: HttpBearerConfiguration
+    "rest_api_key"?: HttpBearerConfiguration,
+    "user_auth_key"?: HttpBearerConfiguration
 }
 
 /**
@@ -94,15 +94,15 @@ export function configureAuthMethods(config: AuthMethodsConfiguration | undefine
     }
     authMethods["default"] = config["default"]
 
-    if (config["app_key"]) {
-        authMethods["app_key"] = new AppKeyAuthentication(
-            config["app_key"]["tokenProvider"]
+    if (config["rest_api_key"]) {
+        authMethods["rest_api_key"] = new RestApiKeyAuthentication(
+            config["rest_api_key"]["tokenProvider"]
         );
     }
 
-    if (config["user_key"]) {
-        authMethods["user_key"] = new UserKeyAuthentication(
-            config["user_key"]["tokenProvider"]
+    if (config["user_auth_key"]) {
+        authMethods["user_auth_key"] = new UserAuthKeyAuthentication(
+            config["user_auth_key"]["tokenProvider"]
         );
     }
 

@@ -6,14 +6,26 @@
  * Contact: devrel@onesignal.com
  */
 
-import { NotificationWithMeta } from './NotificationWithMeta';
+import { SegmentData } from './SegmentData';
 import { HttpFile } from '../http/http';
 
-export class NotificationSlice {
+export class GetSegmentsSuccessResponse {
+    /**
+    * The number of Segments in the response.
+    */
     'total_count'?: number;
+    /**
+    * Set with the offset query parameter. Default 0.
+    */
     'offset'?: number;
+    /**
+    * Maximum number of Segments returned. Default 300.
+    */
     'limit'?: number;
-    'notifications'?: Array<NotificationWithMeta>;
+    /**
+    * An array containing the Segment information.
+    */
+    'segments'?: Array<SegmentData>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -37,14 +49,14 @@ export class NotificationSlice {
             "format": ""
         },
         {
-            "name": "notifications",
-            "baseName": "notifications",
-            "type": "Array<NotificationWithMeta>",
+            "name": "segments",
+            "baseName": "segments",
+            "type": "Array<SegmentData>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return NotificationSlice.attributeTypeMap;
+        return GetSegmentsSuccessResponse.attributeTypeMap;
     }
 
     public constructor() {

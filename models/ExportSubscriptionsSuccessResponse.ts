@@ -6,24 +6,23 @@
  * Contact: devrel@onesignal.com
  */
 
-import { OutcomeData } from './OutcomeData';
 import { HttpFile } from '../http/http';
 
-export class OutcomesData {
-    'outcomes'?: Array<OutcomeData>;
+export class ExportSubscriptionsSuccessResponse {
+    'csv_file_url'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "outcomes",
-            "baseName": "outcomes",
-            "type": "Array<OutcomeData>",
+            "name": "csv_file_url",
+            "baseName": "csv_file_url",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return OutcomesData.attributeTypeMap;
+        return ExportSubscriptionsSuccessResponse.attributeTypeMap;
     }
 
     public constructor() {

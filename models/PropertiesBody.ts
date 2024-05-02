@@ -7,13 +7,10 @@
  */
 
 import { PropertiesObject } from './PropertiesObject';
-import { Subscription } from './Subscription';
 import { HttpFile } from '../http/http';
 
-export class User {
+export class PropertiesBody {
     'properties'?: PropertiesObject;
-    'identity'?: { [key: string]: string; };
-    'subscriptions'?: Array<Subscription>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -23,22 +20,10 @@ export class User {
             "baseName": "properties",
             "type": "PropertiesObject",
             "format": ""
-        },
-        {
-            "name": "identity",
-            "baseName": "identity",
-            "type": "{ [key: string]: string; }",
-            "format": ""
-        },
-        {
-            "name": "subscriptions",
-            "baseName": "subscriptions",
-            "type": "Array<Subscription>",
-            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return User.attributeTypeMap;
+        return PropertiesBody.attributeTypeMap;
     }
 
     public constructor() {
