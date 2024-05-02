@@ -6,19 +6,9 @@
  * Contact: devrel@onesignal.com
  */
 
-import { SegmentNotificationTarget } from './SegmentNotificationTarget';
-import { SubscriptionNotificationTarget } from './SubscriptionNotificationTarget';
 import { HttpFile } from '../http/http';
 
-export class NotificationTarget {
-    /**
-    * The segment names you want to target. Users in these segments will receive a notification. This targeting parameter is only compatible with excluded_segments. Example: [\"Active Users\", \"Inactive Users\"] 
-    */
-    'included_segments'?: Array<string>;
-    /**
-    * Segment that will be excluded when sending. Users in these segments will not receive a notification, even if they were included in included_segments. This targeting parameter is only compatible with included_segments. Example: [\"Active Users\", \"Inactive Users\"] 
-    */
-    'excluded_segments'?: Array<string>;
+export class SubscriptionNotificationTarget {
     /**
     * Specific subscription ids to send your notification to. _Does not require API Auth Key._ Not compatible with any other targeting parameters. Example: [\"1dd608f2-c6a1-11e3-851d-000c2940e62c\"] Limit of 2,000 entries per REST API call 
     */
@@ -59,23 +49,11 @@ export class NotificationTarget {
     * Target specific users by aliases assigned via API. An alias can be an external_id, onesignal_id, or a custom alias. Accepts an object where keys are alias labels and values are arrays of alias IDs to include Example usage: { \"external_id\": [\"exId1\", \"extId2\"], \"internal_label\": [\"id1\", \"id2\"] } Not compatible with any other targeting parameters. REQUIRED: REST API Key Authentication Limit of 2,000 entries per REST API call Note: If targeting push, email, or sms subscribers with same ids, use with target_channel to indicate you are sending a push or email or sms.
     */
     'include_aliases'?: { [key: string]: Array<string>; };
-    'target_channel'?: NotificationTargetTargetChannelEnum;
+    'target_channel'?: SubscriptionNotificationTargetTargetChannelEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "included_segments",
-            "baseName": "included_segments",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "excluded_segments",
-            "baseName": "excluded_segments",
-            "type": "Array<string>",
-            "format": ""
-        },
         {
             "name": "include_subscription_ids",
             "baseName": "include_subscription_ids",
@@ -139,12 +117,12 @@ export class NotificationTarget {
         {
             "name": "target_channel",
             "baseName": "target_channel",
-            "type": "NotificationTargetTargetChannelEnum",
+            "type": "SubscriptionNotificationTargetTargetChannelEnum",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return NotificationTarget.attributeTypeMap;
+        return SubscriptionNotificationTarget.attributeTypeMap;
     }
 
     public constructor() {
@@ -152,5 +130,5 @@ export class NotificationTarget {
 }
 
 
-export type NotificationTargetTargetChannelEnum = "push" | "email" | "sms" ;
+export type SubscriptionNotificationTargetTargetChannelEnum = "push" | "email" | "sms" ;
 

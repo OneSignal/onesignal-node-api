@@ -2,27 +2,27 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.2.2
+ * API Version: 5.0.0-alpha-01
  * Contact: devrel@onesignal.com
  */
 
 import { HttpFile } from '../http/http';
 
-export class UserSubscriptionOptions {
-    'retain_previous_owner'?: boolean;
+export class ExportSubscriptionsSuccessResponse {
+    'csv_file_url'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "retain_previous_owner",
-            "baseName": "retain_previous_owner",
-            "type": "boolean",
+            "name": "csv_file_url",
+            "baseName": "csv_file_url",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return UserSubscriptionOptions.attributeTypeMap;
+        return ExportSubscriptionsSuccessResponse.attributeTypeMap;
     }
 
     public constructor() {

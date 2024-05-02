@@ -2,27 +2,28 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.2.2
+ * API Version: 5.0.0-alpha-01
  * Contact: devrel@onesignal.com
  */
 
+import { Subscription } from './Subscription';
 import { HttpFile } from '../http/http';
 
-export class UserIdentityResponse {
-    'identity'?: { [key: string]: any; };
+export class SubscriptionBody {
+    'subscription'?: Subscription;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "identity",
-            "baseName": "identity",
-            "type": "{ [key: string]: any; }",
+            "name": "subscription",
+            "baseName": "subscription",
+            "type": "Subscription",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return UserIdentityResponse.attributeTypeMap;
+        return SubscriptionBody.attributeTypeMap;
     }
 
     public constructor() {

@@ -2,7 +2,7 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.2.2
+ * API Version: 5.0.0-alpha-01
  * Contact: devrel@onesignal.com
  */
 
@@ -10,13 +10,13 @@ import { BasicNotification } from './BasicNotification';
 import { BasicNotificationAllOfAndroidBackgroundLayout } from './BasicNotificationAllOfAndroidBackgroundLayout';
 import { Button } from './Button';
 import { DeliveryData } from './DeliveryData';
-import { Filter } from './Filter';
+import { FilterExpression } from './FilterExpression';
+import { LanguageStringMap } from './LanguageStringMap';
 import { NotificationWithMetaAllOf } from './NotificationWithMetaAllOf';
 import { OutcomeData } from './OutcomeData';
 import { OutcomesData } from './OutcomesData';
 import { PlatformDeliveryData } from './PlatformDeliveryData';
-import { PlayerNotificationTargetIncludeAliases } from './PlayerNotificationTargetIncludeAliases';
-import { StringMap } from './StringMap';
+import { WebButton } from './WebButton';
 import { HttpFile } from '../http/http';
 
 export class NotificationWithMeta {
@@ -29,13 +29,9 @@ export class NotificationWithMeta {
     */
     'excluded_segments'?: Array<string>;
     /**
-    * Specific playerids to send your notification to. _Does not require API Auth Key. Do not combine with other targeting parameters. Not compatible with any other targeting parameters. Example: [\"1dd608f2-c6a1-11e3-851d-000c2940e62c\"] Limit of 2,000 entries per REST API call 
+    * Specific subscription ids to send your notification to. _Does not require API Auth Key._ Not compatible with any other targeting parameters. Example: [\"1dd608f2-c6a1-11e3-851d-000c2940e62c\"] Limit of 2,000 entries per REST API call 
     */
-    'include_player_ids'?: Array<string>;
-    /**
-    * Target specific devices by custom user IDs assigned via API. Not compatible with any other targeting parameters Example: [\"custom-id-assigned-by-api\"] REQUIRED: REST API Key Authentication Limit of 2,000 entries per REST API call. Note: If targeting push, email, or sms subscribers with same ids, use with channel_for_external_user_ids to indicate you are sending a push or email or sms. 
-    */
-    'include_external_user_ids'?: Array<string>;
+    'include_subscription_ids'?: Array<string>;
     /**
     * Recommended for Sending Emails - Target specific email addresses. If an email does not correspond to an existing user, a new user will be created. Example: nick@catfac.ts Limit of 2,000 entries per REST API call 
     */
@@ -45,30 +41,33 @@ export class NotificationWithMeta {
     */
     'include_phone_numbers'?: Array<string>;
     /**
-    * Not Recommended: Please consider using include_player_ids or include_external_user_ids instead. Target using iOS device tokens. Warning: Only works with Production tokens. All non-alphanumeric characters must be removed from each token. If a token does not correspond to an existing user, a new user will be created. Example: ce777617da7f548fe7a9ab6febb56cf39fba6d38203... Limit of 2,000 entries per REST API call 
+    * Not Recommended: Please consider using include_subscription_ids or include_aliases instead. Target using iOS device tokens. Warning: Only works with Production tokens. All non-alphanumeric characters must be removed from each token. If a token does not correspond to an existing user, a new user will be created. Example: ce777617da7f548fe7a9ab6febb56cf39fba6d38203... Limit of 2,000 entries per REST API call 
     */
     'include_ios_tokens'?: Array<string>;
     /**
-    * Not Recommended: Please consider using include_player_ids or include_external_user_ids instead. Target using Windows URIs. If a token does not correspond to an existing user, a new user will be created. Example: http://s.notify.live.net/u/1/bn1/HmQAAACPaLDr-... Limit of 2,000 entries per REST API call 
+    * Not Recommended: Please consider using include_subscription_ids or include_aliases instead. Target using Windows URIs. If a token does not correspond to an existing user, a new user will be created. Example: http://s.notify.live.net/u/1/bn1/HmQAAACPaLDr-... Limit of 2,000 entries per REST API call 
     */
     'include_wp_wns_uris'?: Array<string>;
     /**
-    * Not Recommended: Please consider using include_player_ids or include_external_user_ids instead. Target using Amazon ADM registration IDs. If a token does not correspond to an existing user, a new user will be created. Example: amzn1.adm-registration.v1.XpvSSUk0Rc3hTVVV... Limit of 2,000 entries per REST API call 
+    * Not Recommended: Please consider using include_subscription_ids or include_aliases instead. Target using Amazon ADM registration IDs. If a token does not correspond to an existing user, a new user will be created. Example: amzn1.adm-registration.v1.XpvSSUk0Rc3hTVVV... Limit of 2,000 entries per REST API call 
     */
     'include_amazon_reg_ids'?: Array<string>;
     /**
-    * Not Recommended: Please consider using include_player_ids or include_external_user_ids instead. Target using Chrome App registration IDs. If a token does not correspond to an existing user, a new user will be created. Example: APA91bEeiUeSukAAUdnw3O2RB45FWlSpgJ7Ji_... Limit of 2,000 entries per REST API call 
+    * Not Recommended: Please consider using include_subscription_ids or include_aliases instead. Target using Chrome App registration IDs. If a token does not correspond to an existing user, a new user will be created. Example: APA91bEeiUeSukAAUdnw3O2RB45FWlSpgJ7Ji_... Limit of 2,000 entries per REST API call 
     */
     'include_chrome_reg_ids'?: Array<string>;
     /**
-    * Not Recommended: Please consider using include_player_ids or include_external_user_ids instead. Target using Chrome Web Push registration IDs. If a token does not correspond to an existing user, a new user will be created. Example: APA91bEeiUeSukAAUdnw3O2RB45FWlSpgJ7Ji_... Limit of 2,000 entries per REST API call 
+    * Not Recommended: Please consider using include_subscription_ids or include_aliases instead. Target using Chrome Web Push registration IDs. If a token does not correspond to an existing user, a new user will be created. Example: APA91bEeiUeSukAAUdnw3O2RB45FWlSpgJ7Ji_... Limit of 2,000 entries per REST API call 
     */
     'include_chrome_web_reg_ids'?: Array<string>;
     /**
-    * Not Recommended: Please consider using include_player_ids or include_external_user_ids instead. Target using Android device registration IDs. If a token does not correspond to an existing user, a new user will be created. Example: APA91bEeiUeSukAAUdnw3O2RB45FWlSpgJ7Ji_... Limit of 2,000 entries per REST API call 
+    * Not Recommended: Please consider using include_subscription_ids or include_aliases instead. Target using Android device registration IDs. If a token does not correspond to an existing user, a new user will be created. Example: APA91bEeiUeSukAAUdnw3O2RB45FWlSpgJ7Ji_... Limit of 2,000 entries per REST API call 
     */
     'include_android_reg_ids'?: Array<string>;
-    'include_aliases'?: PlayerNotificationTargetIncludeAliases;
+    /**
+    * Target specific users by aliases assigned via API. An alias can be an external_id, onesignal_id, or a custom alias. Accepts an object where keys are alias labels and values are arrays of alias IDs to include Example usage: { \"external_id\": [\"exId1\", \"extId2\"], \"internal_label\": [\"id1\", \"id2\"] } Not compatible with any other targeting parameters. REQUIRED: REST API Key Authentication Limit of 2,000 entries per REST API call Note: If targeting push, email, or sms subscribers with same ids, use with target_channel to indicate you are sending a push or email or sms.
+    */
+    'include_aliases'?: { [key: string]: Array<string>; };
     'target_channel'?: NotificationWithMetaTargetChannelEnum;
     'id'?: string;
     'value'?: number;
@@ -118,10 +117,6 @@ export class NotificationWithMeta {
     */
     'is_chrome'?: boolean;
     /**
-    * Indicates if the message type when targeting with include_external_user_ids for cases where an email, sms, and/or push subscribers have the same external user id. Example: Use the string \"push\" to indicate you are sending a push notification or the string \"email\"for sending emails or \"sms\"for sending SMS. 
-    */
-    'channel_for_external_user_ids'?: string;
-    /**
     * Required: Your OneSignal Application ID, which can be found in Keys & IDs. It is a UUID and looks similar to 8250eaf6-1a58-489e-b136-7c74a864b434. 
     */
     'app_id': string;
@@ -129,9 +124,9 @@ export class NotificationWithMeta {
     * Correlation and idempotency key. A request received with this parameter will first look for another notification with the same external_id. If one exists, a notification will not be sent, and result of the previous operation will instead be returned. Therefore, if you plan on using this feature, it\'s important to use a good source of randomness to generate the UUID passed here. This key is only idempotent for 30 days. After 30 days, the notification could be removed from our system and a notification with the same external_id will be sent again.   See Idempotent Notification Requests for more details writeOnly: true 
     */
     'external_id'?: string;
-    'contents'?: StringMap;
-    'headings'?: StringMap;
-    'subtitle'?: StringMap;
+    'contents'?: LanguageStringMap;
+    'headings'?: LanguageStringMap;
+    'subtitle'?: LanguageStringMap;
     /**
     * Channel: Push Notifications Platform: Huawei A custom map of data that is passed back to your app. Same as using Additional Data within the dashboard. Can use up to 2048 bytes of data. Example: {\"abc\": 123, \"foo\": \"bar\", \"event_performed\": true, \"amount\": 12.1} 
     */
@@ -199,7 +194,7 @@ export class NotificationWithMeta {
     /**
     * Channel: Push Notifications Platform: Chrome 48+ Add action buttons to the notification. The id field is required. Example: [{\"id\": \"like-button\", \"text\": \"Like\", \"icon\": \"http://i.imgur.com/N8SN8ZS.png\", \"url\": \"https://yoursite.com\"}, {\"id\": \"read-more-button\", \"text\": \"Read more\", \"icon\": \"http://i.imgur.com/MIxJp1L.png\", \"url\": \"https://yoursite.com\"}] 
     */
-    'web_buttons'?: Array<Button>;
+    'web_buttons'?: Array<WebButton>;
     /**
     * Channel: Push Notifications Platform: iOS Category APS payload, use with registerUserNotificationSettings:categories in your Objective-C / Swift code. Example: calendar category which contains actions like accept and decline iOS 10+ This will trigger your UNNotificationContentExtension whose ID matches this category. 
     */
@@ -378,6 +373,14 @@ export class NotificationWithMeta {
     */
     'summary_arg_count'?: number;
     /**
+    * Channel: Push Notifications Platform: iOS 15+ A score to be set per notification to indicate how it should be displayed when grouped. Use a float between 0-1. 
+    */
+    'ios_relevance_score'?: number;
+    /**
+    * Channel: Push Notifications Platform: iOS 15+ Focus Modes and Interruption Levels indicate the priority and delivery timing of a notification, to \"interrupt\" the user. Can choose from options: [\'active\', \'passive\', \'time_sensitive\', \'critical\']. Default is active. 
+    */
+    'ios_interruption_level'?: string;
+    /**
     * Channel: Email Required.  The subject of the email. 
     */
     'email_subject'?: string;
@@ -409,7 +412,7 @@ export class NotificationWithMeta {
     * Channel: SMS URLs for the media files to be attached to the SMS content. Limit: 10 media urls with a total max. size of 5MBs. 
     */
     'sms_media_urls'?: Array<string>;
-    'filters'?: Array<Filter>;
+    'filters'?: Array<FilterExpression>;
     /**
     * Channel: All JSON object that can be used as a source of message personalization data for fields that support tag variable substitution. Push, SMS: Can accept up to 2048 bytes of valid JSON. Email: Can accept up to 10000 bytes of valid JSON. Example: {\"order_id\": 123, \"currency\": \"USD\", \"amount\": 25} 
     */
@@ -469,14 +472,8 @@ export class NotificationWithMeta {
             "format": ""
         },
         {
-            "name": "include_player_ids",
-            "baseName": "include_player_ids",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "include_external_user_ids",
-            "baseName": "include_external_user_ids",
+            "name": "include_subscription_ids",
+            "baseName": "include_subscription_ids",
             "type": "Array<string>",
             "format": ""
         },
@@ -531,7 +528,7 @@ export class NotificationWithMeta {
         {
             "name": "include_aliases",
             "baseName": "include_aliases",
-            "type": "PlayerNotificationTargetIncludeAliases",
+            "type": "{ [key: string]: Array<string>; }",
             "format": ""
         },
         {
@@ -625,12 +622,6 @@ export class NotificationWithMeta {
             "format": ""
         },
         {
-            "name": "channel_for_external_user_ids",
-            "baseName": "channel_for_external_user_ids",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "app_id",
             "baseName": "app_id",
             "type": "string",
@@ -645,19 +636,19 @@ export class NotificationWithMeta {
         {
             "name": "contents",
             "baseName": "contents",
-            "type": "StringMap",
+            "type": "LanguageStringMap",
             "format": ""
         },
         {
             "name": "headings",
             "baseName": "headings",
-            "type": "StringMap",
+            "type": "LanguageStringMap",
             "format": ""
         },
         {
             "name": "subtitle",
             "baseName": "subtitle",
-            "type": "StringMap",
+            "type": "LanguageStringMap",
             "format": ""
         },
         {
@@ -759,7 +750,7 @@ export class NotificationWithMeta {
         {
             "name": "web_buttons",
             "baseName": "web_buttons",
-            "type": "Array<Button>",
+            "type": "Array<WebButton>",
             "format": ""
         },
         {
@@ -1033,6 +1024,18 @@ export class NotificationWithMeta {
             "format": ""
         },
         {
+            "name": "ios_relevance_score",
+            "baseName": "ios_relevance_score",
+            "type": "number",
+            "format": ""
+        },
+        {
+            "name": "ios_interruption_level",
+            "baseName": "ios_interruption_level",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "email_subject",
             "baseName": "email_subject",
             "type": "string",
@@ -1083,7 +1086,7 @@ export class NotificationWithMeta {
         {
             "name": "filters",
             "baseName": "filters",
-            "type": "Array<Filter>",
+            "type": "Array<FilterExpression>",
             "format": ""
         },
         {

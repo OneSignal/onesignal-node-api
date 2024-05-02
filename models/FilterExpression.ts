@@ -6,9 +6,11 @@
  * Contact: devrel@onesignal.com
  */
 
+import { Filter } from './Filter';
+import { Operator } from './Operator';
 import { HttpFile } from '../http/http';
 
-export class Filter {
+export class FilterExpression {
     /**
     * Required. Name of the field to use as the first operand in the filter expression.
     */
@@ -40,7 +42,11 @@ export class Filter {
     /**
     * Required. Operator of a filter expression.
     */
-    'relation'?: FilterRelationEnum;
+    'relation'?: FilterExpressionRelationEnum;
+    /**
+    * Strictly, this must be either `\"OR\"`, or `\"AND\"`.  It can be used to compose Filters as part of a Filters object.
+    */
+    'operator'?: FilterExpressionOperatorEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -90,12 +96,18 @@ export class Filter {
         {
             "name": "relation",
             "baseName": "relation",
-            "type": "FilterRelationEnum",
+            "type": "FilterExpressionRelationEnum",
+            "format": ""
+        },
+        {
+            "name": "operator",
+            "baseName": "operator",
+            "type": "FilterExpressionOperatorEnum",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return Filter.attributeTypeMap;
+        return FilterExpression.attributeTypeMap;
     }
 
     public constructor() {
@@ -103,5 +115,6 @@ export class Filter {
 }
 
 
-export type FilterRelationEnum = ">" | "<" | "=" | "!=" | "exists" | "not_exists" | "time_elapsed_gt" | "time_elapsed_lt" ;
+export type FilterExpressionRelationEnum = ">" | "<" | "=" | "!=" | "exists" | "not_exists" | "time_elapsed_gt" | "time_elapsed_lt" ;
+export type FilterExpressionOperatorEnum = "OR" | "AND" ;
 

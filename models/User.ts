@@ -2,20 +2,18 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.2.2
+ * API Version: 5.0.0-alpha-01
  * Contact: devrel@onesignal.com
  */
 
 import { PropertiesObject } from './PropertiesObject';
-import { SubscriptionObject } from './SubscriptionObject';
-import { UserSubscriptionOptions } from './UserSubscriptionOptions';
+import { Subscription } from './Subscription';
 import { HttpFile } from '../http/http';
 
 export class User {
     'properties'?: PropertiesObject;
-    'identity'?: { [key: string]: any; };
-    'subscriptions'?: Array<SubscriptionObject>;
-    'subscription_options'?: UserSubscriptionOptions;
+    'identity'?: { [key: string]: string; };
+    'subscriptions'?: Array<Subscription>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -29,19 +27,13 @@ export class User {
         {
             "name": "identity",
             "baseName": "identity",
-            "type": "{ [key: string]: any; }",
+            "type": "{ [key: string]: string; }",
             "format": ""
         },
         {
             "name": "subscriptions",
             "baseName": "subscriptions",
-            "type": "Array<SubscriptionObject>",
-            "format": ""
-        },
-        {
-            "name": "subscription_options",
-            "baseName": "subscription_options",
-            "type": "UserSubscriptionOptions",
+            "type": "Array<Subscription>",
             "format": ""
         }    ];
 

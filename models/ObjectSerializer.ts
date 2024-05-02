@@ -2,37 +2,26 @@ export * from './App';
 export * from './BasicNotification';
 export * from './BasicNotificationAllOf';
 export * from './BasicNotificationAllOfAndroidBackgroundLayout';
-export * from './BeginLiveActivityRequest';
 export * from './Button';
-export * from './CancelNotificationSuccessResponse';
 export * from './CreateNotificationSuccessResponse';
-export * from './CreatePlayerSuccessResponse';
 export * from './CreateSegmentConflictResponse';
 export * from './CreateSegmentSuccessResponse';
-export * from './CreateSubscriptionRequestBody';
 export * from './CreateUserConflictResponse';
 export * from './CreateUserConflictResponseErrorsInner';
 export * from './CreateUserConflictResponseErrorsItemsMeta';
-export * from './DeletePlayerNotFoundResponse';
-export * from './DeletePlayerSuccessResponse';
-export * from './DeleteSegmentNotFoundResponse';
-export * from './DeleteSegmentSuccessResponse';
 export * from './DeliveryData';
 export * from './ExportEventsSuccessResponse';
-export * from './ExportPlayersRequestBody';
-export * from './ExportPlayersSuccessResponse';
+export * from './ExportSubscriptionsRequestBody';
+export * from './ExportSubscriptionsSuccessResponse';
 export * from './Filter';
-export * from './FilterExpressions';
+export * from './FilterExpression';
 export * from './GenericError';
-export * from './GenericErrorErrorsInner';
-export * from './GetNotificationRequestBody';
-export * from './InlineResponse200';
-export * from './InlineResponse2003';
-export * from './InlineResponse201';
-export * from './InlineResponse202';
+export * from './GenericSuccessBoolResponse';
+export * from './GetNotificationHistoryRequestBody';
+export * from './GetSegmentsSuccessResponse';
 export * from './InvalidIdentifierError';
+export * from './LanguageStringMap';
 export * from './Notification';
-export * from './Notification200Errors';
 export * from './NotificationAllOf';
 export * from './NotificationHistorySuccessResponse';
 export * from './NotificationSlice';
@@ -45,71 +34,54 @@ export * from './OutcomesData';
 export * from './PlatformDeliveryData';
 export * from './PlatformDeliveryDataEmailAllOf';
 export * from './PlatformDeliveryDataSmsAllOf';
-export * from './Player';
-export * from './PlayerNotificationTarget';
-export * from './PlayerNotificationTargetIncludeAliases';
-export * from './PlayerSlice';
+export * from './PropertiesBody';
 export * from './PropertiesDeltas';
 export * from './PropertiesObject';
 export * from './Purchase';
-export * from './RateLimiterError';
+export * from './RateLimitError';
 export * from './Segment';
+export * from './SegmentData';
 export * from './SegmentNotificationTarget';
-export * from './StringMap';
-export * from './SubscriptionObject';
+export * from './Subscription';
+export * from './SubscriptionBody';
+export * from './SubscriptionNotificationTarget';
 export * from './TransferSubscriptionRequestBody';
 export * from './UpdateLiveActivityRequest';
 export * from './UpdateLiveActivitySuccessResponse';
-export * from './UpdatePlayerSuccessResponse';
-export * from './UpdatePlayerTagsRequestBody';
-export * from './UpdatePlayerTagsSuccessResponse';
-export * from './UpdateSubscriptionRequestBody';
 export * from './UpdateUserRequest';
 export * from './User';
-export * from './UserIdentityRequestBody';
-export * from './UserIdentityResponse';
-export * from './UserSubscriptionOptions';
+export * from './UserIdentityBody';
+export * from './WebButton';
 
 import { App            , AppApnsEnvEnum                        } from './App';
-import { BasicNotification             , BasicNotificationTargetChannelEnum     , BasicNotificationAggregationEnum                                                                                           } from './BasicNotification';
-import { BasicNotificationAllOf   , BasicNotificationAllOfAggregationEnum                                                                                           } from './BasicNotificationAllOf';
+import { BasicNotification            , BasicNotificationTargetChannelEnum     , BasicNotificationAggregationEnum                                                                                            } from './BasicNotification';
+import { BasicNotificationAllOf   , BasicNotificationAllOfAggregationEnum                                                                                            } from './BasicNotificationAllOf';
 import { BasicNotificationAllOfAndroidBackgroundLayout } from './BasicNotificationAllOfAndroidBackgroundLayout';
-import { BeginLiveActivityRequest } from './BeginLiveActivityRequest';
 import { Button } from './Button';
-import { CancelNotificationSuccessResponse } from './CancelNotificationSuccessResponse';
 import { CreateNotificationSuccessResponse } from './CreateNotificationSuccessResponse';
-import { CreatePlayerSuccessResponse } from './CreatePlayerSuccessResponse';
 import { CreateSegmentConflictResponse } from './CreateSegmentConflictResponse';
 import { CreateSegmentSuccessResponse } from './CreateSegmentSuccessResponse';
-import { CreateSubscriptionRequestBody } from './CreateSubscriptionRequestBody';
 import { CreateUserConflictResponse } from './CreateUserConflictResponse';
 import { CreateUserConflictResponseErrorsInner } from './CreateUserConflictResponseErrorsInner';
 import { CreateUserConflictResponseErrorsItemsMeta } from './CreateUserConflictResponseErrorsItemsMeta';
-import { DeletePlayerNotFoundResponse } from './DeletePlayerNotFoundResponse';
-import { DeletePlayerSuccessResponse } from './DeletePlayerSuccessResponse';
-import { DeleteSegmentNotFoundResponse } from './DeleteSegmentNotFoundResponse';
-import { DeleteSegmentSuccessResponse } from './DeleteSegmentSuccessResponse';
 import { DeliveryData } from './DeliveryData';
 import { ExportEventsSuccessResponse } from './ExportEventsSuccessResponse';
-import { ExportPlayersRequestBody } from './ExportPlayersRequestBody';
-import { ExportPlayersSuccessResponse } from './ExportPlayersSuccessResponse';
-import { Filter   , FilterRelationEnum   } from './Filter';
-import { FilterExpressions   , FilterExpressionsRelationEnum  , FilterExpressionsOperatorEnum   } from './FilterExpressions';
+import { ExportSubscriptionsRequestBody } from './ExportSubscriptionsRequestBody';
+import { ExportSubscriptionsSuccessResponse } from './ExportSubscriptionsSuccessResponse';
+import { Filter       , FilterRelationEnum   } from './Filter';
+import { FilterExpression       , FilterExpressionRelationEnum  , FilterExpressionOperatorEnum   } from './FilterExpression';
 import { GenericError } from './GenericError';
-import { GenericErrorErrorsInner } from './GenericErrorErrorsInner';
-import { GetNotificationRequestBody, GetNotificationRequestBodyEventsEnum     } from './GetNotificationRequestBody';
-import { InlineResponse200 } from './InlineResponse200';
-import { InlineResponse2003 } from './InlineResponse2003';
-import { InlineResponse201 } from './InlineResponse201';
-import { InlineResponse202 } from './InlineResponse202';
+import { GenericSuccessBoolResponse } from './GenericSuccessBoolResponse';
+import { GetNotificationHistoryRequestBody, GetNotificationHistoryRequestBodyEventsEnum     } from './GetNotificationHistoryRequestBody';
+import { GetSegmentsSuccessResponse } from './GetSegmentsSuccessResponse';
 import { InvalidIdentifierError } from './InvalidIdentifierError';
-import { Notification             , NotificationTargetChannelEnum     , NotificationAggregationEnum                                                                                            } from './Notification';
-import { Notification200Errors } from './Notification200Errors';
+import { LanguageStringMap } from './LanguageStringMap';
+import { Notification            , NotificationTargetChannelEnum     , NotificationAggregationEnum                                                                                             } from './Notification';
 import { NotificationAllOf } from './NotificationAllOf';
 import { NotificationHistorySuccessResponse } from './NotificationHistorySuccessResponse';
 import { NotificationSlice } from './NotificationSlice';
-import { NotificationTarget             , NotificationTargetTargetChannelEnum   } from './NotificationTarget';
-import { NotificationWithMeta             , NotificationWithMetaTargetChannelEnum     , NotificationWithMetaAggregationEnum                                                                                                      } from './NotificationWithMeta';
+import { NotificationTarget            , NotificationTargetTargetChannelEnum   } from './NotificationTarget';
+import { NotificationWithMeta            , NotificationWithMetaTargetChannelEnum     , NotificationWithMetaAggregationEnum                                                                                                       } from './NotificationWithMeta';
 import { NotificationWithMetaAllOf } from './NotificationWithMetaAllOf';
 import { Operator, OperatorOperatorEnum   } from './Operator';
 import { OutcomeData  , OutcomeDataAggregationEnum   } from './OutcomeData';
@@ -117,30 +89,24 @@ import { OutcomesData } from './OutcomesData';
 import { PlatformDeliveryData } from './PlatformDeliveryData';
 import { PlatformDeliveryDataEmailAllOf } from './PlatformDeliveryDataEmailAllOf';
 import { PlatformDeliveryDataSmsAllOf } from './PlatformDeliveryDataSmsAllOf';
-import { Player } from './Player';
-import { PlayerNotificationTarget           , PlayerNotificationTargetTargetChannelEnum   } from './PlayerNotificationTarget';
-import { PlayerNotificationTargetIncludeAliases } from './PlayerNotificationTargetIncludeAliases';
-import { PlayerSlice } from './PlayerSlice';
+import { PropertiesBody } from './PropertiesBody';
 import { PropertiesDeltas } from './PropertiesDeltas';
 import { PropertiesObject } from './PropertiesObject';
 import { Purchase } from './Purchase';
-import { RateLimiterError } from './RateLimiterError';
+import { RateLimitError } from './RateLimitError';
 import { Segment } from './Segment';
+import { SegmentData } from './SegmentData';
 import { SegmentNotificationTarget } from './SegmentNotificationTarget';
-import { StringMap } from './StringMap';
-import { SubscriptionObject , SubscriptionObjectTypeEnum                  } from './SubscriptionObject';
+import { Subscription , SubscriptionTypeEnum                  } from './Subscription';
+import { SubscriptionBody } from './SubscriptionBody';
+import { SubscriptionNotificationTarget          , SubscriptionNotificationTargetTargetChannelEnum   } from './SubscriptionNotificationTarget';
 import { TransferSubscriptionRequestBody } from './TransferSubscriptionRequestBody';
-import { UpdateLiveActivityRequest, UpdateLiveActivityRequestNameEnum  , UpdateLiveActivityRequestEventEnum     } from './UpdateLiveActivityRequest';
+import { UpdateLiveActivityRequest , UpdateLiveActivityRequestEventEnum          } from './UpdateLiveActivityRequest';
 import { UpdateLiveActivitySuccessResponse } from './UpdateLiveActivitySuccessResponse';
-import { UpdatePlayerSuccessResponse } from './UpdatePlayerSuccessResponse';
-import { UpdatePlayerTagsRequestBody } from './UpdatePlayerTagsRequestBody';
-import { UpdatePlayerTagsSuccessResponse } from './UpdatePlayerTagsSuccessResponse';
-import { UpdateSubscriptionRequestBody } from './UpdateSubscriptionRequestBody';
 import { UpdateUserRequest } from './UpdateUserRequest';
 import { User } from './User';
-import { UserIdentityRequestBody } from './UserIdentityRequestBody';
-import { UserIdentityResponse } from './UserIdentityResponse';
-import { UserSubscriptionOptions } from './UserSubscriptionOptions';
+import { UserIdentityBody } from './UserIdentityBody';
+import { WebButton } from './WebButton';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -167,9 +133,9 @@ let enumsMap: Set<string> = new Set<string>([
     "BasicNotificationAggregationEnum",
     "BasicNotificationAllOfAggregationEnum",
     "FilterRelationEnum",
-    "FilterExpressionsRelationEnum",
-    "FilterExpressionsOperatorEnum",
-    "GetNotificationRequestBodyEventsEnum",
+    "FilterExpressionRelationEnum",
+    "FilterExpressionOperatorEnum",
+    "GetNotificationHistoryRequestBodyEventsEnum",
     "NotificationTargetChannelEnum",
     "NotificationAggregationEnum",
     "NotificationTargetTargetChannelEnum",
@@ -177,9 +143,8 @@ let enumsMap: Set<string> = new Set<string>([
     "NotificationWithMetaAggregationEnum",
     "OperatorOperatorEnum",
     "OutcomeDataAggregationEnum",
-    "PlayerNotificationTargetTargetChannelEnum",
-    "SubscriptionObjectTypeEnum",
-    "UpdateLiveActivityRequestNameEnum",
+    "SubscriptionTypeEnum",
+    "SubscriptionNotificationTargetTargetChannelEnum",
     "UpdateLiveActivityRequestEventEnum",
 ]);
 
@@ -188,37 +153,26 @@ let typeMap: {[index: string]: any} = {
     "BasicNotification": BasicNotification,
     "BasicNotificationAllOf": BasicNotificationAllOf,
     "BasicNotificationAllOfAndroidBackgroundLayout": BasicNotificationAllOfAndroidBackgroundLayout,
-    "BeginLiveActivityRequest": BeginLiveActivityRequest,
     "Button": Button,
-    "CancelNotificationSuccessResponse": CancelNotificationSuccessResponse,
     "CreateNotificationSuccessResponse": CreateNotificationSuccessResponse,
-    "CreatePlayerSuccessResponse": CreatePlayerSuccessResponse,
     "CreateSegmentConflictResponse": CreateSegmentConflictResponse,
     "CreateSegmentSuccessResponse": CreateSegmentSuccessResponse,
-    "CreateSubscriptionRequestBody": CreateSubscriptionRequestBody,
     "CreateUserConflictResponse": CreateUserConflictResponse,
     "CreateUserConflictResponseErrorsInner": CreateUserConflictResponseErrorsInner,
     "CreateUserConflictResponseErrorsItemsMeta": CreateUserConflictResponseErrorsItemsMeta,
-    "DeletePlayerNotFoundResponse": DeletePlayerNotFoundResponse,
-    "DeletePlayerSuccessResponse": DeletePlayerSuccessResponse,
-    "DeleteSegmentNotFoundResponse": DeleteSegmentNotFoundResponse,
-    "DeleteSegmentSuccessResponse": DeleteSegmentSuccessResponse,
     "DeliveryData": DeliveryData,
     "ExportEventsSuccessResponse": ExportEventsSuccessResponse,
-    "ExportPlayersRequestBody": ExportPlayersRequestBody,
-    "ExportPlayersSuccessResponse": ExportPlayersSuccessResponse,
+    "ExportSubscriptionsRequestBody": ExportSubscriptionsRequestBody,
+    "ExportSubscriptionsSuccessResponse": ExportSubscriptionsSuccessResponse,
     "Filter": Filter,
-    "FilterExpressions": FilterExpressions,
+    "FilterExpression": FilterExpression,
     "GenericError": GenericError,
-    "GenericErrorErrorsInner": GenericErrorErrorsInner,
-    "GetNotificationRequestBody": GetNotificationRequestBody,
-    "InlineResponse200": InlineResponse200,
-    "InlineResponse2003": InlineResponse2003,
-    "InlineResponse201": InlineResponse201,
-    "InlineResponse202": InlineResponse202,
+    "GenericSuccessBoolResponse": GenericSuccessBoolResponse,
+    "GetNotificationHistoryRequestBody": GetNotificationHistoryRequestBody,
+    "GetSegmentsSuccessResponse": GetSegmentsSuccessResponse,
     "InvalidIdentifierError": InvalidIdentifierError,
+    "LanguageStringMap": LanguageStringMap,
     "Notification": Notification,
-    "Notification200Errors": Notification200Errors,
     "NotificationAllOf": NotificationAllOf,
     "NotificationHistorySuccessResponse": NotificationHistorySuccessResponse,
     "NotificationSlice": NotificationSlice,
@@ -231,30 +185,24 @@ let typeMap: {[index: string]: any} = {
     "PlatformDeliveryData": PlatformDeliveryData,
     "PlatformDeliveryDataEmailAllOf": PlatformDeliveryDataEmailAllOf,
     "PlatformDeliveryDataSmsAllOf": PlatformDeliveryDataSmsAllOf,
-    "Player": Player,
-    "PlayerNotificationTarget": PlayerNotificationTarget,
-    "PlayerNotificationTargetIncludeAliases": PlayerNotificationTargetIncludeAliases,
-    "PlayerSlice": PlayerSlice,
+    "PropertiesBody": PropertiesBody,
     "PropertiesDeltas": PropertiesDeltas,
     "PropertiesObject": PropertiesObject,
     "Purchase": Purchase,
-    "RateLimiterError": RateLimiterError,
+    "RateLimitError": RateLimitError,
     "Segment": Segment,
+    "SegmentData": SegmentData,
     "SegmentNotificationTarget": SegmentNotificationTarget,
-    "StringMap": StringMap,
-    "SubscriptionObject": SubscriptionObject,
+    "Subscription": Subscription,
+    "SubscriptionBody": SubscriptionBody,
+    "SubscriptionNotificationTarget": SubscriptionNotificationTarget,
     "TransferSubscriptionRequestBody": TransferSubscriptionRequestBody,
     "UpdateLiveActivityRequest": UpdateLiveActivityRequest,
     "UpdateLiveActivitySuccessResponse": UpdateLiveActivitySuccessResponse,
-    "UpdatePlayerSuccessResponse": UpdatePlayerSuccessResponse,
-    "UpdatePlayerTagsRequestBody": UpdatePlayerTagsRequestBody,
-    "UpdatePlayerTagsSuccessResponse": UpdatePlayerTagsSuccessResponse,
-    "UpdateSubscriptionRequestBody": UpdateSubscriptionRequestBody,
     "UpdateUserRequest": UpdateUserRequest,
     "User": User,
-    "UserIdentityRequestBody": UserIdentityRequestBody,
-    "UserIdentityResponse": UserIdentityResponse,
-    "UserSubscriptionOptions": UserSubscriptionOptions,
+    "UserIdentityBody": UserIdentityBody,
+    "WebButton": WebButton,
 }
 
 export class ObjectSerializer {

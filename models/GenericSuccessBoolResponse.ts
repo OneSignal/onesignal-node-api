@@ -2,27 +2,27 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.2.2
+ * API Version: 5.0.0-alpha-01
  * Contact: devrel@onesignal.com
  */
 
 import { HttpFile } from '../http/http';
 
-export class InlineResponse200 {
-    'identity'?: { [key: string]: any; };
+export class GenericSuccessBoolResponse {
+    'success'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "identity",
-            "baseName": "identity",
-            "type": "{ [key: string]: any; }",
+            "name": "success",
+            "baseName": "success",
+            "type": "boolean",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return InlineResponse200.attributeTypeMap;
+        return GenericSuccessBoolResponse.attributeTypeMap;
     }
 
     public constructor() {

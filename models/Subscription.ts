@@ -2,15 +2,15 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.2.2
+ * API Version: 5.0.0-alpha-01
  * Contact: devrel@onesignal.com
  */
 
 import { HttpFile } from '../http/http';
 
-export class SubscriptionObject {
+export class Subscription {
     'id'?: string;
-    'type'?: SubscriptionObjectTypeEnum;
+    'type'?: SubscriptionTypeEnum;
     'token'?: string;
     'enabled'?: boolean;
     'notification_types'?: number;
@@ -39,7 +39,7 @@ export class SubscriptionObject {
         {
             "name": "type",
             "baseName": "type",
-            "type": "SubscriptionObjectTypeEnum",
+            "type": "SubscriptionTypeEnum",
             "format": ""
         },
         {
@@ -134,7 +134,7 @@ export class SubscriptionObject {
         }    ];
 
     static getAttributeTypeMap() {
-        return SubscriptionObject.attributeTypeMap;
+        return Subscription.attributeTypeMap;
     }
 
     public constructor() {
@@ -142,5 +142,5 @@ export class SubscriptionObject {
 }
 
 
-export type SubscriptionObjectTypeEnum = "iOSPush" | "AndroidPush" | "FireOSPush" | "ChromeExtensionPush" | "ChromePush" | "WindowsPush" | "SafariLegacyPush" | "FirefoxPush" | "macOSPush" | "HuaweiPush" | "SafariPush" | "Email" | "SMS" ;
+export type SubscriptionTypeEnum = "iOSPush" | "AndroidPush" | "FireOSPush" | "ChromeExtensionPush" | "ChromePush" | "WindowsPush" | "SafariLegacyPush" | "FirefoxPush" | "macOSPush" | "HuaweiPush" | "SafariPush" | "Email" | "SMS" ;
 

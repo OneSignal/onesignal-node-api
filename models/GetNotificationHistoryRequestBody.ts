@@ -2,17 +2,17 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.2.2
+ * API Version: 5.0.0-alpha-01
  * Contact: devrel@onesignal.com
  */
 
 import { HttpFile } from '../http/http';
 
-export class GetNotificationRequestBody {
+export class GetNotificationHistoryRequestBody {
     /**
     * -> \"sent\" - All the devices by player_id that were sent the specified notification_id.  Notifications targeting under 1000 recipients will not have \"sent\" events recorded, but will show \"clicked\" events. \"clicked\" - All the devices by `player_id` that clicked the specified notification_id.
     */
-    'events'?: GetNotificationRequestBodyEventsEnum;
+    'events'?: GetNotificationHistoryRequestBodyEventsEnum;
     /**
     * The email address you would like the report sent.
     */
@@ -25,7 +25,7 @@ export class GetNotificationRequestBody {
         {
             "name": "events",
             "baseName": "events",
-            "type": "GetNotificationRequestBodyEventsEnum",
+            "type": "GetNotificationHistoryRequestBodyEventsEnum",
             "format": ""
         },
         {
@@ -42,7 +42,7 @@ export class GetNotificationRequestBody {
         }    ];
 
     static getAttributeTypeMap() {
-        return GetNotificationRequestBody.attributeTypeMap;
+        return GetNotificationHistoryRequestBody.attributeTypeMap;
     }
 
     public constructor() {
@@ -50,5 +50,5 @@ export class GetNotificationRequestBody {
 }
 
 
-export type GetNotificationRequestBodyEventsEnum = "sent" | "clicked" ;
+export type GetNotificationHistoryRequestBodyEventsEnum = "sent" | "clicked" ;
 

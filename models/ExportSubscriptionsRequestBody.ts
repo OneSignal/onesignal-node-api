@@ -2,13 +2,13 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.2.2
+ * API Version: 5.0.0-alpha-01
  * Contact: devrel@onesignal.com
  */
 
 import { HttpFile } from '../http/http';
 
-export class ExportPlayersRequestBody {
+export class ExportSubscriptionsRequestBody {
     /**
     * Additional fields that you wish to include. Currently supports location, country, rooted, notification_types, ip, external_user_id, web_auth, and web_p256.
     */
@@ -45,7 +45,7 @@ export class ExportPlayersRequestBody {
         }    ];
 
     static getAttributeTypeMap() {
-        return ExportPlayersRequestBody.attributeTypeMap;
+        return ExportSubscriptionsRequestBody.attributeTypeMap;
     }
 
     public constructor() {

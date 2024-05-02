@@ -2,34 +2,48 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 1.2.2
+ * API Version: 5.0.0-alpha-01
  * Contact: devrel@onesignal.com
  */
 
 import { HttpFile } from '../http/http';
 
-export class CreatePlayerSuccessResponse {
-    'success'?: boolean;
-    'id'?: string;
+export class WebButton {
+    'id': string;
+    'text'?: string;
+    'icon'?: string;
+    'url'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "success",
-            "baseName": "success",
-            "type": "boolean",
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "text",
+            "baseName": "text",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "icon",
+            "baseName": "icon",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "url",
+            "baseName": "url",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CreatePlayerSuccessResponse.attributeTypeMap;
+        return WebButton.attributeTypeMap;
     }
 
     public constructor() {
