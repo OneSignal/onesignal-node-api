@@ -48,6 +48,6 @@ export class ServerConfiguration<T extends { [key: string]: string }> implements
     }
 }
 
-export const server1 = new ServerConfiguration<{  }>("https://onesignal.com/api/v1", {  })
+export const server1 = new ServerConfiguration<{  }>("https://api.onesignal.com", {  })
 
 export const servers = [server1];

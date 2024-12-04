@@ -1,6 +1,6 @@
 # .DefaultApi
 
-All URIs are relative to *https://onesignal.com/api/v1*
+All URIs are relative to *https://api.onesignal.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -937,7 +937,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[app_key](README.md#app_key)
 
 ### HTTP request headers
 
