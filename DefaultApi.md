@@ -863,7 +863,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[rest_api_key](README.md#rest_api_key)
 
 ### HTTP request headers
 

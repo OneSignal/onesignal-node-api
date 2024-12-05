@@ -2,7 +2,7 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 5.0.0-alpha-01
+ * API Version: 5.0.1
  * Contact: devrel@onesignal.com
  */
 
