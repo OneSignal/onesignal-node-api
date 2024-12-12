@@ -157,7 +157,7 @@ notification.contents = {
 notification.headings = {
   en: "Gig'em Ags"
 }
-const notification = await client.createNotification(notification);
+const createdNotification = await client.createNotification(notification);
 ```
 ### Creating a notification using Filters
 Sends a notification to your users filtered by specific criteria.
@@ -186,7 +186,7 @@ notification.filters = [
     },
 ];
 
-const notification = await client.createNotification(notification);
+const createdNotification = await client.createNotification(notification);
 ```
 
 ### Canceling a notification
