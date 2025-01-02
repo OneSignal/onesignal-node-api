@@ -2,41 +2,23 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 5.0.1
+ * API Version: 1.3.0
  * Contact: devrel@onesignal.com
  */
 
-import { LanguageStringMap } from './LanguageStringMap';
 import { HttpFile } from '../http/http';
 
 export class UpdateLiveActivityRequest {
     /**
-    * An internal name to assist with your campaign organization. This does not get displayed in the message itself.
+    * Type of live activity
     */
-    'name': string;
+    'name': UpdateLiveActivityRequestNameEnum;
     'event': UpdateLiveActivityRequestEventEnum;
-    /**
-    * This must match the ContentState interface you have defined within your Live Activity in your app.
-    */
     'event_updates': object;
-    'contents'?: LanguageStringMap;
-    'headings'?: LanguageStringMap;
     /**
-    * Sound file that is included in your app to play instead of the default device notification sound. Omit to disable vibration and sound for the notification.
+    * Timestamp; only allowed if event is \"end\"
     */
-    'sound'?: string;
-    /**
-    * Accepts Unix timestamp in seconds. When time reaches the configured stale date, the system considers the Live Activity out of date, and the ActivityState of the Live Activity changes to ActivityState.stale.
-    */
-    'stale_date'?: number;
-    /**
-    * Accepts Unix timestamp in seconds; only allowed if event is \"end\"
-    */
-    'dismissal_date'?: number;
-    /**
-    * Delivery priority through the the push provider (APNs). Pass 10 for higher priority notifications, or 5 for lower priority notifications. Lower priority notifications are sent based on the power considerations of the end user\'s device. If not set, defaults to 10. Some providers (APNs) allow for a limited budget of high priority notifications per hour, and if that budget is exceeded, the provider may throttle notification delivery.
-    */
-    'priority'?: number;
+    'dismiss_at'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -44,7 +26,7 @@ export class UpdateLiveActivityRequest {
         {
             "name": "name",
             "baseName": "name",
-            "type": "string",
+            "type": "UpdateLiveActivityRequestNameEnum",
             "format": ""
         },
         {
@@ -60,38 +42,8 @@ export class UpdateLiveActivityRequest {
             "format": ""
         },
         {
-            "name": "contents",
-            "baseName": "contents",
-            "type": "LanguageStringMap",
-            "format": ""
-        },
-        {
-            "name": "headings",
-            "baseName": "headings",
-            "type": "LanguageStringMap",
-            "format": ""
-        },
-        {
-            "name": "sound",
-            "baseName": "sound",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "stale_date",
-            "baseName": "stale_date",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "dismissal_date",
-            "baseName": "dismissal_date",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "priority",
-            "baseName": "priority",
+            "name": "dismiss_at",
+            "baseName": "dismiss_at",
             "type": "number",
             "format": ""
         }    ];
@@ -105,5 +57,6 @@ export class UpdateLiveActivityRequest {
 }
 
 
+export type UpdateLiveActivityRequestNameEnum = "headings" | "contents" | "ios_sound" | "priority_level" ;
 export type UpdateLiveActivityRequestEventEnum = "update" | "end" ;
 
