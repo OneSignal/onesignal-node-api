@@ -6,26 +6,37 @@ import { App } from '../models/App';
 import { BasicNotification } from '../models/BasicNotification';
 import { BasicNotificationAllOf } from '../models/BasicNotificationAllOf';
 import { BasicNotificationAllOfAndroidBackgroundLayout } from '../models/BasicNotificationAllOfAndroidBackgroundLayout';
+import { BeginLiveActivityRequest } from '../models/BeginLiveActivityRequest';
 import { Button } from '../models/Button';
+import { CancelNotificationSuccessResponse } from '../models/CancelNotificationSuccessResponse';
 import { CreateNotificationSuccessResponse } from '../models/CreateNotificationSuccessResponse';
+import { CreatePlayerSuccessResponse } from '../models/CreatePlayerSuccessResponse';
 import { CreateSegmentConflictResponse } from '../models/CreateSegmentConflictResponse';
 import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
+import { CreateSubscriptionRequestBody } from '../models/CreateSubscriptionRequestBody';
 import { CreateUserConflictResponse } from '../models/CreateUserConflictResponse';
 import { CreateUserConflictResponseErrorsInner } from '../models/CreateUserConflictResponseErrorsInner';
 import { CreateUserConflictResponseErrorsItemsMeta } from '../models/CreateUserConflictResponseErrorsItemsMeta';
+import { DeletePlayerNotFoundResponse } from '../models/DeletePlayerNotFoundResponse';
+import { DeletePlayerSuccessResponse } from '../models/DeletePlayerSuccessResponse';
+import { DeleteSegmentNotFoundResponse } from '../models/DeleteSegmentNotFoundResponse';
+import { DeleteSegmentSuccessResponse } from '../models/DeleteSegmentSuccessResponse';
 import { DeliveryData } from '../models/DeliveryData';
 import { ExportEventsSuccessResponse } from '../models/ExportEventsSuccessResponse';
-import { ExportSubscriptionsRequestBody } from '../models/ExportSubscriptionsRequestBody';
-import { ExportSubscriptionsSuccessResponse } from '../models/ExportSubscriptionsSuccessResponse';
+import { ExportPlayersRequestBody } from '../models/ExportPlayersRequestBody';
+import { ExportPlayersSuccessResponse } from '../models/ExportPlayersSuccessResponse';
 import { Filter } from '../models/Filter';
-import { FilterExpression } from '../models/FilterExpression';
+import { FilterExpressions } from '../models/FilterExpressions';
 import { GenericError } from '../models/GenericError';
-import { GenericSuccessBoolResponse } from '../models/GenericSuccessBoolResponse';
-import { GetNotificationHistoryRequestBody } from '../models/GetNotificationHistoryRequestBody';
-import { GetSegmentsSuccessResponse } from '../models/GetSegmentsSuccessResponse';
+import { GenericErrorErrorsInner } from '../models/GenericErrorErrorsInner';
+import { GetNotificationRequestBody } from '../models/GetNotificationRequestBody';
+import { InlineResponse200 } from '../models/InlineResponse200';
+import { InlineResponse2003 } from '../models/InlineResponse2003';
+import { InlineResponse201 } from '../models/InlineResponse201';
+import { InlineResponse202 } from '../models/InlineResponse202';
 import { InvalidIdentifierError } from '../models/InvalidIdentifierError';
-import { LanguageStringMap } from '../models/LanguageStringMap';
 import { Notification } from '../models/Notification';
+import { Notification200Errors } from '../models/Notification200Errors';
 import { NotificationAllOf } from '../models/NotificationAllOf';
 import { NotificationHistorySuccessResponse } from '../models/NotificationHistorySuccessResponse';
 import { NotificationSlice } from '../models/NotificationSlice';
@@ -38,27 +49,54 @@ import { OutcomesData } from '../models/OutcomesData';
 import { PlatformDeliveryData } from '../models/PlatformDeliveryData';
 import { PlatformDeliveryDataEmailAllOf } from '../models/PlatformDeliveryDataEmailAllOf';
 import { PlatformDeliveryDataSmsAllOf } from '../models/PlatformDeliveryDataSmsAllOf';
-import { PropertiesBody } from '../models/PropertiesBody';
+import { Player } from '../models/Player';
+import { PlayerNotificationTarget } from '../models/PlayerNotificationTarget';
+import { PlayerNotificationTargetIncludeAliases } from '../models/PlayerNotificationTargetIncludeAliases';
+import { PlayerSlice } from '../models/PlayerSlice';
 import { PropertiesDeltas } from '../models/PropertiesDeltas';
 import { PropertiesObject } from '../models/PropertiesObject';
 import { Purchase } from '../models/Purchase';
-import { RateLimitError } from '../models/RateLimitError';
+import { RateLimiterError } from '../models/RateLimiterError';
 import { Segment } from '../models/Segment';
-import { SegmentData } from '../models/SegmentData';
 import { SegmentNotificationTarget } from '../models/SegmentNotificationTarget';
-import { Subscription } from '../models/Subscription';
-import { SubscriptionBody } from '../models/SubscriptionBody';
-import { SubscriptionNotificationTarget } from '../models/SubscriptionNotificationTarget';
+import { StringMap } from '../models/StringMap';
+import { SubscriptionObject } from '../models/SubscriptionObject';
 import { TransferSubscriptionRequestBody } from '../models/TransferSubscriptionRequestBody';
 import { UpdateLiveActivityRequest } from '../models/UpdateLiveActivityRequest';
 import { UpdateLiveActivitySuccessResponse } from '../models/UpdateLiveActivitySuccessResponse';
+import { UpdatePlayerSuccessResponse } from '../models/UpdatePlayerSuccessResponse';
+import { UpdatePlayerTagsRequestBody } from '../models/UpdatePlayerTagsRequestBody';
+import { UpdatePlayerTagsSuccessResponse } from '../models/UpdatePlayerTagsSuccessResponse';
+import { UpdateSubscriptionRequestBody } from '../models/UpdateSubscriptionRequestBody';
 import { UpdateUserRequest } from '../models/UpdateUserRequest';
 import { User } from '../models/User';
-import { UserIdentityBody } from '../models/UserIdentityBody';
-import { WebButton } from '../models/WebButton';
+import { UserIdentityRequestBody } from '../models/UserIdentityRequestBody';
+import { UserIdentityResponse } from '../models/UserIdentityResponse';
+import { UserSubscriptionOptions } from '../models/UserSubscriptionOptions';
 
 import { ObservableDefaultApi } from "./ObservableAPI";
 import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
+
+export interface DefaultApiBeginLiveActivityRequest {
+    /**
+     * The OneSignal App ID for your app.  Available in Keys &amp; IDs.
+     * @type string
+     * @memberof DefaultApibeginLiveActivity
+     */
+    appId: string
+    /**
+     * Live Activity record ID
+     * @type string
+     * @memberof DefaultApibeginLiveActivity
+     */
+    activityId: string
+    /**
+     * 
+     * @type BeginLiveActivityRequest
+     * @memberof DefaultApibeginLiveActivity
+     */
+    beginLiveActivityRequest: BeginLiveActivityRequest
+}
 
 export interface DefaultApiCancelNotificationRequest {
     /**
@@ -73,54 +111,6 @@ export interface DefaultApiCancelNotificationRequest {
      * @memberof DefaultApicancelNotification
      */
     notificationId: string
-}
-
-export interface DefaultApiCreateAliasRequest {
-    /**
-     * 
-     * @type string
-     * @memberof DefaultApicreateAlias
-     */
-    appId: string
-    /**
-     * 
-     * @type string
-     * @memberof DefaultApicreateAlias
-     */
-    aliasLabel: string
-    /**
-     * 
-     * @type string
-     * @memberof DefaultApicreateAlias
-     */
-    aliasId: string
-    /**
-     * 
-     * @type UserIdentityBody
-     * @memberof DefaultApicreateAlias
-     */
-    userIdentityBody: UserIdentityBody
-}
-
-export interface DefaultApiCreateAliasBySubscriptionRequest {
-    /**
-     * 
-     * @type string
-     * @memberof DefaultApicreateAliasBySubscription
-     */
-    appId: string
-    /**
-     * 
-     * @type string
-     * @memberof DefaultApicreateAliasBySubscription
-     */
-    subscriptionId: string
-    /**
-     * 
-     * @type UserIdentityBody
-     * @memberof DefaultApicreateAliasBySubscription
-     */
-    userIdentityBody: UserIdentityBody
 }
 
 export interface DefaultApiCreateAppRequest {
@@ -141,17 +131,26 @@ export interface DefaultApiCreateNotificationRequest {
     notification: Notification
 }
 
-export interface DefaultApiCreateSegmentRequest {
+export interface DefaultApiCreatePlayerRequest {
+    /**
+     * 
+     * @type Player
+     * @memberof DefaultApicreatePlayer
+     */
+    player: Player
+}
+
+export interface DefaultApiCreateSegmentsRequest {
     /**
      * The OneSignal App ID for your app.  Available in Keys &amp; IDs.
      * @type string
-     * @memberof DefaultApicreateSegment
+     * @memberof DefaultApicreateSegments
      */
     appId: string
     /**
      * 
      * @type Segment
-     * @memberof DefaultApicreateSegment
+     * @memberof DefaultApicreateSegments
      */
     segment?: Segment
 }
@@ -177,10 +176,10 @@ export interface DefaultApiCreateSubscriptionRequest {
     aliasId: string
     /**
      * 
-     * @type SubscriptionBody
+     * @type CreateSubscriptionRequestBody
      * @memberof DefaultApicreateSubscription
      */
-    subscriptionBody: SubscriptionBody
+    createSubscriptionRequestBody: CreateSubscriptionRequestBody
 }
 
 export interface DefaultApiCreateUserRequest {
@@ -225,17 +224,32 @@ export interface DefaultApiDeleteAliasRequest {
     aliasLabelToDelete: string
 }
 
-export interface DefaultApiDeleteSegmentRequest {
+export interface DefaultApiDeletePlayerRequest {
     /**
      * The OneSignal App ID for your app.  Available in Keys &amp; IDs.
      * @type string
-     * @memberof DefaultApideleteSegment
+     * @memberof DefaultApideletePlayer
+     */
+    appId: string
+    /**
+     * The OneSignal player_id
+     * @type string
+     * @memberof DefaultApideletePlayer
+     */
+    playerId: string
+}
+
+export interface DefaultApiDeleteSegmentsRequest {
+    /**
+     * The OneSignal App ID for your app.  Available in Keys &amp; IDs.
+     * @type string
+     * @memberof DefaultApideleteSegments
      */
     appId: string
     /**
      * The segment_id can be found in the URL of the segment when viewing it in the dashboard.
      * @type string
-     * @memberof DefaultApideleteSegment
+     * @memberof DefaultApideleteSegments
      */
     segmentId: string
 }
@@ -276,6 +290,27 @@ export interface DefaultApiDeleteUserRequest {
     aliasId: string
 }
 
+export interface DefaultApiEndLiveActivityRequest {
+    /**
+     * The OneSignal App ID for your app.  Available in Keys &amp; IDs.
+     * @type string
+     * @memberof DefaultApiendLiveActivity
+     */
+    appId: string
+    /**
+     * Live Activity record ID
+     * @type string
+     * @memberof DefaultApiendLiveActivity
+     */
+    activityId: string
+    /**
+     * Subscription ID
+     * @type string
+     * @memberof DefaultApiendLiveActivity
+     */
+    subscriptionId: string
+}
+
 export interface DefaultApiExportEventsRequest {
     /**
      * The ID of the notification to export events from.
@@ -291,55 +326,76 @@ export interface DefaultApiExportEventsRequest {
     appId: string
 }
 
-export interface DefaultApiExportSubscriptionsRequest {
+export interface DefaultApiExportPlayersRequest {
     /**
      * The app ID that you want to export devices from
      * @type string
-     * @memberof DefaultApiexportSubscriptions
+     * @memberof DefaultApiexportPlayers
      */
     appId: string
     /**
      * 
-     * @type ExportSubscriptionsRequestBody
-     * @memberof DefaultApiexportSubscriptions
+     * @type ExportPlayersRequestBody
+     * @memberof DefaultApiexportPlayers
      */
-    exportSubscriptionsRequestBody?: ExportSubscriptionsRequestBody
+    exportPlayersRequestBody?: ExportPlayersRequestBody
 }
 
-export interface DefaultApiGetAliasesRequest {
+export interface DefaultApiFetchAliasesRequest {
     /**
      * 
      * @type string
-     * @memberof DefaultApigetAliases
+     * @memberof DefaultApifetchAliases
      */
     appId: string
     /**
      * 
      * @type string
-     * @memberof DefaultApigetAliases
+     * @memberof DefaultApifetchAliases
+     */
+    subscriptionId: string
+}
+
+export interface DefaultApiFetchUserRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApifetchUser
+     */
+    appId: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApifetchUser
      */
     aliasLabel: string
     /**
      * 
      * @type string
-     * @memberof DefaultApigetAliases
+     * @memberof DefaultApifetchUser
      */
     aliasId: string
 }
 
-export interface DefaultApiGetAliasesBySubscriptionRequest {
+export interface DefaultApiFetchUserIdentityRequest {
     /**
      * 
      * @type string
-     * @memberof DefaultApigetAliasesBySubscription
+     * @memberof DefaultApifetchUserIdentity
      */
     appId: string
     /**
      * 
      * @type string
-     * @memberof DefaultApigetAliasesBySubscription
+     * @memberof DefaultApifetchUserIdentity
      */
-    subscriptionId: string
+    aliasLabel: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApifetchUserIdentity
+     */
+    aliasId: string
 }
 
 export interface DefaultApiGetAppRequest {
@@ -352,6 +408,21 @@ export interface DefaultApiGetAppRequest {
 }
 
 export interface DefaultApiGetAppsRequest {
+}
+
+export interface DefaultApiGetEligibleIamsRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApigetEligibleIams
+     */
+    appId: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApigetEligibleIams
+     */
+    subscriptionId: string
 }
 
 export interface DefaultApiGetNotificationRequest {
@@ -378,10 +449,10 @@ export interface DefaultApiGetNotificationHistoryRequest {
     notificationId: string
     /**
      * 
-     * @type GetNotificationHistoryRequestBody
+     * @type GetNotificationRequestBody
      * @memberof DefaultApigetNotificationHistory
      */
-    getNotificationHistoryRequestBody: GetNotificationHistoryRequestBody
+    getNotificationRequestBody: GetNotificationRequestBody
 }
 
 export interface DefaultApiGetNotificationsRequest {
@@ -450,46 +521,94 @@ export interface DefaultApiGetOutcomesRequest {
     outcomeAttribution?: string
 }
 
-export interface DefaultApiGetSegmentsRequest {
+export interface DefaultApiGetPlayerRequest {
     /**
-     * The OneSignal App ID for your app.  Available in Keys &amp; IDs.
+     * Your app_id for this device
      * @type string
-     * @memberof DefaultApigetSegments
+     * @memberof DefaultApigetPlayer
      */
     appId: string
     /**
-     * Segments are listed in ascending order of created_at date. offset will omit that number of segments from the beginning of the list. Eg offset 5, will remove the 5 earliest created Segments.
-     * @type number
-     * @memberof DefaultApigetSegments
+     * Player\&#39;s OneSignal ID
+     * @type string
+     * @memberof DefaultApigetPlayer
      */
-    offset?: number
+    playerId: string
     /**
-     * The amount of Segments in the response. Maximum 300.
-     * @type number
-     * @memberof DefaultApigetSegments
+     * Email - Only required if you have enabled Identity Verification and device_type is email (11).
+     * @type string
+     * @memberof DefaultApigetPlayer
      */
-    limit?: number
+    emailAuthHash?: string
 }
 
-export interface DefaultApiGetUserRequest {
+export interface DefaultApiGetPlayersRequest {
+    /**
+     * The app ID that you want to view players from
+     * @type string
+     * @memberof DefaultApigetPlayers
+     */
+    appId: string
+    /**
+     * How many devices to return. Max is 300. Default is 300
+     * @type number
+     * @memberof DefaultApigetPlayers
+     */
+    limit?: number
+    /**
+     * Result offset. Default is 0. Results are sorted by id;
+     * @type number
+     * @memberof DefaultApigetPlayers
+     */
+    offset?: number
+}
+
+export interface DefaultApiIdentifyUserByAliasRequest {
     /**
      * 
      * @type string
-     * @memberof DefaultApigetUser
+     * @memberof DefaultApiidentifyUserByAlias
      */
     appId: string
     /**
      * 
      * @type string
-     * @memberof DefaultApigetUser
+     * @memberof DefaultApiidentifyUserByAlias
      */
     aliasLabel: string
     /**
      * 
      * @type string
-     * @memberof DefaultApigetUser
+     * @memberof DefaultApiidentifyUserByAlias
      */
     aliasId: string
+    /**
+     * 
+     * @type UserIdentityRequestBody
+     * @memberof DefaultApiidentifyUserByAlias
+     */
+    userIdentityRequestBody: UserIdentityRequestBody
+}
+
+export interface DefaultApiIdentifyUserBySubscriptionIdRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApiidentifyUserBySubscriptionId
+     */
+    appId: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApiidentifyUserBySubscriptionId
+     */
+    subscriptionId: string
+    /**
+     * 
+     * @type UserIdentityRequestBody
+     * @memberof DefaultApiidentifyUserBySubscriptionId
+     */
+    userIdentityRequestBody: UserIdentityRequestBody
 }
 
 export interface DefaultApiTransferSubscriptionRequest {
@@ -511,27 +630,6 @@ export interface DefaultApiTransferSubscriptionRequest {
      * @memberof DefaultApitransferSubscription
      */
     transferSubscriptionRequestBody: TransferSubscriptionRequestBody
-}
-
-export interface DefaultApiUnsubscribeEmailWithTokenRequest {
-    /**
-     * The OneSignal App ID for your app.  Available in Keys &amp; IDs.
-     * @type string
-     * @memberof DefaultApiunsubscribeEmailWithToken
-     */
-    appId: string
-    /**
-     * The id of the message found in the creation notification POST response, View Notifications GET response, or URL within the Message Report.
-     * @type string
-     * @memberof DefaultApiunsubscribeEmailWithToken
-     */
-    notificationId: string
-    /**
-     * The unsubscribe token that is generated via liquid syntax in {{subscription.unsubscribe_token}} when personalizing an email.
-     * @type string
-     * @memberof DefaultApiunsubscribeEmailWithToken
-     */
-    token: string
 }
 
 export interface DefaultApiUpdateAppRequest {
@@ -570,6 +668,42 @@ export interface DefaultApiUpdateLiveActivityRequest {
     updateLiveActivityRequest: UpdateLiveActivityRequest
 }
 
+export interface DefaultApiUpdatePlayerRequest {
+    /**
+     * Player\&#39;s OneSignal ID
+     * @type string
+     * @memberof DefaultApiupdatePlayer
+     */
+    playerId: string
+    /**
+     * 
+     * @type Player
+     * @memberof DefaultApiupdatePlayer
+     */
+    player: Player
+}
+
+export interface DefaultApiUpdatePlayerTagsRequest {
+    /**
+     * The OneSignal App ID the user record is found under.
+     * @type string
+     * @memberof DefaultApiupdatePlayerTags
+     */
+    appId: string
+    /**
+     * The External User ID mapped to teh device record in OneSignal.  Must be actively set on the device to be updated.
+     * @type string
+     * @memberof DefaultApiupdatePlayerTags
+     */
+    externalUserId: string
+    /**
+     * 
+     * @type UpdatePlayerTagsRequestBody
+     * @memberof DefaultApiupdatePlayerTags
+     */
+    updatePlayerTagsRequestBody?: UpdatePlayerTagsRequestBody
+}
+
 export interface DefaultApiUpdateSubscriptionRequest {
     /**
      * 
@@ -585,10 +719,10 @@ export interface DefaultApiUpdateSubscriptionRequest {
     subscriptionId: string
     /**
      * 
-     * @type SubscriptionBody
+     * @type UpdateSubscriptionRequestBody
      * @memberof DefaultApiupdateSubscription
      */
-    subscriptionBody: SubscriptionBody
+    updateSubscriptionRequestBody: UpdateSubscriptionRequestBody
 }
 
 export interface DefaultApiUpdateUserRequest {
@@ -626,28 +760,21 @@ export class ObjectDefaultApi {
     }
 
     /**
+     * Starts a Live Activity
+     * Start Live Activity
+     * @param param the request object
+     */
+    public beginLiveActivity(param: DefaultApiBeginLiveActivityRequest, options?: Configuration): Promise<void> {
+        return this.api.beginLiveActivity(param.appId, param.activityId, param.beginLiveActivityRequest,  options).toPromise();
+    }
+
+    /**
      * Used to stop a scheduled or currently outgoing notification
      * Stop a scheduled or currently outgoing notification
      * @param param the request object
      */
-    public cancelNotification(param: DefaultApiCancelNotificationRequest, options?: Configuration): Promise<GenericSuccessBoolResponse> {
+    public cancelNotification(param: DefaultApiCancelNotificationRequest, options?: Configuration): Promise<CancelNotificationSuccessResponse> {
         return this.api.cancelNotification(param.appId, param.notificationId,  options).toPromise();
-    }
-
-    /**
-     * Upserts one or more Aliases to an existing User identified by (:alias_label, :alias_id).
-     * @param param the request object
-     */
-    public createAlias(param: DefaultApiCreateAliasRequest, options?: Configuration): Promise<UserIdentityBody> {
-        return this.api.createAlias(param.appId, param.aliasLabel, param.aliasId, param.userIdentityBody,  options).toPromise();
-    }
-
-    /**
-     * Upserts one or more Aliases for the User identified by :subscription_id.
-     * @param param the request object
-     */
-    public createAliasBySubscription(param: DefaultApiCreateAliasBySubscriptionRequest, options?: Configuration): Promise<UserIdentityBody> {
-        return this.api.createAliasBySubscription(param.appId, param.subscriptionId, param.userIdentityBody,  options).toPromise();
     }
 
     /**
@@ -669,20 +796,29 @@ export class ObjectDefaultApi {
     }
 
     /**
-     * Create a segment visible and usable in the dashboard and API - Required: OneSignal Paid Plan The Create Segment method is used when you want your server to programmatically create a segment instead of using the OneSignal Dashboard UI. Just like creating Segments from the dashboard you can pass in filters with multiple \"AND\" or \"OR\" operator\'s. &#x1F6A7; Does Not Update Segments This endpoint will only create segments, it does not edit or update currently created Segments. You will need to use the Delete Segment endpoint and re-create it with this endpoint to edit. 
-     * Create Segment
+     * Register a new device to one of your OneSignal apps &#x1F6A7; Don\'t use this This API endpoint is designed to be used from our open source Mobile and Web Push SDKs. It is not designed for developers to use it directly, unless instructed to do so by OneSignal support. If you use this method instead of our SDKs, many OneSignal features such as conversion tracking, timezone tracking, language detection, and rich-push won\'t work out of the box. It will also make it harder to identify possible setup issues. This method is used to register a new device with OneSignal. If a device is already registered with the specified identifier, then this will update the existing device record instead of creating a new one. The returned player is a player / user ID. Use the returned ID to send push notifications to this specific user later, or to include this player when sending to a set of users. &#x1F6A7; iOS Must set test_type to 1 when building your iOS app as development. Omit this field in your production app builds. 
+     * Add a device
      * @param param the request object
      */
-    public createSegment(param: DefaultApiCreateSegmentRequest, options?: Configuration): Promise<CreateSegmentSuccessResponse> {
-        return this.api.createSegment(param.appId, param.segment,  options).toPromise();
+    public createPlayer(param: DefaultApiCreatePlayerRequest, options?: Configuration): Promise<CreatePlayerSuccessResponse> {
+        return this.api.createPlayer(param.player,  options).toPromise();
+    }
+
+    /**
+     * Create segments visible and usable in the dashboard and API - Required: OneSignal Paid Plan The Create Segment method is used when you want your server to programmatically create a segment instead of using the OneSignal Dashboard UI. Just like creating Segments from the dashboard you can pass in filters with multiple \"AND\" or \"OR\" operator\'s. &#x1F6A7; Does Not Update Segments This endpoint will only create segments, it does not edit or update currently created Segments. You will need to use the Delete Segments endpoint and re-create it with this endpoint to edit. 
+     * Create Segments
+     * @param param the request object
+     */
+    public createSegments(param: DefaultApiCreateSegmentsRequest, options?: Configuration): Promise<CreateSegmentSuccessResponse> {
+        return this.api.createSegments(param.appId, param.segment,  options).toPromise();
     }
 
     /**
      * Creates a new Subscription under the User provided. Useful to add email addresses and SMS numbers to the User.
      * @param param the request object
      */
-    public createSubscription(param: DefaultApiCreateSubscriptionRequest, options?: Configuration): Promise<SubscriptionBody> {
-        return this.api.createSubscription(param.appId, param.aliasLabel, param.aliasId, param.subscriptionBody,  options).toPromise();
+    public createSubscription(param: DefaultApiCreateSubscriptionRequest, options?: Configuration): Promise<InlineResponse201> {
+        return this.api.createSubscription(param.appId, param.aliasLabel, param.aliasId, param.createSubscriptionRequestBody,  options).toPromise();
     }
 
     /**
@@ -697,17 +833,26 @@ export class ObjectDefaultApi {
      * Deletes an alias by alias label
      * @param param the request object
      */
-    public deleteAlias(param: DefaultApiDeleteAliasRequest, options?: Configuration): Promise<UserIdentityBody> {
+    public deleteAlias(param: DefaultApiDeleteAliasRequest, options?: Configuration): Promise<InlineResponse200> {
         return this.api.deleteAlias(param.appId, param.aliasLabel, param.aliasId, param.aliasLabelToDelete,  options).toPromise();
     }
 
     /**
-     * Delete a segment (not user devices) - Required: OneSignal Paid Plan You can delete a segment under your app by calling this API. You must provide an API key in the Authorization header that has admin access on the app. The segment_id can be found in the URL of the segment when viewing it in the dashboard. 
-     * Delete Segment
+     * Delete player - Required: Used to delete a single, specific Player ID record from a specific OneSignal app. 
+     * Delete a user record
      * @param param the request object
      */
-    public deleteSegment(param: DefaultApiDeleteSegmentRequest, options?: Configuration): Promise<GenericSuccessBoolResponse> {
-        return this.api.deleteSegment(param.appId, param.segmentId,  options).toPromise();
+    public deletePlayer(param: DefaultApiDeletePlayerRequest, options?: Configuration): Promise<DeletePlayerSuccessResponse> {
+        return this.api.deletePlayer(param.appId, param.playerId,  options).toPromise();
+    }
+
+    /**
+     * Delete segments (not user devices) - Required: OneSignal Paid Plan You can delete a segment under your app by calling this API. You must provide an API key in the Authorization header that has admin access on the app. The segment_id can be found in the URL of the segment when viewing it in the dashboard. 
+     * Delete Segments
+     * @param param the request object
+     */
+    public deleteSegments(param: DefaultApiDeleteSegmentsRequest, options?: Configuration): Promise<DeleteSegmentSuccessResponse> {
+        return this.api.deleteSegments(param.appId, param.segmentId,  options).toPromise();
     }
 
     /**
@@ -727,6 +872,15 @@ export class ObjectDefaultApi {
     }
 
     /**
+     * Stops a Live Activity
+     * Stop Live Activity
+     * @param param the request object
+     */
+    public endLiveActivity(param: DefaultApiEndLiveActivityRequest, options?: Configuration): Promise<void> {
+        return this.api.endLiveActivity(param.appId, param.activityId, param.subscriptionId,  options).toPromise();
+    }
+
+    /**
      * Generate a compressed CSV report of all of the events data for a notification. This will return a URL immediately upon success but it may take several minutes for the CSV to become available at that URL depending on the volume of data. Only one export can be in-progress per OneSignal account at any given time.
      * Export CSV of Events
      * @param param the request object
@@ -737,27 +891,35 @@ export class ObjectDefaultApi {
 
     /**
      * Generate a compressed CSV export of all of your current user data This method can be used to generate a compressed CSV export of all of your current user data. It is a much faster alternative than retrieving this data using the /players API endpoint. The file will be compressed using GZip. The file may take several minutes to generate depending on the number of users in your app. The URL generated will be available for 3 days and includes random v4 uuid as part of the resource name to be unguessable. &#x1F6A7; 403 Error Responses          You can test if it is complete by making a GET request to the csv_file_url value. This file may take time to generate depending on how many device records are being pulled. If the file is not ready, a 403 error will be returned. Otherwise the file itself will be returned. &#x1F6A7; Requires Authentication Key Requires your OneSignal App\'s REST API Key, available in Keys & IDs. &#x1F6A7; Concurrent Exports Only one concurrent export is allowed per OneSignal account. Please ensure you have successfully downloaded the .csv.gz file before exporting another app. CSV File Format: - Default Columns:   | Field | Details |   | --- | --- |   | id | OneSignal Player Id |   | identifier | Push Token |   | session_count | Number of times they visited the app or site   | language | Device language code |   | timezone | Number of seconds away from UTC. Example: -28800 |   | game_version | Version of your mobile app gathered from Android Studio versionCode in your App/build.gradle and iOS uses kCFBundleVersionKey in Xcode. |   | device_os | Device Operating System Version. Example: 80 = Chrome 80, 9 = Android 9 |   | device_type | Device Operating System Type |   | device_model | Device Hardware String Code. Example: Mobile Web Subscribers will have `Linux armv` |   | ad_id | Based on the Google Advertising Id for Android, identifierForVendor for iOS. OptedOut means user turned off Advertising tracking on the device. |   | tags | Current OneSignal Data Tags on the device. |   | last_active | Date and time the user last opened the mobile app or visited the site. |   | playtime | Total amount of time in seconds the user had the mobile app open. |   | amount_spent |  Mobile only - amount spent in USD on In-App Purchases. |    | created_at | Date and time the device record was created in OneSignal. Mobile - first time they opened the app with OneSignal SDK. Web - first time the user subscribed to the site. |   | invalid_identifier | t = unsubscribed, f = subscibed |   | badge_count | Current number of badges on the device | - Extra Columns:   | Field | Details |   | --- | --- |   | external_user_id | Your User Id set on the device |   | notification_types | Notification types |   | location | Location points (Latitude and Longitude) set on the device. |   | country | Country code |   | rooted | Android device rooted or not |   | ip | IP Address of the device if being tracked. See Handling Personal Data. |   | web_auth | Web Only authorization key. |   | web_p256 | Web Only p256 key. | 
-     * Export CSV of Subscriptions
+     * Export CSV of Players
      * @param param the request object
      */
-    public exportSubscriptions(param: DefaultApiExportSubscriptionsRequest, options?: Configuration): Promise<ExportSubscriptionsSuccessResponse> {
-        return this.api.exportSubscriptions(param.appId, param.exportSubscriptionsRequestBody,  options).toPromise();
-    }
-
-    /**
-     * Lists all Aliases for the User identified by (:alias_label, :alias_id).
-     * @param param the request object
-     */
-    public getAliases(param: DefaultApiGetAliasesRequest, options?: Configuration): Promise<UserIdentityBody> {
-        return this.api.getAliases(param.appId, param.aliasLabel, param.aliasId,  options).toPromise();
+    public exportPlayers(param: DefaultApiExportPlayersRequest, options?: Configuration): Promise<ExportPlayersSuccessResponse> {
+        return this.api.exportPlayers(param.appId, param.exportPlayersRequestBody,  options).toPromise();
     }
 
     /**
      * Lists all Aliases for the User identified by :subscription_id.
      * @param param the request object
      */
-    public getAliasesBySubscription(param: DefaultApiGetAliasesBySubscriptionRequest, options?: Configuration): Promise<UserIdentityBody> {
-        return this.api.getAliasesBySubscription(param.appId, param.subscriptionId,  options).toPromise();
+    public fetchAliases(param: DefaultApiFetchAliasesRequest, options?: Configuration): Promise<UserIdentityResponse> {
+        return this.api.fetchAliases(param.appId, param.subscriptionId,  options).toPromise();
+    }
+
+    /**
+     * Returns the User’s properties, Aliases, and Subscriptions.
+     * @param param the request object
+     */
+    public fetchUser(param: DefaultApiFetchUserRequest, options?: Configuration): Promise<User> {
+        return this.api.fetchUser(param.appId, param.aliasLabel, param.aliasId,  options).toPromise();
+    }
+
+    /**
+     * Lists all Aliases for the User identified by (:alias_label, :alias_id).
+     * @param param the request object
+     */
+    public fetchUserIdentity(param: DefaultApiFetchUserIdentityRequest, options?: Configuration): Promise<InlineResponse200> {
+        return this.api.fetchUserIdentity(param.appId, param.aliasLabel, param.aliasId,  options).toPromise();
     }
 
     /**
@@ -779,6 +941,14 @@ export class ObjectDefaultApi {
     }
 
     /**
+     * Manifest of In-App Messages the Subscription is eligible to display by the SDK.
+     * @param param the request object
+     */
+    public getEligibleIams(param: DefaultApiGetEligibleIamsRequest, options?: Configuration): Promise<InlineResponse2003> {
+        return this.api.getEligibleIams(param.appId, param.subscriptionId,  options).toPromise();
+    }
+
+    /**
      * View the details of a single notification and outcomes associated with it
      * View notification
      * @param param the request object
@@ -793,7 +963,7 @@ export class ObjectDefaultApi {
      * @param param the request object
      */
     public getNotificationHistory(param: DefaultApiGetNotificationHistoryRequest, options?: Configuration): Promise<NotificationHistorySuccessResponse> {
-        return this.api.getNotificationHistory(param.notificationId, param.getNotificationHistoryRequestBody,  options).toPromise();
+        return this.api.getNotificationHistory(param.notificationId, param.getNotificationRequestBody,  options).toPromise();
     }
 
     /**
@@ -815,37 +985,45 @@ export class ObjectDefaultApi {
     }
 
     /**
-     * Returns an array of segments from an app.
-     * Get Segments
+     * View the details of an existing device in one of your OneSignal apps
+     * View device
      * @param param the request object
      */
-    public getSegments(param: DefaultApiGetSegmentsRequest, options?: Configuration): Promise<GetSegmentsSuccessResponse> {
-        return this.api.getSegments(param.appId, param.offset, param.limit,  options).toPromise();
+    public getPlayer(param: DefaultApiGetPlayerRequest, options?: Configuration): Promise<Player> {
+        return this.api.getPlayer(param.appId, param.playerId, param.emailAuthHash,  options).toPromise();
     }
 
     /**
-     * Returns the User’s properties, Aliases, and Subscriptions.
+     * View the details of multiple devices in one of your OneSignal apps Unavailable for Apps Over 80,000 Users For performance reasons, this method is not available for larger apps. Larger apps should use the CSV export API endpoint, which is much more performant. 
+     * View devices
      * @param param the request object
      */
-    public getUser(param: DefaultApiGetUserRequest, options?: Configuration): Promise<User> {
-        return this.api.getUser(param.appId, param.aliasLabel, param.aliasId,  options).toPromise();
+    public getPlayers(param: DefaultApiGetPlayersRequest, options?: Configuration): Promise<PlayerSlice> {
+        return this.api.getPlayers(param.appId, param.limit, param.offset,  options).toPromise();
+    }
+
+    /**
+     * Upserts one or more Aliases to an existing User identified by (:alias_label, :alias_id).
+     * @param param the request object
+     */
+    public identifyUserByAlias(param: DefaultApiIdentifyUserByAliasRequest, options?: Configuration): Promise<InlineResponse200> {
+        return this.api.identifyUserByAlias(param.appId, param.aliasLabel, param.aliasId, param.userIdentityRequestBody,  options).toPromise();
+    }
+
+    /**
+     * Upserts one or more Aliases for the User identified by :subscription_id.
+     * @param param the request object
+     */
+    public identifyUserBySubscriptionId(param: DefaultApiIdentifyUserBySubscriptionIdRequest, options?: Configuration): Promise<UserIdentityResponse> {
+        return this.api.identifyUserBySubscriptionId(param.appId, param.subscriptionId, param.userIdentityRequestBody,  options).toPromise();
     }
 
     /**
      * Transfers this Subscription to the User identified by the identity in the payload.
      * @param param the request object
      */
-    public transferSubscription(param: DefaultApiTransferSubscriptionRequest, options?: Configuration): Promise<UserIdentityBody> {
+    public transferSubscription(param: DefaultApiTransferSubscriptionRequest, options?: Configuration): Promise<UserIdentityResponse> {
         return this.api.transferSubscription(param.appId, param.subscriptionId, param.transferSubscriptionRequestBody,  options).toPromise();
-    }
-
-    /**
-     * Unsubscribe an email with a token when using your own custom email unsubscribe landing page
-     * Unsubscribe with token
-     * @param param the request object
-     */
-    public unsubscribeEmailWithToken(param: DefaultApiUnsubscribeEmailWithTokenRequest, options?: Configuration): Promise<GenericSuccessBoolResponse> {
-        return this.api.unsubscribeEmailWithToken(param.appId, param.notificationId, param.token,  options).toPromise();
     }
 
     /**
@@ -867,18 +1045,36 @@ export class ObjectDefaultApi {
     }
 
     /**
+     * Update an existing device in one of your OneSignal apps
+     * Edit device
+     * @param param the request object
+     */
+    public updatePlayer(param: DefaultApiUpdatePlayerRequest, options?: Configuration): Promise<UpdatePlayerSuccessResponse> {
+        return this.api.updatePlayer(param.playerId, param.player,  options).toPromise();
+    }
+
+    /**
+     * Update an existing device\'s tags in one of your OneSignal apps using the External User ID. Warning - Android SDK Data Synchronization Tags added through the Android SDK tagging methods may not update if using the API to change or update the same tag. For example, if you use SDK method sendTag(\"key\", \"value1\") then update the tag value to \"value2\" with this API endpoint. You will not be able to set the value back to \"value1\" through the SDK, you will need to change it to something different through the SDK to be reset. Recommendations if using this Endpoint on Android Mobile Apps: 1 - Do not use the same tag keys for SDK and API updates 2 - If you want to use the same key for both SDK and API updates, call the SDK getTags method first to update the device\'s tags. This is only applicable on the Android Mobile App SDKs. &#128216; Deleting Tags To delete a tag, include its key and set its value to blank. Omitting a key/value will not delete it. For example, if I wanted to delete two existing tags rank and category while simultaneously adding a new tag class, the tags JSON would look like the following: \"tags\": {    \"rank\": \"\",    \"category\": \"\",    \"class\": \"my_new_value\" } 
+     * Edit tags with external user id
+     * @param param the request object
+     */
+    public updatePlayerTags(param: DefaultApiUpdatePlayerTagsRequest, options?: Configuration): Promise<UpdatePlayerTagsSuccessResponse> {
+        return this.api.updatePlayerTags(param.appId, param.externalUserId, param.updatePlayerTagsRequestBody,  options).toPromise();
+    }
+
+    /**
      * Updates an existing Subscription’s properties.
      * @param param the request object
      */
     public updateSubscription(param: DefaultApiUpdateSubscriptionRequest, options?: Configuration): Promise<void> {
-        return this.api.updateSubscription(param.appId, param.subscriptionId, param.subscriptionBody,  options).toPromise();
+        return this.api.updateSubscription(param.appId, param.subscriptionId, param.updateSubscriptionRequestBody,  options).toPromise();
     }
 
     /**
      * Updates an existing User’s properties.
      * @param param the request object
      */
-    public updateUser(param: DefaultApiUpdateUserRequest, options?: Configuration): Promise<PropertiesBody> {
+    public updateUser(param: DefaultApiUpdateUserRequest, options?: Configuration): Promise<InlineResponse202> {
         return this.api.updateUser(param.appId, param.aliasLabel, param.aliasId, param.updateUserRequest,  options).toPromise();
     }
 

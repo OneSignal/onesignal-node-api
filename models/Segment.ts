@@ -2,11 +2,11 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 5.0.1
+ * API Version: 1.3.0
  * Contact: devrel@onesignal.com
  */
 
-import { FilterExpression } from './FilterExpression';
+import { FilterExpressions } from './FilterExpressions';
 import { HttpFile } from '../http/http';
 
 export class Segment {
@@ -21,7 +21,7 @@ export class Segment {
     /**
     * Filter or operators the segment will have.  For a list of available filters with details, please see Send to Users Based on Filters.
     */
-    'filters': Array<FilterExpression>;
+    'filters': Array<FilterExpressions>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -41,7 +41,7 @@ export class Segment {
         {
             "name": "filters",
             "baseName": "filters",
-            "type": "Array<FilterExpression>",
+            "type": "Array<FilterExpressions>",
             "format": ""
         }    ];
 

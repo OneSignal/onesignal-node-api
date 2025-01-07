@@ -2,15 +2,14 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 5.0.1
+ * API Version: 1.3.0
  * Contact: devrel@onesignal.com
  */
 
 import { BasicNotificationAllOfAndroidBackgroundLayout } from './BasicNotificationAllOfAndroidBackgroundLayout';
 import { Button } from './Button';
-import { FilterExpression } from './FilterExpression';
-import { LanguageStringMap } from './LanguageStringMap';
-import { WebButton } from './WebButton';
+import { Filter } from './Filter';
+import { StringMap } from './StringMap';
 import { HttpFile } from '../http/http';
 
 export class BasicNotificationAllOf {
@@ -62,6 +61,10 @@ export class BasicNotificationAllOf {
     */
     'is_chrome'?: boolean;
     /**
+    * Indicates if the message type when targeting with include_external_user_ids for cases where an email, sms, and/or push subscribers have the same external user id. Example: Use the string \"push\" to indicate you are sending a push notification or the string \"email\"for sending emails or \"sms\"for sending SMS. 
+    */
+    'channel_for_external_user_ids'?: string;
+    /**
     * Required: Your OneSignal Application ID, which can be found in Keys & IDs. It is a UUID and looks similar to 8250eaf6-1a58-489e-b136-7c74a864b434. 
     */
     'app_id'?: string;
@@ -69,9 +72,9 @@ export class BasicNotificationAllOf {
     * Correlation and idempotency key. A request received with this parameter will first look for another notification with the same external_id. If one exists, a notification will not be sent, and result of the previous operation will instead be returned. Therefore, if you plan on using this feature, it\'s important to use a good source of randomness to generate the UUID passed here. This key is only idempotent for 30 days. After 30 days, the notification could be removed from our system and a notification with the same external_id will be sent again.   See Idempotent Notification Requests for more details writeOnly: true 
     */
     'external_id'?: string;
-    'contents'?: LanguageStringMap;
-    'headings'?: LanguageStringMap;
-    'subtitle'?: LanguageStringMap;
+    'contents'?: StringMap;
+    'headings'?: StringMap;
+    'subtitle'?: StringMap;
     /**
     * Channel: Push Notifications Platform: Huawei A custom map of data that is passed back to your app. Same as using Additional Data within the dashboard. Can use up to 2048 bytes of data. Example: {\"abc\": 123, \"foo\": \"bar\", \"event_performed\": true, \"amount\": 12.1} 
     */
@@ -139,7 +142,7 @@ export class BasicNotificationAllOf {
     /**
     * Channel: Push Notifications Platform: Chrome 48+ Add action buttons to the notification. The id field is required. Example: [{\"id\": \"like-button\", \"text\": \"Like\", \"icon\": \"http://i.imgur.com/N8SN8ZS.png\", \"url\": \"https://yoursite.com\"}, {\"id\": \"read-more-button\", \"text\": \"Read more\", \"icon\": \"http://i.imgur.com/MIxJp1L.png\", \"url\": \"https://yoursite.com\"}] 
     */
-    'web_buttons'?: Array<WebButton>;
+    'web_buttons'?: Array<Button>;
     /**
     * Channel: Push Notifications Platform: iOS Category APS payload, use with registerUserNotificationSettings:categories in your Objective-C / Swift code. Example: calendar category which contains actions like accept and decline iOS 10+ This will trigger your UNNotificationContentExtension whose ID matches this category. 
     */
@@ -318,14 +321,6 @@ export class BasicNotificationAllOf {
     */
     'summary_arg_count'?: number;
     /**
-    * Channel: Push Notifications Platform: iOS 15+ A score to be set per notification to indicate how it should be displayed when grouped. Use a float between 0-1. 
-    */
-    'ios_relevance_score'?: number;
-    /**
-    * Channel: Push Notifications Platform: iOS 15+ Focus Modes and Interruption Levels indicate the priority and delivery timing of a notification, to \"interrupt\" the user. Can choose from options: [\'active\', \'passive\', \'time_sensitive\', \'critical\']. Default is active. 
-    */
-    'ios_interruption_level'?: string;
-    /**
     * Channel: Email Required.  The subject of the email. 
     */
     'email_subject'?: string;
@@ -357,7 +352,7 @@ export class BasicNotificationAllOf {
     * Channel: SMS URLs for the media files to be attached to the SMS content. Limit: 10 media urls with a total max. size of 5MBs. 
     */
     'sms_media_urls'?: Array<string>;
-    'filters'?: Array<FilterExpression>;
+    'filters'?: Array<Filter>;
     /**
     * Channel: All JSON object that can be used as a source of message personalization data for fields that support tag variable substitution. Push, SMS: Can accept up to 2048 bytes of valid JSON. Email: Can accept up to 10000 bytes of valid JSON. Example: {\"order_id\": 123, \"currency\": \"USD\", \"amount\": 25} 
     */
@@ -451,6 +446,12 @@ export class BasicNotificationAllOf {
             "format": ""
         },
         {
+            "name": "channel_for_external_user_ids",
+            "baseName": "channel_for_external_user_ids",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "app_id",
             "baseName": "app_id",
             "type": "string",
@@ -465,19 +466,19 @@ export class BasicNotificationAllOf {
         {
             "name": "contents",
             "baseName": "contents",
-            "type": "LanguageStringMap",
+            "type": "StringMap",
             "format": ""
         },
         {
             "name": "headings",
             "baseName": "headings",
-            "type": "LanguageStringMap",
+            "type": "StringMap",
             "format": ""
         },
         {
             "name": "subtitle",
             "baseName": "subtitle",
-            "type": "LanguageStringMap",
+            "type": "StringMap",
             "format": ""
         },
         {
@@ -579,7 +580,7 @@ export class BasicNotificationAllOf {
         {
             "name": "web_buttons",
             "baseName": "web_buttons",
-            "type": "Array<WebButton>",
+            "type": "Array<Button>",
             "format": ""
         },
         {
@@ -853,18 +854,6 @@ export class BasicNotificationAllOf {
             "format": ""
         },
         {
-            "name": "ios_relevance_score",
-            "baseName": "ios_relevance_score",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "ios_interruption_level",
-            "baseName": "ios_interruption_level",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "email_subject",
             "baseName": "email_subject",
             "type": "string",
@@ -915,7 +904,7 @@ export class BasicNotificationAllOf {
         {
             "name": "filters",
             "baseName": "filters",
-            "type": "Array<FilterExpression>",
+            "type": "Array<Filter>",
             "format": ""
         },
         {
