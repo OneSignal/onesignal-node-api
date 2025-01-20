@@ -46,6 +46,8 @@ export * from './Subscription';
 export * from './SubscriptionBody';
 export * from './SubscriptionNotificationTarget';
 export * from './TransferSubscriptionRequestBody';
+export * from './BeginLiveActivityRequest';
+export * from './BeginLiveActivitySuccessResponse';
 export * from './UpdateLiveActivityRequest';
 export * from './UpdateLiveActivitySuccessResponse';
 export * from './UpdateUserRequest';
@@ -101,6 +103,8 @@ import { Subscription , SubscriptionTypeEnum                  } from './Subscrip
 import { SubscriptionBody } from './SubscriptionBody';
 import { SubscriptionNotificationTarget          , SubscriptionNotificationTargetTargetChannelEnum   } from './SubscriptionNotificationTarget';
 import { TransferSubscriptionRequestBody } from './TransferSubscriptionRequestBody';
+import { BeginLiveActivityRequest } from "./BeginLiveActivityRequest";
+import { BeginLiveActivitySuccessResponse } from "./BeginLiveActivitySuccessResponse";
 import { UpdateLiveActivityRequest , UpdateLiveActivityRequestEventEnum          } from './UpdateLiveActivityRequest';
 import { UpdateLiveActivitySuccessResponse } from './UpdateLiveActivitySuccessResponse';
 import { UpdateUserRequest } from './UpdateUserRequest';
@@ -197,6 +201,8 @@ let typeMap: {[index: string]: any} = {
     "SubscriptionBody": SubscriptionBody,
     "SubscriptionNotificationTarget": SubscriptionNotificationTarget,
     "TransferSubscriptionRequestBody": TransferSubscriptionRequestBody,
+    "BeginLiveActivityRequest": BeginLiveActivityRequest,
+    "BeginLiveActivitySuccessResponse": BeginLiveActivitySuccessResponse,
     "UpdateLiveActivityRequest": UpdateLiveActivityRequest,
     "UpdateLiveActivitySuccessResponse": UpdateLiveActivitySuccessResponse,
     "UpdateUserRequest": UpdateUserRequest,

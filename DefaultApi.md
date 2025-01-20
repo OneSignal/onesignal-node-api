@@ -1830,6 +1830,79 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
+# **beginLiveActivity**
+> BeginLiveActivitySuccessResponse beginLiveActivity(beginLiveActivityRequest)
+
+Remotely start a Live Activity.
+
+### Example
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .DefaultApi(configuration);
+
+let body:.DefaultApiBeginLiveActivityRequest = {
+    // string | The OneSignal App ID for your app.  Available in Keys & IDs.
+    appId: "app_id_example",
+    // string | The type of activity to begin.
+    activityType: "activity_type_example",
+    // beginLiveActivityRequest
+    beginLiveActivityRequest: {
+        activity_id: "activity_id_example",
+        event_attributes: {},
+        name: "name_example",
+        contents: {
+            en: "en_example",
+        },
+        headings: {
+            en: "en_example",
+        },
+        sound: "beep.wav",
+        priority: 10,
+        include_subscription_ids: [
+            "include_subscription_ids_example",
+        ],
+    }
+};
+
+apiInstance.beginLiveActivity(body).then((data:any) => {
+    console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **beginLiveActivityRequest** | **BeginLiveActivityRequest**|  |
+ **appId** | [**string**] | The OneSignal App ID for your app.  Available in Keys &amp; IDs. | defaults to undefined
+**activityType** | [**string**] | The type of activity to begin. | defaults to undefined
+
+### Return type
+
+**BeginLiveActivitySuccessResponse**
+
+### Authorization
+
+[rest_api_key](README.md#rest_api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Created     |  -  |
+**400** | Bad Request |  -  |
+**429** | Rate Limit Exceeded |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 # **updateLiveActivity**
 > UpdateLiveActivitySuccessResponse updateLiveActivity(updateLiveActivityRequest)
 

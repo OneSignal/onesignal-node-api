@@ -59,6 +59,7 @@ import { WebButton } from '../models/WebButton';
 
 import { ObservableDefaultApi } from "./ObservableAPI";
 import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
+import { BeginLiveActivityRequest, BeginLiveActivitySuccessResponse } from "../models/all";
 
 export interface DefaultApiCancelNotificationRequest {
     /**
@@ -549,6 +550,28 @@ export interface DefaultApiUpdateAppRequest {
     app: App
 }
 
+export interface DefaultApiBeginLiveActivityRequest {
+    /**
+     *
+     * @type string
+     * @memberof DefaultApiBeginLiveActivityRequest
+     */
+    appId: string
+    /**
+     * Indicates which Live Activity to start.
+     * @type string
+     * @memberof DefaultApiBeginLiveActivityRequest
+     */
+    activityType: string
+
+    /**
+     *
+     * @type BeginLiveActivityRequest
+     * @memberof DefaultApiBeginLiveActivityRequest
+     */
+    beginLiveActivityRequest: BeginLiveActivityRequest
+}
+
 export interface DefaultApiUpdateLiveActivityRequest {
     /**
      * The OneSignal App ID for your app.  Available in Keys &amp; IDs.
@@ -855,6 +878,14 @@ export class ObjectDefaultApi {
      */
     public updateApp(param: DefaultApiUpdateAppRequest, options?: Configuration): Promise<App> {
         return this.api.updateApp(param.appId, param.app,  options).toPromise();
+    }
+
+    /**
+     * Remotely start a Live Activity.
+     * @param param the request object
+     */
+    public beginLiveActivity(param: DefaultApiBeginLiveActivityRequest, options?: Configuration): Promise<BeginLiveActivitySuccessResponse> {
+        return this.api.beginLiveActivity(param.appId, param.activityType, param.beginLiveActivityRequest, options).toPromise();
     }
 
     /**

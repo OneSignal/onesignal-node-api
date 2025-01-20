@@ -59,6 +59,9 @@ import { UserIdentityBody } from '../models/UserIdentityBody';
 import { WebButton } from '../models/WebButton';
 
 import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
+import { BeginLiveActivityRequest } from "../models/BeginLiveActivityRequest";
+import { BeginLiveActivitySuccessResponse } from "../models/BeginLiveActivitySuccessResponse";
+
 export class ObservableDefaultApi {
     private requestFactory: DefaultApiRequestFactory;
     private responseProcessor: DefaultApiResponseProcessor;
@@ -749,6 +752,32 @@ export class ObservableDefaultApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateApp(rsp)));
+            }));
+    }
+
+
+    /**
+     * Remotely start a Live Activity.
+     * @param appId The OneSignal App ID for your app.  Available in Keys &amp; IDs.
+     * @param activityType Indicates which Live Activity to start.
+     * @param beginLiveActivityRequest
+     */
+    public beginLiveActivity(appId: string, activityType: string, beginLiveActivityRequest: BeginLiveActivityRequest, _options?: Configuration): Observable<BeginLiveActivitySuccessResponse> {
+        const requestContextPromise = this.requestFactory.beginLiveActivity(appId, activityType, beginLiveActivityRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.beginLiveActivity(rsp)));
             }));
     }
 

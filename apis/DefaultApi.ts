@@ -32,6 +32,8 @@ import { RateLimitError } from '../models/RateLimitError';
 import { Segment } from '../models/Segment';
 import { SubscriptionBody } from '../models/SubscriptionBody';
 import { TransferSubscriptionRequestBody } from '../models/TransferSubscriptionRequestBody';
+import { BeginLiveActivityRequest } from "../models/BeginLiveActivityRequest";
+import { BeginLiveActivitySuccessResponse } from '../models/BeginLiveActivitySuccessResponse';
 import { UpdateLiveActivityRequest } from '../models/UpdateLiveActivityRequest';
 import { UpdateLiveActivitySuccessResponse } from '../models/UpdateLiveActivitySuccessResponse';
 import { UpdateUserRequest } from '../models/UpdateUserRequest';
@@ -1575,6 +1577,69 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         }
         
         const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Remotely start a Live Activity.
+     * @param appId The OneSignal App ID for your app.  Available in Keys &amp; IDs.
+     * @param activityType Indicates which Live Activity to start.
+     * @param beginLiveActivityRequest
+     */
+    public async beginLiveActivity(appId: string, activityType: string, beginLiveActivityRequest: BeginLiveActivityRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("DefaultApi", "beginLiveActivity", "appId");
+        }
+
+        // verify required parameter 'activityType' is not null or undefined
+        if (activityType === null || activityType === undefined) {
+            throw new RequiredError("DefaultApi", "beginLiveActivity", "activityType");
+        }
+
+        // verify required parameter 'beginLiveActivityRequestBody' is not null or undefined
+        if (beginLiveActivityRequest === null || beginLiveActivityRequest === undefined) {
+            throw new RequiredError("DefaultApi", "beginLiveActivity", "beginLiveActivityRequest");
+        }
+
+        // Path Params
+        const localVarPath = '/apps/{app_id}/activities/activity/{activity_type}'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'activity_type' + '}', encodeURIComponent(String(activityType)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+
+        // Always add the One Signal telemetry to the request.
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.0.1");
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(beginLiveActivityRequest, "BeginLiveActivityRequestBody", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["rest_api_key"];
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default;
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
