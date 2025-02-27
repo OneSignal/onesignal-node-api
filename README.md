@@ -61,8 +61,8 @@ You can configure auth parameters passing them like this:
 
 ```js
 const configuration = OneSignal.createConfiguration({
-    userAuthKey: '<YOUR_USER_AUTH_KEY>',
-    restApiKey: '<YOUR_REST_API_KEY>',
+    userAuthKey: '<YOUR_ORGANIZATION_API_KEY>', // Organization key is only required for creating new apps and other top-level endpoints
+    restApiKey: '<YOUR_REST_API_KEY>', // App rest api key required for most endpoints
 });
 
 const client = new OneSignal.DefaultApi(configuration);
@@ -76,7 +76,7 @@ parameter. You can then use this to modify your configuration object and create 
 const response = await client.createApp(newapp);
 
 const configuration = OneSignal.createConfiguration({
-    userAuthKey: '<YOUR_USER_KEY_TOKEN>',
+    userAuthKey: '<YOUR_ORGANIZATION_API_KEY>',
     restApiKey: response.basic_auth_key,
 });
 
