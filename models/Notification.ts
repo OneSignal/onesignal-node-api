@@ -397,6 +397,10 @@ export class Notification {
     */
     'email_preheader'?: string;
     /**
+    * Channel: Email Default is `false`. If set to `true`, the URLs sent within the email will not include link tracking and will be the same as originally set; otherwise, all the URLs in the email will be tracked. 
+    */
+    'disable_email_click_tracking'?: boolean;
+    /**
     * Channel: Email Default is `false`. This field is used to send transactional notifications. If set to `true`, this notification will also be sent to unsubscribed emails. If a `template_id` is provided, the `include_unsubscribed` value from the template will be inherited. If you are using a third-party ESP, this field requires the ESP\'s list of unsubscribed emails to be cleared.
     */
     'include_unsubscribed'?: boolean;
@@ -1026,6 +1030,12 @@ export class Notification {
             "baseName": "email_preheader",
             "type": "string",
             "format": ""
+        },
+        {
+          "name": "disable_email_click_tracking",
+          "baseName": "disable_email_click_tracking",
+          "type": "boolean",
+          "format": ""
         },
         {
             "name": "include_unsubscribed",
