@@ -40,7 +40,7 @@ export class AppKeyAuthentication implements SecurityAuthentication {
     }
 
     public async applySecurityAuthentication(context: RequestContext) {
-        context.setHeaderParam("Authorization", "Bearer " + await this.tokenProvider.getToken());
+        context.setHeaderParam("Authorization", "Key " + await this.tokenProvider.getToken());
     }
 }
 
@@ -60,7 +60,7 @@ export class UserKeyAuthentication implements SecurityAuthentication {
     }
 
     public async applySecurityAuthentication(context: RequestContext) {
-        context.setHeaderParam("Authorization", "Bearer " + await this.tokenProvider.getToken());
+        context.setHeaderParam("Authorization", "Key " + await this.tokenProvider.getToken());
     }
 }
 
