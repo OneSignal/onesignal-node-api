@@ -19,7 +19,6 @@ export * from './GenericError';
 export * from './GenericSuccessBoolResponse';
 export * from './GetNotificationHistoryRequestBody';
 export * from './GetSegmentsSuccessResponse';
-export * from './InvalidIdentifierError';
 export * from './LanguageStringMap';
 export * from './Notification';
 export * from './NotificationAllOf';
@@ -54,8 +53,8 @@ export * from './UserIdentityBody';
 export * from './WebButton';
 
 import { App            , AppApnsEnvEnum                        } from './App';
-import { BasicNotification            , BasicNotificationTargetChannelEnum     , BasicNotificationAggregationEnum                                                                                            } from './BasicNotification';
-import { BasicNotificationAllOf   , BasicNotificationAllOfAggregationEnum                                                                                            } from './BasicNotificationAllOf';
+import { BasicNotification            , BasicNotificationTargetChannelEnum     , BasicNotificationAggregationEnum                                                                                             } from './BasicNotification';
+import { BasicNotificationAllOf   , BasicNotificationAllOfAggregationEnum                                                                                             } from './BasicNotificationAllOf';
 import { BasicNotificationAllOfAndroidBackgroundLayout } from './BasicNotificationAllOfAndroidBackgroundLayout';
 import { Button } from './Button';
 import { CreateNotificationSuccessResponse } from './CreateNotificationSuccessResponse';
@@ -74,14 +73,13 @@ import { GenericError } from './GenericError';
 import { GenericSuccessBoolResponse } from './GenericSuccessBoolResponse';
 import { GetNotificationHistoryRequestBody, GetNotificationHistoryRequestBodyEventsEnum     } from './GetNotificationHistoryRequestBody';
 import { GetSegmentsSuccessResponse } from './GetSegmentsSuccessResponse';
-import { InvalidIdentifierError } from './InvalidIdentifierError';
 import { LanguageStringMap } from './LanguageStringMap';
-import { Notification            , NotificationTargetChannelEnum     , NotificationAggregationEnum                                                                                             } from './Notification';
+import { Notification            , NotificationTargetChannelEnum     , NotificationAggregationEnum                                                                                              } from './Notification';
 import { NotificationAllOf } from './NotificationAllOf';
 import { NotificationHistorySuccessResponse } from './NotificationHistorySuccessResponse';
 import { NotificationSlice } from './NotificationSlice';
 import { NotificationTarget            , NotificationTargetTargetChannelEnum   } from './NotificationTarget';
-import { NotificationWithMeta            , NotificationWithMetaTargetChannelEnum     , NotificationWithMetaAggregationEnum                                                                                                       } from './NotificationWithMeta';
+import { NotificationWithMeta            , NotificationWithMetaTargetChannelEnum     , NotificationWithMetaAggregationEnum                                                                                                        } from './NotificationWithMeta';
 import { NotificationWithMetaAllOf } from './NotificationWithMetaAllOf';
 import { Operator, OperatorOperatorEnum   } from './Operator';
 import { OutcomeData  , OutcomeDataAggregationEnum   } from './OutcomeData';
@@ -170,7 +168,6 @@ let typeMap: {[index: string]: any} = {
     "GenericSuccessBoolResponse": GenericSuccessBoolResponse,
     "GetNotificationHistoryRequestBody": GetNotificationHistoryRequestBody,
     "GetSegmentsSuccessResponse": GetSegmentsSuccessResponse,
-    "InvalidIdentifierError": InvalidIdentifierError,
     "LanguageStringMap": LanguageStringMap,
     "Notification": Notification,
     "NotificationAllOf": NotificationAllOf,

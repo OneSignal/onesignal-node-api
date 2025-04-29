@@ -61,8 +61,8 @@ You can configure auth parameters passing them like this:
 
 ```js
 const configuration = OneSignal.createConfiguration({
-    userAuthKey: '<YOUR_ORGANIZATION_API_KEY>', // Organization key is only required for creating new apps and other top-level endpoints
-    restApiKey: '<YOUR_REST_API_KEY>', // App rest api key required for most endpoints
+    userKey: '<YOUR_ORGANIZATION_API_KEY>', // Organization key is only required for creating new apps and other top-level endpoints
+    appKey: '<YOUR_REST_API_KEY>', // App REST API key required for most endpoints
 });
 
 const client = new OneSignal.DefaultApi(configuration);
@@ -76,8 +76,8 @@ parameter. You can then use this to modify your configuration object and create 
 const response = await client.createApp(newapp);
 
 const configuration = OneSignal.createConfiguration({
-    userAuthKey: '<YOUR_ORGANIZATION_API_KEY>',
-    restApiKey: response.basic_auth_key,
+    userKey: '<YOUR_ORGANIZATION_API_KEY>', // Organization key is only required for creating new apps and other top-level endpoints
+    appKey: response.basic_auth_key,
 });
 
 const client = new OneSignal.DefaultApi(configuration);
@@ -86,14 +86,14 @@ const client = new OneSignal.DefaultApi(configuration);
 ---
 ## API Reference
 
-> See the full list of [API Endpoints](DefaultApi.md).
+> See the full list of [API Endpoints](DefaultApi.MD).
 
 To make stateful changes requests should take on the following pattern:
 1. create or get an object
 2. make changes to that object
 3. pass the object to the request function to make the changes
 
-Examples of important OneSignal objects include `App`, `Notification`, `User`, and `Segment`.
+Examples of important OneSignal objects include `App`, `Notification`, `Player`, and `Segment`.
 
 For example, see the section below on creating an app. First an app object is created via the instantiation of the `App`
 class. Then, the app instance is modified directly. Finally, we use the `client` to create the app via a remote request.
