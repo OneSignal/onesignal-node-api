@@ -1,7 +1,7 @@
 name: 🙋‍♂️ Ask a question
 description: Tell us what's on your mind
-title: "[question]: "
-labels: ["triage"]
+title: "[Question]: "
+labels: ["Question"]
 body:
   - type: markdown
     attributes:

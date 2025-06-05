@@ -39,8 +39,8 @@ export interface ConfigurationParameters {
     /**
      * Faster way to configure authentication methods
      */
+    organizationApiKey?: string;
     restApiKey?: string;
-    userAuthKey?: string;
 }
 
 /**
@@ -58,14 +58,14 @@ export interface ConfigurationParameters {
 export function createConfiguration(conf: ConfigurationParameters): Configuration {
 
     const authMethods: AuthMethodsConfiguration = {
+        'organization_api_key': {
+            tokenProvider: {
+                getToken: () => conf.organizationApiKey || ''
+            }
+        },
         'rest_api_key': {
             tokenProvider: {
                 getToken: () => conf.restApiKey || ''
-            }
-        },
-        'user_auth_key': {
-            tokenProvider: {
-                getToken: () => conf.userAuthKey || ''
             }
         },
     }

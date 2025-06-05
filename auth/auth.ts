@@ -27,6 +27,26 @@ export interface TokenProvider {
 /**
  * Applies http authentication to the request context.
  */
+export class OrganizationApiKeyAuthentication implements SecurityAuthentication {
+    /**
+     * Configures the http authentication with the required details.
+     *
+     * @param tokenProvider service that can provide the up-to-date token when needed
+     */
+    public constructor(private tokenProvider: TokenProvider) {}
+
+    public getName(): string {
+        return "organization_api_key";
+    }
+
+    public async applySecurityAuthentication(context: RequestContext) {
+        context.setHeaderParam("Authorization", "Key " + await this.tokenProvider.getToken());
+    }
+}
+
+/**
+ * Applies http authentication to the request context.
+ */
 export class RestApiKeyAuthentication implements SecurityAuthentication {
     /**
      * Configures the http authentication with the required details.
@@ -40,35 +60,15 @@ export class RestApiKeyAuthentication implements SecurityAuthentication {
     }
 
     public async applySecurityAuthentication(context: RequestContext) {
-        context.setHeaderParam("Authorization", "Bearer " + await this.tokenProvider.getToken());
-    }
-}
-
-/**
- * Applies http authentication to the request context.
- */
-export class UserAuthKeyAuthentication implements SecurityAuthentication {
-    /**
-     * Configures the http authentication with the required details.
-     *
-     * @param tokenProvider service that can provide the up-to-date token when needed
-     */
-    public constructor(private tokenProvider: TokenProvider) {}
-
-    public getName(): string {
-        return "user_auth_key";
-    }
-
-    public async applySecurityAuthentication(context: RequestContext) {
-        context.setHeaderParam("Authorization", "Bearer " + await this.tokenProvider.getToken());
+        context.setHeaderParam("Authorization", "Key " + await this.tokenProvider.getToken());
     }
 }
 
 
 export type AuthMethods = {
     "default"?: SecurityAuthentication,
-    "rest_api_key"?: SecurityAuthentication,
-    "user_auth_key"?: SecurityAuthentication
+    "organization_api_key"?: SecurityAuthentication,
+    "rest_api_key"?: SecurityAuthentication
 }
 
 export type ApiKeyConfiguration = string;
@@ -78,8 +78,8 @@ export type OAuth2Configuration = { accessToken: string };
 
 export type AuthMethodsConfiguration = {
     "default"?: SecurityAuthentication,
-    "rest_api_key"?: HttpBearerConfiguration,
-    "user_auth_key"?: HttpBearerConfiguration
+    "organization_api_key"?: HttpBearerConfiguration,
+    "rest_api_key"?: HttpBearerConfiguration
 }
 
 /**
@@ -94,15 +94,15 @@ export function configureAuthMethods(config: AuthMethodsConfiguration | undefine
     }
     authMethods["default"] = config["default"]
 
-    if (config["rest_api_key"]) {
-        authMethods["rest_api_key"] = new RestApiKeyAuthentication(
-            config["rest_api_key"]["tokenProvider"]
+    if (config["organization_api_key"]) {
+        authMethods["organization_api_key"] = new OrganizationApiKeyAuthentication(
+            config["organization_api_key"]["tokenProvider"]
         );
     }
 
-    if (config["user_auth_key"]) {
-        authMethods["user_auth_key"] = new UserAuthKeyAuthentication(
-            config["user_auth_key"]["tokenProvider"]
+    if (config["rest_api_key"]) {
+        authMethods["rest_api_key"] = new RestApiKeyAuthentication(
+            config["rest_api_key"]["tokenProvider"]
         );
     }
 
