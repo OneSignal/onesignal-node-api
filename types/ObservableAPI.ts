@@ -24,7 +24,6 @@ import { GenericError } from '../models/GenericError';
 import { GenericSuccessBoolResponse } from '../models/GenericSuccessBoolResponse';
 import { GetNotificationHistoryRequestBody } from '../models/GetNotificationHistoryRequestBody';
 import { GetSegmentsSuccessResponse } from '../models/GetSegmentsSuccessResponse';
-import { InvalidIdentifierError } from '../models/InvalidIdentifierError';
 import { LanguageStringMap } from '../models/LanguageStringMap';
 import { Notification } from '../models/Notification';
 import { NotificationAllOf } from '../models/NotificationAllOf';
