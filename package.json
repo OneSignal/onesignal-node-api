@@ -21,7 +21,7 @@
     "prepare": "npm run build"
   },
   "dependencies": {
-    "@types/node": "^22.15.30",
+    "@types/node": "^24.0.4",
     "btoa": "^1.2.1",
     "es6-promise": "^4.2.4",
     "form-data": "^2.5.0",
