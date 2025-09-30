@@ -1,4 +1,4 @@
-# .DefaultApi
+# Onesignal.DefaultApi
 
 All URIs are relative to *https://api.onesignal.com*
 
@@ -45,22 +45,22 @@ Used to stop a scheduled or currently outgoing notification
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiCancelNotificationRequest = {
+let body: Onesignal.DefaultApiCancelNotificationRequest = {
   // string
   appId: "app_id_example",
   // string
   notificationId: "notification_id_example",
 };
 
-apiInstance.cancelNotification(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.cancelNotification(body);
+console.log(response);
 ```
 
 
@@ -105,13 +105,14 @@ Upserts one or more Aliases to an existing User identified by (:alias_label, :al
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiCreateAliasRequest = {
+let body: Onesignal.DefaultApiCreateAliasRequest = {
   // string
   appId: "app_id_example",
   // string
@@ -126,9 +127,8 @@ let body:.DefaultApiCreateAliasRequest = {
   },
 };
 
-apiInstance.createAlias(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.createAlias(body);
+console.log(response);
 ```
 
 
@@ -176,13 +176,14 @@ Upserts one or more Aliases for the User identified by :subscription_id.
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiCreateAliasBySubscriptionRequest = {
+let body: Onesignal.DefaultApiCreateAliasBySubscriptionRequest = {
   // string
   appId: "app_id_example",
   // string
@@ -195,9 +196,8 @@ let body:.DefaultApiCreateAliasBySubscriptionRequest = {
   },
 };
 
-apiInstance.createAliasBySubscription(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.createAliasBySubscription(body);
+console.log(response);
 ```
 
 
@@ -244,13 +244,14 @@ Creates a new OneSignal app
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    organizationApiKey: '<YOUR_ORGANIZATION_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiCreateAppRequest = {
+let body: Onesignal.DefaultApiCreateAppRequest = {
   // App
   app: {
     name: "name_example",
@@ -277,9 +278,8 @@ let body:.DefaultApiCreateAppRequest = {
   },
 };
 
-apiInstance.createApp(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.createApp(body);
+console.log(response);
 ```
 
 
@@ -322,20 +322,20 @@ Sends notifications to your users
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiCreateNotificationRequest = {
+let body: Onesignal.DefaultApiCreateNotificationRequest = {
   // Notification
   notification: null,
 };
 
-apiInstance.createNotification(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.createNotification(body);
+console.log(response);
 ```
 
 
@@ -378,13 +378,14 @@ Create a segment visible and usable in the dashboard and API - Required: OneSign
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiCreateSegmentRequest = {
+let body: Onesignal.DefaultApiCreateSegmentRequest = {
   // string | The OneSignal App ID for your app.  Available in Keys & IDs.
   appId: "app_id_example",
   // Segment (optional)
@@ -397,9 +398,8 @@ let body:.DefaultApiCreateSegmentRequest = {
   },
 };
 
-apiInstance.createSegment(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.createSegment(body);
+console.log(response);
 ```
 
 
@@ -444,13 +444,14 @@ Creates a new Subscription under the User provided. Useful to add email addresse
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiCreateSubscriptionRequest = {
+let body: Onesignal.DefaultApiCreateSubscriptionRequest = {
   // string
   appId: "app_id_example",
   // string
@@ -481,9 +482,8 @@ let body:.DefaultApiCreateSubscriptionRequest = {
   },
 };
 
-apiInstance.createSubscription(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.createSubscription(body);
+console.log(response);
 ```
 
 
@@ -532,13 +532,14 @@ Creates a User, optionally Subscriptions owned by the User as well as Aliases. A
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiCreateUserRequest = {
+let body: Onesignal.DefaultApiCreateUserRequest = {
   // string
   appId: "app_id_example",
   // User
@@ -590,9 +591,8 @@ let body:.DefaultApiCreateUserRequest = {
   },
 };
 
-apiInstance.createUser(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.createUser(body);
+console.log(response);
 ```
 
 
@@ -639,13 +639,14 @@ Deletes an alias by alias label
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiDeleteAliasRequest = {
+let body: Onesignal.DefaultApiDeleteAliasRequest = {
   // string
   appId: "app_id_example",
   // string
@@ -656,9 +657,8 @@ let body:.DefaultApiDeleteAliasRequest = {
   aliasLabelToDelete: "alias_label_to_delete_example",
 };
 
-apiInstance.deleteAlias(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.deleteAlias(body);
+console.log(response);
 ```
 
 
@@ -706,22 +706,22 @@ Delete a segment (not user devices) - Required: OneSignal Paid Plan You can dele
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiDeleteSegmentRequest = {
+let body: Onesignal.DefaultApiDeleteSegmentRequest = {
   // string | The OneSignal App ID for your app.  Available in Keys & IDs.
   appId: "app_id_example",
   // string | The segment_id can be found in the URL of the segment when viewing it in the dashboard.
   segmentId: "segment_id_example",
 };
 
-apiInstance.deleteSegment(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.deleteSegment(body);
+console.log(response);
 ```
 
 
@@ -766,22 +766,22 @@ Deletes the Subscription.
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiDeleteSubscriptionRequest = {
+let body: Onesignal.DefaultApiDeleteSubscriptionRequest = {
   // string
   appId: "app_id_example",
   // string
   subscriptionId: "subscription_id_example",
 };
 
-apiInstance.deleteSubscription(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.deleteSubscription(body);
+console.log(response);
 ```
 
 
@@ -827,13 +827,14 @@ Removes the User identified by (:alias_label, :alias_id), and all Subscriptions 
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiDeleteUserRequest = {
+let body: Onesignal.DefaultApiDeleteUserRequest = {
   // string
   appId: "app_id_example",
   // string
@@ -842,9 +843,8 @@ let body:.DefaultApiDeleteUserRequest = {
   aliasId: "alias_id_example",
 };
 
-apiInstance.deleteUser(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.deleteUser(body);
+console.log(response);
 ```
 
 
@@ -890,22 +890,22 @@ Generate a compressed CSV report of all of the events data for a notification. T
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiExportEventsRequest = {
+let body: Onesignal.DefaultApiExportEventsRequest = {
   // string | The ID of the notification to export events from.
   notificationId: "notification_id_example",
   // string | The ID of the app that the notification belongs to.
   appId: "app_id_example",
 };
 
-apiInstance.exportEvents(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.exportEvents(body);
+console.log(response);
 ```
 
 
@@ -950,13 +950,14 @@ Generate a compressed CSV export of all of your current user data This method ca
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiExportSubscriptionsRequest = {
+let body: Onesignal.DefaultApiExportSubscriptionsRequest = {
   // string | The app ID that you want to export devices from
   appId: "app_id_example",
   // ExportSubscriptionsRequestBody (optional)
@@ -969,9 +970,8 @@ let body:.DefaultApiExportSubscriptionsRequest = {
   },
 };
 
-apiInstance.exportSubscriptions(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.exportSubscriptions(body);
+console.log(response);
 ```
 
 
@@ -1015,13 +1015,14 @@ Lists all Aliases for the User identified by (:alias_label, :alias_id).
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiGetAliasesRequest = {
+let body: Onesignal.DefaultApiGetAliasesRequest = {
   // string
   appId: "app_id_example",
   // string
@@ -1030,9 +1031,8 @@ let body:.DefaultApiGetAliasesRequest = {
   aliasId: "alias_id_example",
 };
 
-apiInstance.getAliases(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.getAliases(body);
+console.log(response);
 ```
 
 
@@ -1078,22 +1078,22 @@ Lists all Aliases for the User identified by :subscription_id.
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiGetAliasesBySubscriptionRequest = {
+let body: Onesignal.DefaultApiGetAliasesBySubscriptionRequest = {
   // string
   appId: "app_id_example",
   // string
   subscriptionId: "subscription_id_example",
 };
 
-apiInstance.getAliasesBySubscription(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.getAliasesBySubscription(body);
+console.log(response);
 ```
 
 
@@ -1137,20 +1137,20 @@ View the details of a single OneSignal app
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    organizationApiKey: '<YOUR_ORGANIZATION_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiGetAppRequest = {
+let body: Onesignal.DefaultApiGetAppRequest = {
   // string | An app id
   appId: "app_id_example",
 };
 
-apiInstance.getApp(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.getApp(body);
+console.log(response);
 ```
 
 
@@ -1193,17 +1193,15 @@ View the details of all of your current OneSignal apps
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    organizationApiKey: '<YOUR_ORGANIZATION_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:any = {};
-
-apiInstance.getApps(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.getApps();
+console.log(response);
 ```
 
 
@@ -1243,22 +1241,22 @@ View the details of a single notification and outcomes associated with it
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiGetNotificationRequest = {
+let body: Onesignal.DefaultApiGetNotificationRequest = {
   // string
   appId: "app_id_example",
   // string
   notificationId: "notification_id_example",
 };
 
-apiInstance.getNotification(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.getNotification(body);
+console.log(response);
 ```
 
 
@@ -1303,13 +1301,14 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiGetNotificationHistoryRequest = {
+let body: Onesignal.DefaultApiGetNotificationHistoryRequest = {
   // string | The \"id\" of the message found in the Notification object
   notificationId: "notification_id_example",
   // GetNotificationHistoryRequestBody
@@ -1320,9 +1319,8 @@ let body:.DefaultApiGetNotificationHistoryRequest = {
   },
 };
 
-apiInstance.getNotificationHistory(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.getNotificationHistory(body);
+console.log(response);
 ```
 
 
@@ -1367,13 +1365,14 @@ View the details of multiple notifications
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiGetNotificationsRequest = {
+let body: Onesignal.DefaultApiGetNotificationsRequest = {
   // string | The app ID that you want to view notifications from
   appId: "app_id_example",
   // number | How many notifications to return.  Max is 50.  Default is 50. (optional)
@@ -1384,9 +1383,8 @@ let body:.DefaultApiGetNotificationsRequest = {
   kind: 0,
 };
 
-apiInstance.getNotifications(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.getNotifications(body);
+console.log(response);
 ```
 
 
@@ -1432,13 +1430,14 @@ View the details of all the outcomes associated with your app  &#x1F6A7; Require
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiGetOutcomesRequest = {
+let body: Onesignal.DefaultApiGetOutcomesRequest = {
   // string | The OneSignal App ID for your app.  Available in Keys & IDs.
   appId: "app_id_example",
   // string | Required Comma-separated list of names and the value (sum/count) for the returned outcome data. Note: Clicks only support count aggregation. For out-of-the-box OneSignal outcomes such as click and session duration, please use the \"os\" prefix with two underscores. For other outcomes, please use the name specified by the user. Example:os__session_duration.count,os__click.count,CustomOutcomeName.sum 
@@ -1453,9 +1452,8 @@ let body:.DefaultApiGetOutcomesRequest = {
   outcomeAttribution: "outcome_attribution_example",
 };
 
-apiInstance.getOutcomes(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.getOutcomes(body);
+console.log(response);
 ```
 
 
@@ -1503,13 +1501,14 @@ Returns an array of segments from an app.
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiGetSegmentsRequest = {
+let body: Onesignal.DefaultApiGetSegmentsRequest = {
   // string | The OneSignal App ID for your app.  Available in Keys & IDs.
   appId: "app_id_example",
   // number | Segments are listed in ascending order of created_at date. offset will omit that number of segments from the beginning of the list. Eg offset 5, will remove the 5 earliest created Segments. (optional)
@@ -1518,9 +1517,8 @@ let body:.DefaultApiGetSegmentsRequest = {
   limit: 1,
 };
 
-apiInstance.getSegments(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.getSegments(body);
+console.log(response);
 ```
 
 
@@ -1565,13 +1563,14 @@ Returns the User’s properties, Aliases, and Subscriptions.
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiGetUserRequest = {
+let body: Onesignal.DefaultApiGetUserRequest = {
   // string
   appId: "app_id_example",
   // string
@@ -1580,9 +1579,8 @@ let body:.DefaultApiGetUserRequest = {
   aliasId: "alias_id_example",
 };
 
-apiInstance.getUser(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.getUser(body);
+console.log(response);
 ```
 
 
@@ -1628,13 +1626,14 @@ Transfers this Subscription to the User identified by the identity in the payloa
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiTransferSubscriptionRequest = {
+let body: Onesignal.DefaultApiTransferSubscriptionRequest = {
   // string
   appId: "app_id_example",
   // string
@@ -1647,9 +1646,8 @@ let body:.DefaultApiTransferSubscriptionRequest = {
   },
 };
 
-apiInstance.transferSubscription(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.transferSubscription(body);
+console.log(response);
 ```
 
 
@@ -1696,13 +1694,14 @@ Unsubscribe an email with a token when using your own custom email unsubscribe l
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiUnsubscribeEmailWithTokenRequest = {
+let body: Onesignal.DefaultApiUnsubscribeEmailWithTokenRequest = {
   // string | The OneSignal App ID for your app.  Available in Keys & IDs.
   appId: "app_id_example",
   // string | The id of the message found in the creation notification POST response, View Notifications GET response, or URL within the Message Report.
@@ -1711,9 +1710,8 @@ let body:.DefaultApiUnsubscribeEmailWithTokenRequest = {
   token: "token_example",
 };
 
-apiInstance.unsubscribeEmailWithToken(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.unsubscribeEmailWithToken(body);
+console.log(response);
 ```
 
 
@@ -1758,13 +1756,14 @@ Updates the name or configuration settings of an existing OneSignal app
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    organizationApiKey: '<YOUR_ORGANIZATION_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiUpdateAppRequest = {
+let body: Onesignal.DefaultApiUpdateAppRequest = {
   // string | An app id
   appId: "app_id_example",
   // App
@@ -1793,9 +1792,8 @@ let body:.DefaultApiUpdateAppRequest = {
   },
 };
 
-apiInstance.updateApp(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.updateApp(body);
+console.log(response);
 ```
 
 
@@ -1839,13 +1837,14 @@ Updates a specified live activity.
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiUpdateLiveActivityRequest = {
+let body: Onesignal.DefaultApiUpdateLiveActivityRequest = {
   // string | The OneSignal App ID for your app.  Available in Keys & IDs.
   appId: "app_id_example",
   // string | Live Activity record ID
@@ -1952,9 +1951,8 @@ let body:.DefaultApiUpdateLiveActivityRequest = {
   },
 };
 
-apiInstance.updateLiveActivity(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.updateLiveActivity(body);
+console.log(response);
 ```
 
 
@@ -1999,13 +1997,14 @@ Updates an existing Subscription’s properties.
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiUpdateSubscriptionRequest = {
+let body: Onesignal.DefaultApiUpdateSubscriptionRequest = {
   // string
   appId: "app_id_example",
   // string
@@ -2034,9 +2033,8 @@ let body:.DefaultApiUpdateSubscriptionRequest = {
   },
 };
 
-apiInstance.updateSubscription(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.updateSubscription(body);
+console.log(response);
 ```
 
 
@@ -2083,13 +2081,14 @@ Updates an existing User’s properties.
 
 
 ```typescript
-import {  } from '';
-import * as fs from 'fs';
+import Onesignal from '@onesignal/node-onesignal';
 
-const configuration = .createConfiguration();
-const apiInstance = new .DefaultApi(configuration);
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body:.DefaultApiUpdateUserRequest = {
+let body: Onesignal.DefaultApiUpdateUserRequest = {
   // string
   appId: "app_id_example",
   // string
@@ -2134,9 +2133,8 @@ let body:.DefaultApiUpdateUserRequest = {
   },
 };
 
-apiInstance.updateUser(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
+const response = await apiInstance.updateUser(body);
+console.log(response);
 ```
 
 
