@@ -2,7 +2,7 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 5.2.0
+ * API Version: 5.2.1
  * Contact: devrel@onesignal.com
  */
 
@@ -463,6 +463,10 @@ export class NotificationWithMeta {
     */
     'completed_at'?: number;
     'platform_delivery_stats'?: PlatformDeliveryData;
+    /**
+    * Indicates whether the notification was canceled before it could be sent.
+    */
+    'canceled'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -1179,6 +1183,12 @@ export class NotificationWithMeta {
             "name": "platform_delivery_stats",
             "baseName": "platform_delivery_stats",
             "type": "PlatformDeliveryData",
+            "format": ""
+        },
+        {
+            "name": "canceled",
+            "baseName": "canceled",
+            "type": "boolean",
             "format": ""
         }    ];
 

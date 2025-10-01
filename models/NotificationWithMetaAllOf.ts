@@ -2,7 +2,7 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 5.2.0
+ * API Version: 5.2.1
  * Contact: devrel@onesignal.com
  */
 
@@ -51,6 +51,10 @@ export class NotificationWithMetaAllOf {
     * number of push notifications sent per minute. Paid Feature Only. If throttling is not enabled for the app or the notification, and for free accounts, null is returned. Refer to Throttling for more details.
     */
     'throttle_rate_per_minute'?: number;
+    /**
+    * Indicates whether the notification was canceled before it could be sent.
+    */
+    'canceled'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -119,6 +123,12 @@ export class NotificationWithMetaAllOf {
             "name": "throttle_rate_per_minute",
             "baseName": "throttle_rate_per_minute",
             "type": "number",
+            "format": ""
+        },
+        {
+            "name": "canceled",
+            "baseName": "canceled",
+            "type": "boolean",
             "format": ""
         }    ];
 
