@@ -8,21 +8,24 @@
 
 import { HttpFile } from '../http/http';
 
-export class ExportSubscriptionsSuccessResponse {
-    'csv_file_url'?: string;
+export class CopyTemplateRequest {
+    /**
+    * Destination OneSignal App ID in UUID v4 format.
+    */
+    'target_app_id': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "csv_file_url",
-            "baseName": "csv_file_url",
+            "name": "target_app_id",
+            "baseName": "target_app_id",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ExportSubscriptionsSuccessResponse.attributeTypeMap;
+        return CopyTemplateRequest.attributeTypeMap;
     }
 
     public constructor() {

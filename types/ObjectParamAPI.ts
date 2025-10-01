@@ -2,17 +2,25 @@ import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import * as models from '../models/all';
 import { Configuration} from '../configuration'
 
+import { ApiKeyToken } from '../models/ApiKeyToken';
+import { ApiKeyTokensListResponse } from '../models/ApiKeyTokensListResponse';
 import { App } from '../models/App';
 import { BasicNotification } from '../models/BasicNotification';
 import { BasicNotificationAllOf } from '../models/BasicNotificationAllOf';
 import { BasicNotificationAllOfAndroidBackgroundLayout } from '../models/BasicNotificationAllOfAndroidBackgroundLayout';
 import { Button } from '../models/Button';
+import { CopyTemplateRequest } from '../models/CopyTemplateRequest';
+import { CreateApiKeyRequest } from '../models/CreateApiKeyRequest';
+import { CreateApiKeyResponse } from '../models/CreateApiKeyResponse';
 import { CreateNotificationSuccessResponse } from '../models/CreateNotificationSuccessResponse';
 import { CreateSegmentConflictResponse } from '../models/CreateSegmentConflictResponse';
 import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
+import { CreateTemplateRequest } from '../models/CreateTemplateRequest';
 import { CreateUserConflictResponse } from '../models/CreateUserConflictResponse';
 import { CreateUserConflictResponseErrorsInner } from '../models/CreateUserConflictResponseErrorsInner';
 import { CreateUserConflictResponseErrorsItemsMeta } from '../models/CreateUserConflictResponseErrorsItemsMeta';
+import { CustomEvent } from '../models/CustomEvent';
+import { CustomEventsRequest } from '../models/CustomEventsRequest';
 import { DeliveryData } from '../models/DeliveryData';
 import { ExportEventsSuccessResponse } from '../models/ExportEventsSuccessResponse';
 import { ExportSubscriptionsRequestBody } from '../models/ExportSubscriptionsRequestBody';
@@ -45,12 +53,18 @@ import { RateLimitError } from '../models/RateLimitError';
 import { Segment } from '../models/Segment';
 import { SegmentData } from '../models/SegmentData';
 import { SegmentNotificationTarget } from '../models/SegmentNotificationTarget';
+import { StartLiveActivityRequest } from '../models/StartLiveActivityRequest';
+import { StartLiveActivitySuccessResponse } from '../models/StartLiveActivitySuccessResponse';
 import { Subscription } from '../models/Subscription';
 import { SubscriptionBody } from '../models/SubscriptionBody';
 import { SubscriptionNotificationTarget } from '../models/SubscriptionNotificationTarget';
+import { TemplateResource } from '../models/TemplateResource';
+import { TemplatesListResponse } from '../models/TemplatesListResponse';
 import { TransferSubscriptionRequestBody } from '../models/TransferSubscriptionRequestBody';
+import { UpdateApiKeyRequest } from '../models/UpdateApiKeyRequest';
 import { UpdateLiveActivityRequest } from '../models/UpdateLiveActivityRequest';
 import { UpdateLiveActivitySuccessResponse } from '../models/UpdateLiveActivitySuccessResponse';
+import { UpdateTemplateRequest } from '../models/UpdateTemplateRequest';
 import { UpdateUserRequest } from '../models/UpdateUserRequest';
 import { User } from '../models/User';
 import { UserIdentityBody } from '../models/UserIdentityBody';
@@ -72,6 +86,27 @@ export interface DefaultApiCancelNotificationRequest {
      * @memberof DefaultApicancelNotification
      */
     notificationId: string
+}
+
+export interface DefaultApiCopyTemplateToAppRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApicopyTemplateToApp
+     */
+    templateId: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApicopyTemplateToApp
+     */
+    appId: string
+    /**
+     * 
+     * @type CopyTemplateRequest
+     * @memberof DefaultApicopyTemplateToApp
+     */
+    copyTemplateRequest: CopyTemplateRequest
 }
 
 export interface DefaultApiCreateAliasRequest {
@@ -122,6 +157,21 @@ export interface DefaultApiCreateAliasBySubscriptionRequest {
     userIdentityBody: UserIdentityBody
 }
 
+export interface DefaultApiCreateApiKeyRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApicreateApiKey
+     */
+    appId: string
+    /**
+     * 
+     * @type CreateApiKeyRequest
+     * @memberof DefaultApicreateApiKey
+     */
+    createApiKeyRequest: CreateApiKeyRequest
+}
+
 export interface DefaultApiCreateAppRequest {
     /**
      * 
@@ -129,6 +179,21 @@ export interface DefaultApiCreateAppRequest {
      * @memberof DefaultApicreateApp
      */
     app: App
+}
+
+export interface DefaultApiCreateCustomEventsRequest {
+    /**
+     * Your OneSignal App ID in UUID v4 format.
+     * @type string
+     * @memberof DefaultApicreateCustomEvents
+     */
+    appId: string
+    /**
+     * 
+     * @type CustomEventsRequest
+     * @memberof DefaultApicreateCustomEvents
+     */
+    customEventsRequest: CustomEventsRequest
 }
 
 export interface DefaultApiCreateNotificationRequest {
@@ -182,6 +247,15 @@ export interface DefaultApiCreateSubscriptionRequest {
     subscriptionBody: SubscriptionBody
 }
 
+export interface DefaultApiCreateTemplateRequest {
+    /**
+     * 
+     * @type CreateTemplateRequest
+     * @memberof DefaultApicreateTemplate
+     */
+    createTemplateRequest: CreateTemplateRequest
+}
+
 export interface DefaultApiCreateUserRequest {
     /**
      * 
@@ -224,6 +298,21 @@ export interface DefaultApiDeleteAliasRequest {
     aliasLabelToDelete: string
 }
 
+export interface DefaultApiDeleteApiKeyRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApideleteApiKey
+     */
+    appId: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApideleteApiKey
+     */
+    tokenId: string
+}
+
 export interface DefaultApiDeleteSegmentRequest {
     /**
      * The OneSignal App ID for your app.  Available in Keys &amp; IDs.
@@ -252,6 +341,21 @@ export interface DefaultApiDeleteSubscriptionRequest {
      * @memberof DefaultApideleteSubscription
      */
     subscriptionId: string
+}
+
+export interface DefaultApiDeleteTemplateRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApideleteTemplate
+     */
+    templateId: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApideleteTemplate
+     */
+    appId: string
 }
 
 export interface DefaultApiDeleteUserRequest {
@@ -491,6 +595,42 @@ export interface DefaultApiGetUserRequest {
     aliasId: string
 }
 
+export interface DefaultApiRotateApiKeyRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApirotateApiKey
+     */
+    appId: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApirotateApiKey
+     */
+    tokenId: string
+}
+
+export interface DefaultApiStartLiveActivityRequest {
+    /**
+     * Your OneSignal App ID in UUID v4 format.
+     * @type string
+     * @memberof DefaultApistartLiveActivity
+     */
+    appId: string
+    /**
+     * The name of the Live Activity defined in your app. This should match the attributes struct used in your app\&#39;s Live Activity implementation.
+     * @type string
+     * @memberof DefaultApistartLiveActivity
+     */
+    activityType: string
+    /**
+     * 
+     * @type StartLiveActivityRequest
+     * @memberof DefaultApistartLiveActivity
+     */
+    startLiveActivityRequest: StartLiveActivityRequest
+}
+
 export interface DefaultApiTransferSubscriptionRequest {
     /**
      * 
@@ -531,6 +671,27 @@ export interface DefaultApiUnsubscribeEmailWithTokenRequest {
      * @memberof DefaultApiunsubscribeEmailWithToken
      */
     token: string
+}
+
+export interface DefaultApiUpdateApiKeyRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApiupdateApiKey
+     */
+    appId: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApiupdateApiKey
+     */
+    tokenId: string
+    /**
+     * 
+     * @type UpdateApiKeyRequest
+     * @memberof DefaultApiupdateApiKey
+     */
+    updateApiKeyRequest: UpdateApiKeyRequest
 }
 
 export interface DefaultApiUpdateAppRequest {
@@ -590,6 +751,54 @@ export interface DefaultApiUpdateSubscriptionRequest {
     subscriptionBody: SubscriptionBody
 }
 
+export interface DefaultApiUpdateSubscriptionByTokenRequest {
+    /**
+     * Your OneSignal App ID in UUID v4 format.
+     * @type string
+     * @memberof DefaultApiupdateSubscriptionByToken
+     */
+    appId: string
+    /**
+     * The type of token to use when looking up the subscription. See Subscription Types.
+     * @type string
+     * @memberof DefaultApiupdateSubscriptionByToken
+     */
+    tokenType: string
+    /**
+     * The value of the token to lookup by (e.g., email address, phone number).
+     * @type string
+     * @memberof DefaultApiupdateSubscriptionByToken
+     */
+    token: string
+    /**
+     * 
+     * @type SubscriptionBody
+     * @memberof DefaultApiupdateSubscriptionByToken
+     */
+    subscriptionBody: SubscriptionBody
+}
+
+export interface DefaultApiUpdateTemplateRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApiupdateTemplate
+     */
+    templateId: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApiupdateTemplate
+     */
+    appId: string
+    /**
+     * 
+     * @type UpdateTemplateRequest
+     * @memberof DefaultApiupdateTemplate
+     */
+    updateTemplateRequest: UpdateTemplateRequest
+}
+
 export interface DefaultApiUpdateUserRequest {
     /**
      * 
@@ -617,6 +826,57 @@ export interface DefaultApiUpdateUserRequest {
     updateUserRequest: UpdateUserRequest
 }
 
+export interface DefaultApiViewApiKeysRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApiviewApiKeys
+     */
+    appId: string
+}
+
+export interface DefaultApiViewTemplateRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApiviewTemplate
+     */
+    templateId: string
+    /**
+     * 
+     * @type string
+     * @memberof DefaultApiviewTemplate
+     */
+    appId: string
+}
+
+export interface DefaultApiViewTemplatesRequest {
+    /**
+     * Your OneSignal App ID in UUID v4 format.
+     * @type string
+     * @memberof DefaultApiviewTemplates
+     */
+    appId: string
+    /**
+     * Maximum number of templates. Default and max is 50.
+     * @type number
+     * @memberof DefaultApiviewTemplates
+     */
+    limit?: number
+    /**
+     * Pagination offset.
+     * @type number
+     * @memberof DefaultApiviewTemplates
+     */
+    offset?: number
+    /**
+     * Filter by delivery channel.
+     * @type &#39;push&#39; | &#39;email&#39; | &#39;sms&#39;
+     * @memberof DefaultApiviewTemplates
+     */
+    channel?: 'push' | 'email' | 'sms'
+}
+
 export class ObjectDefaultApi {
     private api: ObservableDefaultApi
 
@@ -631,6 +891,15 @@ export class ObjectDefaultApi {
      */
     public cancelNotification(param: DefaultApiCancelNotificationRequest, options?: Configuration): Promise<GenericSuccessBoolResponse> {
         return this.api.cancelNotification(param.appId, param.notificationId,  options).toPromise();
+    }
+
+    /**
+     * Copy a template to a destination app.
+     * Copy template to another app
+     * @param param the request object
+     */
+    public copyTemplateToApp(param: DefaultApiCopyTemplateToAppRequest, options?: Configuration): Promise<TemplateResource> {
+        return this.api.copyTemplateToApp(param.templateId, param.appId, param.copyTemplateRequest,  options).toPromise();
     }
 
     /**
@@ -650,12 +919,30 @@ export class ObjectDefaultApi {
     }
 
     /**
+     * Use this API to create a new App API Key (also called a Rich Authentication Token) for a specific OneSignal app. These keys are used to authenticate API requests at the app level and offer enhanced security features, including optional IP allowlisting.
+     * Create API key
+     * @param param the request object
+     */
+    public createApiKey(param: DefaultApiCreateApiKeyRequest, options?: Configuration): Promise<CreateApiKeyResponse> {
+        return this.api.createApiKey(param.appId, param.createApiKeyRequest,  options).toPromise();
+    }
+
+    /**
      * Creates a new OneSignal app
      * Create an app
      * @param param the request object
      */
     public createApp(param: DefaultApiCreateAppRequest, options?: Configuration): Promise<App> {
         return this.api.createApp(param.app,  options).toPromise();
+    }
+
+    /**
+     * The Custom Events API allows you to record user events. Custom events can represent any action users take in your application, such as completing a purchase, viewing content, or achieving milestones.
+     * Create custom events
+     * @param param the request object
+     */
+    public createCustomEvents(param: DefaultApiCreateCustomEventsRequest, options?: Configuration): Promise<object> {
+        return this.api.createCustomEvents(param.appId, param.customEventsRequest,  options).toPromise();
     }
 
     /**
@@ -685,6 +972,15 @@ export class ObjectDefaultApi {
     }
 
     /**
+     * Create reusable message templates for push, email, and SMS channels.
+     * Create template
+     * @param param the request object
+     */
+    public createTemplate(param: DefaultApiCreateTemplateRequest, options?: Configuration): Promise<TemplateResource> {
+        return this.api.createTemplate(param.createTemplateRequest,  options).toPromise();
+    }
+
+    /**
      * Creates a User, optionally Subscriptions owned by the User as well as Aliases. Aliases provided in the payload will be used to look up an existing User.
      * @param param the request object
      */
@@ -698,6 +994,15 @@ export class ObjectDefaultApi {
      */
     public deleteAlias(param: DefaultApiDeleteAliasRequest, options?: Configuration): Promise<UserIdentityBody> {
         return this.api.deleteAlias(param.appId, param.aliasLabel, param.aliasId, param.aliasLabelToDelete,  options).toPromise();
+    }
+
+    /**
+     * Delete a specific Rich Authentication Token (App API Key) for a OneSignal app. Requires your Organization API Key and the token’s unique ID, not the token value itself.
+     * Delete API key
+     * @param param the request object
+     */
+    public deleteApiKey(param: DefaultApiDeleteApiKeyRequest, options?: Configuration): Promise<object> {
+        return this.api.deleteApiKey(param.appId, param.tokenId,  options).toPromise();
     }
 
     /**
@@ -715,6 +1020,15 @@ export class ObjectDefaultApi {
      */
     public deleteSubscription(param: DefaultApiDeleteSubscriptionRequest, options?: Configuration): Promise<void> {
         return this.api.deleteSubscription(param.appId, param.subscriptionId,  options).toPromise();
+    }
+
+    /**
+     * Delete a template by id.
+     * Delete template
+     * @param param the request object
+     */
+    public deleteTemplate(param: DefaultApiDeleteTemplateRequest, options?: Configuration): Promise<GenericSuccessBoolResponse> {
+        return this.api.deleteTemplate(param.templateId, param.appId,  options).toPromise();
     }
 
     /**
@@ -831,6 +1145,24 @@ export class ObjectDefaultApi {
     }
 
     /**
+     * Rotate a Rich Authentication Token (App API Key) for a OneSignal app. Rotating a key revokes the current token and generates a new one under the same configuration—ideal when a token is lost or compromised but you don’t want to recreate and reconfigure it from scratch.
+     * Rotate API key
+     * @param param the request object
+     */
+    public rotateApiKey(param: DefaultApiRotateApiKeyRequest, options?: Configuration): Promise<CreateApiKeyResponse> {
+        return this.api.rotateApiKey(param.appId, param.tokenId,  options).toPromise();
+    }
+
+    /**
+     * Remotely start a Live Activity on iOS devices via OneSignal’s REST API.
+     * Start Live Activity
+     * @param param the request object
+     */
+    public startLiveActivity(param: DefaultApiStartLiveActivityRequest, options?: Configuration): Promise<StartLiveActivitySuccessResponse> {
+        return this.api.startLiveActivity(param.appId, param.activityType, param.startLiveActivityRequest,  options).toPromise();
+    }
+
+    /**
      * Transfers this Subscription to the User identified by the identity in the payload.
      * @param param the request object
      */
@@ -845,6 +1177,15 @@ export class ObjectDefaultApi {
      */
     public unsubscribeEmailWithToken(param: DefaultApiUnsubscribeEmailWithTokenRequest, options?: Configuration): Promise<GenericSuccessBoolResponse> {
         return this.api.unsubscribeEmailWithToken(param.appId, param.notificationId, param.token,  options).toPromise();
+    }
+
+    /**
+     * Update a Rich Authentication Token (App API Key) for a OneSignal app.
+     * Update API key
+     * @param param the request object
+     */
+    public updateApiKey(param: DefaultApiUpdateApiKeyRequest, options?: Configuration): Promise<object> {
+        return this.api.updateApiKey(param.appId, param.tokenId, param.updateApiKeyRequest,  options).toPromise();
     }
 
     /**
@@ -874,11 +1215,56 @@ export class ObjectDefaultApi {
     }
 
     /**
+     * Update properties on an existing OneSignal subscription using its token.
+     * Update subscription by token
+     * @param param the request object
+     */
+    public updateSubscriptionByToken(param: DefaultApiUpdateSubscriptionByTokenRequest, options?: Configuration): Promise<object> {
+        return this.api.updateSubscriptionByToken(param.appId, param.tokenType, param.token, param.subscriptionBody,  options).toPromise();
+    }
+
+    /**
+     * Update an existing template.
+     * Update template
+     * @param param the request object
+     */
+    public updateTemplate(param: DefaultApiUpdateTemplateRequest, options?: Configuration): Promise<TemplateResource> {
+        return this.api.updateTemplate(param.templateId, param.appId, param.updateTemplateRequest,  options).toPromise();
+    }
+
+    /**
      * Updates an existing User’s properties.
      * @param param the request object
      */
     public updateUser(param: DefaultApiUpdateUserRequest, options?: Configuration): Promise<PropertiesBody> {
         return this.api.updateUser(param.appId, param.aliasLabel, param.aliasId, param.updateUserRequest,  options).toPromise();
+    }
+
+    /**
+     * View the details of all of your current app API keys (Rich Authentication Token) for a single OneSignal app.
+     * View API keys
+     * @param param the request object
+     */
+    public viewApiKeys(param: DefaultApiViewApiKeysRequest, options?: Configuration): Promise<ApiKeyTokensListResponse> {
+        return this.api.viewApiKeys(param.appId,  options).toPromise();
+    }
+
+    /**
+     * Fetch a single template by id.
+     * View template
+     * @param param the request object
+     */
+    public viewTemplate(param: DefaultApiViewTemplateRequest, options?: Configuration): Promise<TemplateResource> {
+        return this.api.viewTemplate(param.templateId, param.appId,  options).toPromise();
+    }
+
+    /**
+     * List templates for an app.
+     * View templates
+     * @param param the request object
+     */
+    public viewTemplates(param: DefaultApiViewTemplatesRequest, options?: Configuration): Promise<TemplatesListResponse> {
+        return this.api.viewTemplates(param.appId, param.limit, param.offset, param.channel,  options).toPromise();
     }
 
 }

@@ -8,41 +8,41 @@
 
 import { HttpFile } from '../http/http';
 
-export class CreateNotificationSuccessResponse {
-    'id'?: string;
-    'external_id'?: string;
-    /**
-    * Errors include the identifiers that are invalid, or that there are no subscribers.
-    */
-    'errors'?: any;
+export class CreateApiKeyRequest {
+    'name'?: string;
+    'ip_allowlist_mode'?: CreateApiKeyRequestIpAllowlistModeEnum;
+    'ip_allowlist'?: Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
         {
-            "name": "external_id",
-            "baseName": "external_id",
-            "type": "string",
+            "name": "ip_allowlist_mode",
+            "baseName": "ip_allowlist_mode",
+            "type": "CreateApiKeyRequestIpAllowlistModeEnum",
             "format": ""
         },
         {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "any",
+            "name": "ip_allowlist",
+            "baseName": "ip_allowlist",
+            "type": "Array<string>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CreateNotificationSuccessResponse.attributeTypeMap;
+        return CreateApiKeyRequest.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
+export type CreateApiKeyRequestIpAllowlistModeEnum = "disabled" | "explicit" ;
 

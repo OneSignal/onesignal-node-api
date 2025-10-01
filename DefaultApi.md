@@ -5,16 +5,22 @@ All URIs are relative to *https://api.onesignal.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**cancelNotification**](DefaultApi.md#cancelNotification) | **DELETE** /notifications/{notification_id} | Stop a scheduled or currently outgoing notification
+[**copyTemplateToApp**](DefaultApi.md#copyTemplateToApp) | **POST** /templates/{template_id}/copy_to_app | Copy template to another app
 [**createAlias**](DefaultApi.md#createAlias) | **PATCH** /apps/{app_id}/users/by/{alias_label}/{alias_id}/identity | 
 [**createAliasBySubscription**](DefaultApi.md#createAliasBySubscription) | **PATCH** /apps/{app_id}/subscriptions/{subscription_id}/user/identity | 
+[**createApiKey**](DefaultApi.md#createApiKey) | **POST** /apps/{app_id}/auth/tokens | Create API key
 [**createApp**](DefaultApi.md#createApp) | **POST** /apps | Create an app
+[**createCustomEvents**](DefaultApi.md#createCustomEvents) | **POST** /apps/{app_id}/integrations/custom_events | Create custom events
 [**createNotification**](DefaultApi.md#createNotification) | **POST** /notifications | Create notification
 [**createSegment**](DefaultApi.md#createSegment) | **POST** /apps/{app_id}/segments | Create Segment
 [**createSubscription**](DefaultApi.md#createSubscription) | **POST** /apps/{app_id}/users/by/{alias_label}/{alias_id}/subscriptions | 
+[**createTemplate**](DefaultApi.md#createTemplate) | **POST** /templates | Create template
 [**createUser**](DefaultApi.md#createUser) | **POST** /apps/{app_id}/users | 
 [**deleteAlias**](DefaultApi.md#deleteAlias) | **DELETE** /apps/{app_id}/users/by/{alias_label}/{alias_id}/identity/{alias_label_to_delete} | 
+[**deleteApiKey**](DefaultApi.md#deleteApiKey) | **DELETE** /apps/{app_id}/auth/tokens/{token_id} | Delete API key
 [**deleteSegment**](DefaultApi.md#deleteSegment) | **DELETE** /apps/{app_id}/segments/{segment_id} | Delete Segment
 [**deleteSubscription**](DefaultApi.md#deleteSubscription) | **DELETE** /apps/{app_id}/subscriptions/{subscription_id} | 
+[**deleteTemplate**](DefaultApi.md#deleteTemplate) | **DELETE** /templates/{template_id} | Delete template
 [**deleteUser**](DefaultApi.md#deleteUser) | **DELETE** /apps/{app_id}/users/by/{alias_label}/{alias_id} | 
 [**exportEvents**](DefaultApi.md#exportEvents) | **POST** /notifications/{notification_id}/export_events?app_id&#x3D;{app_id} | Export CSV of Events
 [**exportSubscriptions**](DefaultApi.md#exportSubscriptions) | **POST** /players/csv_export?app_id&#x3D;{app_id} | Export CSV of Subscriptions
@@ -28,12 +34,20 @@ Method | HTTP request | Description
 [**getOutcomes**](DefaultApi.md#getOutcomes) | **GET** /apps/{app_id}/outcomes | View Outcomes
 [**getSegments**](DefaultApi.md#getSegments) | **GET** /apps/{app_id}/segments | Get Segments
 [**getUser**](DefaultApi.md#getUser) | **GET** /apps/{app_id}/users/by/{alias_label}/{alias_id} | 
+[**rotateApiKey**](DefaultApi.md#rotateApiKey) | **POST** /apps/{app_id}/auth/tokens/{token_id}/rotate | Rotate API key
+[**startLiveActivity**](DefaultApi.md#startLiveActivity) | **POST** /apps/{app_id}/activities/activity/{activity_type} | Start Live Activity
 [**transferSubscription**](DefaultApi.md#transferSubscription) | **PATCH** /apps/{app_id}/subscriptions/{subscription_id}/owner | 
 [**unsubscribeEmailWithToken**](DefaultApi.md#unsubscribeEmailWithToken) | **POST** /apps/{app_id}/notifications/{notification_id}/unsubscribe | Unsubscribe with token
+[**updateApiKey**](DefaultApi.md#updateApiKey) | **PATCH** /apps/{app_id}/auth/tokens/{token_id} | Update API key
 [**updateApp**](DefaultApi.md#updateApp) | **PUT** /apps/{app_id} | Update an app
 [**updateLiveActivity**](DefaultApi.md#updateLiveActivity) | **POST** /apps/{app_id}/live_activities/{activity_id}/notifications | Update a Live Activity via Push
 [**updateSubscription**](DefaultApi.md#updateSubscription) | **PATCH** /apps/{app_id}/subscriptions/{subscription_id} | 
+[**updateSubscriptionByToken**](DefaultApi.md#updateSubscriptionByToken) | **PATCH** /apps/{app_id}/subscriptions_by_token/{token_type}/{token} | Update subscription by token
+[**updateTemplate**](DefaultApi.md#updateTemplate) | **PATCH** /templates/{template_id} | Update template
 [**updateUser**](DefaultApi.md#updateUser) | **PATCH** /apps/{app_id}/users/by/{alias_label}/{alias_id} | 
+[**viewApiKeys**](DefaultApi.md#viewApiKeys) | **GET** /apps/{app_id}/auth/tokens | View API keys
+[**viewTemplate**](DefaultApi.md#viewTemplate) | **GET** /templates/{template_id} | View template
+[**viewTemplates**](DefaultApi.md#viewTemplates) | **GET** /templates | View templates
 
 
 # **cancelNotification**
@@ -93,6 +107,69 @@ Name | Type | Description  | Notes
 **400** | Bad Request |  -  |
 **404** | Not Found |  -  |
 **429** | Rate Limit Exceeded |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **copyTemplateToApp**
+> TemplateResource copyTemplateToApp(copyTemplateRequest)
+
+Copy a template to a destination app.
+
+### Example
+
+
+```typescript
+import Onesignal from '@onesignal/node-onesignal';
+
+const configuration = Onesignal.createConfiguration({
+    organizationApiKey: '<YOUR_ORGANIZATION_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
+
+let body: Onesignal.DefaultApiCopyTemplateToAppRequest = {
+  // string
+  templateId: "template_id_example",
+  // string
+  appId: "app_id_example",
+  // CopyTemplateRequest
+  copyTemplateRequest: {
+    target_app_id: "target_app_id_example",
+  },
+};
+
+const response = await apiInstance.copyTemplateToApp(body);
+console.log(response);
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **copyTemplateRequest** | **CopyTemplateRequest**|  |
+ **templateId** | [**string**] |  | defaults to undefined
+ **appId** | [**string**] |  | defaults to undefined
+
+
+### Return type
+
+**TemplateResource**
+
+### Authorization
+
+[organization_api_key](README.md#organization_api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -235,6 +312,70 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
+# **createApiKey**
+> CreateApiKeyResponse createApiKey(createApiKeyRequest)
+
+Use this API to create a new App API Key (also called a Rich Authentication Token) for a specific OneSignal app. These keys are used to authenticate API requests at the app level and offer enhanced security features, including optional IP allowlisting.
+
+### Example
+
+
+```typescript
+import Onesignal from '@onesignal/node-onesignal';
+
+const configuration = Onesignal.createConfiguration({
+    organizationApiKey: '<YOUR_ORGANIZATION_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
+
+let body: Onesignal.DefaultApiCreateApiKeyRequest = {
+  // string
+  appId: "app_id_example",
+  // CreateApiKeyRequest
+  createApiKeyRequest: {
+    name: "name_example",
+    ip_allowlist_mode: "disabled",
+    ip_allowlist: [
+      "ip_allowlist_example",
+    ],
+  },
+};
+
+const response = await apiInstance.createApiKey(body);
+console.log(response);
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createApiKeyRequest** | **CreateApiKeyRequest**|  |
+ **appId** | [**string**] |  | defaults to undefined
+
+
+### Return type
+
+**CreateApiKeyResponse**
+
+### Authorization
+
+[organization_api_key](README.md#organization_api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 # **createApp**
 > App createApp(app)
 
@@ -309,6 +450,76 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | OK |  -  |
 **400** | Bad Request |  -  |
+**429** | Rate Limit Exceeded |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **createCustomEvents**
+> object createCustomEvents(customEventsRequest)
+
+The Custom Events API allows you to record user events. Custom events can represent any action users take in your application, such as completing a purchase, viewing content, or achieving milestones.
+
+### Example
+
+
+```typescript
+import Onesignal from '@onesignal/node-onesignal';
+
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
+
+let body: Onesignal.DefaultApiCreateCustomEventsRequest = {
+  // string | Your OneSignal App ID in UUID v4 format.
+  appId: "app_id_example",
+  // CustomEventsRequest
+  customEventsRequest: {
+    events: [
+      {
+        name: "name_example",
+        external_id: "external_id_example",
+        onesignal_id: "onesignal_id_example",
+        timestamp: new Date('1970-01-01T00:00:00.00Z'),
+        payload: {},
+      },
+    ],
+  },
+};
+
+const response = await apiInstance.createCustomEvents(body);
+console.log(response);
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **customEventsRequest** | **CustomEventsRequest**|  |
+ **appId** | [**string**] | Your OneSignal App ID in UUID v4 format. | defaults to undefined
+
+
+### Return type
+
+**object**
+
+### Authorization
+
+[rest_api_key](README.md#rest_api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
 **429** | Rate Limit Exceeded |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
@@ -523,6 +734,115 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
+# **createTemplate**
+> TemplateResource createTemplate(createTemplateRequest)
+
+Create reusable message templates for push, email, and SMS channels.
+
+### Example
+
+
+```typescript
+import Onesignal from '@onesignal/node-onesignal';
+
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
+
+let body: Onesignal.DefaultApiCreateTemplateRequest = {
+  // CreateTemplateRequest
+  createTemplateRequest: {
+    app_id: "app_id_example",
+    name: "name_example",
+    contents: {
+      en: "en_example",
+      ar: "ar_example",
+      bs: "bs_example",
+      bg: "bg_example",
+      ca: "ca_example",
+      zh_hans: "zh_hans_example",
+      zh_hant: "zh_hant_example",
+      zh: "zh_example",
+      hr: "hr_example",
+      cs: "cs_example",
+      da: "da_example",
+      nl: "nl_example",
+      et: "et_example",
+      fi: "fi_example",
+      fr: "fr_example",
+      ka: "ka_example",
+      de: "de_example",
+      el: "el_example",
+      hi: "hi_example",
+      he: "he_example",
+      hu: "hu_example",
+      id: "id_example",
+      it: "it_example",
+      ja: "ja_example",
+      ko: "ko_example",
+      lv: "lv_example",
+      lt: "lt_example",
+      ms: "ms_example",
+      nb: "nb_example",
+      pl: "pl_example",
+      fa: "fa_example",
+      pt: "pt_example",
+      pa: "pa_example",
+      ro: "ro_example",
+      ru: "ru_example",
+      sr: "sr_example",
+      sk: "sk_example",
+      es: "es_example",
+      sv: "sv_example",
+      th: "th_example",
+      tr: "tr_example",
+      uk: "uk_example",
+      vi: "vi_example",
+    },
+    is_email: true,
+    email_subject: "email_subject_example",
+    email_body: "email_body_example",
+    is_sms: true,
+    dynamic_content: "dynamic_content_example",
+  },
+};
+
+const response = await apiInstance.createTemplate(body);
+console.log(response);
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createTemplateRequest** | **CreateTemplateRequest**|  |
+
+
+### Return type
+
+**TemplateResource**
+
+### Authorization
+
+[rest_api_key](README.md#rest_api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+**422** | Unprocessable Entity |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 # **createUser**
 > User createUser(user)
 
@@ -697,6 +1017,64 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
+# **deleteApiKey**
+> object deleteApiKey()
+
+Delete a specific Rich Authentication Token (App API Key) for a OneSignal app. Requires your Organization API Key and the token’s unique ID, not the token value itself.
+
+### Example
+
+
+```typescript
+import Onesignal from '@onesignal/node-onesignal';
+
+const configuration = Onesignal.createConfiguration({
+    organizationApiKey: '<YOUR_ORGANIZATION_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
+
+let body: Onesignal.DefaultApiDeleteApiKeyRequest = {
+  // string
+  appId: "app_id_example",
+  // string
+  tokenId: "token_id_example",
+};
+
+const response = await apiInstance.deleteApiKey(body);
+console.log(response);
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **appId** | [**string**] |  | defaults to undefined
+ **tokenId** | [**string**] |  | defaults to undefined
+
+
+### Return type
+
+**object**
+
+### Authorization
+
+[organization_api_key](README.md#organization_api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 # **deleteSegment**
 > GenericSuccessBoolResponse deleteSegment()
 
@@ -815,6 +1193,65 @@ Name | Type | Description  | Notes
 **404** | Not Found |  -  |
 **409** | Conflict |  -  |
 **429** | Rate Limit Exceeded |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **deleteTemplate**
+> GenericSuccessBoolResponse deleteTemplate()
+
+Delete a template by id.
+
+### Example
+
+
+```typescript
+import Onesignal from '@onesignal/node-onesignal';
+
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
+
+let body: Onesignal.DefaultApiDeleteTemplateRequest = {
+  // string
+  templateId: "template_id_example",
+  // string
+  appId: "app_id_example",
+};
+
+const response = await apiInstance.deleteTemplate(body);
+console.log(response);
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **templateId** | [**string**] |  | defaults to undefined
+ **appId** | [**string**] |  | defaults to undefined
+
+
+### Return type
+
+**GenericSuccessBoolResponse**
+
+### Authorization
+
+[rest_api_key](README.md#rest_api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+**404** | Not Found |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -1617,6 +2054,243 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
+# **rotateApiKey**
+> CreateApiKeyResponse rotateApiKey()
+
+Rotate a Rich Authentication Token (App API Key) for a OneSignal app. Rotating a key revokes the current token and generates a new one under the same configuration—ideal when a token is lost or compromised but you don’t want to recreate and reconfigure it from scratch.
+
+### Example
+
+
+```typescript
+import Onesignal from '@onesignal/node-onesignal';
+
+const configuration = Onesignal.createConfiguration({
+    organizationApiKey: '<YOUR_ORGANIZATION_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
+
+let body: Onesignal.DefaultApiRotateApiKeyRequest = {
+  // string
+  appId: "app_id_example",
+  // string
+  tokenId: "token_id_example",
+};
+
+const response = await apiInstance.rotateApiKey(body);
+console.log(response);
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **appId** | [**string**] |  | defaults to undefined
+ **tokenId** | [**string**] |  | defaults to undefined
+
+
+### Return type
+
+**CreateApiKeyResponse**
+
+### Authorization
+
+[organization_api_key](README.md#organization_api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **startLiveActivity**
+> StartLiveActivitySuccessResponse startLiveActivity(startLiveActivityRequest)
+
+Remotely start a Live Activity on iOS devices via OneSignal’s REST API.
+
+### Example
+
+
+```typescript
+import Onesignal from '@onesignal/node-onesignal';
+
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
+
+let body: Onesignal.DefaultApiStartLiveActivityRequest = {
+  // string | Your OneSignal App ID in UUID v4 format.
+  appId: "app_id_example",
+  // string | The name of the Live Activity defined in your app. This should match the attributes struct used in your app\'s Live Activity implementation.
+  activityType: "activity_type_example",
+  // StartLiveActivityRequest
+  startLiveActivityRequest: {
+    name: "name_example",
+    event: "start",
+    activity_id: "activity_id_example",
+    event_attributes: {},
+    event_updates: {},
+    contents: {
+      en: "en_example",
+      ar: "ar_example",
+      bs: "bs_example",
+      bg: "bg_example",
+      ca: "ca_example",
+      zh_hans: "zh_hans_example",
+      zh_hant: "zh_hant_example",
+      zh: "zh_example",
+      hr: "hr_example",
+      cs: "cs_example",
+      da: "da_example",
+      nl: "nl_example",
+      et: "et_example",
+      fi: "fi_example",
+      fr: "fr_example",
+      ka: "ka_example",
+      de: "de_example",
+      el: "el_example",
+      hi: "hi_example",
+      he: "he_example",
+      hu: "hu_example",
+      id: "id_example",
+      it: "it_example",
+      ja: "ja_example",
+      ko: "ko_example",
+      lv: "lv_example",
+      lt: "lt_example",
+      ms: "ms_example",
+      nb: "nb_example",
+      pl: "pl_example",
+      fa: "fa_example",
+      pt: "pt_example",
+      pa: "pa_example",
+      ro: "ro_example",
+      ru: "ru_example",
+      sr: "sr_example",
+      sk: "sk_example",
+      es: "es_example",
+      sv: "sv_example",
+      th: "th_example",
+      tr: "tr_example",
+      uk: "uk_example",
+      vi: "vi_example",
+    },
+    headings: {
+      en: "en_example",
+      ar: "ar_example",
+      bs: "bs_example",
+      bg: "bg_example",
+      ca: "ca_example",
+      zh_hans: "zh_hans_example",
+      zh_hant: "zh_hant_example",
+      zh: "zh_example",
+      hr: "hr_example",
+      cs: "cs_example",
+      da: "da_example",
+      nl: "nl_example",
+      et: "et_example",
+      fi: "fi_example",
+      fr: "fr_example",
+      ka: "ka_example",
+      de: "de_example",
+      el: "el_example",
+      hi: "hi_example",
+      he: "he_example",
+      hu: "hu_example",
+      id: "id_example",
+      it: "it_example",
+      ja: "ja_example",
+      ko: "ko_example",
+      lv: "lv_example",
+      lt: "lt_example",
+      ms: "ms_example",
+      nb: "nb_example",
+      pl: "pl_example",
+      fa: "fa_example",
+      pt: "pt_example",
+      pa: "pa_example",
+      ro: "ro_example",
+      ru: "ru_example",
+      sr: "sr_example",
+      sk: "sk_example",
+      es: "es_example",
+      sv: "sv_example",
+      th: "th_example",
+      tr: "tr_example",
+      uk: "uk_example",
+      vi: "vi_example",
+    },
+    stale_date: 1,
+    priority: 1,
+    ios_relevance_score: 3.14,
+    idempotency_key: "idempotency_key_example",
+    include_aliases: {
+      "key": [
+        "key_example",
+      ],
+    },
+    include_subscription_ids: [
+      "include_subscription_ids_example",
+    ],
+    included_segments: [
+      "included_segments_example",
+    ],
+    excluded_segments: [
+      "excluded_segments_example",
+    ],
+    filters: [
+      null,
+    ],
+  },
+};
+
+const response = await apiInstance.startLiveActivity(body);
+console.log(response);
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **startLiveActivityRequest** | **StartLiveActivityRequest**|  |
+ **appId** | [**string**] | Your OneSignal App ID in UUID v4 format. | defaults to undefined
+ **activityType** | [**string**] | The name of the Live Activity defined in your app. This should match the attributes struct used in your app\&#39;s Live Activity implementation. | defaults to undefined
+
+
+### Return type
+
+**StartLiveActivitySuccessResponse**
+
+### Authorization
+
+[rest_api_key](README.md#rest_api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Created |  -  |
+**400** | Bad Request |  -  |
+**429** | Rate Limit Exceeded |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 # **transferSubscription**
 > UserIdentityBody transferSubscription(transferSubscriptionRequestBody)
 
@@ -1744,6 +2418,73 @@ Name | Type | Description  | Notes
 **202** | OK |  -  |
 **400** | Bad Request |  -  |
 **429** | Rate Limit Exceeded |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **updateApiKey**
+> object updateApiKey(updateApiKeyRequest)
+
+Update a Rich Authentication Token (App API Key) for a OneSignal app.
+
+### Example
+
+
+```typescript
+import Onesignal from '@onesignal/node-onesignal';
+
+const configuration = Onesignal.createConfiguration({
+    organizationApiKey: '<YOUR_ORGANIZATION_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
+
+let body: Onesignal.DefaultApiUpdateApiKeyRequest = {
+  // string
+  appId: "app_id_example",
+  // string
+  tokenId: "token_id_example",
+  // UpdateApiKeyRequest
+  updateApiKeyRequest: {
+    name: "name_example",
+    ip_allowlist_mode: "disabled",
+    ip_allowlist: [
+      "ip_allowlist_example",
+    ],
+  },
+};
+
+const response = await apiInstance.updateApiKey(body);
+console.log(response);
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **updateApiKeyRequest** | **UpdateApiKeyRequest**|  |
+ **appId** | [**string**] |  | defaults to undefined
+ **tokenId** | [**string**] |  | defaults to undefined
+
+
+### Return type
+
+**object**
+
+### Authorization
+
+[organization_api_key](README.md#organization_api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
@@ -2072,6 +2813,204 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
+# **updateSubscriptionByToken**
+> object updateSubscriptionByToken(subscriptionBody)
+
+Update properties on an existing OneSignal subscription using its token.
+
+### Example
+
+
+```typescript
+import Onesignal from '@onesignal/node-onesignal';
+
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
+
+let body: Onesignal.DefaultApiUpdateSubscriptionByTokenRequest = {
+  // string | Your OneSignal App ID in UUID v4 format.
+  appId: "app_id_example",
+  // string | The type of token to use when looking up the subscription. See Subscription Types.
+  tokenType: "token_type_example",
+  // string | The value of the token to lookup by (e.g., email address, phone number).
+  token: "token_example",
+  // SubscriptionBody
+  subscriptionBody: {
+    subscription: {
+      id: "id_example",
+      type: "iOSPush",
+      token: "token_example",
+      enabled: true,
+      notification_types: 1,
+      session_time: 1,
+      session_count: 1,
+      sdk: "sdk_example",
+      device_model: "device_model_example",
+      device_os: "device_os_example",
+      rooted: true,
+      test_type: 1,
+      app_version: "app_version_example",
+      net_type: 1,
+      carrier: "carrier_example",
+      web_auth: "web_auth_example",
+      web_p256: "web_p256_example",
+    },
+  },
+};
+
+const response = await apiInstance.updateSubscriptionByToken(body);
+console.log(response);
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **subscriptionBody** | **SubscriptionBody**|  |
+ **appId** | [**string**] | Your OneSignal App ID in UUID v4 format. | defaults to undefined
+ **tokenType** | [**string**] | The type of token to use when looking up the subscription. See Subscription Types. | defaults to undefined
+ **token** | [**string**] | The value of the token to lookup by (e.g., email address, phone number). | defaults to undefined
+
+
+### Return type
+
+**object**
+
+### Authorization
+
+[rest_api_key](README.md#rest_api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | ACCEPTED |  -  |
+**400** | Bad Request |  -  |
+**404** | Not Found |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **updateTemplate**
+> TemplateResource updateTemplate(updateTemplateRequest)
+
+Update an existing template.
+
+### Example
+
+
+```typescript
+import Onesignal from '@onesignal/node-onesignal';
+
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
+
+let body: Onesignal.DefaultApiUpdateTemplateRequest = {
+  // string
+  templateId: "template_id_example",
+  // string
+  appId: "app_id_example",
+  // UpdateTemplateRequest
+  updateTemplateRequest: {
+    name: "name_example",
+    contents: {
+      en: "en_example",
+      ar: "ar_example",
+      bs: "bs_example",
+      bg: "bg_example",
+      ca: "ca_example",
+      zh_hans: "zh_hans_example",
+      zh_hant: "zh_hant_example",
+      zh: "zh_example",
+      hr: "hr_example",
+      cs: "cs_example",
+      da: "da_example",
+      nl: "nl_example",
+      et: "et_example",
+      fi: "fi_example",
+      fr: "fr_example",
+      ka: "ka_example",
+      de: "de_example",
+      el: "el_example",
+      hi: "hi_example",
+      he: "he_example",
+      hu: "hu_example",
+      id: "id_example",
+      it: "it_example",
+      ja: "ja_example",
+      ko: "ko_example",
+      lv: "lv_example",
+      lt: "lt_example",
+      ms: "ms_example",
+      nb: "nb_example",
+      pl: "pl_example",
+      fa: "fa_example",
+      pt: "pt_example",
+      pa: "pa_example",
+      ro: "ro_example",
+      ru: "ru_example",
+      sr: "sr_example",
+      sk: "sk_example",
+      es: "es_example",
+      sv: "sv_example",
+      th: "th_example",
+      tr: "tr_example",
+      uk: "uk_example",
+      vi: "vi_example",
+    },
+    is_email: true,
+    email_subject: "email_subject_example",
+    email_body: "email_body_example",
+    is_sms: true,
+    dynamic_content: "dynamic_content_example",
+  },
+};
+
+const response = await apiInstance.updateTemplate(body);
+console.log(response);
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **updateTemplateRequest** | **UpdateTemplateRequest**|  |
+ **templateId** | [**string**] |  | defaults to undefined
+ **appId** | [**string**] |  | defaults to undefined
+
+
+### Return type
+
+**TemplateResource**
+
+### Authorization
+
+[rest_api_key](README.md#rest_api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 # **updateUser**
 > PropertiesBody updateUser(updateUserRequest)
 
@@ -2168,6 +3107,185 @@ Name | Type | Description  | Notes
 **202** | ACCEPTED |  -  |
 **400** | Bad Request |  -  |
 **409** | Conflict |  -  |
+**429** | Rate Limit Exceeded |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **viewApiKeys**
+> ApiKeyTokensListResponse viewApiKeys()
+
+View the details of all of your current app API keys (Rich Authentication Token) for a single OneSignal app.
+
+### Example
+
+
+```typescript
+import Onesignal from '@onesignal/node-onesignal';
+
+const configuration = Onesignal.createConfiguration({
+    organizationApiKey: '<YOUR_ORGANIZATION_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
+
+let body: Onesignal.DefaultApiViewApiKeysRequest = {
+  // string
+  appId: "app_id_example",
+};
+
+const response = await apiInstance.viewApiKeys(body);
+console.log(response);
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **appId** | [**string**] |  | defaults to undefined
+
+
+### Return type
+
+**ApiKeyTokensListResponse**
+
+### Authorization
+
+[organization_api_key](README.md#organization_api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **viewTemplate**
+> TemplateResource viewTemplate()
+
+Fetch a single template by id.
+
+### Example
+
+
+```typescript
+import Onesignal from '@onesignal/node-onesignal';
+
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
+
+let body: Onesignal.DefaultApiViewTemplateRequest = {
+  // string
+  templateId: "template_id_example",
+  // string
+  appId: "app_id_example",
+};
+
+const response = await apiInstance.viewTemplate(body);
+console.log(response);
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **templateId** | [**string**] |  | defaults to undefined
+ **appId** | [**string**] |  | defaults to undefined
+
+
+### Return type
+
+**TemplateResource**
+
+### Authorization
+
+[rest_api_key](README.md#rest_api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+**404** | Not Found |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **viewTemplates**
+> TemplatesListResponse viewTemplates()
+
+List templates for an app.
+
+### Example
+
+
+```typescript
+import Onesignal from '@onesignal/node-onesignal';
+
+const configuration = Onesignal.createConfiguration({
+    restApiKey: '<YOUR_REST_API_KEY>',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
+
+let body: Onesignal.DefaultApiViewTemplatesRequest = {
+  // string | Your OneSignal App ID in UUID v4 format.
+  appId: "app_id_example",
+  // number | Maximum number of templates. Default and max is 50. (optional)
+  limit: 50,
+  // number | Pagination offset. (optional)
+  offset: 0,
+  // 'push' | 'email' | 'sms' | Filter by delivery channel. (optional)
+  channel: "push",
+};
+
+const response = await apiInstance.viewTemplates(body);
+console.log(response);
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **appId** | [**string**] | Your OneSignal App ID in UUID v4 format. | defaults to undefined
+ **limit** | [**number**] | Maximum number of templates. Default and max is 50. | (optional) defaults to 50
+ **offset** | [**number**] | Pagination offset. | (optional) defaults to 0
+ **channel** | [**&#39;push&#39; | &#39;email&#39; | &#39;sms&#39;**]**Array<&#39;push&#39; &#124; &#39;email&#39; &#124; &#39;sms&#39;>** | Filter by delivery channel. | (optional) defaults to undefined
+
+
+### Return type
+
+**TemplatesListResponse**
+
+### Authorization
+
+[rest_api_key](README.md#rest_api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
 **429** | Rate Limit Exceeded |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)

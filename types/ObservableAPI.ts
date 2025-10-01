@@ -3,17 +3,25 @@ import * as models from '../models/all';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
+import { ApiKeyToken } from '../models/ApiKeyToken';
+import { ApiKeyTokensListResponse } from '../models/ApiKeyTokensListResponse';
 import { App } from '../models/App';
 import { BasicNotification } from '../models/BasicNotification';
 import { BasicNotificationAllOf } from '../models/BasicNotificationAllOf';
 import { BasicNotificationAllOfAndroidBackgroundLayout } from '../models/BasicNotificationAllOfAndroidBackgroundLayout';
 import { Button } from '../models/Button';
+import { CopyTemplateRequest } from '../models/CopyTemplateRequest';
+import { CreateApiKeyRequest } from '../models/CreateApiKeyRequest';
+import { CreateApiKeyResponse } from '../models/CreateApiKeyResponse';
 import { CreateNotificationSuccessResponse } from '../models/CreateNotificationSuccessResponse';
 import { CreateSegmentConflictResponse } from '../models/CreateSegmentConflictResponse';
 import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
+import { CreateTemplateRequest } from '../models/CreateTemplateRequest';
 import { CreateUserConflictResponse } from '../models/CreateUserConflictResponse';
 import { CreateUserConflictResponseErrorsInner } from '../models/CreateUserConflictResponseErrorsInner';
 import { CreateUserConflictResponseErrorsItemsMeta } from '../models/CreateUserConflictResponseErrorsItemsMeta';
+import { CustomEvent } from '../models/CustomEvent';
+import { CustomEventsRequest } from '../models/CustomEventsRequest';
 import { DeliveryData } from '../models/DeliveryData';
 import { ExportEventsSuccessResponse } from '../models/ExportEventsSuccessResponse';
 import { ExportSubscriptionsRequestBody } from '../models/ExportSubscriptionsRequestBody';
@@ -46,12 +54,18 @@ import { RateLimitError } from '../models/RateLimitError';
 import { Segment } from '../models/Segment';
 import { SegmentData } from '../models/SegmentData';
 import { SegmentNotificationTarget } from '../models/SegmentNotificationTarget';
+import { StartLiveActivityRequest } from '../models/StartLiveActivityRequest';
+import { StartLiveActivitySuccessResponse } from '../models/StartLiveActivitySuccessResponse';
 import { Subscription } from '../models/Subscription';
 import { SubscriptionBody } from '../models/SubscriptionBody';
 import { SubscriptionNotificationTarget } from '../models/SubscriptionNotificationTarget';
+import { TemplateResource } from '../models/TemplateResource';
+import { TemplatesListResponse } from '../models/TemplatesListResponse';
 import { TransferSubscriptionRequestBody } from '../models/TransferSubscriptionRequestBody';
+import { UpdateApiKeyRequest } from '../models/UpdateApiKeyRequest';
 import { UpdateLiveActivityRequest } from '../models/UpdateLiveActivityRequest';
 import { UpdateLiveActivitySuccessResponse } from '../models/UpdateLiveActivitySuccessResponse';
+import { UpdateTemplateRequest } from '../models/UpdateTemplateRequest';
 import { UpdateUserRequest } from '../models/UpdateUserRequest';
 import { User } from '../models/User';
 import { UserIdentityBody } from '../models/UserIdentityBody';
@@ -95,6 +109,32 @@ export class ObservableDefaultApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.cancelNotification(rsp)));
+            }));
+    }
+
+    /**
+     * Copy a template to a destination app.
+     * Copy template to another app
+     * @param templateId 
+     * @param appId 
+     * @param copyTemplateRequest 
+     */
+    public copyTemplateToApp(templateId: string, appId: string, copyTemplateRequest: CopyTemplateRequest, _options?: Configuration): Observable<TemplateResource> {
+        const requestContextPromise = this.requestFactory.copyTemplateToApp(templateId, appId, copyTemplateRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.copyTemplateToApp(rsp)));
             }));
     }
 
@@ -150,6 +190,31 @@ export class ObservableDefaultApi {
     }
 
     /**
+     * Use this API to create a new App API Key (also called a Rich Authentication Token) for a specific OneSignal app. These keys are used to authenticate API requests at the app level and offer enhanced security features, including optional IP allowlisting.
+     * Create API key
+     * @param appId 
+     * @param createApiKeyRequest 
+     */
+    public createApiKey(appId: string, createApiKeyRequest: CreateApiKeyRequest, _options?: Configuration): Observable<CreateApiKeyResponse> {
+        const requestContextPromise = this.requestFactory.createApiKey(appId, createApiKeyRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createApiKey(rsp)));
+            }));
+    }
+
+    /**
      * Creates a new OneSignal app
      * Create an app
      * @param app 
@@ -170,6 +235,31 @@ export class ObservableDefaultApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createApp(rsp)));
+            }));
+    }
+
+    /**
+     * The Custom Events API allows you to record user events. Custom events can represent any action users take in your application, such as completing a purchase, viewing content, or achieving milestones.
+     * Create custom events
+     * @param appId Your OneSignal App ID in UUID v4 format.
+     * @param customEventsRequest 
+     */
+    public createCustomEvents(appId: string, customEventsRequest: CustomEventsRequest, _options?: Configuration): Observable<object> {
+        const requestContextPromise = this.requestFactory.createCustomEvents(appId, customEventsRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createCustomEvents(rsp)));
             }));
     }
 
@@ -249,6 +339,30 @@ export class ObservableDefaultApi {
     }
 
     /**
+     * Create reusable message templates for push, email, and SMS channels.
+     * Create template
+     * @param createTemplateRequest 
+     */
+    public createTemplate(createTemplateRequest: CreateTemplateRequest, _options?: Configuration): Observable<TemplateResource> {
+        const requestContextPromise = this.requestFactory.createTemplate(createTemplateRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createTemplate(rsp)));
+            }));
+    }
+
+    /**
      * Creates a User, optionally Subscriptions owned by the User as well as Aliases. Aliases provided in the payload will be used to look up an existing User.
      * @param appId 
      * @param user 
@@ -299,6 +413,31 @@ export class ObservableDefaultApi {
     }
 
     /**
+     * Delete a specific Rich Authentication Token (App API Key) for a OneSignal app. Requires your Organization API Key and the token’s unique ID, not the token value itself.
+     * Delete API key
+     * @param appId 
+     * @param tokenId 
+     */
+    public deleteApiKey(appId: string, tokenId: string, _options?: Configuration): Observable<object> {
+        const requestContextPromise = this.requestFactory.deleteApiKey(appId, tokenId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteApiKey(rsp)));
+            }));
+    }
+
+    /**
      * Delete a segment (not user devices) - Required: OneSignal Paid Plan You can delete a segment under your app by calling this API. You must provide an API key in the Authorization header that has admin access on the app. The segment_id can be found in the URL of the segment when viewing it in the dashboard. 
      * Delete Segment
      * @param appId The OneSignal App ID for your app.  Available in Keys &amp; IDs.
@@ -344,6 +483,31 @@ export class ObservableDefaultApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteSubscription(rsp)));
+            }));
+    }
+
+    /**
+     * Delete a template by id.
+     * Delete template
+     * @param templateId 
+     * @param appId 
+     */
+    public deleteTemplate(templateId: string, appId: string, _options?: Configuration): Observable<GenericSuccessBoolResponse> {
+        const requestContextPromise = this.requestFactory.deleteTemplate(templateId, appId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteTemplate(rsp)));
             }));
     }
 
@@ -676,6 +840,57 @@ export class ObservableDefaultApi {
     }
 
     /**
+     * Rotate a Rich Authentication Token (App API Key) for a OneSignal app. Rotating a key revokes the current token and generates a new one under the same configuration—ideal when a token is lost or compromised but you don’t want to recreate and reconfigure it from scratch.
+     * Rotate API key
+     * @param appId 
+     * @param tokenId 
+     */
+    public rotateApiKey(appId: string, tokenId: string, _options?: Configuration): Observable<CreateApiKeyResponse> {
+        const requestContextPromise = this.requestFactory.rotateApiKey(appId, tokenId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.rotateApiKey(rsp)));
+            }));
+    }
+
+    /**
+     * Remotely start a Live Activity on iOS devices via OneSignal’s REST API.
+     * Start Live Activity
+     * @param appId Your OneSignal App ID in UUID v4 format.
+     * @param activityType The name of the Live Activity defined in your app. This should match the attributes struct used in your app\&#39;s Live Activity implementation.
+     * @param startLiveActivityRequest 
+     */
+    public startLiveActivity(appId: string, activityType: string, startLiveActivityRequest: StartLiveActivityRequest, _options?: Configuration): Observable<StartLiveActivitySuccessResponse> {
+        const requestContextPromise = this.requestFactory.startLiveActivity(appId, activityType, startLiveActivityRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.startLiveActivity(rsp)));
+            }));
+    }
+
+    /**
      * Transfers this Subscription to the User identified by the identity in the payload.
      * @param appId 
      * @param subscriptionId 
@@ -723,6 +938,32 @@ export class ObservableDefaultApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.unsubscribeEmailWithToken(rsp)));
+            }));
+    }
+
+    /**
+     * Update a Rich Authentication Token (App API Key) for a OneSignal app.
+     * Update API key
+     * @param appId 
+     * @param tokenId 
+     * @param updateApiKeyRequest 
+     */
+    public updateApiKey(appId: string, tokenId: string, updateApiKeyRequest: UpdateApiKeyRequest, _options?: Configuration): Observable<object> {
+        const requestContextPromise = this.requestFactory.updateApiKey(appId, tokenId, updateApiKeyRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateApiKey(rsp)));
             }));
     }
 
@@ -803,6 +1044,59 @@ export class ObservableDefaultApi {
     }
 
     /**
+     * Update properties on an existing OneSignal subscription using its token.
+     * Update subscription by token
+     * @param appId Your OneSignal App ID in UUID v4 format.
+     * @param tokenType The type of token to use when looking up the subscription. See Subscription Types.
+     * @param token The value of the token to lookup by (e.g., email address, phone number).
+     * @param subscriptionBody 
+     */
+    public updateSubscriptionByToken(appId: string, tokenType: string, token: string, subscriptionBody: SubscriptionBody, _options?: Configuration): Observable<object> {
+        const requestContextPromise = this.requestFactory.updateSubscriptionByToken(appId, tokenType, token, subscriptionBody, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateSubscriptionByToken(rsp)));
+            }));
+    }
+
+    /**
+     * Update an existing template.
+     * Update template
+     * @param templateId 
+     * @param appId 
+     * @param updateTemplateRequest 
+     */
+    public updateTemplate(templateId: string, appId: string, updateTemplateRequest: UpdateTemplateRequest, _options?: Configuration): Observable<TemplateResource> {
+        const requestContextPromise = this.requestFactory.updateTemplate(templateId, appId, updateTemplateRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateTemplate(rsp)));
+            }));
+    }
+
+    /**
      * Updates an existing User’s properties.
      * @param appId 
      * @param aliasLabel 
@@ -825,6 +1119,82 @@ export class ObservableDefaultApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateUser(rsp)));
+            }));
+    }
+
+    /**
+     * View the details of all of your current app API keys (Rich Authentication Token) for a single OneSignal app.
+     * View API keys
+     * @param appId 
+     */
+    public viewApiKeys(appId: string, _options?: Configuration): Observable<ApiKeyTokensListResponse> {
+        const requestContextPromise = this.requestFactory.viewApiKeys(appId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.viewApiKeys(rsp)));
+            }));
+    }
+
+    /**
+     * Fetch a single template by id.
+     * View template
+     * @param templateId 
+     * @param appId 
+     */
+    public viewTemplate(templateId: string, appId: string, _options?: Configuration): Observable<TemplateResource> {
+        const requestContextPromise = this.requestFactory.viewTemplate(templateId, appId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.viewTemplate(rsp)));
+            }));
+    }
+
+    /**
+     * List templates for an app.
+     * View templates
+     * @param appId Your OneSignal App ID in UUID v4 format.
+     * @param limit Maximum number of templates. Default and max is 50.
+     * @param offset Pagination offset.
+     * @param channel Filter by delivery channel.
+     */
+    public viewTemplates(appId: string, limit?: number, offset?: number, channel?: 'push' | 'email' | 'sms', _options?: Configuration): Observable<TemplatesListResponse> {
+        const requestContextPromise = this.requestFactory.viewTemplates(appId, limit, offset, channel, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.viewTemplates(rsp)));
             }));
     }
 
