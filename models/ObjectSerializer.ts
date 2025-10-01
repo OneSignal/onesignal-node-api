@@ -79,7 +79,7 @@ import { NotificationAllOf } from './NotificationAllOf';
 import { NotificationHistorySuccessResponse } from './NotificationHistorySuccessResponse';
 import { NotificationSlice } from './NotificationSlice';
 import { NotificationTarget            , NotificationTargetTargetChannelEnum   } from './NotificationTarget';
-import { NotificationWithMeta            , NotificationWithMetaTargetChannelEnum     , NotificationWithMetaAggregationEnum                                                                                                         } from './NotificationWithMeta';
+import { NotificationWithMeta            , NotificationWithMetaTargetChannelEnum     , NotificationWithMetaAggregationEnum                                                                                                          } from './NotificationWithMeta';
 import { NotificationWithMetaAllOf } from './NotificationWithMetaAllOf';
 import { Operator, OperatorOperatorEnum   } from './Operator';
 import { OutcomeData  , OutcomeDataAggregationEnum   } from './OutcomeData';
