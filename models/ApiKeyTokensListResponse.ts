@@ -6,23 +6,24 @@
  * Contact: devrel@onesignal.com
  */
 
+import { ApiKeyToken } from './ApiKeyToken';
 import { HttpFile } from '../http/http';
 
-export class ExportSubscriptionsSuccessResponse {
-    'csv_file_url'?: string;
+export class ApiKeyTokensListResponse {
+    'tokens'?: Array<ApiKeyToken>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "csv_file_url",
-            "baseName": "csv_file_url",
-            "type": "string",
+            "name": "tokens",
+            "baseName": "tokens",
+            "type": "Array<ApiKeyToken>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ExportSubscriptionsSuccessResponse.attributeTypeMap;
+        return ApiKeyTokensListResponse.attributeTypeMap;
     }
 
     public constructor() {

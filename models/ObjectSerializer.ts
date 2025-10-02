@@ -1,14 +1,22 @@
+export * from './ApiKeyToken';
+export * from './ApiKeyTokensListResponse';
 export * from './App';
 export * from './BasicNotification';
 export * from './BasicNotificationAllOf';
 export * from './BasicNotificationAllOfAndroidBackgroundLayout';
 export * from './Button';
+export * from './CopyTemplateRequest';
+export * from './CreateApiKeyRequest';
+export * from './CreateApiKeyResponse';
 export * from './CreateNotificationSuccessResponse';
 export * from './CreateSegmentConflictResponse';
 export * from './CreateSegmentSuccessResponse';
+export * from './CreateTemplateRequest';
 export * from './CreateUserConflictResponse';
 export * from './CreateUserConflictResponseErrorsInner';
 export * from './CreateUserConflictResponseErrorsItemsMeta';
+export * from './CustomEvent';
+export * from './CustomEventsRequest';
 export * from './DeliveryData';
 export * from './ExportEventsSuccessResponse';
 export * from './ExportSubscriptionsRequestBody';
@@ -41,28 +49,42 @@ export * from './RateLimitError';
 export * from './Segment';
 export * from './SegmentData';
 export * from './SegmentNotificationTarget';
+export * from './StartLiveActivityRequest';
+export * from './StartLiveActivitySuccessResponse';
 export * from './Subscription';
 export * from './SubscriptionBody';
 export * from './SubscriptionNotificationTarget';
+export * from './TemplateResource';
+export * from './TemplatesListResponse';
 export * from './TransferSubscriptionRequestBody';
+export * from './UpdateApiKeyRequest';
 export * from './UpdateLiveActivityRequest';
 export * from './UpdateLiveActivitySuccessResponse';
+export * from './UpdateTemplateRequest';
 export * from './UpdateUserRequest';
 export * from './User';
 export * from './UserIdentityBody';
 export * from './WebButton';
 
+import { ApiKeyToken    , ApiKeyTokenIpAllowlistModeEnum    } from './ApiKeyToken';
+import { ApiKeyTokensListResponse } from './ApiKeyTokensListResponse';
 import { App            , AppApnsEnvEnum                        } from './App';
 import { BasicNotification            , BasicNotificationTargetChannelEnum     , BasicNotificationAggregationEnum                                                                                              } from './BasicNotification';
 import { BasicNotificationAllOf   , BasicNotificationAllOfAggregationEnum                                                                                              } from './BasicNotificationAllOf';
 import { BasicNotificationAllOfAndroidBackgroundLayout } from './BasicNotificationAllOfAndroidBackgroundLayout';
 import { Button } from './Button';
+import { CopyTemplateRequest } from './CopyTemplateRequest';
+import { CreateApiKeyRequest , CreateApiKeyRequestIpAllowlistModeEnum    } from './CreateApiKeyRequest';
+import { CreateApiKeyResponse } from './CreateApiKeyResponse';
 import { CreateNotificationSuccessResponse } from './CreateNotificationSuccessResponse';
 import { CreateSegmentConflictResponse } from './CreateSegmentConflictResponse';
 import { CreateSegmentSuccessResponse } from './CreateSegmentSuccessResponse';
+import { CreateTemplateRequest } from './CreateTemplateRequest';
 import { CreateUserConflictResponse } from './CreateUserConflictResponse';
 import { CreateUserConflictResponseErrorsInner } from './CreateUserConflictResponseErrorsInner';
 import { CreateUserConflictResponseErrorsItemsMeta } from './CreateUserConflictResponseErrorsItemsMeta';
+import { CustomEvent } from './CustomEvent';
+import { CustomEventsRequest } from './CustomEventsRequest';
 import { DeliveryData } from './DeliveryData';
 import { ExportEventsSuccessResponse } from './ExportEventsSuccessResponse';
 import { ExportSubscriptionsRequestBody } from './ExportSubscriptionsRequestBody';
@@ -95,12 +117,18 @@ import { RateLimitError } from './RateLimitError';
 import { Segment } from './Segment';
 import { SegmentData } from './SegmentData';
 import { SegmentNotificationTarget } from './SegmentNotificationTarget';
+import { StartLiveActivityRequest , StartLiveActivityRequestEventEnum                 } from './StartLiveActivityRequest';
+import { StartLiveActivitySuccessResponse } from './StartLiveActivitySuccessResponse';
 import { Subscription , SubscriptionTypeEnum                  } from './Subscription';
 import { SubscriptionBody } from './SubscriptionBody';
 import { SubscriptionNotificationTarget          , SubscriptionNotificationTargetTargetChannelEnum   } from './SubscriptionNotificationTarget';
+import { TemplateResource    , TemplateResourceChannelEnum    } from './TemplateResource';
+import { TemplatesListResponse } from './TemplatesListResponse';
 import { TransferSubscriptionRequestBody } from './TransferSubscriptionRequestBody';
+import { UpdateApiKeyRequest , UpdateApiKeyRequestIpAllowlistModeEnum    } from './UpdateApiKeyRequest';
 import { UpdateLiveActivityRequest , UpdateLiveActivityRequestEventEnum          } from './UpdateLiveActivityRequest';
 import { UpdateLiveActivitySuccessResponse } from './UpdateLiveActivitySuccessResponse';
+import { UpdateTemplateRequest } from './UpdateTemplateRequest';
 import { UpdateUserRequest } from './UpdateUserRequest';
 import { User } from './User';
 import { UserIdentityBody } from './UserIdentityBody';
@@ -126,10 +154,12 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 
 
 let enumsMap: Set<string> = new Set<string>([
+    "ApiKeyTokenIpAllowlistModeEnum",
     "AppApnsEnvEnum",
     "BasicNotificationTargetChannelEnum",
     "BasicNotificationAggregationEnum",
     "BasicNotificationAllOfAggregationEnum",
+    "CreateApiKeyRequestIpAllowlistModeEnum",
     "FilterRelationEnum",
     "FilterExpressionRelationEnum",
     "FilterExpressionOperatorEnum",
@@ -141,23 +171,34 @@ let enumsMap: Set<string> = new Set<string>([
     "NotificationWithMetaAggregationEnum",
     "OperatorOperatorEnum",
     "OutcomeDataAggregationEnum",
+    "StartLiveActivityRequestEventEnum",
     "SubscriptionTypeEnum",
     "SubscriptionNotificationTargetTargetChannelEnum",
+    "TemplateResourceChannelEnum",
+    "UpdateApiKeyRequestIpAllowlistModeEnum",
     "UpdateLiveActivityRequestEventEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
+    "ApiKeyToken": ApiKeyToken,
+    "ApiKeyTokensListResponse": ApiKeyTokensListResponse,
     "App": App,
     "BasicNotification": BasicNotification,
     "BasicNotificationAllOf": BasicNotificationAllOf,
     "BasicNotificationAllOfAndroidBackgroundLayout": BasicNotificationAllOfAndroidBackgroundLayout,
     "Button": Button,
+    "CopyTemplateRequest": CopyTemplateRequest,
+    "CreateApiKeyRequest": CreateApiKeyRequest,
+    "CreateApiKeyResponse": CreateApiKeyResponse,
     "CreateNotificationSuccessResponse": CreateNotificationSuccessResponse,
     "CreateSegmentConflictResponse": CreateSegmentConflictResponse,
     "CreateSegmentSuccessResponse": CreateSegmentSuccessResponse,
+    "CreateTemplateRequest": CreateTemplateRequest,
     "CreateUserConflictResponse": CreateUserConflictResponse,
     "CreateUserConflictResponseErrorsInner": CreateUserConflictResponseErrorsInner,
     "CreateUserConflictResponseErrorsItemsMeta": CreateUserConflictResponseErrorsItemsMeta,
+    "CustomEvent": CustomEvent,
+    "CustomEventsRequest": CustomEventsRequest,
     "DeliveryData": DeliveryData,
     "ExportEventsSuccessResponse": ExportEventsSuccessResponse,
     "ExportSubscriptionsRequestBody": ExportSubscriptionsRequestBody,
@@ -190,12 +231,18 @@ let typeMap: {[index: string]: any} = {
     "Segment": Segment,
     "SegmentData": SegmentData,
     "SegmentNotificationTarget": SegmentNotificationTarget,
+    "StartLiveActivityRequest": StartLiveActivityRequest,
+    "StartLiveActivitySuccessResponse": StartLiveActivitySuccessResponse,
     "Subscription": Subscription,
     "SubscriptionBody": SubscriptionBody,
     "SubscriptionNotificationTarget": SubscriptionNotificationTarget,
+    "TemplateResource": TemplateResource,
+    "TemplatesListResponse": TemplatesListResponse,
     "TransferSubscriptionRequestBody": TransferSubscriptionRequestBody,
+    "UpdateApiKeyRequest": UpdateApiKeyRequest,
     "UpdateLiveActivityRequest": UpdateLiveActivityRequest,
     "UpdateLiveActivitySuccessResponse": UpdateLiveActivitySuccessResponse,
+    "UpdateTemplateRequest": UpdateTemplateRequest,
     "UpdateUserRequest": UpdateUserRequest,
     "User": User,
     "UserIdentityBody": UserIdentityBody,

@@ -6,23 +6,24 @@
  * Contact: devrel@onesignal.com
  */
 
+import { TemplateResource } from './TemplateResource';
 import { HttpFile } from '../http/http';
 
-export class ExportSubscriptionsSuccessResponse {
-    'csv_file_url'?: string;
+export class TemplatesListResponse {
+    'templates'?: Array<TemplateResource>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "csv_file_url",
-            "baseName": "csv_file_url",
-            "type": "string",
+            "name": "templates",
+            "baseName": "templates",
+            "type": "Array<TemplateResource>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ExportSubscriptionsSuccessResponse.attributeTypeMap;
+        return TemplatesListResponse.attributeTypeMap;
     }
 
     public constructor() {

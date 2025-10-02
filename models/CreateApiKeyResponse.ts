@@ -8,21 +8,28 @@
 
 import { HttpFile } from '../http/http';
 
-export class ExportSubscriptionsSuccessResponse {
-    'csv_file_url'?: string;
+export class CreateApiKeyResponse {
+    'token_id'?: string;
+    'formatted_token'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "csv_file_url",
-            "baseName": "csv_file_url",
+            "name": "token_id",
+            "baseName": "token_id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "formatted_token",
+            "baseName": "formatted_token",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ExportSubscriptionsSuccessResponse.attributeTypeMap;
+        return CreateApiKeyResponse.attributeTypeMap;
     }
 
     public constructor() {

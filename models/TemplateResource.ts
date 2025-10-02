@@ -8,35 +8,16 @@
 
 import { HttpFile } from '../http/http';
 
-export class SegmentData {
-    /**
-    * The segment ID
-    */
+export class TemplateResource {
     'id'?: string;
-    /**
-    * The segment name
-    */
     'name'?: string;
-    /**
-    * Date segment created
-    */
     'created_at'?: string;
-    /**
-    * Date segment last updated
-    */
     'updated_at'?: string;
+    'channel'?: TemplateResourceChannelEnum;
     /**
-    * The app id
+    * Rendered content and channel/platform flags for the template.
     */
-    'app_id'?: string;
-    /**
-    * Is the segment read only?
-    */
-    'read_only'?: boolean;
-    /**
-    * Is the segment active?
-    */
-    'is_active'?: boolean;
+    'content'?: { [key: string]: any; };
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -57,38 +38,35 @@ export class SegmentData {
             "name": "created_at",
             "baseName": "created_at",
             "type": "string",
-            "format": ""
+            "format": "date-time"
         },
         {
             "name": "updated_at",
             "baseName": "updated_at",
             "type": "string",
+            "format": "date-time"
+        },
+        {
+            "name": "channel",
+            "baseName": "channel",
+            "type": "TemplateResourceChannelEnum",
             "format": ""
         },
         {
-            "name": "app_id",
-            "baseName": "app_id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "read_only",
-            "baseName": "read_only",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "is_active",
-            "baseName": "is_active",
-            "type": "boolean",
+            "name": "content",
+            "baseName": "content",
+            "type": "{ [key: string]: any; }",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return SegmentData.attributeTypeMap;
+        return TemplateResource.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
+export type TemplateResourceChannelEnum = "push" | "email" | "sms" ;
 
