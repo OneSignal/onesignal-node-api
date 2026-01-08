@@ -9,6 +9,7 @@ jobs:
     name: Publish
     runs-on: ubuntu-latest
     permissions:
+      id-token: write
       contents: write
       issues: write
       pull-requests: write
@@ -28,7 +29,6 @@ jobs:
       - name: Publish to NPM and Create GitHub Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           npx -p semantic-release \
               -p @semantic-release/changelog \
