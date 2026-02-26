@@ -69,8 +69,8 @@ export * from './WebButton';
 import { ApiKeyToken    , ApiKeyTokenIpAllowlistModeEnum    } from './ApiKeyToken';
 import { ApiKeyTokensListResponse } from './ApiKeyTokensListResponse';
 import { App            , AppApnsEnvEnum                        } from './App';
-import { BasicNotification            , BasicNotificationTargetChannelEnum     , BasicNotificationAggregationEnum                                                                                              } from './BasicNotification';
-import { BasicNotificationAllOf   , BasicNotificationAllOfAggregationEnum                                                                                              } from './BasicNotificationAllOf';
+import { BasicNotification            , BasicNotificationTargetChannelEnum     , BasicNotificationAggregationEnum                                                                                                 , BasicNotificationHuaweiCategoryEnum    } from './BasicNotification';
+import { BasicNotificationAllOf   , BasicNotificationAllOfAggregationEnum                                                                                                 , BasicNotificationAllOfHuaweiCategoryEnum    } from './BasicNotificationAllOf';
 import { BasicNotificationAllOfAndroidBackgroundLayout } from './BasicNotificationAllOfAndroidBackgroundLayout';
 import { Button } from './Button';
 import { CopyTemplateRequest } from './CopyTemplateRequest';
@@ -96,12 +96,12 @@ import { GenericSuccessBoolResponse } from './GenericSuccessBoolResponse';
 import { GetNotificationHistoryRequestBody, GetNotificationHistoryRequestBodyEventsEnum     } from './GetNotificationHistoryRequestBody';
 import { GetSegmentsSuccessResponse } from './GetSegmentsSuccessResponse';
 import { LanguageStringMap } from './LanguageStringMap';
-import { Notification            , NotificationTargetChannelEnum     , NotificationAggregationEnum                                                                                               } from './Notification';
+import { Notification            , NotificationTargetChannelEnum     , NotificationAggregationEnum                                                                                                 , NotificationHuaweiCategoryEnum     } from './Notification';
 import { NotificationAllOf } from './NotificationAllOf';
 import { NotificationHistorySuccessResponse } from './NotificationHistorySuccessResponse';
 import { NotificationSlice } from './NotificationSlice';
 import { NotificationTarget            , NotificationTargetTargetChannelEnum   } from './NotificationTarget';
-import { NotificationWithMeta            , NotificationWithMetaTargetChannelEnum     , NotificationWithMetaAggregationEnum                                                                                                          } from './NotificationWithMeta';
+import { NotificationWithMeta            , NotificationWithMetaTargetChannelEnum     , NotificationWithMetaAggregationEnum                                                                                                 , NotificationWithMetaHuaweiCategoryEnum                } from './NotificationWithMeta';
 import { NotificationWithMetaAllOf } from './NotificationWithMetaAllOf';
 import { Operator, OperatorOperatorEnum   } from './Operator';
 import { OutcomeData  , OutcomeDataAggregationEnum   } from './OutcomeData';
@@ -158,7 +158,9 @@ let enumsMap: Set<string> = new Set<string>([
     "AppApnsEnvEnum",
     "BasicNotificationTargetChannelEnum",
     "BasicNotificationAggregationEnum",
+    "BasicNotificationHuaweiCategoryEnum",
     "BasicNotificationAllOfAggregationEnum",
+    "BasicNotificationAllOfHuaweiCategoryEnum",
     "CreateApiKeyRequestIpAllowlistModeEnum",
     "FilterRelationEnum",
     "FilterExpressionRelationEnum",
@@ -166,9 +168,11 @@ let enumsMap: Set<string> = new Set<string>([
     "GetNotificationHistoryRequestBodyEventsEnum",
     "NotificationTargetChannelEnum",
     "NotificationAggregationEnum",
+    "NotificationHuaweiCategoryEnum",
     "NotificationTargetTargetChannelEnum",
     "NotificationWithMetaTargetChannelEnum",
     "NotificationWithMetaAggregationEnum",
+    "NotificationWithMetaHuaweiCategoryEnum",
     "OperatorOperatorEnum",
     "OutcomeDataAggregationEnum",
     "StartLiveActivityRequestEventEnum",

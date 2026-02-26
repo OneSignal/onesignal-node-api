@@ -401,6 +401,10 @@ export class NotificationWithMeta {
     */
     'email_from_address'?: string;
     /**
+    * Channel: Email The email address where replies should be sent. If not specified, replies will go to the from address. 
+    */
+    'email_reply_to_address'?: string;
+    /**
     * Channel: Email The preheader text of the email. Preheader is the preview text displayed immediately after an email subject that provides additional context about the email content. If not specified, will default to null. 
     */
     'email_preheader'?: string;
@@ -425,6 +429,26 @@ export class NotificationWithMeta {
     * Channel: All JSON object that can be used as a source of message personalization data for fields that support tag variable substitution. Push, SMS: Can accept up to 2048 bytes of valid JSON. Email: Can accept up to 10000 bytes of valid JSON. Example: {\"order_id\": 123, \"currency\": \"USD\", \"amount\": 25} 
     */
     'custom_data'?: object;
+    /**
+    * Channel: Push Notifications Platform: Huawei Full path of the app entry activity class
+    */
+    'huawei_badge_class'?: string;
+    /**
+    * Channel: Push Notifications Platform: Huawei Accumulative badge number, which is an integer ranging from 1 to 99
+    */
+    'huawei_badge_add_num'?: number;
+    /**
+    * Channel: Push Notifications Platform: Huawei Badge number, which is an integer ranging from 0 to 99
+    */
+    'huawei_badge_set_num'?: number;
+    /**
+    * Channel: Push Notifications Platform: Huawei Category of the push notification for HMS classification.
+    */
+    'huawei_category'?: NotificationWithMetaHuaweiCategoryEnum;
+    /**
+    * Channel: Push Notifications Platform: Huawei A tag used for Huawei business intelligence and analytics.
+    */
+    'huawei_bi_tag'?: string;
     /**
     * Number of notifications that were successfully delivered.
     */
@@ -1078,6 +1102,12 @@ export class NotificationWithMeta {
             "format": ""
         },
         {
+            "name": "email_reply_to_address",
+            "baseName": "email_reply_to_address",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "email_preheader",
             "baseName": "email_preheader",
             "type": "string",
@@ -1117,6 +1147,36 @@ export class NotificationWithMeta {
             "name": "custom_data",
             "baseName": "custom_data",
             "type": "object",
+            "format": ""
+        },
+        {
+            "name": "huawei_badge_class",
+            "baseName": "huawei_badge_class",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "huawei_badge_add_num",
+            "baseName": "huawei_badge_add_num",
+            "type": "number",
+            "format": ""
+        },
+        {
+            "name": "huawei_badge_set_num",
+            "baseName": "huawei_badge_set_num",
+            "type": "number",
+            "format": ""
+        },
+        {
+            "name": "huawei_category",
+            "baseName": "huawei_category",
+            "type": "NotificationWithMetaHuaweiCategoryEnum",
+            "format": ""
+        },
+        {
+            "name": "huawei_bi_tag",
+            "baseName": "huawei_bi_tag",
+            "type": "string",
             "format": ""
         },
         {
@@ -1203,4 +1263,5 @@ export class NotificationWithMeta {
 
 export type NotificationWithMetaTargetChannelEnum = "push" | "email" | "sms" ;
 export type NotificationWithMetaAggregationEnum = "sum" | "count" ;
+export type NotificationWithMetaHuaweiCategoryEnum = "IM" | "VOIP" | "SUBSCRIPTION" | "TRAVEL" | "HEALTH" | "WORK" | "ACCOUNT" | "EXPRESS" | "FINANCE" | "DEVICE_REMINDER" | "MAIL" | "MARKETING" ;
 
