@@ -1,12 +1,14 @@
-name: NPM Publish
+name: Release
+
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
-  publish:
-    name: Publish
+  release:
+    name: Release
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -29,6 +31,7 @@ jobs:
       - name: Publish to NPM and Create GitHub Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           npx -p semantic-release \
               -p @semantic-release/changelog \
@@ -36,4 +39,4 @@ jobs:
               -p @semantic-release/github \
               -p @semantic-release/npm \
               -p conventional-changelog-conventionalcommits \
-              semantic-release --dry-run
+              semantic-release

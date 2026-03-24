@@ -1,6 +1,6 @@
 {
   "branches": ["main"],
-  "tagFormat": "${version}",
+  "tagFormat": "v${version}",
   "plugins": [
     [
       "@semantic-release/release-notes-generator",
@@ -44,6 +44,10 @@
             },
             {
               "type": "test",
+              "hidden": true
+            },
+            {
+              "type": "ci",
               "hidden": true
             }
           ]
