@@ -31,7 +31,6 @@ jobs:
       - name: Publish to NPM and Create GitHub Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           npx -p semantic-release \
               -p @semantic-release/changelog \
