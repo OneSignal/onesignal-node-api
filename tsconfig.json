@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "strict": true,
+    "ignoreDeprecations": "6.0",
     /* Basic Options */
     "target": "es5",
     "moduleResolution": "node",
