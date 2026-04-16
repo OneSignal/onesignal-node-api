@@ -19,6 +19,8 @@ export class CreateTemplateRequest {
     */
     'name': string;
     'contents': LanguageStringMap;
+    'headings'?: LanguageStringMap;
+    'subtitle'?: LanguageStringMap;
     /**
     * Set true for an Email template.
     */
@@ -58,6 +60,18 @@ export class CreateTemplateRequest {
         {
             "name": "contents",
             "baseName": "contents",
+            "type": "LanguageStringMap",
+            "format": ""
+        },
+        {
+            "name": "headings",
+            "baseName": "headings",
+            "type": "LanguageStringMap",
+            "format": ""
+        },
+        {
+            "name": "subtitle",
+            "baseName": "subtitle",
             "type": "LanguageStringMap",
             "format": ""
         },
