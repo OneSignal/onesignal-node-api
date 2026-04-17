@@ -22,6 +22,18 @@ var UpdateTemplateRequest = (function () {
             "format": ""
         },
         {
+            "name": "headings",
+            "baseName": "headings",
+            "type": "LanguageStringMap",
+            "format": ""
+        },
+        {
+            "name": "subtitle",
+            "baseName": "subtitle",
+            "type": "LanguageStringMap",
+            "format": ""
+        },
+        {
             "name": "is_email",
             "baseName": "isEmail",
             "type": "boolean",
