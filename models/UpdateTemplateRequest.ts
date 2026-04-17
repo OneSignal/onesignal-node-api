@@ -2,7 +2,7 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 5.3.0
+ * API Version: 5.4.0
  * Contact: devrel@onesignal.com
  */
 
@@ -15,6 +15,8 @@ export class UpdateTemplateRequest {
     */
     'name'?: string;
     'contents'?: LanguageStringMap;
+    'headings'?: LanguageStringMap;
+    'subtitle'?: LanguageStringMap;
     /**
     * Set true for an Email template.
     */
@@ -48,6 +50,18 @@ export class UpdateTemplateRequest {
         {
             "name": "contents",
             "baseName": "contents",
+            "type": "LanguageStringMap",
+            "format": ""
+        },
+        {
+            "name": "headings",
+            "baseName": "headings",
+            "type": "LanguageStringMap",
+            "format": ""
+        },
+        {
+            "name": "subtitle",
+            "baseName": "subtitle",
             "type": "LanguageStringMap",
             "format": ""
         },
