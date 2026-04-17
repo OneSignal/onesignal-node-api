@@ -2,6 +2,8 @@ import { LanguageStringMap } from './LanguageStringMap';
 export declare class UpdateTemplateRequest {
     'name'?: string;
     'contents'?: LanguageStringMap;
+    'headings'?: LanguageStringMap;
+    'subtitle'?: LanguageStringMap;
     'is_email'?: boolean;
     'email_subject'?: string;
     'email_body'?: string;

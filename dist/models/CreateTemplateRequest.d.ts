@@ -3,6 +3,8 @@ export declare class CreateTemplateRequest {
     'app_id': string;
     'name': string;
     'contents': LanguageStringMap;
+    'headings'?: LanguageStringMap;
+    'subtitle'?: LanguageStringMap;
     'is_email'?: boolean;
     'email_subject'?: string;
     'email_body'?: string;
