@@ -540,12 +540,15 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiCreateNotificationRequest = {
-  // Notification
-  notification: null,
-};
+const notification = new Onesignal.Notification();
+notification.app_id = 'YOUR_APP_ID';
+notification.contents = { en: 'Hello from OneSignal!' };
+notification.headings = { en: 'Push Notification' };
+// Target by External ID: alias keys must match the API (external_id, not externalId).
+notification.include_aliases = { external_id: ['YOUR_USER_EXTERNAL_ID'] };
+notification.target_channel = 'push';
 
-const response = await apiInstance.createNotification(body);
+const response = await apiInstance.createNotification(notification);
 console.log(response);
 ```
 
