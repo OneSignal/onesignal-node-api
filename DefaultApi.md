@@ -527,7 +527,7 @@ Name | Type | Description  | Notes
 # **createNotification**
 > CreateNotificationSuccessResponse createNotification(notification)
 
-Sends notifications to your users 
+Sends notifications to your users.  **Target by External ID (push example):** set `include_aliases` to `{ \"external_id\": [\"your-user-id\"] }` and set `target_channel` to `push` (or `email` / `sms` for those channels). Alias object keys must match API labels exactly (for example `external_id`, not camelCase).  **Do not confuse** the notification-level `external_id` field with External ID targeting: top-level `external_id` / `idempotency_key` are for idempotent notification requests only, not for selecting recipients.  **Targeting compatibility:** `include_aliases` must not be combined with other targeting modes (segments, filters, subscription IDs, legacy player IDs, etc.). Clients should send only one targeting strategy per request. 
 
 ### Example
 
@@ -577,7 +577,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK, invalid_aliases, or No Subscribed Players If a message was successfully created, you will get a 200 response and an id for the notification. If the 200 response contains \&quot;invalid_aliases\&quot; this will mark devices that exist in the provided app_id but are no longer subscribed. If no id is returned, then a message was not created and the targeted User IDs do not exist under the provided app_id. Any User IDs sent in the request that do not exist under the specified app_id will be ignored.  |  -  |
+**200** | OK, invalid_aliases, or No Subscribed Players If a message was successfully created, you will get a 200 response with a non-empty &#x60;id&#x60; for the notification. If the 200 response contains &#x60;invalid_aliases&#x60;, that marks devices that exist in the provided app_id but are no longer subscribed. If &#x60;id&#x60; is an empty string, no notification was created: check the &#x60;errors&#x60; array (for example messages such as \&quot;All included players are not subscribed\&quot;) even though HTTP status is still 200. This can happen when alias keys are wrong, External IDs do not resolve to subscribed users, or other validation issues. If no id is returned, then a message was not created and the targeted User IDs do not exist under the provided app_id. Any User IDs sent in the request that do not exist under the specified app_id will be ignored.  |  -  |
 **400** | Bad Request |  -  |
 **429** | Rate Limit Exceeded |  -  |
 
