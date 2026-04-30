@@ -62,6 +62,31 @@ const response = await client.createNotification(notification);
 console.log('Notification ID:', response.id);
 ```
 
+## Send a push notification by External ID
+
+Target specific users with the alias label `external_id` (snake_case). This is different from the notification-level `external_id` field, which is only for [idempotent requests](https://documentation.onesignal.com/docs/idempotent-notification-requests).
+
+You must set `target_channel` when sending push (or email/SMS) to alias targets.
+
+```javascript
+const notification = new OneSignal.Notification();
+notification.app_id = 'YOUR_APP_ID';
+notification.contents = { en: 'Hello from OneSignal!' };
+notification.headings = { en: 'Push Notification' };
+// Keys under include_aliases must match API alias labels exactly (e.g. external_id, not externalId).
+notification.include_aliases = { external_id: ['YOUR_USER_EXTERNAL_ID'] };
+notification.target_channel = 'push';
+
+const response = await client.createNotification(notification);
+if (!response.id) {
+  console.error('Notification was not created:', response.errors);
+} else {
+  console.log('Notification ID:', response.id);
+}
+```
+
+The API may return HTTP 200 with an empty `id` when no matching subscribed recipients are found; always check `response.id` and `response.errors`.
+
 ## Send an email
 
 ```javascript
