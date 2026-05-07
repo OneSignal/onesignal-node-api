@@ -413,6 +413,10 @@ export class Notification {
     */
     'include_unsubscribed'?: boolean;
     /**
+    * Channel: Email BCC recipients for the email. Maximum 5 addresses. Only supported when the email service provider is OneSignal Email. 
+    */
+    'email_bcc'?: Array<string>;
+    /**
     * Channel: SMS Phone Number used to send SMS. Should be a registered Twilio phone number in E.164 format. 
     */
     'sms_from'?: string;
@@ -1081,6 +1085,12 @@ export class Notification {
             "name": "include_unsubscribed",
             "baseName": "include_unsubscribed",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "email_bcc",
+            "baseName": "email_bcc",
+            "type": "Array<string>",
             "format": ""
         },
         {

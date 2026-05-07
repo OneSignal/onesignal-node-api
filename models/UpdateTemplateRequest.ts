@@ -30,6 +30,10 @@ export class UpdateTemplateRequest {
     */
     'email_body'?: string;
     /**
+    * BCC recipients for the email template. Maximum 5 addresses. Only supported when the email service provider is OneSignal Email.
+    */
+    'email_bcc'?: Array<string>;
+    /**
     * Set true for an SMS template.
     */
     'is_sms'?: boolean;
@@ -81,6 +85,12 @@ export class UpdateTemplateRequest {
             "name": "email_body",
             "baseName": "email_body",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "email_bcc",
+            "baseName": "email_bcc",
+            "type": "Array<string>",
             "format": ""
         },
         {

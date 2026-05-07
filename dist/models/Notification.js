@@ -640,6 +640,12 @@ var Notification = (function () {
             "format": ""
         },
         {
+            "name": "email_bcc",
+            "baseName": "email_bcc",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
             "name": "sms_from",
             "baseName": "sms_from",
             "type": "string",

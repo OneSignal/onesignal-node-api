@@ -55,6 +55,14 @@ export class NotificationWithMetaAllOf {
     * Indicates whether the notification was canceled before it could be sent.
     */
     'canceled'?: boolean;
+    /**
+    * BCC recipients that were set on this email notification.
+    */
+    'email_bcc'?: Array<string>;
+    /**
+    * Number of BCC copies successfully sent for this notification.
+    */
+    'bcc_sent'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -129,6 +137,18 @@ export class NotificationWithMetaAllOf {
             "name": "canceled",
             "baseName": "canceled",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "email_bcc",
+            "baseName": "email_bcc",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "bcc_sent",
+            "baseName": "bcc_sent",
+            "type": "number",
             "format": ""
         }    ];
 

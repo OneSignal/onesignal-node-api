@@ -7,6 +7,7 @@ export declare class UpdateTemplateRequest {
     'is_email'?: boolean;
     'email_subject'?: string;
     'email_body'?: string;
+    'email_bcc'?: Array<string>;
     'is_sms'?: boolean;
     'dynamic_content'?: string;
     static readonly discriminator: string | undefined;
