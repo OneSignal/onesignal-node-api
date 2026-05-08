@@ -1,5 +1,11 @@
 # Changelog
 
+## [5.6.0](https://github.com/OneSignal/onesignal-node-api/compare/v5.5.0...v5.6.0) (2026-05-08)
+
+### Features
+
+* add `email_bcc` and `bcc_sent` to Notification and Template models ([#166](https://github.com/OneSignal/onesignal-node-api/issues/166)) ([2398cc2](https://github.com/OneSignal/onesignal-node-api/commit/2398cc2180d5f41c85025c37dbe9889304a3d7a6))
+
 ## [5.5.0](https://github.com/OneSignal/onesignal-node-api/compare/v5.4.0...v5.5.0) (2026-04-17)
 
 ### Features
