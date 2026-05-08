@@ -2,7 +2,7 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 5.4.0
+ * API Version: 5.5.0
  * Contact: devrel@onesignal.com
  */
 
@@ -417,6 +417,10 @@ export class NotificationWithMeta {
     */
     'include_unsubscribed'?: boolean;
     /**
+    * BCC recipients that were set on this email notification.
+    */
+    'email_bcc'?: Array<string>;
+    /**
     * Channel: SMS Phone Number used to send SMS. Should be a registered Twilio phone number in E.164 format. 
     */
     'sms_from'?: string;
@@ -491,6 +495,10 @@ export class NotificationWithMeta {
     * Indicates whether the notification was canceled before it could be sent.
     */
     'canceled'?: boolean;
+    /**
+    * Number of BCC copies successfully sent for this notification.
+    */
+    'bcc_sent'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -1126,6 +1134,12 @@ export class NotificationWithMeta {
             "format": ""
         },
         {
+            "name": "email_bcc",
+            "baseName": "email_bcc",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
             "name": "sms_from",
             "baseName": "sms_from",
             "type": "string",
@@ -1249,6 +1263,12 @@ export class NotificationWithMeta {
             "name": "canceled",
             "baseName": "canceled",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "bcc_sent",
+            "baseName": "bcc_sent",
+            "type": "number",
             "format": ""
         }    ];
 

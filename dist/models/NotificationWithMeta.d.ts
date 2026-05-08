@@ -113,6 +113,7 @@ export declare class NotificationWithMeta {
     'email_preheader'?: string;
     'disable_email_click_tracking'?: boolean;
     'include_unsubscribed'?: boolean;
+    'email_bcc'?: Array<string>;
     'sms_from'?: string;
     'sms_media_urls'?: Array<string>;
     'filters'?: Array<FilterExpression>;
@@ -134,6 +135,7 @@ export declare class NotificationWithMeta {
     'completed_at'?: number;
     'platform_delivery_stats'?: PlatformDeliveryData;
     'canceled'?: boolean;
+    'bcc_sent'?: number;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;

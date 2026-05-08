@@ -2,7 +2,7 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 5.4.0
+ * API Version: 5.5.0
  * Contact: devrel@onesignal.com
  */
 
@@ -29,6 +29,10 @@ export class UpdateTemplateRequest {
     * Body of the email (HTML supported).
     */
     'email_body'?: string;
+    /**
+    * BCC recipients for the email template. Maximum 5 addresses. Only supported when the email service provider is OneSignal Email.
+    */
+    'email_bcc'?: Array<string>;
     /**
     * Set true for an SMS template.
     */
@@ -81,6 +85,12 @@ export class UpdateTemplateRequest {
             "name": "email_body",
             "baseName": "email_body",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "email_bcc",
+            "baseName": "email_bcc",
+            "type": "Array<string>",
             "format": ""
         },
         {

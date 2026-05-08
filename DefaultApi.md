@@ -896,6 +896,9 @@ let body: Onesignal.DefaultApiCreateTemplateRequest = {
     is_email: true,
     email_subject: "email_subject_example",
     email_body: "email_body_example",
+    email_bcc: [
+      "email_bcc_example",
+    ],
     is_sms: true,
     dynamic_content: "dynamic_content_example",
   },
@@ -3153,6 +3156,9 @@ let body: Onesignal.DefaultApiUpdateTemplateRequest = {
     is_email: true,
     email_subject: "email_subject_example",
     email_body: "email_body_example",
+    email_bcc: [
+      "email_bcc_example",
+    ],
     is_sms: true,
     dynamic_content: "dynamic_content_example",
   },

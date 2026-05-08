@@ -2,7 +2,7 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 5.4.0
+ * API Version: 5.5.0
  * Contact: devrel@onesignal.com
  */
 
@@ -412,6 +412,10 @@ export class BasicNotification {
     * Channel: Email Default is `false`. This field is used to send transactional notifications. If set to `true`, this notification will also be sent to unsubscribed emails. If a `template_id` is provided, the `include_unsubscribed` value from the template will be inherited. If you are using a third-party ESP, this field requires the ESP\'s list of unsubscribed emails to be cleared.
     */
     'include_unsubscribed'?: boolean;
+    /**
+    * Channel: Email BCC recipients for the email. Maximum 5 addresses. Only supported when the email service provider is OneSignal Email. 
+    */
+    'email_bcc'?: Array<string>;
     /**
     * Channel: SMS Phone Number used to send SMS. Should be a registered Twilio phone number in E.164 format. 
     */
@@ -1077,6 +1081,12 @@ export class BasicNotification {
             "name": "include_unsubscribed",
             "baseName": "include_unsubscribed",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "email_bcc",
+            "baseName": "email_bcc",
+            "type": "Array<string>",
             "format": ""
         },
         {
