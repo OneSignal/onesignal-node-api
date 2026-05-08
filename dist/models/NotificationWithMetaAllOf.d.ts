@@ -12,6 +12,8 @@ export declare class NotificationWithMetaAllOf {
     'received'?: number;
     'throttle_rate_per_minute'?: number;
     'canceled'?: boolean;
+    'email_bcc'?: Array<string>;
+    'bcc_sent'?: number;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;

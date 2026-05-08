@@ -80,6 +80,18 @@ var NotificationWithMetaAllOf = (function () {
             "baseName": "canceled",
             "type": "boolean",
             "format": ""
+        },
+        {
+            "name": "email_bcc",
+            "baseName": "email_bcc",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "bcc_sent",
+            "baseName": "bcc_sent",
+            "type": "number",
+            "format": ""
         }
     ];
     return NotificationWithMetaAllOf;

@@ -52,6 +52,12 @@ var UpdateTemplateRequest = (function () {
             "format": ""
         },
         {
+            "name": "email_bcc",
+            "baseName": "email_bcc",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
             "name": "is_sms",
             "baseName": "isSMS",
             "type": "boolean",

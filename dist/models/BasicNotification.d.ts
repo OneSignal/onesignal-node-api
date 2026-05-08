@@ -111,6 +111,7 @@ export declare class BasicNotification {
     'email_preheader'?: string;
     'disable_email_click_tracking'?: boolean;
     'include_unsubscribed'?: boolean;
+    'email_bcc'?: Array<string>;
     'sms_from'?: string;
     'sms_media_urls'?: Array<string>;
     'filters'?: Array<FilterExpression>;

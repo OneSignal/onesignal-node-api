@@ -640,6 +640,12 @@ var NotificationWithMeta = (function () {
             "format": ""
         },
         {
+            "name": "email_bcc",
+            "baseName": "email_bcc",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
             "name": "sms_from",
             "baseName": "sms_from",
             "type": "string",
@@ -763,6 +769,12 @@ var NotificationWithMeta = (function () {
             "name": "canceled",
             "baseName": "canceled",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "bcc_sent",
+            "baseName": "bcc_sent",
+            "type": "number",
             "format": ""
         }
     ];
