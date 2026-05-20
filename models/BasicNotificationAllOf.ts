@@ -2,7 +2,7 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 5.5.0
+ * API Version: 5.6.0
  * Contact: devrel@onesignal.com
  */
 
@@ -365,6 +365,10 @@ export class BasicNotificationAllOf {
     * Channel: Email BCC recipients for the email. Maximum 5 addresses. Only supported when the email service provider is OneSignal Email. 
     */
     'email_bcc'?: Array<string>;
+    /**
+    * Channel: Email Sender domain to use for the email message. Overrides the default sender domain configured for the app. Only supported when the email service provider is OneSignal Email. 
+    */
+    'email_sender_domain'?: string;
     /**
     * Channel: SMS Phone Number used to send SMS. Should be a registered Twilio phone number in E.164 format. 
     */
@@ -958,6 +962,12 @@ export class BasicNotificationAllOf {
             "name": "email_bcc",
             "baseName": "email_bcc",
             "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "email_sender_domain",
+            "baseName": "email_sender_domain",
+            "type": "string",
             "format": ""
         },
         {

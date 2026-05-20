@@ -2,7 +2,7 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 5.5.0
+ * API Version: 5.6.0
  * Contact: devrel@onesignal.com
  */
 
@@ -14,9 +14,13 @@ export class SubscriptionNotificationTarget {
     */
     'include_subscription_ids'?: Array<string>;
     /**
-    * Recommended for Sending Emails - Target specific email addresses. If an email does not correspond to an existing user, a new user will be created. Example: nick@catfac.ts Limit of 2,000 entries per REST API call 
+    * Deprecated alias for `email_to`. Target specific email addresses. If an email does not correspond to an existing user, a new user will be created. Example: nick@catfac.ts. Limit of 2,000 entries per REST API call. Prefer `email_to` in new integrations. 
     */
     'include_email_tokens'?: Array<string>;
+    /**
+    * Recommended for Sending Emails - Target specific email addresses. If an email does not correspond to an existing user, a new user will be created. Example: nick@catfac.ts. Limit of 2,000 entries per REST API call. Supersedes the deprecated `include_email_tokens` field. 
+    */
+    'email_to'?: Array<string>;
     /**
     * Recommended for Sending SMS - Target specific phone numbers. The phone number should be in the E.164 format. Phone number should be an existing subscriber on OneSignal. Refer our docs to learn how to add phone numbers to OneSignal. Example phone number: +1999999999 Limit of 2,000 entries per REST API call 
     */
@@ -63,6 +67,12 @@ export class SubscriptionNotificationTarget {
         {
             "name": "include_email_tokens",
             "baseName": "include_email_tokens",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "email_to",
+            "baseName": "email_to",
             "type": "Array<string>",
             "format": ""
         },
