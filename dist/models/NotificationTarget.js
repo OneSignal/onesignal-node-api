@@ -34,6 +34,12 @@ var NotificationTarget = (function () {
             "format": ""
         },
         {
+            "name": "email_to",
+            "baseName": "email_to",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
             "name": "include_phone_numbers",
             "baseName": "include_phone_numbers",
             "type": "Array<string>",

@@ -1,6 +1,7 @@
 export declare class SubscriptionNotificationTarget {
     'include_subscription_ids'?: Array<string>;
     'include_email_tokens'?: Array<string>;
+    'email_to'?: Array<string>;
     'include_phone_numbers'?: Array<string>;
     'include_ios_tokens'?: Array<string>;
     'include_wp_wns_uris'?: Array<string>;

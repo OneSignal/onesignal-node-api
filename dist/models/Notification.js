@@ -34,6 +34,12 @@ var Notification = (function () {
             "format": ""
         },
         {
+            "name": "email_to",
+            "baseName": "email_to",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
             "name": "include_phone_numbers",
             "baseName": "include_phone_numbers",
             "type": "Array<string>",
@@ -643,6 +649,12 @@ var Notification = (function () {
             "name": "email_bcc",
             "baseName": "email_bcc",
             "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "email_sender_domain",
+            "baseName": "email_sender_domain",
+            "type": "string",
             "format": ""
         },
         {

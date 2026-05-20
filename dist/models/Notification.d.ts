@@ -8,6 +8,7 @@ export declare class Notification {
     'excluded_segments'?: Array<string>;
     'include_subscription_ids'?: Array<string>;
     'include_email_tokens'?: Array<string>;
+    'email_to'?: Array<string>;
     'include_phone_numbers'?: Array<string>;
     'include_ios_tokens'?: Array<string>;
     'include_wp_wns_uris'?: Array<string>;
@@ -112,6 +113,7 @@ export declare class Notification {
     'disable_email_click_tracking'?: boolean;
     'include_unsubscribed'?: boolean;
     'email_bcc'?: Array<string>;
+    'email_sender_domain'?: string;
     'sms_from'?: string;
     'sms_media_urls'?: Array<string>;
     'filters'?: Array<FilterExpression>;
