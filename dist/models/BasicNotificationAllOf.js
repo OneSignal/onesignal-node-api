@@ -568,6 +568,12 @@ var BasicNotificationAllOf = (function () {
             "format": ""
         },
         {
+            "name": "email_sender_domain",
+            "baseName": "email_sender_domain",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "sms_from",
             "baseName": "sms_from",
             "type": "string",

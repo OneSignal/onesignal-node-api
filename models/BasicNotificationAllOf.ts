@@ -366,6 +366,10 @@ export class BasicNotificationAllOf {
     */
     'email_bcc'?: Array<string>;
     /**
+    * Channel: Email Sender domain to use for the email message. Overrides the default sender domain configured for the app. Only supported when the email service provider is OneSignal Email. 
+    */
+    'email_sender_domain'?: string;
+    /**
     * Channel: SMS Phone Number used to send SMS. Should be a registered Twilio phone number in E.164 format. 
     */
     'sms_from'?: string;
@@ -958,6 +962,12 @@ export class BasicNotificationAllOf {
             "name": "email_bcc",
             "baseName": "email_bcc",
             "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "email_sender_domain",
+            "baseName": "email_sender_domain",
+            "type": "string",
             "format": ""
         },
         {

@@ -33,9 +33,13 @@ export class NotificationWithMeta {
     */
     'include_subscription_ids'?: Array<string>;
     /**
-    * Recommended for Sending Emails - Target specific email addresses. If an email does not correspond to an existing user, a new user will be created. Example: nick@catfac.ts Limit of 2,000 entries per REST API call 
+    * Deprecated alias for `email_to`. Target specific email addresses. If an email does not correspond to an existing user, a new user will be created. Example: nick@catfac.ts. Limit of 2,000 entries per REST API call. Prefer `email_to` in new integrations. 
     */
     'include_email_tokens'?: Array<string>;
+    /**
+    * Recommended for Sending Emails - Target specific email addresses. If an email does not correspond to an existing user, a new user will be created. Example: nick@catfac.ts. Limit of 2,000 entries per REST API call. Supersedes the deprecated `include_email_tokens` field. 
+    */
+    'email_to'?: Array<string>;
     /**
     * Recommended for Sending SMS - Target specific phone numbers. The phone number should be in the E.164 format. Phone number should be an existing subscriber on OneSignal. Refer our docs to learn how to add phone numbers to OneSignal. Example phone number: +1999999999 Limit of 2,000 entries per REST API call 
     */
@@ -421,6 +425,10 @@ export class NotificationWithMeta {
     */
     'email_bcc'?: Array<string>;
     /**
+    * Channel: Email Sender domain to use for the email message. Overrides the default sender domain configured for the app. Only supported when the email service provider is OneSignal Email. 
+    */
+    'email_sender_domain'?: string;
+    /**
     * Channel: SMS Phone Number used to send SMS. Should be a registered Twilio phone number in E.164 format. 
     */
     'sms_from'?: string;
@@ -524,6 +532,12 @@ export class NotificationWithMeta {
         {
             "name": "include_email_tokens",
             "baseName": "include_email_tokens",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "email_to",
+            "baseName": "email_to",
             "type": "Array<string>",
             "format": ""
         },
@@ -1137,6 +1151,12 @@ export class NotificationWithMeta {
             "name": "email_bcc",
             "baseName": "email_bcc",
             "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "email_sender_domain",
+            "baseName": "email_sender_domain",
+            "type": "string",
             "format": ""
         },
         {
