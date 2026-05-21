@@ -74,6 +74,12 @@
         "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes} [skip ci]"
       }
     ],
-    "@semantic-release/github"
+    "@semantic-release/github",
+    [
+      "@semantic-release/exec",
+      {
+        "successCmd": "case '${nextRelease.version}' in *-alpha*) ch=alpha;; *-beta*) ch=beta;; *) ch=current;; esac; body=$(gh release view '${nextRelease.gitTag}' --json body --jq .body); case \"$body\" in '**Channels:**'*) exit 0;; esac; printf '**Channels:** %s\\n\\n%s' \"$ch\" \"$body\" | gh release edit '${nextRelease.gitTag}' --notes-file -"
+      }
+    ]
   ]
 }
