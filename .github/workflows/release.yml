@@ -34,6 +34,7 @@ jobs:
         run: |
           npx -p semantic-release \
               -p @semantic-release/changelog \
+              -p @semantic-release/exec \
               -p @semantic-release/git \
               -p @semantic-release/github \
               -p @semantic-release/npm \
