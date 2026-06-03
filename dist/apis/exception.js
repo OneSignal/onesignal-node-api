@@ -24,6 +24,7 @@ var ApiException = (function (_super) {
         _this.code = code;
         _this.body = body;
         _this.headers = headers;
+        Object.setPrototypeOf(_this, ApiException.prototype);
         return _this;
     }
     return ApiException;
