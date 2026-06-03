@@ -1,22 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CustomEventsRequest = void 0;
-var CustomEventsRequest = (function () {
-    function CustomEventsRequest() {
-    }
-    CustomEventsRequest.getAttributeTypeMap = function () {
+class CustomEventsRequest {
+    static getAttributeTypeMap() {
         return CustomEventsRequest.attributeTypeMap;
-    };
-    CustomEventsRequest.discriminator = undefined;
-    CustomEventsRequest.attributeTypeMap = [
-        {
-            "name": "events",
-            "baseName": "events",
-            "type": "Array<CustomEvent>",
-            "format": ""
-        }
-    ];
-    return CustomEventsRequest;
-}());
+    }
+    constructor() {
+    }
+}
 exports.CustomEventsRequest = CustomEventsRequest;
+CustomEventsRequest.discriminator = undefined;
+CustomEventsRequest.attributeTypeMap = [
+    {
+        "name": "events",
+        "baseName": "events",
+        "type": "Array<CustomEvent>",
+        "format": ""
+    }
+];
 //# sourceMappingURL=CustomEventsRequest.js.map

@@ -1,22 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SubscriptionBody = void 0;
-var SubscriptionBody = (function () {
-    function SubscriptionBody() {
-    }
-    SubscriptionBody.getAttributeTypeMap = function () {
+class SubscriptionBody {
+    static getAttributeTypeMap() {
         return SubscriptionBody.attributeTypeMap;
-    };
-    SubscriptionBody.discriminator = undefined;
-    SubscriptionBody.attributeTypeMap = [
-        {
-            "name": "subscription",
-            "baseName": "subscription",
-            "type": "Subscription",
-            "format": ""
-        }
-    ];
-    return SubscriptionBody;
-}());
+    }
+    constructor() {
+    }
+}
 exports.SubscriptionBody = SubscriptionBody;
+SubscriptionBody.discriminator = undefined;
+SubscriptionBody.attributeTypeMap = [
+    {
+        "name": "subscription",
+        "baseName": "subscription",
+        "type": "Subscription",
+        "format": ""
+    }
+];
 //# sourceMappingURL=SubscriptionBody.js.map

@@ -1,22 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GenericSuccessBoolResponse = void 0;
-var GenericSuccessBoolResponse = (function () {
-    function GenericSuccessBoolResponse() {
-    }
-    GenericSuccessBoolResponse.getAttributeTypeMap = function () {
+class GenericSuccessBoolResponse {
+    static getAttributeTypeMap() {
         return GenericSuccessBoolResponse.attributeTypeMap;
-    };
-    GenericSuccessBoolResponse.discriminator = undefined;
-    GenericSuccessBoolResponse.attributeTypeMap = [
-        {
-            "name": "success",
-            "baseName": "success",
-            "type": "boolean",
-            "format": ""
-        }
-    ];
-    return GenericSuccessBoolResponse;
-}());
+    }
+    constructor() {
+    }
+}
 exports.GenericSuccessBoolResponse = GenericSuccessBoolResponse;
+GenericSuccessBoolResponse.discriminator = undefined;
+GenericSuccessBoolResponse.attributeTypeMap = [
+    {
+        "name": "success",
+        "baseName": "success",
+        "type": "boolean",
+        "format": ""
+    }
+];
 //# sourceMappingURL=GenericSuccessBoolResponse.js.map

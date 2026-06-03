@@ -1,18 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.map = exports.mergeMap = exports.of = exports.from = exports.Observable = void 0;
-var Observable = (function () {
-    function Observable(promise) {
+class Observable {
+    constructor(promise) {
         this.promise = promise;
     }
-    Observable.prototype.toPromise = function () {
+    toPromise() {
         return this.promise;
-    };
-    Observable.prototype.pipe = function (callback) {
+    }
+    pipe(callback) {
         return new Observable(this.promise.then(callback));
-    };
-    return Observable;
-}());
+    }
+}
 exports.Observable = Observable;
 function from(promise) {
     return new Observable(promise);
@@ -23,7 +22,7 @@ function of(value) {
 }
 exports.of = of;
 function mergeMap(callback) {
-    return function (value) { return callback(value).toPromise(); };
+    return (value) => callback(value).toPromise();
 }
 exports.mergeMap = mergeMap;
 function map(callback) {

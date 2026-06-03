@@ -1,31 +1,31 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createConfiguration = void 0;
-var middleware_1 = require("./middleware");
-var isomorphic_fetch_1 = require("./http/isomorphic-fetch");
-var servers_1 = require("./servers");
-var auth_1 = require("./auth/auth");
+const middleware_1 = require("./middleware");
+const isomorphic_fetch_1 = require("./http/isomorphic-fetch");
+const servers_1 = require("./servers");
+const auth_1 = require("./auth/auth");
 function createConfiguration(conf) {
-    var authMethods = {
+    const authMethods = {
         'organization_api_key': {
             tokenProvider: {
-                getToken: function () { return conf.organizationApiKey || ''; }
+                getToken: () => conf.organizationApiKey || ''
             }
         },
         'rest_api_key': {
             tokenProvider: {
-                getToken: function () { return conf.restApiKey || ''; }
+                getToken: () => conf.restApiKey || ''
             }
         },
     };
-    var configuration = {
+    const configuration = {
         baseServer: conf.baseServer !== undefined ? conf.baseServer : servers_1.server1,
         httpApi: conf.httpApi || new isomorphic_fetch_1.IsomorphicFetchHttpLibrary(),
         middleware: conf.middleware || [],
         authMethods: (0, auth_1.configureAuthMethods)(Object.assign(authMethods, conf.authMethods || {}))
     };
     if (conf.promiseMiddleware) {
-        conf.promiseMiddleware.forEach(function (m) { return configuration.middleware.push(new middleware_1.PromiseMiddlewareWrapper(m)); });
+        conf.promiseMiddleware.forEach(m => configuration.middleware.push(new middleware_1.PromiseMiddlewareWrapper(m)));
     }
     return configuration;
 }

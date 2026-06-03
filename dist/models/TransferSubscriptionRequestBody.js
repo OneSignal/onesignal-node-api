@@ -1,22 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TransferSubscriptionRequestBody = void 0;
-var TransferSubscriptionRequestBody = (function () {
-    function TransferSubscriptionRequestBody() {
-    }
-    TransferSubscriptionRequestBody.getAttributeTypeMap = function () {
+class TransferSubscriptionRequestBody {
+    static getAttributeTypeMap() {
         return TransferSubscriptionRequestBody.attributeTypeMap;
-    };
-    TransferSubscriptionRequestBody.discriminator = undefined;
-    TransferSubscriptionRequestBody.attributeTypeMap = [
-        {
-            "name": "identity",
-            "baseName": "identity",
-            "type": "{ [key: string]: string; }",
-            "format": ""
-        }
-    ];
-    return TransferSubscriptionRequestBody;
-}());
+    }
+    constructor() {
+    }
+}
 exports.TransferSubscriptionRequestBody = TransferSubscriptionRequestBody;
+TransferSubscriptionRequestBody.discriminator = undefined;
+TransferSubscriptionRequestBody.attributeTypeMap = [
+    {
+        "name": "identity",
+        "baseName": "identity",
+        "type": "{ [key: string]: string; }",
+        "format": ""
+    }
+];
 //# sourceMappingURL=TransferSubscriptionRequestBody.js.map
