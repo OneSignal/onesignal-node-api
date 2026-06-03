@@ -68,13 +68,22 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiCancelNotificationRequest = {
   // string
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // string
-  notificationId: "notification_id_example",
+  notificationId: "b3a0c8bd-3a4c-4b22-9a73-3f1a8c2d1b88",
 };
 
-const response = await apiInstance.cancelNotification(body);
-console.log(response);
+try {
+  const response = await apiInstance.cancelNotification(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("cancelNotification failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -128,17 +137,26 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiCopyTemplateToAppRequest = {
   // string
-  templateId: "template_id_example",
+  templateId: "e4d3c2b1-a09f-4f1e-8d7c-6b5a4f3e2d1c",
   // string
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // CopyTemplateRequest
   copyTemplateRequest: {
     target_app_id: "target_app_id_example",
   },
 };
 
-const response = await apiInstance.copyTemplateToApp(body);
-console.log(response);
+try {
+  const response = await apiInstance.copyTemplateToApp(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("copyTemplateToApp failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -191,11 +209,11 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiCreateAliasRequest = {
   // string
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // string
-  aliasLabel: "alias_label_example",
+  aliasLabel: "external_id",
   // string
-  aliasId: "alias_id_example",
+  aliasId: "YOUR_USER_EXTERNAL_ID",
   // UserIdentityBody
   userIdentityBody: {
     identity: {
@@ -204,8 +222,17 @@ let body: Onesignal.DefaultApiCreateAliasRequest = {
   },
 };
 
-const response = await apiInstance.createAlias(body);
-console.log(response);
+try {
+  const response = await apiInstance.createAlias(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("createAlias failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -262,9 +289,9 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiCreateAliasBySubscriptionRequest = {
   // string
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // string
-  subscriptionId: "subscription_id_example",
+  subscriptionId: "7e4c5b9a-1f60-4d07-9b1a-2e8c8d2cae51",
   // UserIdentityBody
   userIdentityBody: {
     identity: {
@@ -273,8 +300,17 @@ let body: Onesignal.DefaultApiCreateAliasBySubscriptionRequest = {
   },
 };
 
-const response = await apiInstance.createAliasBySubscription(body);
-console.log(response);
+try {
+  const response = await apiInstance.createAliasBySubscription(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("createAliasBySubscription failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -330,7 +366,7 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiCreateApiKeyRequest = {
   // string
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // CreateApiKeyRequest
   createApiKeyRequest: {
     name: "name_example",
@@ -341,8 +377,17 @@ let body: Onesignal.DefaultApiCreateApiKeyRequest = {
   },
 };
 
-const response = await apiInstance.createApiKey(body);
-console.log(response);
+try {
+  const response = await apiInstance.createApiKey(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("createApiKey failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -419,8 +464,17 @@ let body: Onesignal.DefaultApiCreateAppRequest = {
   },
 };
 
-const response = await apiInstance.createApp(body);
-console.log(response);
+try {
+  const response = await apiInstance.createApp(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("createApp failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -472,7 +526,7 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiCreateCustomEventsRequest = {
   // string | Your OneSignal App ID in UUID v4 format.
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // CustomEventsRequest
   customEventsRequest: {
     events: [
@@ -487,8 +541,17 @@ let body: Onesignal.DefaultApiCreateCustomEventsRequest = {
   },
 };
 
-const response = await apiInstance.createCustomEvents(body);
-console.log(response);
+try {
+  const response = await apiInstance.createCustomEvents(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("createCustomEvents failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -548,8 +611,29 @@ notification.headings = { en: 'Push Notification' };
 notification.include_aliases = { external_id: ['YOUR_USER_EXTERNAL_ID'] };
 notification.target_channel = 'push';
 
-const response = await apiInstance.createNotification(notification);
-console.log(response);
+try {
+  const response = await apiInstance.createNotification(notification);
+  // `response.id` discriminates the two HTTP 200 shapes. A falsy value (empty string,
+  // null, or undefined) means no notification was created (e.g. all targets were
+  // unreachable / not subscribed). `response.errors` is polymorphic: a `string[]` in the
+  // no-subscribers case, or an object keyed by recipient-identifier type
+  // (`invalid_player_ids`, `invalid_external_user_ids`, `invalid_aliases`, …) when the
+  // notification WAS created but some recipients were skipped.
+  if (!response.id) {
+    console.warn("Notification was not sent:", response.errors);
+  } else if (response.errors) {
+    console.log("Notification created:", response.id, "(partial failures:", response.errors, ")");
+  } else {
+    console.log("Notification created:", response.id);
+  }
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("createNotification failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -601,7 +685,7 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiCreateSegmentRequest = {
   // string | The OneSignal App ID for your app.  Available in Keys & IDs.
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // Segment (optional)
   segment: {
     id: "id_example",
@@ -612,8 +696,17 @@ let body: Onesignal.DefaultApiCreateSegmentRequest = {
   },
 };
 
-const response = await apiInstance.createSegment(body);
-console.log(response);
+try {
+  const response = await apiInstance.createSegment(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("createSegment failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -667,11 +760,11 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiCreateSubscriptionRequest = {
   // string
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // string
-  aliasLabel: "alias_label_example",
+  aliasLabel: "external_id",
   // string
-  aliasId: "alias_id_example",
+  aliasId: "YOUR_USER_EXTERNAL_ID",
   // SubscriptionBody
   subscriptionBody: {
     subscription: {
@@ -696,8 +789,17 @@ let body: Onesignal.DefaultApiCreateSubscriptionRequest = {
   },
 };
 
-const response = await apiInstance.createSubscription(body);
-console.log(response);
+try {
+  const response = await apiInstance.createSubscription(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("createSubscription failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -904,8 +1006,17 @@ let body: Onesignal.DefaultApiCreateTemplateRequest = {
   },
 };
 
-const response = await apiInstance.createTemplate(body);
-console.log(response);
+try {
+  const response = await apiInstance.createTemplate(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("createTemplate failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -957,7 +1068,7 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiCreateUserRequest = {
   // string
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // User
   user: {
     properties: {
@@ -1007,8 +1118,17 @@ let body: Onesignal.DefaultApiCreateUserRequest = {
   },
 };
 
-const response = await apiInstance.createUser(body);
-console.log(response);
+try {
+  const response = await apiInstance.createUser(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("createUser failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -1064,17 +1184,26 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiDeleteAliasRequest = {
   // string
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // string
-  aliasLabel: "alias_label_example",
+  aliasLabel: "external_id",
   // string
-  aliasId: "alias_id_example",
+  aliasId: "YOUR_USER_EXTERNAL_ID",
   // string
-  aliasLabelToDelete: "alias_label_to_delete_example",
+  aliasLabelToDelete: "external_id",
 };
 
-const response = await apiInstance.deleteAlias(body);
-console.log(response);
+try {
+  const response = await apiInstance.deleteAlias(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("deleteAlias failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -1131,13 +1260,22 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiDeleteApiKeyRequest = {
   // string
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // string
-  tokenId: "token_id_example",
+  tokenId: "0aa1b2c3-d4e5-46f7-8899-aabbccddeeff",
 };
 
-const response = await apiInstance.deleteApiKey(body);
-console.log(response);
+try {
+  const response = await apiInstance.deleteApiKey(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("deleteApiKey failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -1189,13 +1327,22 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiDeleteSegmentRequest = {
   // string | The OneSignal App ID for your app.  Available in Keys & IDs.
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // string | The segment_id can be found in the URL of the segment when viewing it in the dashboard.
-  segmentId: "segment_id_example",
+  segmentId: "d6c5a3e1-9f17-44a1-9d10-7c0e4a2b1c8e",
 };
 
-const response = await apiInstance.deleteSegment(body);
-console.log(response);
+try {
+  const response = await apiInstance.deleteSegment(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("deleteSegment failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -1249,13 +1396,22 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiDeleteSubscriptionRequest = {
   // string
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // string
-  subscriptionId: "subscription_id_example",
+  subscriptionId: "7e4c5b9a-1f60-4d07-9b1a-2e8c8d2cae51",
 };
 
-const response = await apiInstance.deleteSubscription(body);
-console.log(response);
+try {
+  const response = await apiInstance.deleteSubscription(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("deleteSubscription failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -1310,13 +1466,22 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiDeleteTemplateRequest = {
   // string
-  templateId: "template_id_example",
+  templateId: "e4d3c2b1-a09f-4f1e-8d7c-6b5a4f3e2d1c",
   // string
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
 };
 
-const response = await apiInstance.deleteTemplate(body);
-console.log(response);
+try {
+  const response = await apiInstance.deleteTemplate(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("deleteTemplate failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -1369,15 +1534,24 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiDeleteUserRequest = {
   // string
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // string
-  aliasLabel: "alias_label_example",
+  aliasLabel: "external_id",
   // string
-  aliasId: "alias_id_example",
+  aliasId: "YOUR_USER_EXTERNAL_ID",
 };
 
-const response = await apiInstance.deleteUser(body);
-console.log(response);
+try {
+  const response = await apiInstance.deleteUser(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("deleteUser failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -1432,13 +1606,22 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiExportEventsRequest = {
   // string | The ID of the notification to export events from.
-  notificationId: "notification_id_example",
+  notificationId: "b3a0c8bd-3a4c-4b22-9a73-3f1a8c2d1b88",
   // string | The ID of the app that the notification belongs to.
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
 };
 
-const response = await apiInstance.exportEvents(body);
-console.log(response);
+try {
+  const response = await apiInstance.exportEvents(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("exportEvents failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -1492,7 +1675,7 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiExportSubscriptionsRequest = {
   // string | The app ID that you want to export devices from
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // ExportSubscriptionsRequestBody (optional)
   exportSubscriptionsRequestBody: {
     extra_fields: [
@@ -1503,8 +1686,17 @@ let body: Onesignal.DefaultApiExportSubscriptionsRequest = {
   },
 };
 
-const response = await apiInstance.exportSubscriptions(body);
-console.log(response);
+try {
+  const response = await apiInstance.exportSubscriptions(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("exportSubscriptions failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -1557,15 +1749,24 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiGetAliasesRequest = {
   // string
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // string
-  aliasLabel: "alias_label_example",
+  aliasLabel: "external_id",
   // string
-  aliasId: "alias_id_example",
+  aliasId: "YOUR_USER_EXTERNAL_ID",
 };
 
-const response = await apiInstance.getAliases(body);
-console.log(response);
+try {
+  const response = await apiInstance.getAliases(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("getAliases failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -1620,13 +1821,22 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiGetAliasesBySubscriptionRequest = {
   // string
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // string
-  subscriptionId: "subscription_id_example",
+  subscriptionId: "7e4c5b9a-1f60-4d07-9b1a-2e8c8d2cae51",
 };
 
-const response = await apiInstance.getAliasesBySubscription(body);
-console.log(response);
+try {
+  const response = await apiInstance.getAliasesBySubscription(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("getAliasesBySubscription failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -1679,11 +1889,20 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiGetAppRequest = {
   // string | An app id
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
 };
 
-const response = await apiInstance.getApp(body);
-console.log(response);
+try {
+  const response = await apiInstance.getApp(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("getApp failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -1733,8 +1952,17 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-const response = await apiInstance.getApps();
-console.log(response);
+try {
+  const response = await apiInstance.getApps();
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("getApps failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -1783,13 +2011,22 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiGetNotificationRequest = {
   // string
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // string
-  notificationId: "notification_id_example",
+  notificationId: "b3a0c8bd-3a4c-4b22-9a73-3f1a8c2d1b88",
 };
 
-const response = await apiInstance.getNotification(body);
-console.log(response);
+try {
+  const response = await apiInstance.getNotification(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("getNotification failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -1843,7 +2080,7 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiGetNotificationHistoryRequest = {
   // string | The \"id\" of the message found in the Notification object
-  notificationId: "notification_id_example",
+  notificationId: "b3a0c8bd-3a4c-4b22-9a73-3f1a8c2d1b88",
   // GetNotificationHistoryRequestBody
   getNotificationHistoryRequestBody: {
     events: "sent",
@@ -1852,8 +2089,17 @@ let body: Onesignal.DefaultApiGetNotificationHistoryRequest = {
   },
 };
 
-const response = await apiInstance.getNotificationHistory(body);
-console.log(response);
+try {
+  const response = await apiInstance.getNotificationHistory(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("getNotificationHistory failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -1907,17 +2153,26 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiGetNotificationsRequest = {
   // string | The app ID that you want to view notifications from
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // number | How many notifications to return.  Max is 50.  Default is 50. (optional)
-  limit: 1,
+  limit: 10,
   // number | Page offset.  Default is 0.  Results are sorted by queued_at in descending order.  queued_at is a representation of the time that the notification was queued at. (optional)
-  offset: 1,
+  offset: 0,
   // 0 | 1 | 3 | Kind of notifications returned:   * unset - All notification types (default)   * `0` - Dashboard only   * `1` - API only   * `3` - Automated only  (optional)
   kind: 0,
 };
 
-const response = await apiInstance.getNotifications(body);
-console.log(response);
+try {
+  const response = await apiInstance.getNotifications(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("getNotifications failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -1972,21 +2227,30 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiGetOutcomesRequest = {
   // string | The OneSignal App ID for your app.  Available in Keys & IDs.
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // string | Required Comma-separated list of names and the value (sum/count) for the returned outcome data. Note: Clicks only support count aggregation. For out-of-the-box OneSignal outcomes such as click and session duration, please use the \"os\" prefix with two underscores. For other outcomes, please use the name specified by the user. Example:os__session_duration.count,os__click.count,CustomOutcomeName.sum 
-  outcomeNames: "outcome_names_example",
+  outcomeNames: "os__session_duration.count,os__click.count",
   // string | Optional If outcome names contain any commas, then please specify only one value at a time. Example: outcome_names[]=os__click.count&outcome_names[]=Sales, Purchase.count where \"Sales, Purchase\" is the custom outcomes with a comma in the name.  (optional)
-  outcomeNames2: "outcome_names[]_example",
+  outcomeNames2: "os__session_duration.count",
   // string | Optional Time range for the returned data. The values can be 1h (for the last 1 hour data), 1d (for the last 1 day data), or 1mo (for the last 1 month data). Default is 1h if the parameter is omitted.  (optional)
-  outcomeTimeRange: "outcome_time_range_example",
+  outcomeTimeRange: "1d",
   // string | Optional Platform id. Refer device\'s platform ids for values. Example: outcome_platform=0 for iOS outcome_platform=7,8 for Safari and Firefox Default is data from all platforms if the parameter is omitted.  (optional)
-  outcomePlatforms: "outcome_platforms_example",
+  outcomePlatforms: "0,1",
   // string | Optional Attribution type for the outcomes. The values can be direct or influenced or unattributed. Example: outcome_attribution=direct Default is total (returns direct+influenced+unattributed) if the parameter is omitted.  (optional)
-  outcomeAttribution: "outcome_attribution_example",
+  outcomeAttribution: "direct",
 };
 
-const response = await apiInstance.getOutcomes(body);
-console.log(response);
+try {
+  const response = await apiInstance.getOutcomes(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("getOutcomes failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -2043,15 +2307,24 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiGetSegmentsRequest = {
   // string | The OneSignal App ID for your app.  Available in Keys & IDs.
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // number | Segments are listed in ascending order of created_at date. offset will omit that number of segments from the beginning of the list. Eg offset 5, will remove the 5 earliest created Segments. (optional)
-  offset: 1,
+  offset: 0,
   // number | The amount of Segments in the response. Maximum 300. (optional)
-  limit: 1,
+  limit: 10,
 };
 
-const response = await apiInstance.getSegments(body);
-console.log(response);
+try {
+  const response = await apiInstance.getSegments(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("getSegments failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -2105,15 +2378,24 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiGetUserRequest = {
   // string
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // string
-  aliasLabel: "alias_label_example",
+  aliasLabel: "external_id",
   // string
-  aliasId: "alias_id_example",
+  aliasId: "YOUR_USER_EXTERNAL_ID",
 };
 
-const response = await apiInstance.getUser(body);
-console.log(response);
+try {
+  const response = await apiInstance.getUser(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("getUser failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -2168,13 +2450,22 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiRotateApiKeyRequest = {
   // string
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // string
-  tokenId: "token_id_example",
+  tokenId: "0aa1b2c3-d4e5-46f7-8899-aabbccddeeff",
 };
 
-const response = await apiInstance.rotateApiKey(body);
-console.log(response);
+try {
+  const response = await apiInstance.rotateApiKey(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("rotateApiKey failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -2226,9 +2517,9 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiStartLiveActivityRequest = {
   // string | Your OneSignal App ID in UUID v4 format.
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // string | The name of the Live Activity defined in your app. This should match the attributes struct used in your app\'s Live Activity implementation.
-  activityType: "activity_type_example",
+  activityType: "order_status",
   // StartLiveActivityRequest
   startLiveActivityRequest: {
     name: "name_example",
@@ -2350,8 +2641,17 @@ let body: Onesignal.DefaultApiStartLiveActivityRequest = {
   },
 };
 
-const response = await apiInstance.startLiveActivity(body);
-console.log(response);
+try {
+  const response = await apiInstance.startLiveActivity(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("startLiveActivity failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -2405,9 +2705,9 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiTransferSubscriptionRequest = {
   // string
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // string
-  subscriptionId: "subscription_id_example",
+  subscriptionId: "7e4c5b9a-1f60-4d07-9b1a-2e8c8d2cae51",
   // TransferSubscriptionRequestBody
   transferSubscriptionRequestBody: {
     identity: {
@@ -2416,8 +2716,17 @@ let body: Onesignal.DefaultApiTransferSubscriptionRequest = {
   },
 };
 
-const response = await apiInstance.transferSubscription(body);
-console.log(response);
+try {
+  const response = await apiInstance.transferSubscription(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("transferSubscription failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -2473,15 +2782,24 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiUnsubscribeEmailWithTokenRequest = {
   // string | The OneSignal App ID for your app.  Available in Keys & IDs.
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // string | The id of the message found in the creation notification POST response, View Notifications GET response, or URL within the Message Report.
-  notificationId: "notification_id_example",
+  notificationId: "b3a0c8bd-3a4c-4b22-9a73-3f1a8c2d1b88",
   // string | The unsubscribe token that is generated via liquid syntax in {{subscription.unsubscribe_token}} when personalizing an email.
-  token: "token_example",
+  token: "YOUR_TOKEN_ID",
 };
 
-const response = await apiInstance.unsubscribeEmailWithToken(body);
-console.log(response);
+try {
+  const response = await apiInstance.unsubscribeEmailWithToken(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("unsubscribeEmailWithToken failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -2535,9 +2853,9 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiUpdateApiKeyRequest = {
   // string
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // string
-  tokenId: "token_id_example",
+  tokenId: "0aa1b2c3-d4e5-46f7-8899-aabbccddeeff",
   // UpdateApiKeyRequest
   updateApiKeyRequest: {
     name: "name_example",
@@ -2548,8 +2866,17 @@ let body: Onesignal.DefaultApiUpdateApiKeyRequest = {
   },
 };
 
-const response = await apiInstance.updateApiKey(body);
-console.log(response);
+try {
+  const response = await apiInstance.updateApiKey(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("updateApiKey failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -2602,7 +2929,7 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiUpdateAppRequest = {
   // string | An app id
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // App
   app: {
     name: "name_example",
@@ -2629,8 +2956,17 @@ let body: Onesignal.DefaultApiUpdateAppRequest = {
   },
 };
 
-const response = await apiInstance.updateApp(body);
-console.log(response);
+try {
+  const response = await apiInstance.updateApp(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("updateApp failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -2683,9 +3019,9 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiUpdateLiveActivityRequest = {
   // string | The OneSignal App ID for your app.  Available in Keys & IDs.
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // string | Live Activity record ID
-  activityId: "activity_id_example",
+  activityId: "12345",
   // UpdateLiveActivityRequest
   updateLiveActivityRequest: {
     name: "name_example",
@@ -2788,8 +3124,17 @@ let body: Onesignal.DefaultApiUpdateLiveActivityRequest = {
   },
 };
 
-const response = await apiInstance.updateLiveActivity(body);
-console.log(response);
+try {
+  const response = await apiInstance.updateLiveActivity(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("updateLiveActivity failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -2843,9 +3188,9 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiUpdateSubscriptionRequest = {
   // string
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // string
-  subscriptionId: "subscription_id_example",
+  subscriptionId: "7e4c5b9a-1f60-4d07-9b1a-2e8c8d2cae51",
   // SubscriptionBody
   subscriptionBody: {
     subscription: {
@@ -2870,8 +3215,17 @@ let body: Onesignal.DefaultApiUpdateSubscriptionRequest = {
   },
 };
 
-const response = await apiInstance.updateSubscription(body);
-console.log(response);
+try {
+  const response = await apiInstance.updateSubscription(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("updateSubscription failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -2927,11 +3281,11 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiUpdateSubscriptionByTokenRequest = {
   // string | Your OneSignal App ID in UUID v4 format.
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // string | The type of token to use when looking up the subscription. See Subscription Types.
-  tokenType: "token_type_example",
+  tokenType: "Email",
   // string | The value of the token to lookup by (e.g., email address, phone number).
-  token: "token_example",
+  token: "user@example.com",
   // SubscriptionBody
   subscriptionBody: {
     subscription: {
@@ -2956,8 +3310,17 @@ let body: Onesignal.DefaultApiUpdateSubscriptionByTokenRequest = {
   },
 };
 
-const response = await apiInstance.updateSubscriptionByToken(body);
-console.log(response);
+try {
+  const response = await apiInstance.updateSubscriptionByToken(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("updateSubscriptionByToken failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -3012,9 +3375,9 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiUpdateTemplateRequest = {
   // string
-  templateId: "template_id_example",
+  templateId: "e4d3c2b1-a09f-4f1e-8d7c-6b5a4f3e2d1c",
   // string
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // UpdateTemplateRequest
   updateTemplateRequest: {
     name: "name_example",
@@ -3164,8 +3527,17 @@ let body: Onesignal.DefaultApiUpdateTemplateRequest = {
   },
 };
 
-const response = await apiInstance.updateTemplate(body);
-console.log(response);
+try {
+  const response = await apiInstance.updateTemplate(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("updateTemplate failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -3218,11 +3590,11 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiUpdateUserRequest = {
   // string
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // string
-  aliasLabel: "alias_label_example",
+  aliasLabel: "external_id",
   // string
-  aliasId: "alias_id_example",
+  aliasId: "YOUR_USER_EXTERNAL_ID",
   // UpdateUserRequest
   updateUserRequest: {
     properties: {
@@ -3261,8 +3633,17 @@ let body: Onesignal.DefaultApiUpdateUserRequest = {
   },
 };
 
-const response = await apiInstance.updateUser(body);
-console.log(response);
+try {
+  const response = await apiInstance.updateUser(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("updateUser failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -3318,11 +3699,20 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiViewApiKeysRequest = {
   // string
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
 };
 
-const response = await apiInstance.viewApiKeys(body);
-console.log(response);
+try {
+  const response = await apiInstance.viewApiKeys(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("viewApiKeys failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -3373,13 +3763,22 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiViewTemplateRequest = {
   // string
-  templateId: "template_id_example",
+  templateId: "e4d3c2b1-a09f-4f1e-8d7c-6b5a4f3e2d1c",
   // string
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
 };
 
-const response = await apiInstance.viewTemplate(body);
-console.log(response);
+try {
+  const response = await apiInstance.viewTemplate(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("viewTemplate failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
@@ -3432,17 +3831,26 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 let body: Onesignal.DefaultApiViewTemplatesRequest = {
   // string | Your OneSignal App ID in UUID v4 format.
-  appId: "app_id_example",
+  appId: "00000000-0000-0000-0000-000000000000",
   // number | Maximum number of templates. Default and max is 50. (optional)
-  limit: 50,
+  limit: 10,
   // number | Pagination offset. (optional)
   offset: 0,
   // 'push' | 'email' | 'sms' | Filter by delivery channel. (optional)
   channel: "push",
 };
 
-const response = await apiInstance.viewTemplates(body);
-console.log(response);
+try {
+  const response = await apiInstance.viewTemplates(body);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
+    console.error("viewTemplates failed: HTTP " + e.code, e.body);
+  } else {
+    throw e;
+  }
+}
 ```
 
 
