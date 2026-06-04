@@ -1,22 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StartLiveActivitySuccessResponse = void 0;
-var StartLiveActivitySuccessResponse = (function () {
-    function StartLiveActivitySuccessResponse() {
-    }
-    StartLiveActivitySuccessResponse.getAttributeTypeMap = function () {
+class StartLiveActivitySuccessResponse {
+    static getAttributeTypeMap() {
         return StartLiveActivitySuccessResponse.attributeTypeMap;
-    };
-    StartLiveActivitySuccessResponse.discriminator = undefined;
-    StartLiveActivitySuccessResponse.attributeTypeMap = [
-        {
-            "name": "notification_id",
-            "baseName": "notification_id",
-            "type": "string",
-            "format": ""
-        }
-    ];
-    return StartLiveActivitySuccessResponse;
-}());
+    }
+    constructor() {
+    }
+}
 exports.StartLiveActivitySuccessResponse = StartLiveActivitySuccessResponse;
+StartLiveActivitySuccessResponse.discriminator = undefined;
+StartLiveActivitySuccessResponse.attributeTypeMap = [
+    {
+        "name": "notification_id",
+        "baseName": "notification_id",
+        "type": "string",
+        "format": ""
+    }
+];
 //# sourceMappingURL=StartLiveActivitySuccessResponse.js.map

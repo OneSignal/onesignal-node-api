@@ -1,22 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateUserConflictResponse = void 0;
-var CreateUserConflictResponse = (function () {
-    function CreateUserConflictResponse() {
-    }
-    CreateUserConflictResponse.getAttributeTypeMap = function () {
+class CreateUserConflictResponse {
+    static getAttributeTypeMap() {
         return CreateUserConflictResponse.attributeTypeMap;
-    };
-    CreateUserConflictResponse.discriminator = undefined;
-    CreateUserConflictResponse.attributeTypeMap = [
-        {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<CreateUserConflictResponseErrorsInner>",
-            "format": ""
-        }
-    ];
-    return CreateUserConflictResponse;
-}());
+    }
+    constructor() {
+    }
+}
 exports.CreateUserConflictResponse = CreateUserConflictResponse;
+CreateUserConflictResponse.discriminator = undefined;
+CreateUserConflictResponse.attributeTypeMap = [
+    {
+        "name": "errors",
+        "baseName": "errors",
+        "type": "Array<CreateUserConflictResponseErrorsInner>",
+        "format": ""
+    }
+];
 //# sourceMappingURL=CreateUserConflictResponse.js.map

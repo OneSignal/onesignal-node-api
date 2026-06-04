@@ -1,22 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OutcomesData = void 0;
-var OutcomesData = (function () {
-    function OutcomesData() {
-    }
-    OutcomesData.getAttributeTypeMap = function () {
+class OutcomesData {
+    static getAttributeTypeMap() {
         return OutcomesData.attributeTypeMap;
-    };
-    OutcomesData.discriminator = undefined;
-    OutcomesData.attributeTypeMap = [
-        {
-            "name": "outcomes",
-            "baseName": "outcomes",
-            "type": "Array<OutcomeData>",
-            "format": ""
-        }
-    ];
-    return OutcomesData;
-}());
+    }
+    constructor() {
+    }
+}
 exports.OutcomesData = OutcomesData;
+OutcomesData.discriminator = undefined;
+OutcomesData.attributeTypeMap = [
+    {
+        "name": "outcomes",
+        "baseName": "outcomes",
+        "type": "Array<OutcomeData>",
+        "format": ""
+    }
+];
 //# sourceMappingURL=OutcomesData.js.map

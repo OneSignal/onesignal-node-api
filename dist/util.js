@@ -9,11 +9,11 @@ function isCodeInRange(codeRange, code) {
         return true;
     }
     else {
-        var codeString = code.toString();
+        const codeString = code.toString();
         if (codeString.length != codeRange.length) {
             return false;
         }
-        for (var i = 0; i < codeString.length; i++) {
+        for (let i = 0; i < codeString.length; i++) {
             if (codeRange.charAt(i) != "X" && codeRange.charAt(i) != codeString.charAt(i)) {
                 return false;
             }

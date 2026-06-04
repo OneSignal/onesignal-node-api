@@ -1,22 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PropertiesBody = void 0;
-var PropertiesBody = (function () {
-    function PropertiesBody() {
-    }
-    PropertiesBody.getAttributeTypeMap = function () {
+class PropertiesBody {
+    static getAttributeTypeMap() {
         return PropertiesBody.attributeTypeMap;
-    };
-    PropertiesBody.discriminator = undefined;
-    PropertiesBody.attributeTypeMap = [
-        {
-            "name": "properties",
-            "baseName": "properties",
-            "type": "PropertiesObject",
-            "format": ""
-        }
-    ];
-    return PropertiesBody;
-}());
+    }
+    constructor() {
+    }
+}
 exports.PropertiesBody = PropertiesBody;
+PropertiesBody.discriminator = undefined;
+PropertiesBody.attributeTypeMap = [
+    {
+        "name": "properties",
+        "baseName": "properties",
+        "type": "PropertiesObject",
+        "format": ""
+    }
+];
 //# sourceMappingURL=PropertiesBody.js.map

@@ -3,7 +3,9 @@
     "strict": true,
     "ignoreDeprecations": "6.0",
     /* Basic Options */
-    "target": "es5",
+    "target": "es2020",
+    "module": "commonjs",
+    "esModuleInterop": true,
     "moduleResolution": "node",
     "declaration": true,
 
@@ -17,7 +19,7 @@
     "sourceMap": true,
     "outDir": "./dist",
     "noLib": false,
-    "lib": [ "es6" ],
+    "lib": [ "es2020" ],
   },
   "exclude": [
     "dist",

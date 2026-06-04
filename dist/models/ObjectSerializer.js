@@ -82,74 +82,74 @@ __exportStar(require("./UpdateUserRequest"), exports);
 __exportStar(require("./User"), exports);
 __exportStar(require("./UserIdentityBody"), exports);
 __exportStar(require("./WebButton"), exports);
-var ApiKeyToken_1 = require("./ApiKeyToken");
-var ApiKeyTokensListResponse_1 = require("./ApiKeyTokensListResponse");
-var App_1 = require("./App");
-var BasicNotification_1 = require("./BasicNotification");
-var BasicNotificationAllOf_1 = require("./BasicNotificationAllOf");
-var BasicNotificationAllOfAndroidBackgroundLayout_1 = require("./BasicNotificationAllOfAndroidBackgroundLayout");
-var Button_1 = require("./Button");
-var CopyTemplateRequest_1 = require("./CopyTemplateRequest");
-var CreateApiKeyRequest_1 = require("./CreateApiKeyRequest");
-var CreateApiKeyResponse_1 = require("./CreateApiKeyResponse");
-var CreateNotificationSuccessResponse_1 = require("./CreateNotificationSuccessResponse");
-var CreateSegmentConflictResponse_1 = require("./CreateSegmentConflictResponse");
-var CreateSegmentSuccessResponse_1 = require("./CreateSegmentSuccessResponse");
-var CreateTemplateRequest_1 = require("./CreateTemplateRequest");
-var CreateUserConflictResponse_1 = require("./CreateUserConflictResponse");
-var CreateUserConflictResponseErrorsInner_1 = require("./CreateUserConflictResponseErrorsInner");
-var CreateUserConflictResponseErrorsItemsMeta_1 = require("./CreateUserConflictResponseErrorsItemsMeta");
-var CustomEvent_1 = require("./CustomEvent");
-var CustomEventsRequest_1 = require("./CustomEventsRequest");
-var DeliveryData_1 = require("./DeliveryData");
-var ExportEventsSuccessResponse_1 = require("./ExportEventsSuccessResponse");
-var ExportSubscriptionsRequestBody_1 = require("./ExportSubscriptionsRequestBody");
-var ExportSubscriptionsSuccessResponse_1 = require("./ExportSubscriptionsSuccessResponse");
-var Filter_1 = require("./Filter");
-var FilterExpression_1 = require("./FilterExpression");
-var GenericError_1 = require("./GenericError");
-var GenericSuccessBoolResponse_1 = require("./GenericSuccessBoolResponse");
-var GetNotificationHistoryRequestBody_1 = require("./GetNotificationHistoryRequestBody");
-var GetSegmentsSuccessResponse_1 = require("./GetSegmentsSuccessResponse");
-var LanguageStringMap_1 = require("./LanguageStringMap");
-var Notification_1 = require("./Notification");
-var NotificationAllOf_1 = require("./NotificationAllOf");
-var NotificationHistorySuccessResponse_1 = require("./NotificationHistorySuccessResponse");
-var NotificationSlice_1 = require("./NotificationSlice");
-var NotificationTarget_1 = require("./NotificationTarget");
-var NotificationWithMeta_1 = require("./NotificationWithMeta");
-var NotificationWithMetaAllOf_1 = require("./NotificationWithMetaAllOf");
-var Operator_1 = require("./Operator");
-var OutcomeData_1 = require("./OutcomeData");
-var OutcomesData_1 = require("./OutcomesData");
-var PlatformDeliveryData_1 = require("./PlatformDeliveryData");
-var PlatformDeliveryDataEmailAllOf_1 = require("./PlatformDeliveryDataEmailAllOf");
-var PlatformDeliveryDataSmsAllOf_1 = require("./PlatformDeliveryDataSmsAllOf");
-var PropertiesBody_1 = require("./PropertiesBody");
-var PropertiesDeltas_1 = require("./PropertiesDeltas");
-var PropertiesObject_1 = require("./PropertiesObject");
-var Purchase_1 = require("./Purchase");
-var RateLimitError_1 = require("./RateLimitError");
-var Segment_1 = require("./Segment");
-var SegmentData_1 = require("./SegmentData");
-var SegmentNotificationTarget_1 = require("./SegmentNotificationTarget");
-var StartLiveActivityRequest_1 = require("./StartLiveActivityRequest");
-var StartLiveActivitySuccessResponse_1 = require("./StartLiveActivitySuccessResponse");
-var Subscription_1 = require("./Subscription");
-var SubscriptionBody_1 = require("./SubscriptionBody");
-var SubscriptionNotificationTarget_1 = require("./SubscriptionNotificationTarget");
-var TemplateResource_1 = require("./TemplateResource");
-var TemplatesListResponse_1 = require("./TemplatesListResponse");
-var TransferSubscriptionRequestBody_1 = require("./TransferSubscriptionRequestBody");
-var UpdateApiKeyRequest_1 = require("./UpdateApiKeyRequest");
-var UpdateLiveActivityRequest_1 = require("./UpdateLiveActivityRequest");
-var UpdateLiveActivitySuccessResponse_1 = require("./UpdateLiveActivitySuccessResponse");
-var UpdateTemplateRequest_1 = require("./UpdateTemplateRequest");
-var UpdateUserRequest_1 = require("./UpdateUserRequest");
-var User_1 = require("./User");
-var UserIdentityBody_1 = require("./UserIdentityBody");
-var WebButton_1 = require("./WebButton");
-var primitives = [
+const ApiKeyToken_1 = require("./ApiKeyToken");
+const ApiKeyTokensListResponse_1 = require("./ApiKeyTokensListResponse");
+const App_1 = require("./App");
+const BasicNotification_1 = require("./BasicNotification");
+const BasicNotificationAllOf_1 = require("./BasicNotificationAllOf");
+const BasicNotificationAllOfAndroidBackgroundLayout_1 = require("./BasicNotificationAllOfAndroidBackgroundLayout");
+const Button_1 = require("./Button");
+const CopyTemplateRequest_1 = require("./CopyTemplateRequest");
+const CreateApiKeyRequest_1 = require("./CreateApiKeyRequest");
+const CreateApiKeyResponse_1 = require("./CreateApiKeyResponse");
+const CreateNotificationSuccessResponse_1 = require("./CreateNotificationSuccessResponse");
+const CreateSegmentConflictResponse_1 = require("./CreateSegmentConflictResponse");
+const CreateSegmentSuccessResponse_1 = require("./CreateSegmentSuccessResponse");
+const CreateTemplateRequest_1 = require("./CreateTemplateRequest");
+const CreateUserConflictResponse_1 = require("./CreateUserConflictResponse");
+const CreateUserConflictResponseErrorsInner_1 = require("./CreateUserConflictResponseErrorsInner");
+const CreateUserConflictResponseErrorsItemsMeta_1 = require("./CreateUserConflictResponseErrorsItemsMeta");
+const CustomEvent_1 = require("./CustomEvent");
+const CustomEventsRequest_1 = require("./CustomEventsRequest");
+const DeliveryData_1 = require("./DeliveryData");
+const ExportEventsSuccessResponse_1 = require("./ExportEventsSuccessResponse");
+const ExportSubscriptionsRequestBody_1 = require("./ExportSubscriptionsRequestBody");
+const ExportSubscriptionsSuccessResponse_1 = require("./ExportSubscriptionsSuccessResponse");
+const Filter_1 = require("./Filter");
+const FilterExpression_1 = require("./FilterExpression");
+const GenericError_1 = require("./GenericError");
+const GenericSuccessBoolResponse_1 = require("./GenericSuccessBoolResponse");
+const GetNotificationHistoryRequestBody_1 = require("./GetNotificationHistoryRequestBody");
+const GetSegmentsSuccessResponse_1 = require("./GetSegmentsSuccessResponse");
+const LanguageStringMap_1 = require("./LanguageStringMap");
+const Notification_1 = require("./Notification");
+const NotificationAllOf_1 = require("./NotificationAllOf");
+const NotificationHistorySuccessResponse_1 = require("./NotificationHistorySuccessResponse");
+const NotificationSlice_1 = require("./NotificationSlice");
+const NotificationTarget_1 = require("./NotificationTarget");
+const NotificationWithMeta_1 = require("./NotificationWithMeta");
+const NotificationWithMetaAllOf_1 = require("./NotificationWithMetaAllOf");
+const Operator_1 = require("./Operator");
+const OutcomeData_1 = require("./OutcomeData");
+const OutcomesData_1 = require("./OutcomesData");
+const PlatformDeliveryData_1 = require("./PlatformDeliveryData");
+const PlatformDeliveryDataEmailAllOf_1 = require("./PlatformDeliveryDataEmailAllOf");
+const PlatformDeliveryDataSmsAllOf_1 = require("./PlatformDeliveryDataSmsAllOf");
+const PropertiesBody_1 = require("./PropertiesBody");
+const PropertiesDeltas_1 = require("./PropertiesDeltas");
+const PropertiesObject_1 = require("./PropertiesObject");
+const Purchase_1 = require("./Purchase");
+const RateLimitError_1 = require("./RateLimitError");
+const Segment_1 = require("./Segment");
+const SegmentData_1 = require("./SegmentData");
+const SegmentNotificationTarget_1 = require("./SegmentNotificationTarget");
+const StartLiveActivityRequest_1 = require("./StartLiveActivityRequest");
+const StartLiveActivitySuccessResponse_1 = require("./StartLiveActivitySuccessResponse");
+const Subscription_1 = require("./Subscription");
+const SubscriptionBody_1 = require("./SubscriptionBody");
+const SubscriptionNotificationTarget_1 = require("./SubscriptionNotificationTarget");
+const TemplateResource_1 = require("./TemplateResource");
+const TemplatesListResponse_1 = require("./TemplatesListResponse");
+const TransferSubscriptionRequestBody_1 = require("./TransferSubscriptionRequestBody");
+const UpdateApiKeyRequest_1 = require("./UpdateApiKeyRequest");
+const UpdateLiveActivityRequest_1 = require("./UpdateLiveActivityRequest");
+const UpdateLiveActivitySuccessResponse_1 = require("./UpdateLiveActivitySuccessResponse");
+const UpdateTemplateRequest_1 = require("./UpdateTemplateRequest");
+const UpdateUserRequest_1 = require("./UpdateUserRequest");
+const User_1 = require("./User");
+const UserIdentityBody_1 = require("./UserIdentityBody");
+const WebButton_1 = require("./WebButton");
+let primitives = [
     "string",
     "boolean",
     "double",
@@ -159,12 +159,12 @@ var primitives = [
     "number",
     "any"
 ];
-var supportedMediaTypes = {
+const supportedMediaTypes = {
     "application/json": Infinity,
     "application/octet-stream": 0,
     "application/x-www-form-urlencoded": 0
 };
-var enumsMap = new Set([
+let enumsMap = new Set([
     "ApiKeyTokenIpAllowlistModeEnum",
     "AppApnsEnvEnum",
     "BasicNotificationTargetChannelEnum",
@@ -193,7 +193,7 @@ var enumsMap = new Set([
     "UpdateApiKeyRequestIpAllowlistModeEnum",
     "UpdateLiveActivityRequestEventEnum",
 ]);
-var typeMap = {
+let typeMap = {
     "ApiKeyToken": ApiKeyToken_1.ApiKeyToken,
     "ApiKeyTokensListResponse": ApiKeyTokensListResponse_1.ApiKeyTokensListResponse,
     "App": App_1.App,
@@ -262,10 +262,8 @@ var typeMap = {
     "UserIdentityBody": UserIdentityBody_1.UserIdentityBody,
     "WebButton": WebButton_1.WebButton,
 };
-var ObjectSerializer = (function () {
-    function ObjectSerializer() {
-    }
-    ObjectSerializer.findCorrectType = function (data, expectedType) {
+class ObjectSerializer {
+    static findCorrectType(data, expectedType) {
         if (data == undefined) {
             return expectedType;
         }
@@ -282,7 +280,7 @@ var ObjectSerializer = (function () {
             if (!typeMap[expectedType]) {
                 return expectedType;
             }
-            var discriminatorProperty = typeMap[expectedType].discriminator;
+            let discriminatorProperty = typeMap[expectedType].discriminator;
             if (discriminatorProperty == null) {
                 return expectedType;
             }
@@ -301,8 +299,8 @@ var ObjectSerializer = (function () {
                 }
             }
         }
-    };
-    ObjectSerializer.serialize = function (data, type, format) {
+    }
+    static serialize(data, type, format) {
         if (data == undefined) {
             return data;
         }
@@ -310,20 +308,20 @@ var ObjectSerializer = (function () {
             return data;
         }
         else if (type.lastIndexOf("Array<", 0) === 0) {
-            var subType = type.replace("Array<", "");
+            let subType = type.replace("Array<", "");
             subType = subType.substring(0, subType.length - 1);
-            var transformedData = [];
-            for (var index in data) {
-                var date = data[index];
+            let transformedData = [];
+            for (let index in data) {
+                let date = data[index];
                 transformedData.push(ObjectSerializer.serialize(date, subType, format));
             }
             return transformedData;
         }
         else if (type === "Date") {
             if (format == "date") {
-                var month = data.getMonth() + 1;
+                let month = data.getMonth() + 1;
                 month = month < 10 ? "0" + month.toString() : month.toString();
-                var day = data.getDate();
+                let day = data.getDate();
                 day = day < 10 ? "0" + day.toString() : day.toString();
                 return data.getFullYear() + "-" + month + "-" + day;
             }
@@ -339,16 +337,16 @@ var ObjectSerializer = (function () {
                 return data;
             }
             type = this.findCorrectType(data, type);
-            var attributeTypes = typeMap[type].getAttributeTypeMap();
-            var instance = {};
-            for (var index in attributeTypes) {
-                var attributeType = attributeTypes[index];
+            let attributeTypes = typeMap[type].getAttributeTypeMap();
+            let instance = {};
+            for (let index in attributeTypes) {
+                let attributeType = attributeTypes[index];
                 instance[attributeType.baseName] = ObjectSerializer.serialize(data[attributeType.name], attributeType.type, attributeType.format);
             }
             return instance;
         }
-    };
-    ObjectSerializer.deserialize = function (data, type, format) {
+    }
+    static deserialize(data, type, format) {
         type = ObjectSerializer.findCorrectType(data, type);
         if (data == undefined) {
             return data;
@@ -357,11 +355,11 @@ var ObjectSerializer = (function () {
             return data;
         }
         else if (type.lastIndexOf("Array<", 0) === 0) {
-            var subType = type.replace("Array<", "");
+            let subType = type.replace("Array<", "");
             subType = subType.substring(0, subType.length - 1);
-            var transformedData = [];
-            for (var index in data) {
-                var date = data[index];
+            let transformedData = [];
+            for (let index in data) {
+                let date = data[index];
                 transformedData.push(ObjectSerializer.deserialize(date, subType, format));
             }
             return transformedData;
@@ -376,33 +374,32 @@ var ObjectSerializer = (function () {
             if (!typeMap[type]) {
                 return data;
             }
-            var instance = new typeMap[type]();
-            var attributeTypes = typeMap[type].getAttributeTypeMap();
-            for (var index in attributeTypes) {
-                var attributeType = attributeTypes[index];
-                var value = ObjectSerializer.deserialize(data[attributeType.baseName], attributeType.type, attributeType.format);
+            let instance = new typeMap[type]();
+            let attributeTypes = typeMap[type].getAttributeTypeMap();
+            for (let index in attributeTypes) {
+                let attributeType = attributeTypes[index];
+                let value = ObjectSerializer.deserialize(data[attributeType.baseName], attributeType.type, attributeType.format);
                 if (value !== undefined) {
                     instance[attributeType.name] = value;
                 }
             }
             return instance;
         }
-    };
-    ObjectSerializer.normalizeMediaType = function (mediaType) {
+    }
+    static normalizeMediaType(mediaType) {
         if (mediaType === undefined) {
             return undefined;
         }
         return mediaType.split(";")[0].trim().toLowerCase();
-    };
-    ObjectSerializer.getPreferredMediaType = function (mediaTypes) {
+    }
+    static getPreferredMediaType(mediaTypes) {
         if (!mediaTypes) {
             return "application/json";
         }
-        var normalMediaTypes = mediaTypes.map(this.normalizeMediaType);
-        var selectedMediaType = undefined;
-        var selectedRank = -Infinity;
-        for (var _i = 0, normalMediaTypes_1 = normalMediaTypes; _i < normalMediaTypes_1.length; _i++) {
-            var mediaType = normalMediaTypes_1[_i];
+        const normalMediaTypes = mediaTypes.map(this.normalizeMediaType);
+        let selectedMediaType = undefined;
+        let selectedRank = -Infinity;
+        for (const mediaType of normalMediaTypes) {
             if (supportedMediaTypes[mediaType] > selectedRank) {
                 selectedMediaType = mediaType;
                 selectedRank = supportedMediaTypes[mediaType];
@@ -412,14 +409,14 @@ var ObjectSerializer = (function () {
             throw new Error("None of the given media types are supported: " + mediaTypes.join(", "));
         }
         return selectedMediaType;
-    };
-    ObjectSerializer.stringify = function (data, mediaType) {
+    }
+    static stringify(data, mediaType) {
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
         throw new Error("The mediaType " + mediaType + " is not supported by ObjectSerializer.stringify.");
-    };
-    ObjectSerializer.parse = function (rawData, mediaType) {
+    }
+    static parse(rawData, mediaType) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
         }
@@ -427,8 +424,7 @@ var ObjectSerializer = (function () {
             return JSON.parse(rawData);
         }
         throw new Error("The mediaType " + mediaType + " is not supported by ObjectSerializer.parse.");
-    };
-    return ObjectSerializer;
-}());
+    }
+}
 exports.ObjectSerializer = ObjectSerializer;
 //# sourceMappingURL=ObjectSerializer.js.map

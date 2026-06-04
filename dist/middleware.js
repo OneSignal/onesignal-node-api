@@ -1,18 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PromiseMiddlewareWrapper = void 0;
-var rxjsStub_1 = require("./rxjsStub");
-var PromiseMiddlewareWrapper = (function () {
-    function PromiseMiddlewareWrapper(middleware) {
+const rxjsStub_1 = require("./rxjsStub");
+class PromiseMiddlewareWrapper {
+    constructor(middleware) {
         this.middleware = middleware;
     }
-    PromiseMiddlewareWrapper.prototype.pre = function (context) {
+    pre(context) {
         return (0, rxjsStub_1.from)(this.middleware.pre(context));
-    };
-    PromiseMiddlewareWrapper.prototype.post = function (context) {
+    }
+    post(context) {
         return (0, rxjsStub_1.from)(this.middleware.post(context));
-    };
-    return PromiseMiddlewareWrapper;
-}());
+    }
+}
 exports.PromiseMiddlewareWrapper = PromiseMiddlewareWrapper;
 //# sourceMappingURL=middleware.js.map

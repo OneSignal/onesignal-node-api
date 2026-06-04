@@ -1,22 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CopyTemplateRequest = void 0;
-var CopyTemplateRequest = (function () {
-    function CopyTemplateRequest() {
-    }
-    CopyTemplateRequest.getAttributeTypeMap = function () {
+class CopyTemplateRequest {
+    static getAttributeTypeMap() {
         return CopyTemplateRequest.attributeTypeMap;
-    };
-    CopyTemplateRequest.discriminator = undefined;
-    CopyTemplateRequest.attributeTypeMap = [
-        {
-            "name": "target_app_id",
-            "baseName": "target_app_id",
-            "type": "string",
-            "format": ""
-        }
-    ];
-    return CopyTemplateRequest;
-}());
+    }
+    constructor() {
+    }
+}
 exports.CopyTemplateRequest = CopyTemplateRequest;
+CopyTemplateRequest.discriminator = undefined;
+CopyTemplateRequest.attributeTypeMap = [
+    {
+        "name": "target_app_id",
+        "baseName": "target_app_id",
+        "type": "string",
+        "format": ""
+    }
+];
 //# sourceMappingURL=CopyTemplateRequest.js.map

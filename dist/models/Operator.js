@@ -1,22 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Operator = void 0;
-var Operator = (function () {
-    function Operator() {
-    }
-    Operator.getAttributeTypeMap = function () {
+class Operator {
+    static getAttributeTypeMap() {
         return Operator.attributeTypeMap;
-    };
-    Operator.discriminator = undefined;
-    Operator.attributeTypeMap = [
-        {
-            "name": "operator",
-            "baseName": "operator",
-            "type": "OperatorOperatorEnum",
-            "format": ""
-        }
-    ];
-    return Operator;
-}());
+    }
+    constructor() {
+    }
+}
 exports.Operator = Operator;
+Operator.discriminator = undefined;
+Operator.attributeTypeMap = [
+    {
+        "name": "operator",
+        "baseName": "operator",
+        "type": "OperatorOperatorEnum",
+        "format": ""
+    }
+];
 //# sourceMappingURL=Operator.js.map
