@@ -1,0 +1,126 @@
+/**
+ * OneSignal
+ * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
+ *
+ * API Version: 5.6.0
+ * Contact: devrel@onesignal.com
+ */
+
+import { LanguageStringMap } from './LanguageStringMap';
+import { HttpFile } from '../http/http';
+
+export class CreateTemplateRequest {
+    /**
+    * Your OneSignal App ID in UUID v4 format.
+    */
+    'app_id': string;
+    /**
+    * Name of the template.
+    */
+    'name': string;
+    'contents': LanguageStringMap;
+    'headings'?: LanguageStringMap;
+    'subtitle'?: LanguageStringMap;
+    /**
+    * Set true for an Email template.
+    */
+    'is_email'?: boolean;
+    /**
+    * Subject of the email.
+    */
+    'email_subject'?: string;
+    /**
+    * Body of the email (HTML supported).
+    */
+    'email_body'?: string;
+    /**
+    * BCC recipients for the email template. Maximum 5 addresses. Only supported when the email service provider is OneSignal Email.
+    */
+    'email_bcc'?: Array<string>;
+    /**
+    * Set true for an SMS template.
+    */
+    'is_sms'?: boolean;
+    /**
+    * JSON string for dynamic content personalization.
+    */
+    'dynamic_content'?: string;
+
+    static readonly discriminator: string | undefined = undefined;
+
+    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "app_id",
+            "baseName": "app_id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "contents",
+            "baseName": "contents",
+            "type": "LanguageStringMap",
+            "format": ""
+        },
+        {
+            "name": "headings",
+            "baseName": "headings",
+            "type": "LanguageStringMap",
+            "format": ""
+        },
+        {
+            "name": "subtitle",
+            "baseName": "subtitle",
+            "type": "LanguageStringMap",
+            "format": ""
+        },
+        {
+            "name": "is_email",
+            "baseName": "isEmail",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "email_subject",
+            "baseName": "email_subject",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "email_body",
+            "baseName": "email_body",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "email_bcc",
+            "baseName": "email_bcc",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "is_sms",
+            "baseName": "isSMS",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "dynamic_content",
+            "baseName": "dynamic_content",
+            "type": "string",
+            "format": ""
+        }    ];
+
+    static getAttributeTypeMap() {
+        return CreateTemplateRequest.attributeTypeMap;
+    }
+
+    public constructor() {
+    }
+}
+

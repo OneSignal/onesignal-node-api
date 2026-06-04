@@ -1,0 +1,47 @@
+{
+  "name": "@onesignal/node-onesignal",
+  "version": "5.8.0",
+  "description": "OpenAPI client for @onesignal/node-onesignal",
+  "author": "OpenAPI-Generator Contributors",
+  "keywords": [
+    "fetch",
+    "typescript",
+    "openapi-client",
+    "openapi-generator"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/OneSignal/onesignal-node-api",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OneSignal/onesignal-node-api"
+  },
+  "main": "./dist/index.js",
+  "type": "commonjs",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "typings": "./dist/index.d.ts",
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "form-data": "^2.5.0",
+    "btoa": "^1.2.1",
+    "url-parse": "^1.4.3"
+  },
+  "devDependencies": {
+    "typescript": "^4.0",
+    "@types/url-parse": "1.4.4",
+    "@types/node": "24.1.0"
+  }
+}
