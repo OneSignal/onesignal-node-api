@@ -1,5 +1,11 @@
 # Changelog
 
+## [5.8.0](https://github.com/OneSignal/onesignal-node-api/compare/v5.7.0...v5.8.0) (2026-06-04)
+
+### Features
+
+* add v5.8.0 package updates ([#175](https://github.com/OneSignal/onesignal-node-api/issues/175)) ([5be56de](https://github.com/OneSignal/onesignal-node-api/commit/5be56dee35a43a0c374f58aee5e830b70aae8d85))
+
 ## [5.7.0](https://github.com/OneSignal/onesignal-node-api/compare/v5.6.0...v5.7.0) (2026-05-20)
 
 ### Features
