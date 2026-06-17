@@ -64,7 +64,7 @@ Every operation requires either a **REST API Key** (App-scoped, used by ~77% of 
 
 ### Error handling
 
-When a request fails, the SDK rejects the returned Promise with an `Onesignal.ApiException`. Wrap each call in `try { ... } catch (e) { ... }` and narrow with `e instanceof Onesignal.ApiException`. The HTTP status code is `e.code` (number); the parsed error body is `e.body`. Most envelopes match `{ "errors": ["..."] }` (an array of strings) but a few endpoints return `{ "errors": [{"code": ..., "title": ..., "meta": {...}}] }` (an array of structured error objects — used by `POST /apps/{app_id}/users` 409 conflict, see `CreateUserConflictResponse`), `{ "errors": "..." }` (string), or `{ "success": false }` (no `errors` field at all). Robust error-handling code should tolerate all four shapes.
+When a request fails, the SDK rejects the returned Promise with an `Onesignal.ApiException`. Wrap each call in `try { ... } catch (e) { ... }` and narrow with `e instanceof Onesignal.ApiException`. The HTTP status code is `e.code` (number); the parsed error body is `e.body`. Most envelopes match `{ "errors": ["..."] }` (an array of strings) but a few endpoints return `{ "errors": [{"code": ..., "title": ..., "meta": {...}}] }` (an array of structured error objects — used by `POST /apps/{app_id}/users` 409 conflict, see `CreateUserConflictResponse`), `{ "errors": "..." }` (string), or `{ "success": false }` (no `errors` field at all). Robust error-handling code should tolerate all four shapes. The `e.errorMessages` getter does this for you, normalizing every shape to a flat `string[]` (empty when the body carries no `errors`).
 
 ### Polymorphic 200 from POST /notifications
 
@@ -106,8 +106,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("cancelNotification failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("cancelNotification failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -179,8 +180,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("copyTemplateToApp failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("copyTemplateToApp failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -255,8 +257,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("createAlias failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("createAlias failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -333,8 +336,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("createAliasBySubscription failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("createAliasBySubscription failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -410,8 +414,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("createApiKey failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("createApiKey failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -497,8 +502,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("createApp failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("createApp failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -574,8 +580,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("createCustomEvents failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("createCustomEvents failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -662,8 +669,9 @@ try {
   }
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("createNotification failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("createNotification failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -735,8 +743,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("createSegment failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("createSegment failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -828,8 +837,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("createSubscription failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("createSubscription failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -1045,8 +1055,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("createTemplate failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("createTemplate failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -1157,8 +1168,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("createUser failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("createUser failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -1232,8 +1244,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("deleteAlias failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("deleteAlias failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -1304,8 +1317,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("deleteApiKey failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("deleteApiKey failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -1371,8 +1385,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("deleteSegment failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("deleteSegment failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -1440,8 +1455,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("deleteSubscription failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("deleteSubscription failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -1510,8 +1526,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("deleteTemplate failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("deleteTemplate failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -1580,8 +1597,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("deleteUser failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("deleteUser failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -1650,8 +1668,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("exportEvents failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("exportEvents failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -1725,8 +1744,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("exportSubscriptions failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("exportSubscriptions failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -1795,8 +1815,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("getAliases failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("getAliases failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -1865,8 +1886,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("getAliasesBySubscription failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("getAliasesBySubscription failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -1931,8 +1953,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("getApp failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("getApp failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -1991,8 +2014,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("getApps failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("getApps failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -2055,8 +2079,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("getNotification failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("getNotification failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -2128,8 +2153,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("getNotificationHistory failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("getNotificationHistory failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -2201,8 +2227,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("getNotifications failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("getNotifications failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -2279,8 +2306,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("getOutcomes failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("getOutcomes failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -2353,8 +2381,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("getSegments failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("getSegments failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -2424,8 +2453,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("getUser failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("getUser failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -2494,8 +2524,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("rotateApiKey failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("rotateApiKey failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -2680,8 +2711,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("startLiveActivity failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("startLiveActivity failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -2755,8 +2787,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("transferSubscription failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("transferSubscription failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -2828,8 +2861,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("unsubscribeEmailWithToken failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("unsubscribeEmailWithToken failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -2905,8 +2939,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("updateApiKey failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("updateApiKey failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -2995,8 +3030,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("updateApp failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("updateApp failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -3163,8 +3199,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("updateLiveActivity failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("updateLiveActivity failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -3254,8 +3291,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("updateSubscription failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("updateSubscription failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -3349,8 +3387,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("updateSubscriptionByToken failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("updateSubscriptionByToken failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -3566,8 +3605,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("updateTemplate failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("updateTemplate failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -3672,8 +3712,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("updateUser failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("updateUser failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -3741,8 +3782,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("viewApiKeys failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("viewApiKeys failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -3807,8 +3849,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("viewTemplate failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("viewTemplate failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
@@ -3879,8 +3922,9 @@ try {
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
-    // `e.body` is the parsed error response (typically `{ errors: string[] }`).
-    console.error("viewTemplates failed: HTTP " + e.code, e.body);
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("viewTemplates failed: HTTP " + e.code, e.errorMessages);
   } else {
     throw e;
   }
