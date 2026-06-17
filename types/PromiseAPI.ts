@@ -1,6 +1,8 @@
 import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import * as models from '../models/all';
 import { Configuration} from '../configuration'
+// OneSignal: surface the idempotent-retry helper as a client method (see helpers.ts).
+import { createNotificationWithRetry, CreateNotificationWithRetryOptions, CreateNotificationWithRetryResult } from '../helpers';
 
 import { ApiKeyToken } from '../models/ApiKeyToken';
 import { ApiKeyTokensListResponse } from '../models/ApiKeyTokensListResponse';
@@ -74,6 +76,8 @@ import { ObservableDefaultApi } from './ObservableAPI';
 import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
 export class PromiseDefaultApi {
     private api: ObservableDefaultApi
+    // OneSignal: retained so the createNotificationWithRetry method can reuse it.
+    private configuration: Configuration
 
     public constructor(
         configuration: Configuration,
@@ -81,6 +85,17 @@ export class PromiseDefaultApi {
         responseProcessor?: DefaultApiResponseProcessor
     ) {
         this.api = new ObservableDefaultApi(configuration, requestFactory, responseProcessor);
+        this.configuration = configuration;
+    }
+
+    /**
+     * OneSignal: create a notification with safe, idempotent retries. Thin
+     * wrapper over the createNotificationWithRetry helper that reuses this
+     * client's configuration so the call mirrors createNotification(). See
+     * helpers.ts for the full retry/idempotency contract.
+     */
+    public createNotificationWithRetry(notification: models.Notification, options?: CreateNotificationWithRetryOptions): Promise<CreateNotificationWithRetryResult> {
+        return createNotificationWithRetry(this.configuration, notification, options);
     }
 
     /**

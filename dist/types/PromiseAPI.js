@@ -1,10 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PromiseDefaultApi = void 0;
+const helpers_1 = require("../helpers");
 const ObservableAPI_1 = require("./ObservableAPI");
 class PromiseDefaultApi {
     constructor(configuration, requestFactory, responseProcessor) {
         this.api = new ObservableAPI_1.ObservableDefaultApi(configuration, requestFactory, responseProcessor);
+        this.configuration = configuration;
+    }
+    createNotificationWithRetry(notification, options) {
+        return (0, helpers_1.createNotificationWithRetry)(this.configuration, notification, options);
     }
     cancelNotification(appId, notificationId, _options) {
         const result = this.api.cancelNotification(appId, notificationId, _options);

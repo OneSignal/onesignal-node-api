@@ -62,6 +62,15 @@ const response = await client.createNotification(notification);
 console.log('Notification ID:', response.id);
 ```
 
+## Send with idempotent retries
+
+`createNotificationWithRetry` generates a UUIDv4 `idempotency_key` when absent (a caller-provided key is respected), retries 429 / 503 / transport errors with the **same** key (honoring `Retry-After`, exponential backoff otherwise; `maxRetries` / `baseDelayMs` configurable via the options object), fails fast on other errors, and reports via `wasReplayed` whether the server answered from a previously completed request (`Idempotent-Replayed` response header). It is a `DefaultApi` method, so the call mirrors `createNotification`:
+
+```javascript
+const result = await client.createNotificationWithRetry(notification);
+console.log('Notification ID:', result.response.id, 'replayed:', result.wasReplayed);
+```
+
 ## Send a push notification by External ID
 
 Target specific users with the alias label `external_id` (snake_case). This is different from the notification-level `external_id` field, which is only for [idempotent requests](https://documentation.onesignal.com/docs/idempotent-notification-requests).
