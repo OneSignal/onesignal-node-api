@@ -1,4 +1,6 @@
+import * as models from '../models/all';
 import { Configuration } from '../configuration';
+import { CreateNotificationWithRetryOptions, CreateNotificationWithRetryResult } from '../helpers';
 import { ApiKeyTokensListResponse } from '../models/ApiKeyTokensListResponse';
 import { App } from '../models/App';
 import { CopyTemplateRequest } from '../models/CopyTemplateRequest';
@@ -37,7 +39,9 @@ import { UserIdentityBody } from '../models/UserIdentityBody';
 import { DefaultApiRequestFactory, DefaultApiResponseProcessor } from "../apis/DefaultApi";
 export declare class PromiseDefaultApi {
     private api;
+    private configuration;
     constructor(configuration: Configuration, requestFactory?: DefaultApiRequestFactory, responseProcessor?: DefaultApiResponseProcessor);
+    createNotificationWithRetry(notification: models.Notification, options?: CreateNotificationWithRetryOptions): Promise<CreateNotificationWithRetryResult>;
     cancelNotification(appId: string, notificationId: string, _options?: Configuration): Promise<GenericSuccessBoolResponse>;
     copyTemplateToApp(templateId: string, appId: string, copyTemplateRequest: CopyTemplateRequest, _options?: Configuration): Promise<TemplateResource>;
     createAlias(appId: string, aliasLabel: string, aliasId: string, userIdentityBody: UserIdentityBody, _options?: Configuration): Promise<UserIdentityBody>;

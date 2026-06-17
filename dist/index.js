@@ -21,9 +21,11 @@ __exportStar(require("./models/all"), exports);
 var configuration_1 = require("./configuration");
 Object.defineProperty(exports, "createConfiguration", { enumerable: true, get: function () { return configuration_1.createConfiguration; } });
 __exportStar(require("./apis/exception"), exports);
+__exportStar(require("./helpers"), exports);
 __exportStar(require("./servers"), exports);
 var baseapi_1 = require("./apis/baseapi");
 Object.defineProperty(exports, "RequiredError", { enumerable: true, get: function () { return baseapi_1.RequiredError; } });
 var PromiseAPI_1 = require("./types/PromiseAPI");
 Object.defineProperty(exports, "DefaultApi", { enumerable: true, get: function () { return PromiseAPI_1.PromiseDefaultApi; } });
+__exportStar(require("./errors"), exports);
 //# sourceMappingURL=index.js.map

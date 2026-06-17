@@ -21,4 +21,58 @@ export class ApiException<T> extends Error {
         // Reference: https://github.com/microsoft/TypeScript-wiki/blob/main/Breaking-Changes.md#extending-built-ins-like-error-array-and-map-may-no-longer-work
         Object.setPrototypeOf(this, ApiException.prototype);
     }
+
+    /**
+     * The error messages carried by the response body, normalized to a flat
+     * string array regardless of which envelope shape the API returned
+     * (`{ errors: "..." }`, `{ errors: ["..."] }`, `{ errors: [{ code, title }] }`,
+     * or an object map such as `{ errors: { invalid_aliases: {...} } }`, which is
+     * surfaced as `"<key>: <value>"` entries). Returns an empty array when the
+     * body is not a recognizable error envelope. The raw body remains on `body`.
+     */
+    public get errorMessages(): string[] {
+        let parsed: any = this.body;
+        if (typeof parsed === "string") {
+            try {
+                parsed = JSON.parse(parsed);
+            } catch {
+                return [];
+            }
+        }
+        if (parsed === null || typeof parsed !== "object") {
+            return [];
+        }
+        const errors: any = parsed.errors;
+        if (typeof errors === "string") {
+            return [errors];
+        }
+        if (Array.isArray(errors)) {
+            return errors
+                .map((e: any) => {
+                    if (typeof e === "string") {
+                        return e;
+                    }
+                    if (e !== null && typeof e === "object") {
+                        const title = typeof e.title === "string" ? e.title : undefined;
+                        const code = typeof e.code === "string" ? e.code : (e.code != null ? String(e.code) : undefined);
+                        return title || code;
+                    }
+                    return undefined;
+                })
+                .filter((m: any): m is string => typeof m === "string");
+        }
+        if (errors !== null && typeof errors === "object") {
+            // Object-shaped envelopes (e.g. { invalid_aliases: {...} }) carry data
+            // under arbitrary keys; surface each so it isn't silently dropped. Key
+            // order is unspecified, so sort for deterministic output.
+            return Object.keys(errors)
+                .map((key: string) => {
+                    const value: any = errors[key];
+                    const rendered = typeof value === "string" ? value : JSON.stringify(value);
+                    return key + ": " + rendered;
+                })
+                .sort();
+        }
+        return [];
+    }
 }
