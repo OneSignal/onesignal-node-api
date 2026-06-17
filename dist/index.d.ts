@@ -8,3 +8,4 @@ export * from "./servers";
 export { RequiredError } from "./apis/baseapi";
 export { PromiseMiddleware as Middleware } from './middleware';
 export { PromiseDefaultApi as DefaultApi } from './types/PromiseAPI';
+export * from "./errors";

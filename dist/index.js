@@ -26,4 +26,5 @@ var baseapi_1 = require("./apis/baseapi");
 Object.defineProperty(exports, "RequiredError", { enumerable: true, get: function () { return baseapi_1.RequiredError; } });
 var PromiseAPI_1 = require("./types/PromiseAPI");
 Object.defineProperty(exports, "DefaultApi", { enumerable: true, get: function () { return PromiseAPI_1.PromiseDefaultApi; } });
+__exportStar(require("./errors"), exports);
 //# sourceMappingURL=index.js.map

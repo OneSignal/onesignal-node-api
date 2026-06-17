@@ -7,4 +7,5 @@ export declare class ApiException<T> extends Error {
     constructor(code: number, message: string, body: T, headers: {
         [key: string]: string;
     });
+    get errorMessages(): string[];
 }
