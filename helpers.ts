@@ -126,3 +126,35 @@ function generateUuidV4(): string {
 function sleep(ms: number): Promise<void> {
     return new Promise<void>((resolve) => setTimeout(resolve, ms));
 }
+
+/**
+ * POST /notifications returns 200 in two distinct cases that share the
+ * `CreateNotificationSuccessResponse` shape. `MessageSent` is the branch where a
+ * notification was actually created — `id` is a non-empty UUID. Prefer the
+ * `isMessageSent` guard over inspecting `id` directly.
+ */
+export type MessageSent = CreateNotificationSuccessResponse;
+
+/**
+ * The branch of a POST /notifications 200 where NO notification was created:
+ * `id` is the empty string and `errors` carries the reason (for example
+ * `["All included players are not subscribed"]`). Prefer the `isMessageNotSent`
+ * guard over inspecting `id` directly.
+ */
+export type MessageNotSent = CreateNotificationSuccessResponse;
+
+/**
+ * Narrows a POST /notifications 200 response to the `MessageSent` branch — a
+ * notification was created (`id` is a non-empty string).
+ */
+export function isMessageSent(response: CreateNotificationSuccessResponse): response is MessageSent {
+    return typeof response.id === 'string' && response.id.length > 0;
+}
+
+/**
+ * Narrows a POST /notifications 200 response to the `MessageNotSent` branch — no
+ * notification was created (`id` is absent or empty); inspect `errors` for why.
+ */
+export function isMessageNotSent(response: CreateNotificationSuccessResponse): response is MessageNotSent {
+    return !isMessageSent(response);
+}
