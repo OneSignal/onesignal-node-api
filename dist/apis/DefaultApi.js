@@ -742,7 +742,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
         }
         return requestContext;
     }
-    async getNotifications(appId, limit, offset, kind, _options) {
+    async getNotifications(appId, limit, offset, kind, timeOffset, _options) {
         let _config = _options || this.configuration;
         if (appId === null || appId === undefined) {
             throw new baseapi_1.RequiredError("DefaultApi", "getNotifications", "appId");
@@ -762,6 +762,9 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
         }
         if (kind !== undefined) {
             requestContext.setQueryParam("kind", ObjectSerializer_1.ObjectSerializer.serialize(kind, "0 | 1 | 3", ""));
+        }
+        if (timeOffset !== undefined) {
+            requestContext.setQueryParam("time_offset", ObjectSerializer_1.ObjectSerializer.serialize(timeOffset, "string", ""));
         }
         let authMethod;
         authMethod = _config.authMethods["rest_api_key"];

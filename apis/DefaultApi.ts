@@ -1499,14 +1499,16 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
      * @param limit How many notifications to return.  Max is 50.  Default is 50.
      * @param offset Page offset.  Default is 0.  Results are sorted by queued_at in descending order.  queued_at is a representation of the time that the notification was queued at.
      * @param kind Kind of notifications returned:   * unset - All notification types (default)   * &#x60;0&#x60; - Dashboard only   * &#x60;1&#x60; - API only   * &#x60;3&#x60; - Automated only 
+     * @param timeOffset Time-offset pagination cursor for sequential pulls of all messages.  Accepts either an ISO 8601 formatted timestamp (e.g. &#x60;2025-01-01T00:00:00.000Z&#x60;) or the opaque Base64 cursor token returned as &#x60;next_time_offset&#x60; in a prior response.  When set, results are sorted ascending by send_after and the standard &#x60;offset&#x60; parameter cannot be used.  Repeat the request with each &#x60;next_time_offset&#x60; until an empty notifications array is returned.
      */
-    public async getNotifications(appId: string, limit?: number, offset?: number, kind?: 0 | 1 | 3, _options?: Configuration): Promise<RequestContext> {
+    public async getNotifications(appId: string, limit?: number, offset?: number, kind?: 0 | 1 | 3, timeOffset?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
             throw new RequiredError("DefaultApi", "getNotifications", "appId");
         }
+
 
 
 
@@ -1540,6 +1542,11 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         // Query Params
         if (kind !== undefined) {
             requestContext.setQueryParam("kind", ObjectSerializer.serialize(kind, "0 | 1 | 3", ""));
+        }
+
+        // Query Params
+        if (timeOffset !== undefined) {
+            requestContext.setQueryParam("time_offset", ObjectSerializer.serialize(timeOffset, "string", ""));
         }
 
 
