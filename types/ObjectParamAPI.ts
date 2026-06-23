@@ -512,6 +512,12 @@ export interface DefaultApiGetNotificationsRequest {
      * @memberof DefaultApigetNotifications
      */
     kind?: 0 | 1 | 3
+    /**
+     * Time-offset pagination cursor for sequential pulls of all messages.  Accepts either an ISO 8601 formatted timestamp (e.g. &#x60;2025-01-01T00:00:00.000Z&#x60;) or the opaque Base64 cursor token returned as &#x60;next_time_offset&#x60; in a prior response.  When set, results are sorted ascending by send_after and the standard &#x60;offset&#x60; parameter cannot be used.  Repeat the request with each &#x60;next_time_offset&#x60; until an empty notifications array is returned.
+     * @type string
+     * @memberof DefaultApigetNotifications
+     */
+    timeOffset?: string
 }
 
 export interface DefaultApiGetOutcomesRequest {
@@ -1115,7 +1121,7 @@ export class ObjectDefaultApi {
      * @param param the request object
      */
     public getNotifications(param: DefaultApiGetNotificationsRequest, options?: Configuration): Promise<NotificationSlice> {
-        return this.api.getNotifications(param.appId, param.limit, param.offset, param.kind,  options).toPromise();
+        return this.api.getNotifications(param.appId, param.limit, param.offset, param.kind, param.timeOffset,  options).toPromise();
     }
 
     /**

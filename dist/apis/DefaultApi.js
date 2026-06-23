@@ -742,7 +742,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
         }
         return requestContext;
     }
-    async getNotifications(appId, limit, offset, kind, _options) {
+    async getNotifications(appId, limit, offset, kind, timeOffset, _options) {
         let _config = _options || this.configuration;
         if (appId === null || appId === undefined) {
             throw new baseapi_1.RequiredError("DefaultApi", "getNotifications", "appId");
@@ -762,6 +762,9 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
         }
         if (kind !== undefined) {
             requestContext.setQueryParam("kind", ObjectSerializer_1.ObjectSerializer.serialize(kind, "0 | 1 | 3", ""));
+        }
+        if (timeOffset !== undefined) {
+            requestContext.setQueryParam("time_offset", ObjectSerializer_1.ObjectSerializer.serialize(timeOffset, "string", ""));
         }
         let authMethod;
         authMethod = _config.authMethods["rest_api_key"];
@@ -1338,6 +1341,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericSuccessBoolResponse", "");
             return body;
@@ -1353,6 +1360,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("400", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
             throw new exception_1.ApiException(400, "Bad Request", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "TemplateResource", "");
@@ -1382,6 +1393,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "UserIdentityBody", "");
             return body;
@@ -1410,6 +1425,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "UserIdentityBody", "");
             return body;
@@ -1425,6 +1444,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("400", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
             throw new exception_1.ApiException(400, "Bad Request", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "CreateApiKeyResponse", "");
@@ -1445,6 +1468,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "App", "");
@@ -1470,6 +1497,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "object", "");
             return body;
@@ -1489,6 +1520,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "CreateNotificationSuccessResponse", "");
@@ -1513,6 +1548,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "CreateSegmentSuccessResponse", "");
@@ -1546,6 +1585,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "SubscriptionBody", "");
             return body;
@@ -1565,6 +1608,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("422", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
             throw new exception_1.ApiException(422, "Unprocessable Entity", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "TemplateResource", "");
@@ -1598,6 +1645,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "User", "");
             return body;
@@ -1626,6 +1677,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "UserIdentityBody", "");
             return body;
@@ -1641,6 +1696,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("400", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
             throw new exception_1.ApiException(400, "Bad Request", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "object", "");
@@ -1665,6 +1724,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericSuccessBoolResponse", "");
@@ -1693,6 +1756,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "void", "");
             return body;
@@ -1712,6 +1779,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("404", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
             throw new exception_1.ApiException(404, "Not Found", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericSuccessBoolResponse", "");
@@ -1735,6 +1806,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "void", "");
@@ -1760,6 +1835,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "ExportEventsSuccessResponse", "");
             return body;
@@ -1779,6 +1858,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "ExportSubscriptionsSuccessResponse", "");
@@ -1804,6 +1887,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "UserIdentityBody", "");
             return body;
@@ -1823,6 +1910,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("404", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
             throw new exception_1.ApiException(404, "Not Found", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "UserIdentityBody", "");
@@ -1844,6 +1935,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "App", "");
             return body;
@@ -1863,6 +1958,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "Array<App>", "");
@@ -1888,6 +1987,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "NotificationWithMeta", "");
             return body;
@@ -1912,6 +2015,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "NotificationHistorySuccessResponse", "");
             return body;
@@ -1931,6 +2038,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "NotificationSlice", "");
@@ -1952,6 +2063,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "OutcomesData", "");
             return body;
@@ -1971,6 +2086,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GetSegmentsSuccessResponse", "");
@@ -1996,6 +2115,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "User", "");
             return body;
@@ -2011,6 +2134,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("400", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
             throw new exception_1.ApiException(400, "Bad Request", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "CreateApiKeyResponse", "");
@@ -2031,6 +2158,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "StartLiveActivitySuccessResponse", "");
@@ -2060,6 +2191,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "UserIdentityBody", "");
             return body;
@@ -2080,6 +2215,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericSuccessBoolResponse", "");
             return body;
@@ -2095,6 +2234,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("400", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
             throw new exception_1.ApiException(400, "Bad Request", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "object", "");
@@ -2116,6 +2259,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "App", "");
             return body;
@@ -2135,6 +2282,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "UpdateLiveActivitySuccessResponse", "");
@@ -2163,6 +2314,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "void", "");
             return body;
@@ -2183,6 +2338,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
             throw new exception_1.ApiException(404, "Not Found", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "object", "");
             return body;
@@ -2198,6 +2357,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("400", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
             throw new exception_1.ApiException(400, "Bad Request", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "TemplateResource", "");
@@ -2223,6 +2386,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "PropertiesBody", "");
             return body;
@@ -2238,6 +2405,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("400", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
             throw new exception_1.ApiException(400, "Bad Request", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "ApiKeyTokensListResponse", "");
@@ -2259,6 +2430,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
             throw new exception_1.ApiException(404, "Not Found", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "TemplateResource", "");
             return body;
@@ -2278,6 +2453,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "TemplatesListResponse", "");

@@ -85,7 +85,7 @@ class ObjectDefaultApi {
         return this.api.getNotificationHistory(param.notificationId, param.getNotificationHistoryRequestBody, options).toPromise();
     }
     getNotifications(param, options) {
-        return this.api.getNotifications(param.appId, param.limit, param.offset, param.kind, options).toPromise();
+        return this.api.getNotifications(param.appId, param.limit, param.offset, param.kind, param.timeOffset, options).toPromise();
     }
     getOutcomes(param, options) {
         return this.api.getOutcomes(param.appId, param.outcomeNames, param.outcomeNames2, param.outcomeTimeRange, param.outcomePlatforms, param.outcomeAttribution, options).toPromise();
