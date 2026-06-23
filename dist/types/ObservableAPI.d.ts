@@ -67,7 +67,7 @@ export declare class ObservableDefaultApi {
     getApps(_options?: Configuration): Observable<Array<App>>;
     getNotification(appId: string, notificationId: string, _options?: Configuration): Observable<NotificationWithMeta>;
     getNotificationHistory(notificationId: string, getNotificationHistoryRequestBody: GetNotificationHistoryRequestBody, _options?: Configuration): Observable<NotificationHistorySuccessResponse>;
-    getNotifications(appId: string, limit?: number, offset?: number, kind?: 0 | 1 | 3, _options?: Configuration): Observable<NotificationSlice>;
+    getNotifications(appId: string, limit?: number, offset?: number, kind?: 0 | 1 | 3, timeOffset?: string, _options?: Configuration): Observable<NotificationSlice>;
     getOutcomes(appId: string, outcomeNames: string, outcomeNames2?: string, outcomeTimeRange?: string, outcomePlatforms?: string, outcomeAttribution?: string, _options?: Configuration): Observable<OutcomesData>;
     getSegments(appId: string, offset?: number, limit?: number, _options?: Configuration): Observable<GetSegmentsSuccessResponse>;
     getUser(appId: string, aliasLabel: string, aliasId: string, _options?: Configuration): Observable<User>;

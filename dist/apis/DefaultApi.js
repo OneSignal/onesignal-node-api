@@ -19,7 +19,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'notification_id' + '}', encodeURIComponent(String(notificationId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.DELETE);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         if (appId !== undefined) {
             requestContext.setQueryParam("app_id", ObjectSerializer_1.ObjectSerializer.serialize(appId, "string", ""));
         }
@@ -49,7 +49,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'template_id' + '}', encodeURIComponent(String(templateId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         if (appId !== undefined) {
             requestContext.setQueryParam("app_id", ObjectSerializer_1.ObjectSerializer.serialize(appId, "string", ""));
         }
@@ -90,7 +90,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'alias_id' + '}', encodeURIComponent(String(aliasId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.PATCH);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -124,7 +124,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'subscription_id' + '}', encodeURIComponent(String(subscriptionId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.PATCH);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -154,7 +154,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -180,7 +180,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
         const localVarPath = '/apps';
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -210,7 +210,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -236,7 +236,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
         const localVarPath = '/notifications';
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -263,7 +263,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -301,7 +301,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'alias_id' + '}', encodeURIComponent(String(aliasId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -327,7 +327,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
         const localVarPath = '/templates';
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -357,7 +357,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -396,7 +396,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'alias_label_to_delete' + '}', encodeURIComponent(String(aliasLabelToDelete)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.DELETE);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         let authMethod;
         authMethod = _config.authMethods["rest_api_key"];
         if (authMethod?.applySecurityAuthentication) {
@@ -421,7 +421,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'token_id' + '}', encodeURIComponent(String(tokenId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.DELETE);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         let authMethod;
         authMethod = _config.authMethods["organization_api_key"];
         if (authMethod?.applySecurityAuthentication) {
@@ -446,7 +446,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'segment_id' + '}', encodeURIComponent(String(segmentId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.DELETE);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         let authMethod;
         authMethod = _config.authMethods["rest_api_key"];
         if (authMethod?.applySecurityAuthentication) {
@@ -471,7 +471,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'subscription_id' + '}', encodeURIComponent(String(subscriptionId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.DELETE);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         let authMethod;
         authMethod = _config.authMethods["rest_api_key"];
         if (authMethod?.applySecurityAuthentication) {
@@ -495,7 +495,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'template_id' + '}', encodeURIComponent(String(templateId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.DELETE);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         if (appId !== undefined) {
             requestContext.setQueryParam("app_id", ObjectSerializer_1.ObjectSerializer.serialize(appId, "string", ""));
         }
@@ -527,7 +527,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'alias_id' + '}', encodeURIComponent(String(aliasId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.DELETE);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         let authMethod;
         authMethod = _config.authMethods["rest_api_key"];
         if (authMethod?.applySecurityAuthentication) {
@@ -551,7 +551,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'notification_id' + '}', encodeURIComponent(String(notificationId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         if (appId !== undefined) {
             requestContext.setQueryParam("app_id", ObjectSerializer_1.ObjectSerializer.serialize(appId, "string", ""));
         }
@@ -575,7 +575,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -610,7 +610,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'alias_id' + '}', encodeURIComponent(String(aliasId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         let authMethod;
         authMethod = _config.authMethods["rest_api_key"];
         if (authMethod?.applySecurityAuthentication) {
@@ -635,7 +635,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'subscription_id' + '}', encodeURIComponent(String(subscriptionId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         let authMethod;
         authMethod = _config.authMethods["rest_api_key"];
         if (authMethod?.applySecurityAuthentication) {
@@ -656,7 +656,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         let authMethod;
         authMethod = _config.authMethods["organization_api_key"];
         if (authMethod?.applySecurityAuthentication) {
@@ -673,7 +673,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
         const localVarPath = '/apps';
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         let authMethod;
         authMethod = _config.authMethods["organization_api_key"];
         if (authMethod?.applySecurityAuthentication) {
@@ -697,7 +697,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'notification_id' + '}', encodeURIComponent(String(notificationId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         if (appId !== undefined) {
             requestContext.setQueryParam("app_id", ObjectSerializer_1.ObjectSerializer.serialize(appId, "string", ""));
         }
@@ -724,7 +724,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'notification_id' + '}', encodeURIComponent(String(notificationId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -742,7 +742,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
         }
         return requestContext;
     }
-    async getNotifications(appId, limit, offset, kind, _options) {
+    async getNotifications(appId, limit, offset, kind, timeOffset, _options) {
         let _config = _options || this.configuration;
         if (appId === null || appId === undefined) {
             throw new baseapi_1.RequiredError("DefaultApi", "getNotifications", "appId");
@@ -750,7 +750,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
         const localVarPath = '/notifications';
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         if (appId !== undefined) {
             requestContext.setQueryParam("app_id", ObjectSerializer_1.ObjectSerializer.serialize(appId, "string", ""));
         }
@@ -762,6 +762,9 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
         }
         if (kind !== undefined) {
             requestContext.setQueryParam("kind", ObjectSerializer_1.ObjectSerializer.serialize(kind, "0 | 1 | 3", ""));
+        }
+        if (timeOffset !== undefined) {
+            requestContext.setQueryParam("time_offset", ObjectSerializer_1.ObjectSerializer.serialize(timeOffset, "string", ""));
         }
         let authMethod;
         authMethod = _config.authMethods["rest_api_key"];
@@ -786,7 +789,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         if (outcomeNames !== undefined) {
             requestContext.setQueryParam("outcome_names", ObjectSerializer_1.ObjectSerializer.serialize(outcomeNames, "string", ""));
         }
@@ -822,7 +825,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         if (offset !== undefined) {
             requestContext.setQueryParam("offset", ObjectSerializer_1.ObjectSerializer.serialize(offset, "number", ""));
         }
@@ -857,7 +860,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'alias_id' + '}', encodeURIComponent(String(aliasId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         let authMethod;
         authMethod = _config.authMethods["rest_api_key"];
         if (authMethod?.applySecurityAuthentication) {
@@ -882,7 +885,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'token_id' + '}', encodeURIComponent(String(tokenId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         let authMethod;
         authMethod = _config.authMethods["organization_api_key"];
         if (authMethod?.applySecurityAuthentication) {
@@ -910,7 +913,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'activity_type' + '}', encodeURIComponent(String(activityType)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -944,7 +947,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'subscription_id' + '}', encodeURIComponent(String(subscriptionId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.PATCH);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -978,7 +981,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'notification_id' + '}', encodeURIComponent(String(notificationId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         if (token !== undefined) {
             requestContext.setQueryParam("token", ObjectSerializer_1.ObjectSerializer.serialize(token, "string", ""));
         }
@@ -1009,7 +1012,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'token_id' + '}', encodeURIComponent(String(tokenId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.PATCH);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -1039,7 +1042,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.PUT);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -1073,7 +1076,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'activity_id' + '}', encodeURIComponent(String(activityId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -1107,7 +1110,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'subscription_id' + '}', encodeURIComponent(String(subscriptionId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.PATCH);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -1145,7 +1148,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'token' + '}', encodeURIComponent(String(token)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.PATCH);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -1178,7 +1181,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'template_id' + '}', encodeURIComponent(String(templateId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.PATCH);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         if (appId !== undefined) {
             requestContext.setQueryParam("app_id", ObjectSerializer_1.ObjectSerializer.serialize(appId, "string", ""));
         }
@@ -1219,7 +1222,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'alias_id' + '}', encodeURIComponent(String(aliasId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.PATCH);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -1246,7 +1249,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         let authMethod;
         authMethod = _config.authMethods["organization_api_key"];
         if (authMethod?.applySecurityAuthentication) {
@@ -1270,7 +1273,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'template_id' + '}', encodeURIComponent(String(templateId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         if (appId !== undefined) {
             requestContext.setQueryParam("app_id", ObjectSerializer_1.ObjectSerializer.serialize(appId, "string", ""));
         }
@@ -1293,7 +1296,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
         const localVarPath = '/templates';
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.8.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.9.0");
         if (appId !== undefined) {
             requestContext.setQueryParam("app_id", ObjectSerializer_1.ObjectSerializer.serialize(appId, "string", ""));
         }
@@ -1338,6 +1341,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericSuccessBoolResponse", "");
             return body;
@@ -1353,6 +1360,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("400", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
             throw new exception_1.ApiException(400, "Bad Request", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "TemplateResource", "");
@@ -1382,6 +1393,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "UserIdentityBody", "");
             return body;
@@ -1410,6 +1425,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "UserIdentityBody", "");
             return body;
@@ -1425,6 +1444,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("400", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
             throw new exception_1.ApiException(400, "Bad Request", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "CreateApiKeyResponse", "");
@@ -1445,6 +1468,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "App", "");
@@ -1470,6 +1497,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "object", "");
             return body;
@@ -1489,6 +1520,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "CreateNotificationSuccessResponse", "");
@@ -1513,6 +1548,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "CreateSegmentSuccessResponse", "");
@@ -1546,6 +1585,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "SubscriptionBody", "");
             return body;
@@ -1565,6 +1608,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("422", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
             throw new exception_1.ApiException(422, "Unprocessable Entity", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "TemplateResource", "");
@@ -1598,6 +1645,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "User", "");
             return body;
@@ -1626,6 +1677,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "UserIdentityBody", "");
             return body;
@@ -1641,6 +1696,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("400", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
             throw new exception_1.ApiException(400, "Bad Request", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "object", "");
@@ -1665,6 +1724,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericSuccessBoolResponse", "");
@@ -1693,6 +1756,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "void", "");
             return body;
@@ -1712,6 +1779,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("404", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
             throw new exception_1.ApiException(404, "Not Found", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericSuccessBoolResponse", "");
@@ -1735,6 +1806,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "void", "");
@@ -1760,6 +1835,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "ExportEventsSuccessResponse", "");
             return body;
@@ -1779,6 +1858,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "ExportSubscriptionsSuccessResponse", "");
@@ -1804,6 +1887,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "UserIdentityBody", "");
             return body;
@@ -1823,6 +1910,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("404", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
             throw new exception_1.ApiException(404, "Not Found", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "UserIdentityBody", "");
@@ -1844,6 +1935,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "App", "");
             return body;
@@ -1863,6 +1958,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "Array<App>", "");
@@ -1888,6 +1987,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "NotificationWithMeta", "");
             return body;
@@ -1912,6 +2015,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "NotificationHistorySuccessResponse", "");
             return body;
@@ -1931,6 +2038,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "NotificationSlice", "");
@@ -1952,6 +2063,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "OutcomesData", "");
             return body;
@@ -1971,6 +2086,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GetSegmentsSuccessResponse", "");
@@ -1996,6 +2115,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "User", "");
             return body;
@@ -2011,6 +2134,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("400", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
             throw new exception_1.ApiException(400, "Bad Request", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "CreateApiKeyResponse", "");
@@ -2031,6 +2158,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "StartLiveActivitySuccessResponse", "");
@@ -2060,6 +2191,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "UserIdentityBody", "");
             return body;
@@ -2080,6 +2215,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericSuccessBoolResponse", "");
             return body;
@@ -2095,6 +2234,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("400", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
             throw new exception_1.ApiException(400, "Bad Request", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "object", "");
@@ -2116,6 +2259,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "App", "");
             return body;
@@ -2135,6 +2282,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "UpdateLiveActivitySuccessResponse", "");
@@ -2163,6 +2314,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "void", "");
             return body;
@@ -2183,6 +2338,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
             throw new exception_1.ApiException(404, "Not Found", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "object", "");
             return body;
@@ -2198,6 +2357,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("400", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
             throw new exception_1.ApiException(400, "Bad Request", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "TemplateResource", "");
@@ -2223,6 +2386,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "PropertiesBody", "");
             return body;
@@ -2238,6 +2405,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("400", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
             throw new exception_1.ApiException(400, "Bad Request", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "ApiKeyTokensListResponse", "");
@@ -2259,6 +2430,10 @@ class DefaultApiResponseProcessor {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
             throw new exception_1.ApiException(404, "Not Found", body, response.headers);
         }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "TemplateResource", "");
             return body;
@@ -2278,6 +2453,10 @@ class DefaultApiResponseProcessor {
         if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
             throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "TemplatesListResponse", "");

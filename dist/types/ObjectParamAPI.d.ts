@@ -148,6 +148,7 @@ export interface DefaultApiGetNotificationsRequest {
     limit?: number;
     offset?: number;
     kind?: 0 | 1 | 3;
+    timeOffset?: string;
 }
 export interface DefaultApiGetOutcomesRequest {
     appId: string;

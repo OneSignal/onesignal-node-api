@@ -400,8 +400,8 @@ class ObservableDefaultApi {
             return middlewarePostObservable.pipe((0, rxjsStub_2.map)((rsp) => this.responseProcessor.getNotificationHistory(rsp)));
         }));
     }
-    getNotifications(appId, limit, offset, kind, _options) {
-        const requestContextPromise = this.requestFactory.getNotifications(appId, limit, offset, kind, _options);
+    getNotifications(appId, limit, offset, kind, timeOffset, _options) {
+        const requestContextPromise = this.requestFactory.getNotifications(appId, limit, offset, kind, timeOffset, _options);
         let middlewarePreObservable = (0, rxjsStub_1.from)(requestContextPromise);
         for (let middleware of this.configuration.middleware) {
             middlewarePreObservable = middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => middleware.pre(ctx)));

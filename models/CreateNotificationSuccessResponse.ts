@@ -2,7 +2,7 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 5.7.0
+ * API Version: 5.8.0
  * Contact: devrel@onesignal.com
  */
 
@@ -10,7 +10,7 @@ import { HttpFile } from '../http/http';
 
 export class CreateNotificationSuccessResponse {
     /**
-    * Notification identifier when the request created a notification. An empty string means no notification was created; read `errors` for details (HTTP may still be 200).
+    * Notification identifier when the request created a notification. An empty string means no notification was created; read `errors` for details (HTTP may still be 200). All OneSignal server SDKs expose message-sent / message-not-sent narrowing helpers (named idiomatically per language — e.g. `isMessageSent`, `is_message_sent`, `message_sent?`); prefer them over comparing `id` directly.
     */
     'id'?: string;
     /**
