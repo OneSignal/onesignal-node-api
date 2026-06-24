@@ -30,6 +30,18 @@ NotificationSlice.attributeTypeMap = [
         "format": ""
     },
     {
+        "name": "time_offset",
+        "baseName": "time_offset",
+        "type": "string",
+        "format": ""
+    },
+    {
+        "name": "next_time_offset",
+        "baseName": "next_time_offset",
+        "type": "string",
+        "format": ""
+    },
+    {
         "name": "notifications",
         "baseName": "notifications",
         "type": "Array<NotificationWithMeta>",

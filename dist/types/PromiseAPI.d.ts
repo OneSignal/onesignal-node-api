@@ -68,7 +68,7 @@ export declare class PromiseDefaultApi {
     getApps(_options?: Configuration): Promise<Array<App>>;
     getNotification(appId: string, notificationId: string, _options?: Configuration): Promise<NotificationWithMeta>;
     getNotificationHistory(notificationId: string, getNotificationHistoryRequestBody: GetNotificationHistoryRequestBody, _options?: Configuration): Promise<NotificationHistorySuccessResponse>;
-    getNotifications(appId: string, limit?: number, offset?: number, kind?: 0 | 1 | 3, _options?: Configuration): Promise<NotificationSlice>;
+    getNotifications(appId: string, limit?: number, offset?: number, kind?: 0 | 1 | 3, timeOffset?: string, _options?: Configuration): Promise<NotificationSlice>;
     getOutcomes(appId: string, outcomeNames: string, outcomeNames2?: string, outcomeTimeRange?: string, outcomePlatforms?: string, outcomeAttribution?: string, _options?: Configuration): Promise<OutcomesData>;
     getSegments(appId: string, offset?: number, limit?: number, _options?: Configuration): Promise<GetSegmentsSuccessResponse>;
     getUser(appId: string, aliasLabel: string, aliasId: string, _options?: Configuration): Promise<User>;

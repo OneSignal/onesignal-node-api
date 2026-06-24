@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createNotificationWithRetry = void 0;
+exports.isMessageNotSent = exports.isMessageSent = exports.createNotificationWithRetry = void 0;
 const crypto_1 = require("crypto");
 const DefaultApi_1 = require("./apis/DefaultApi");
 const RETRYABLE_STATUSES = [429, 503];
@@ -76,4 +76,12 @@ function generateUuidV4() {
 function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
+function isMessageSent(response) {
+    return typeof response.id === 'string' && response.id.length > 0;
+}
+exports.isMessageSent = isMessageSent;
+function isMessageNotSent(response) {
+    return !isMessageSent(response);
+}
+exports.isMessageNotSent = isMessageNotSent;
 //# sourceMappingURL=helpers.js.map

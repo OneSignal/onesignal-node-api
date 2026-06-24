@@ -115,8 +115,8 @@ class PromiseDefaultApi {
         const result = this.api.getNotificationHistory(notificationId, getNotificationHistoryRequestBody, _options);
         return result.toPromise();
     }
-    getNotifications(appId, limit, offset, kind, _options) {
-        const result = this.api.getNotifications(appId, limit, offset, kind, _options);
+    getNotifications(appId, limit, offset, kind, timeOffset, _options) {
+        const result = this.api.getNotifications(appId, limit, offset, kind, timeOffset, _options);
         return result.toPromise();
     }
     getOutcomes(appId, outcomeNames, outcomeNames2, outcomeTimeRange, outcomePlatforms, outcomeAttribution, _options) {

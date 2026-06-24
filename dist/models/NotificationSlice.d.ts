@@ -3,6 +3,8 @@ export declare class NotificationSlice {
     'total_count'?: number;
     'offset'?: number;
     'limit'?: number;
+    'time_offset'?: string;
+    'next_time_offset'?: string;
     'notifications'?: Array<NotificationWithMeta>;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
