@@ -86,7 +86,7 @@ The hero `createNotification` example below demonstrates the branch pattern expl
 Set `include_aliases.external_id` to a list of External IDs and set `target_channel` to `push` / `email` / `sms`. The alias label must be the literal string `external_id` — camelCase variants such as `externalId` are silently ignored and yield zero recipients. **Do not confuse** this with the deprecated top-level `external_id` notification field — a separate correlation/idempotency field with its own 30-day dedup keyspace (parallel to `idempotency_key`, not an alias) and no targeting effect.
 
 # **cancelNotification**
-> GenericSuccessBoolResponse cancelNotification()
+> GenericSuccessBoolResponse cancelNotification(appId, notificationId)
 
 Used to stop a scheduled or currently outgoing notification
 
@@ -101,15 +101,13 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiCancelNotificationRequest = {
-  // string
-  appId: "00000000-0000-0000-0000-000000000000",
-  // string
-  notificationId: "b3a0c8bd-3a4c-4b22-9a73-3f1a8c2d1b88",
-};
+// string
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// string
+const notificationId: string = "b3a0c8bd-3a4c-4b22-9a73-3f1a8c2d1b88";
 
 try {
-  const response = await apiInstance.cancelNotification(body);
+  const response = await apiInstance.cancelNotification(appId, notificationId);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -129,7 +127,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **appId** | [**string**] |  | defaults to undefined
  **notificationId** | [**string**] |  | defaults to undefined
-
 
 ### Return type
 
@@ -157,7 +154,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **copyTemplateToApp**
-> TemplateResource copyTemplateToApp(copyTemplateRequest)
+> TemplateResource copyTemplateToApp(templateId, appId, copyTemplateRequest)
 
 Copy a template to a destination app.
 
@@ -172,19 +169,17 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiCopyTemplateToAppRequest = {
-  // string
-  templateId: "e4d3c2b1-a09f-4f1e-8d7c-6b5a4f3e2d1c",
-  // string
-  appId: "00000000-0000-0000-0000-000000000000",
-  // CopyTemplateRequest
-  copyTemplateRequest: {
+// string
+const templateId: string = "e4d3c2b1-a09f-4f1e-8d7c-6b5a4f3e2d1c";
+// string
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// CopyTemplateRequest
+const copyTemplateRequest: Onesignal.CopyTemplateRequest = {
     target_app_id: "target_app_id_example",
-  },
-};
+  };
 
 try {
-  const response = await apiInstance.copyTemplateToApp(body);
+  const response = await apiInstance.copyTemplateToApp(templateId, appId, copyTemplateRequest);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -202,10 +197,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **copyTemplateRequest** | **CopyTemplateRequest**|  |
  **templateId** | [**string**] |  | defaults to undefined
  **appId** | [**string**] |  | defaults to undefined
-
+ **copyTemplateRequest** | **CopyTemplateRequest** |  |
 
 ### Return type
 
@@ -231,7 +225,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **createAlias**
-> UserIdentityBody createAlias(userIdentityBody)
+> UserIdentityBody createAlias(appId, aliasLabel, aliasId, userIdentityBody)
 
 Upserts one or more Aliases to an existing User identified by (:alias_label, :alias_id).
 
@@ -246,23 +240,21 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiCreateAliasRequest = {
-  // string
-  appId: "00000000-0000-0000-0000-000000000000",
-  // string
-  aliasLabel: "external_id",
-  // string
-  aliasId: "YOUR_USER_EXTERNAL_ID",
-  // UserIdentityBody
-  userIdentityBody: {
+// string
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// string
+const aliasLabel: string = "external_id";
+// string
+const aliasId: string = "YOUR_USER_EXTERNAL_ID";
+// UserIdentityBody
+const userIdentityBody: Onesignal.UserIdentityBody = {
     identity: {
       "key": "key_example",
     },
-  },
-};
+  };
 
 try {
-  const response = await apiInstance.createAlias(body);
+  const response = await apiInstance.createAlias(appId, aliasLabel, aliasId, userIdentityBody);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -280,11 +272,10 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userIdentityBody** | **UserIdentityBody**|  |
  **appId** | [**string**] |  | defaults to undefined
  **aliasLabel** | [**string**] |  | defaults to undefined
  **aliasId** | [**string**] |  | defaults to undefined
-
+ **userIdentityBody** | **UserIdentityBody** |  |
 
 ### Return type
 
@@ -313,7 +304,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **createAliasBySubscription**
-> UserIdentityBody createAliasBySubscription(userIdentityBody)
+> UserIdentityBody createAliasBySubscription(appId, subscriptionId, userIdentityBody)
 
 Upserts one or more Aliases for the User identified by :subscription_id.
 
@@ -328,21 +319,19 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiCreateAliasBySubscriptionRequest = {
-  // string
-  appId: "00000000-0000-0000-0000-000000000000",
-  // string
-  subscriptionId: "7e4c5b9a-1f60-4d07-9b1a-2e8c8d2cae51",
-  // UserIdentityBody
-  userIdentityBody: {
+// string
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// string
+const subscriptionId: string = "7e4c5b9a-1f60-4d07-9b1a-2e8c8d2cae51";
+// UserIdentityBody
+const userIdentityBody: Onesignal.UserIdentityBody = {
     identity: {
       "key": "key_example",
     },
-  },
-};
+  };
 
 try {
-  const response = await apiInstance.createAliasBySubscription(body);
+  const response = await apiInstance.createAliasBySubscription(appId, subscriptionId, userIdentityBody);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -360,10 +349,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userIdentityBody** | **UserIdentityBody**|  |
  **appId** | [**string**] |  | defaults to undefined
  **subscriptionId** | [**string**] |  | defaults to undefined
-
+ **userIdentityBody** | **UserIdentityBody** |  |
 
 ### Return type
 
@@ -392,7 +380,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **createApiKey**
-> CreateApiKeyResponse createApiKey(createApiKeyRequest)
+> CreateApiKeyResponse createApiKey(appId, createApiKeyRequest)
 
 Use this API to create a new App API Key (also called a Rich Authentication Token) for a specific OneSignal app. These keys are used to authenticate API requests at the app level and offer enhanced security features, including optional IP allowlisting.
 
@@ -407,21 +395,19 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiCreateApiKeyRequest = {
-  // string
-  appId: "00000000-0000-0000-0000-000000000000",
-  // CreateApiKeyRequest
-  createApiKeyRequest: {
+// string
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// CreateApiKeyRequest
+const createApiKeyRequest: Onesignal.CreateApiKeyRequest = {
     name: "name_example",
     ip_allowlist_mode: "disabled",
     ip_allowlist: [
       "ip_allowlist_example",
     ],
-  },
-};
+  };
 
 try {
-  const response = await apiInstance.createApiKey(body);
+  const response = await apiInstance.createApiKey(appId, createApiKeyRequest);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -439,9 +425,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **createApiKeyRequest** | **CreateApiKeyRequest**|  |
  **appId** | [**string**] |  | defaults to undefined
-
+ **createApiKeyRequest** | **CreateApiKeyRequest** |  |
 
 ### Return type
 
@@ -482,9 +467,8 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiCreateAppRequest = {
-  // App
-  app: {
+// App
+const app: Onesignal.App = {
     name: "name_example",
     android_gcm_sender_id: "android_gcm_sender_id_example",
     gcm_key: "gcm_key_example",
@@ -506,11 +490,10 @@ let body: Onesignal.DefaultApiCreateAppRequest = {
     site_name: "site_name_example",
     organization_id: "organization_id_example",
     additional_data_is_root_payload: true,
-  },
-};
+  };
 
 try {
-  const response = await apiInstance.createApp(body);
+  const response = await apiInstance.createApp(app);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -528,8 +511,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **app** | **App**|  |
-
+ **app** | **App** |  |
 
 ### Return type
 
@@ -556,7 +538,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **createCustomEvents**
-> object createCustomEvents(customEventsRequest)
+> object createCustomEvents(appId, customEventsRequest)
 
 The Custom Events API allows you to record user events. Custom events can represent any action users take in your application, such as completing a purchase, viewing content, or achieving milestones.
 
@@ -571,25 +553,23 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiCreateCustomEventsRequest = {
-  // string | Your OneSignal App ID in UUID v4 format.
-  appId: "00000000-0000-0000-0000-000000000000",
-  // CustomEventsRequest
-  customEventsRequest: {
+// string | Your OneSignal App ID in UUID v4 format.
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// CustomEventsRequest
+const customEventsRequest: Onesignal.CustomEventsRequest = {
     events: [
       {
         name: "name_example",
         external_id: "external_id_example",
         onesignal_id: "onesignal_id_example",
-        timestamp: new Date('1970-01-01T00:00:00.00Z'),
+        timestamp: '1970-01-01T00:00:00.00Z',
         payload: {},
       },
     ],
-  },
-};
+  };
 
 try {
-  const response = await apiInstance.createCustomEvents(body);
+  const response = await apiInstance.createCustomEvents(appId, customEventsRequest);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -607,9 +587,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **customEventsRequest** | **CustomEventsRequest**|  |
  **appId** | [**string**] | Your OneSignal App ID in UUID v4 format. | defaults to undefined
-
+ **customEventsRequest** | **CustomEventsRequest** |  |
 
 ### Return type
 
@@ -734,8 +713,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **notification** | **Notification**|  |
-
+ **notification** | **Notification** |  |
 
 ### Return type
 
@@ -762,7 +740,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **createSegment**
-> CreateSegmentSuccessResponse createSegment()
+> CreateSegmentSuccessResponse createSegment(appId, segment)
 
 Create a segment visible and usable in the dashboard and API - Required: OneSignal Paid Plan The Create Segment method is used when you want your server to programmatically create a segment instead of using the OneSignal Dashboard UI. Just like creating Segments from the dashboard you can pass in filters with multiple \"AND\" or \"OR\" operator\'s. &#x1F6A7; Does Not Update Segments This endpoint will only create segments, it does not edit or update currently created Segments. You will need to use the Delete Segment endpoint and re-create it with this endpoint to edit. 
 
@@ -777,21 +755,28 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiCreateSegmentRequest = {
-  // string | The OneSignal App ID for your app.  Available in Keys & IDs.
-  appId: "00000000-0000-0000-0000-000000000000",
-  // Segment (optional)
-  segment: {
+// string | The OneSignal App ID for your app.  Available in Keys & IDs.
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// Segment (optional)
+const segment: Onesignal.Segment = {
     id: "id_example",
     name: "name_example",
     filters: [
-      null,
+      {
+        field: "field_example",
+        key: "key_example",
+        value: "value_example",
+        hours_ago: "hours_ago_example",
+        radius: 3.14,
+        lat: 3.14,
+        long: 3.14,
+        relation: ">",
+      },
     ],
-  },
-};
+  };
 
 try {
-  const response = await apiInstance.createSegment(body);
+  const response = await apiInstance.createSegment(appId, segment);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -809,9 +794,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **segment** | **Segment**|  |
  **appId** | [**string**] | The OneSignal App ID for your app.  Available in Keys &amp; IDs. | defaults to undefined
-
+ **segment** | **Segment** |  |
 
 ### Return type
 
@@ -839,7 +823,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **createSubscription**
-> SubscriptionBody createSubscription(subscriptionBody)
+> SubscriptionBody createSubscription(appId, aliasLabel, aliasId, subscriptionBody)
 
 Creates a new Subscription under the User provided. Useful to add email addresses and SMS numbers to the User.
 
@@ -854,15 +838,14 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiCreateSubscriptionRequest = {
-  // string
-  appId: "00000000-0000-0000-0000-000000000000",
-  // string
-  aliasLabel: "external_id",
-  // string
-  aliasId: "YOUR_USER_EXTERNAL_ID",
-  // SubscriptionBody
-  subscriptionBody: {
+// string
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// string
+const aliasLabel: string = "external_id";
+// string
+const aliasId: string = "YOUR_USER_EXTERNAL_ID";
+// SubscriptionBody
+const subscriptionBody: Onesignal.SubscriptionBody = {
     subscription: {
       id: "id_example",
       type: "iOSPush",
@@ -882,11 +865,10 @@ let body: Onesignal.DefaultApiCreateSubscriptionRequest = {
       web_auth: "web_auth_example",
       web_p256: "web_p256_example",
     },
-  },
-};
+  };
 
 try {
-  const response = await apiInstance.createSubscription(body);
+  const response = await apiInstance.createSubscription(appId, aliasLabel, aliasId, subscriptionBody);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -904,11 +886,10 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **subscriptionBody** | **SubscriptionBody**|  |
  **appId** | [**string**] |  | defaults to undefined
  **aliasLabel** | [**string**] |  | defaults to undefined
  **aliasId** | [**string**] |  | defaults to undefined
-
+ **subscriptionBody** | **SubscriptionBody** |  |
 
 ### Return type
 
@@ -953,9 +934,8 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiCreateTemplateRequest = {
-  // CreateTemplateRequest
-  createTemplateRequest: {
+// CreateTemplateRequest
+const createTemplateRequest: Onesignal.CreateTemplateRequest = {
     app_id: "app_id_example",
     name: "name_example",
     contents: {
@@ -1101,11 +1081,10 @@ let body: Onesignal.DefaultApiCreateTemplateRequest = {
     ],
     is_sms: true,
     dynamic_content: "dynamic_content_example",
-  },
-};
+  };
 
 try {
-  const response = await apiInstance.createTemplate(body);
+  const response = await apiInstance.createTemplate(createTemplateRequest);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -1123,8 +1102,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **createTemplateRequest** | **CreateTemplateRequest**|  |
-
+ **createTemplateRequest** | **CreateTemplateRequest** |  |
 
 ### Return type
 
@@ -1151,7 +1129,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **createUser**
-> User createUser(user)
+> User createUser(appId, user)
 
 Creates a User, optionally Subscriptions owned by the User as well as Aliases. Aliases provided in the payload will be used to look up an existing User.
 
@@ -1166,11 +1144,10 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiCreateUserRequest = {
-  // string
-  appId: "00000000-0000-0000-0000-000000000000",
-  // User
-  user: {
+// string
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// User
+const user: Onesignal.User = {
     properties: {
       tags: {},
       language: "language_example",
@@ -1215,11 +1192,10 @@ let body: Onesignal.DefaultApiCreateUserRequest = {
         web_p256: "web_p256_example",
       },
     ],
-  },
-};
+  };
 
 try {
-  const response = await apiInstance.createUser(body);
+  const response = await apiInstance.createUser(appId, user);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -1249,9 +1225,8 @@ if (e instanceof Onesignal.ApiException && e.code === 409) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user** | **User**|  |
  **appId** | [**string**] |  | defaults to undefined
-
+ **user** | **User** |  |
 
 ### Return type
 
@@ -1281,7 +1256,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **deleteAlias**
-> UserIdentityBody deleteAlias()
+> UserIdentityBody deleteAlias(appId, aliasLabel, aliasId, aliasLabelToDelete)
 
 Deletes an alias by alias label
 
@@ -1296,19 +1271,17 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiDeleteAliasRequest = {
-  // string
-  appId: "00000000-0000-0000-0000-000000000000",
-  // string
-  aliasLabel: "external_id",
-  // string
-  aliasId: "YOUR_USER_EXTERNAL_ID",
-  // string
-  aliasLabelToDelete: "external_id",
-};
+// string
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// string
+const aliasLabel: string = "external_id";
+// string
+const aliasId: string = "YOUR_USER_EXTERNAL_ID";
+// string
+const aliasLabelToDelete: string = "external_id";
 
 try {
-  const response = await apiInstance.deleteAlias(body);
+  const response = await apiInstance.deleteAlias(appId, aliasLabel, aliasId, aliasLabelToDelete);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -1330,7 +1303,6 @@ Name | Type | Description  | Notes
  **aliasLabel** | [**string**] |  | defaults to undefined
  **aliasId** | [**string**] |  | defaults to undefined
  **aliasLabelToDelete** | [**string**] |  | defaults to undefined
-
 
 ### Return type
 
@@ -1359,7 +1331,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **deleteApiKey**
-> object deleteApiKey()
+> object deleteApiKey(appId, tokenId)
 
 Delete a specific Rich Authentication Token (App API Key) for a OneSignal app. Requires your Organization API Key and the token’s unique ID, not the token value itself.
 
@@ -1374,15 +1346,13 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiDeleteApiKeyRequest = {
-  // string
-  appId: "00000000-0000-0000-0000-000000000000",
-  // string
-  tokenId: "0aa1b2c3-d4e5-46f7-8899-aabbccddeeff",
-};
+// string
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// string
+const tokenId: string = "0aa1b2c3-d4e5-46f7-8899-aabbccddeeff";
 
 try {
-  const response = await apiInstance.deleteApiKey(body);
+  const response = await apiInstance.deleteApiKey(appId, tokenId);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -1402,7 +1372,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **appId** | [**string**] |  | defaults to undefined
  **tokenId** | [**string**] |  | defaults to undefined
-
 
 ### Return type
 
@@ -1428,7 +1397,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **deleteSegment**
-> GenericSuccessBoolResponse deleteSegment()
+> GenericSuccessBoolResponse deleteSegment(appId, segmentId)
 
 Delete a segment (not user devices) - Required: OneSignal Paid Plan You can delete a segment under your app by calling this API. You must provide an API key in the Authorization header that has admin access on the app. The segment_id can be found in the URL of the segment when viewing it in the dashboard. 
 
@@ -1443,15 +1412,13 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiDeleteSegmentRequest = {
-  // string | The OneSignal App ID for your app.  Available in Keys & IDs.
-  appId: "00000000-0000-0000-0000-000000000000",
-  // string | The segment_id can be found in the URL of the segment when viewing it in the dashboard.
-  segmentId: "d6c5a3e1-9f17-44a1-9d10-7c0e4a2b1c8e",
-};
+// string | The OneSignal App ID for your app.  Available in Keys & IDs.
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// string | The segment_id can be found in the URL of the segment when viewing it in the dashboard.
+const segmentId: string = "d6c5a3e1-9f17-44a1-9d10-7c0e4a2b1c8e";
 
 try {
-  const response = await apiInstance.deleteSegment(body);
+  const response = await apiInstance.deleteSegment(appId, segmentId);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -1471,7 +1438,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **appId** | [**string**] | The OneSignal App ID for your app.  Available in Keys &amp; IDs. | defaults to undefined
  **segmentId** | [**string**] | The segment_id can be found in the URL of the segment when viewing it in the dashboard. | defaults to undefined
-
 
 ### Return type
 
@@ -1499,7 +1465,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **deleteSubscription**
-> void deleteSubscription()
+> void deleteSubscription(appId, subscriptionId)
 
 Deletes the Subscription.
 
@@ -1514,15 +1480,13 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiDeleteSubscriptionRequest = {
-  // string
-  appId: "00000000-0000-0000-0000-000000000000",
-  // string
-  subscriptionId: "7e4c5b9a-1f60-4d07-9b1a-2e8c8d2cae51",
-};
+// string
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// string
+const subscriptionId: string = "7e4c5b9a-1f60-4d07-9b1a-2e8c8d2cae51";
 
 try {
-  const response = await apiInstance.deleteSubscription(body);
+  const response = await apiInstance.deleteSubscription(appId, subscriptionId);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -1542,7 +1506,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **appId** | [**string**] |  | defaults to undefined
  **subscriptionId** | [**string**] |  | defaults to undefined
-
 
 ### Return type
 
@@ -1571,7 +1534,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **deleteTemplate**
-> GenericSuccessBoolResponse deleteTemplate()
+> GenericSuccessBoolResponse deleteTemplate(templateId, appId)
 
 Delete a template by id.
 
@@ -1586,15 +1549,13 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiDeleteTemplateRequest = {
-  // string
-  templateId: "e4d3c2b1-a09f-4f1e-8d7c-6b5a4f3e2d1c",
-  // string
-  appId: "00000000-0000-0000-0000-000000000000",
-};
+// string
+const templateId: string = "e4d3c2b1-a09f-4f1e-8d7c-6b5a4f3e2d1c";
+// string
+const appId: string = "00000000-0000-0000-0000-000000000000";
 
 try {
-  const response = await apiInstance.deleteTemplate(body);
+  const response = await apiInstance.deleteTemplate(templateId, appId);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -1614,7 +1575,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **templateId** | [**string**] |  | defaults to undefined
  **appId** | [**string**] |  | defaults to undefined
-
 
 ### Return type
 
@@ -1641,7 +1601,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **deleteUser**
-> void deleteUser()
+> void deleteUser(appId, aliasLabel, aliasId)
 
 Removes the User identified by (:alias_label, :alias_id), and all Subscriptions and Aliases
 
@@ -1656,17 +1616,15 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiDeleteUserRequest = {
-  // string
-  appId: "00000000-0000-0000-0000-000000000000",
-  // string
-  aliasLabel: "external_id",
-  // string
-  aliasId: "YOUR_USER_EXTERNAL_ID",
-};
+// string
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// string
+const aliasLabel: string = "external_id";
+// string
+const aliasId: string = "YOUR_USER_EXTERNAL_ID";
 
 try {
-  const response = await apiInstance.deleteUser(body);
+  const response = await apiInstance.deleteUser(appId, aliasLabel, aliasId);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -1687,7 +1645,6 @@ Name | Type | Description  | Notes
  **appId** | [**string**] |  | defaults to undefined
  **aliasLabel** | [**string**] |  | defaults to undefined
  **aliasId** | [**string**] |  | defaults to undefined
-
 
 ### Return type
 
@@ -1715,7 +1672,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **exportEvents**
-> ExportEventsSuccessResponse exportEvents()
+> ExportEventsSuccessResponse exportEvents(notificationId, appId)
 
 Generate a compressed CSV report of all of the events data for a notification. This will return a URL immediately upon success but it may take several minutes for the CSV to become available at that URL depending on the volume of data. Only one export can be in-progress per OneSignal account at any given time.
 
@@ -1730,15 +1687,13 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiExportEventsRequest = {
-  // string | The ID of the notification to export events from.
-  notificationId: "b3a0c8bd-3a4c-4b22-9a73-3f1a8c2d1b88",
-  // string | The ID of the app that the notification belongs to.
-  appId: "00000000-0000-0000-0000-000000000000",
-};
+// string | The ID of the notification to export events from.
+const notificationId: string = "b3a0c8bd-3a4c-4b22-9a73-3f1a8c2d1b88";
+// string | The ID of the app that the notification belongs to.
+const appId: string = "00000000-0000-0000-0000-000000000000";
 
 try {
-  const response = await apiInstance.exportEvents(body);
+  const response = await apiInstance.exportEvents(notificationId, appId);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -1758,7 +1713,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **notificationId** | [**string**] | The ID of the notification to export events from. | defaults to undefined
  **appId** | [**string**] | The ID of the app that the notification belongs to. | defaults to undefined
-
 
 ### Return type
 
@@ -1786,7 +1740,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **exportSubscriptions**
-> ExportSubscriptionsSuccessResponse exportSubscriptions()
+> ExportSubscriptionsSuccessResponse exportSubscriptions(appId, exportSubscriptionsRequestBody)
 
 Generate a compressed CSV export of all of your current user data This method can be used to generate a compressed CSV export of all of your current user data. It is a much faster alternative than retrieving this data using the /players API endpoint. The file will be compressed using GZip. The file may take several minutes to generate depending on the number of users in your app. The URL generated will be available for 3 days and includes random v4 uuid as part of the resource name to be unguessable. &#x1F6A7; 403 Error Responses          You can test if it is complete by making a GET request to the csv_file_url value. This file may take time to generate depending on how many device records are being pulled. If the file is not ready, a 403 error will be returned. Otherwise the file itself will be returned. &#x1F6A7; Requires Authentication Key Requires your OneSignal App\'s REST API Key, available in Keys & IDs. &#x1F6A7; Concurrent Exports Only one concurrent export is allowed per OneSignal account. Please ensure you have successfully downloaded the .csv.gz file before exporting another app. CSV File Format: - Default Columns:   | Field | Details |   | --- | --- |   | id | OneSignal Player Id |   | identifier | Push Token |   | session_count | Number of times they visited the app or site   | language | Device language code |   | timezone | Number of seconds away from UTC. Example: -28800 |   | game_version | Version of your mobile app gathered from Android Studio versionCode in your App/build.gradle and iOS uses kCFBundleVersionKey in Xcode. |   | device_os | Device Operating System Version. Example: 80 = Chrome 80, 9 = Android 9 |   | device_type | Device Operating System Type |   | device_model | Device Hardware String Code. Example: Mobile Web Subscribers will have `Linux armv` |   | ad_id | Based on the Google Advertising Id for Android, identifierForVendor for iOS. OptedOut means user turned off Advertising tracking on the device. |   | tags | Current OneSignal Data Tags on the device. |   | last_active | Date and time the user last opened the mobile app or visited the site. |   | playtime | Total amount of time in seconds the user had the mobile app open. |   | amount_spent |  Mobile only - amount spent in USD on In-App Purchases. |    | created_at | Date and time the device record was created in OneSignal. Mobile - first time they opened the app with OneSignal SDK. Web - first time the user subscribed to the site. |   | invalid_identifier | t = unsubscribed, f = subscibed |   | badge_count | Current number of badges on the device | - Extra Columns:   | Field | Details |   | --- | --- |   | external_user_id | Your User Id set on the device |   | notification_types | Notification types |   | location | Location points (Latitude and Longitude) set on the device. |   | country | Country code |   | rooted | Android device rooted or not |   | ip | IP Address of the device if being tracked. See Handling Personal Data. |   | web_auth | Web Only authorization key. |   | web_p256 | Web Only p256 key. | 
 
@@ -1801,21 +1755,19 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiExportSubscriptionsRequest = {
-  // string | The app ID that you want to export devices from
-  appId: "00000000-0000-0000-0000-000000000000",
-  // ExportSubscriptionsRequestBody (optional)
-  exportSubscriptionsRequestBody: {
+// string | The app ID that you want to export devices from
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// ExportSubscriptionsRequestBody (optional)
+const exportSubscriptionsRequestBody: Onesignal.ExportSubscriptionsRequestBody = {
     extra_fields: [
       "extra_fields_example",
     ],
     last_active_since: "last_active_since_example",
     segment_name: "segment_name_example",
-  },
-};
+  };
 
 try {
-  const response = await apiInstance.exportSubscriptions(body);
+  const response = await apiInstance.exportSubscriptions(appId, exportSubscriptionsRequestBody);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -1833,9 +1785,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **exportSubscriptionsRequestBody** | **ExportSubscriptionsRequestBody**|  |
  **appId** | [**string**] | The app ID that you want to export devices from | defaults to undefined
-
+ **exportSubscriptionsRequestBody** | **ExportSubscriptionsRequestBody** |  |
 
 ### Return type
 
@@ -1862,7 +1813,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **getAliases**
-> UserIdentityBody getAliases()
+> UserIdentityBody getAliases(appId, aliasLabel, aliasId)
 
 Lists all Aliases for the User identified by (:alias_label, :alias_id).
 
@@ -1877,17 +1828,15 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiGetAliasesRequest = {
-  // string
-  appId: "00000000-0000-0000-0000-000000000000",
-  // string
-  aliasLabel: "external_id",
-  // string
-  aliasId: "YOUR_USER_EXTERNAL_ID",
-};
+// string
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// string
+const aliasLabel: string = "external_id";
+// string
+const aliasId: string = "YOUR_USER_EXTERNAL_ID";
 
 try {
-  const response = await apiInstance.getAliases(body);
+  const response = await apiInstance.getAliases(appId, aliasLabel, aliasId);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -1908,7 +1857,6 @@ Name | Type | Description  | Notes
  **appId** | [**string**] |  | defaults to undefined
  **aliasLabel** | [**string**] |  | defaults to undefined
  **aliasId** | [**string**] |  | defaults to undefined
-
 
 ### Return type
 
@@ -1936,7 +1884,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **getAliasesBySubscription**
-> UserIdentityBody getAliasesBySubscription()
+> UserIdentityBody getAliasesBySubscription(appId, subscriptionId)
 
 Lists all Aliases for the User identified by :subscription_id.
 
@@ -1951,15 +1899,13 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiGetAliasesBySubscriptionRequest = {
-  // string
-  appId: "00000000-0000-0000-0000-000000000000",
-  // string
-  subscriptionId: "7e4c5b9a-1f60-4d07-9b1a-2e8c8d2cae51",
-};
+// string
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// string
+const subscriptionId: string = "7e4c5b9a-1f60-4d07-9b1a-2e8c8d2cae51";
 
 try {
-  const response = await apiInstance.getAliasesBySubscription(body);
+  const response = await apiInstance.getAliasesBySubscription(appId, subscriptionId);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -1979,7 +1925,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **appId** | [**string**] |  | defaults to undefined
  **subscriptionId** | [**string**] |  | defaults to undefined
-
 
 ### Return type
 
@@ -2006,7 +1951,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **getApp**
-> App getApp()
+> App getApp(appId)
 
 View the details of a single OneSignal app
 
@@ -2021,13 +1966,11 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiGetAppRequest = {
-  // string | An app id
-  appId: "00000000-0000-0000-0000-000000000000",
-};
+// string | An app id
+const appId: string = "00000000-0000-0000-0000-000000000000";
 
 try {
-  const response = await apiInstance.getApp(body);
+  const response = await apiInstance.getApp(appId);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -2046,7 +1989,6 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **appId** | [**string**] | An app id | defaults to undefined
-
 
 ### Return type
 
@@ -2106,7 +2048,6 @@ try {
 ### Parameters
 This endpoint does not need any parameter.
 
-
 ### Return type
 
 **Array<App>**
@@ -2132,7 +2073,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **getNotification**
-> NotificationWithMeta getNotification()
+> NotificationWithMeta getNotification(appId, notificationId)
 
 View the details of a single notification and outcomes associated with it
 
@@ -2147,15 +2088,13 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiGetNotificationRequest = {
-  // string
-  appId: "00000000-0000-0000-0000-000000000000",
-  // string
-  notificationId: "b3a0c8bd-3a4c-4b22-9a73-3f1a8c2d1b88",
-};
+// string
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// string
+const notificationId: string = "b3a0c8bd-3a4c-4b22-9a73-3f1a8c2d1b88";
 
 try {
-  const response = await apiInstance.getNotification(body);
+  const response = await apiInstance.getNotification(appId, notificationId);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -2175,7 +2114,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **appId** | [**string**] |  | defaults to undefined
  **notificationId** | [**string**] |  | defaults to undefined
-
 
 ### Return type
 
@@ -2203,7 +2141,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **getNotificationHistory**
-> NotificationHistorySuccessResponse getNotificationHistory(getNotificationHistoryRequestBody)
+> NotificationHistorySuccessResponse getNotificationHistory(notificationId, getNotificationHistoryRequestBody)
 
 -> View the devices sent a message - OneSignal Paid Plan Required This method will return all devices that were sent the given notification_id of an Email or Push Notification if used within 7 days of the date sent. After 7 days of the sending date, the message history data will be unavailable. After a successful response is received, the destination url may be polled until the file becomes available. Most exports are done in ~1-3 minutes, so setting a poll interval of 10 seconds should be adequate. For use cases that are not meant to be consumed by a script, an email will be sent to the supplied email address. &#x1F6A7; Requirements A OneSignal Paid Plan. Turn on Send History via OneSignal API in Settings -> Analytics. Cannot get data before this was turned on. Must be called within 7 days after sending the message. Messages targeting under 1000 recipients will not have \"sent\" events recorded, but will show \"clicked\" events. Requires your OneSignal App\'s REST API Key, available in Keys & IDs.
 
@@ -2218,19 +2156,17 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiGetNotificationHistoryRequest = {
-  // string | The \"id\" of the message found in the Notification object
-  notificationId: "b3a0c8bd-3a4c-4b22-9a73-3f1a8c2d1b88",
-  // GetNotificationHistoryRequestBody
-  getNotificationHistoryRequestBody: {
+// string | The \"id\" of the message found in the Notification object
+const notificationId: string = "b3a0c8bd-3a4c-4b22-9a73-3f1a8c2d1b88";
+// GetNotificationHistoryRequestBody
+const getNotificationHistoryRequestBody: Onesignal.GetNotificationHistoryRequestBody = {
     events: "sent",
     email: "email_example",
     app_id: "app_id_example",
-  },
-};
+  };
 
 try {
-  const response = await apiInstance.getNotificationHistory(body);
+  const response = await apiInstance.getNotificationHistory(notificationId, getNotificationHistoryRequestBody);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -2248,9 +2184,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **getNotificationHistoryRequestBody** | **GetNotificationHistoryRequestBody**|  |
  **notificationId** | [**string**] | The \&quot;id\&quot; of the message found in the Notification object | defaults to undefined
-
+ **getNotificationHistoryRequestBody** | **GetNotificationHistoryRequestBody** |  |
 
 ### Return type
 
@@ -2278,7 +2213,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **getNotifications**
-> NotificationSlice getNotifications()
+> NotificationSlice getNotifications(appId, limit, offset, kind, timeOffset)
 
 View the details of multiple notifications
 
@@ -2293,21 +2228,19 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiGetNotificationsRequest = {
-  // string | The app ID that you want to view notifications from
-  appId: "00000000-0000-0000-0000-000000000000",
-  // number | How many notifications to return.  Max is 50.  Default is 50. (optional)
-  limit: 10,
-  // number | Page offset.  Default is 0.  Results are sorted by queued_at in descending order.  queued_at is a representation of the time that the notification was queued at. (optional)
-  offset: 0,
-  // 0 | 1 | 3 | Kind of notifications returned:   * unset - All notification types (default)   * `0` - Dashboard only   * `1` - API only   * `3` - Automated only  (optional)
-  kind: 0,
-  // string | Time-offset pagination cursor for sequential pulls of all messages.  Accepts either an ISO 8601 formatted timestamp (e.g. `2025-01-01T00:00:00.000Z`) or the opaque Base64 cursor token returned as `next_time_offset` in a prior response.  When set, results are sorted ascending by send_after and the standard `offset` parameter cannot be used.  Repeat the request with each `next_time_offset` until an empty notifications array is returned. (optional)
-  timeOffset: "2025-01-01T00:00:00.000Z",
-};
+// string | The app ID that you want to view notifications from
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// number | How many notifications to return.  Max is 50.  Default is 50. (optional)
+const limit: number = 10;
+// number | Page offset.  Default is 0.  Results are sorted by queued_at in descending order.  queued_at is a representation of the time that the notification was queued at. (optional)
+const offset: number = 0;
+// 0 | 1 | 3 | Kind of notifications returned:   * unset - All notification types (default)   * `0` - Dashboard only   * `1` - API only   * `3` - Automated only  (optional)
+const kind: 0 | 1 | 3 = 0;
+// string | Time-offset pagination cursor for sequential pulls of all messages.  Accepts either an ISO 8601 formatted timestamp (e.g. `2025-01-01T00:00:00.000Z`) or the opaque Base64 cursor token returned as `next_time_offset` in a prior response.  When set, results are sorted ascending by send_after and the standard `offset` parameter cannot be used.  Repeat the request with each `next_time_offset` until an empty notifications array is returned. (optional)
+const timeOffset: string = "2025-01-01T00:00:00.000Z";
 
 try {
-  const response = await apiInstance.getNotifications(body);
+  const response = await apiInstance.getNotifications(appId, limit, offset, kind, timeOffset);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -2330,7 +2263,6 @@ Name | Type | Description  | Notes
  **offset** | [**number**] | Page offset.  Default is 0.  Results are sorted by queued_at in descending order.  queued_at is a representation of the time that the notification was queued at. | (optional) defaults to undefined
  **kind** | [**0 | 1 | 3**]**Array<0 &#124; 1 &#124; 3>** | Kind of notifications returned:   * unset - All notification types (default)   * &#x60;0&#x60; - Dashboard only   * &#x60;1&#x60; - API only   * &#x60;3&#x60; - Automated only  | (optional) defaults to undefined
  **timeOffset** | [**string**] | Time-offset pagination cursor for sequential pulls of all messages.  Accepts either an ISO 8601 formatted timestamp (e.g. &#x60;2025-01-01T00:00:00.000Z&#x60;) or the opaque Base64 cursor token returned as &#x60;next_time_offset&#x60; in a prior response.  When set, results are sorted ascending by send_after and the standard &#x60;offset&#x60; parameter cannot be used.  Repeat the request with each &#x60;next_time_offset&#x60; until an empty notifications array is returned. | (optional) defaults to undefined
-
 
 ### Return type
 
@@ -2357,7 +2289,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **getOutcomes**
-> OutcomesData getOutcomes()
+> OutcomesData getOutcomes(appId, outcomeNames, outcomeNames2, outcomeTimeRange, outcomePlatforms, outcomeAttribution)
 
 View the details of all the outcomes associated with your app  &#x1F6A7; Requires Authentication Key Requires your OneSignal App\'s REST API Key, available in Keys & IDs.  &#x1F6A7; Outcome Data Limitations Outcomes are only accessible for around 30 days before deleted from our servers. You will need to export this data every month if you want to keep it. 
 
@@ -2372,23 +2304,21 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiGetOutcomesRequest = {
-  // string | The OneSignal App ID for your app.  Available in Keys & IDs.
-  appId: "00000000-0000-0000-0000-000000000000",
-  // string | Required Comma-separated list of names and the value (sum/count) for the returned outcome data. Note: Clicks only support count aggregation. For out-of-the-box OneSignal outcomes such as click and session duration, please use the \"os\" prefix with two underscores. For other outcomes, please use the name specified by the user. Example:os__session_duration.count,os__click.count,CustomOutcomeName.sum 
-  outcomeNames: "os__session_duration.count,os__click.count",
-  // string | Optional If outcome names contain any commas, then please specify only one value at a time. Example: outcome_names[]=os__click.count&outcome_names[]=Sales, Purchase.count where \"Sales, Purchase\" is the custom outcomes with a comma in the name.  (optional)
-  outcomeNames2: "os__session_duration.count",
-  // string | Optional Time range for the returned data. The values can be 1h (for the last 1 hour data), 1d (for the last 1 day data), or 1mo (for the last 1 month data). Default is 1h if the parameter is omitted.  (optional)
-  outcomeTimeRange: "1d",
-  // string | Optional Platform id. Refer device\'s platform ids for values. Example: outcome_platform=0 for iOS outcome_platform=7,8 for Safari and Firefox Default is data from all platforms if the parameter is omitted.  (optional)
-  outcomePlatforms: "0,1",
-  // string | Optional Attribution type for the outcomes. The values can be direct or influenced or unattributed. Example: outcome_attribution=direct Default is total (returns direct+influenced+unattributed) if the parameter is omitted.  (optional)
-  outcomeAttribution: "direct",
-};
+// string | The OneSignal App ID for your app.  Available in Keys & IDs.
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// string | Required Comma-separated list of names and the value (sum/count) for the returned outcome data. Note: Clicks only support count aggregation. For out-of-the-box OneSignal outcomes such as click and session duration, please use the \"os\" prefix with two underscores. For other outcomes, please use the name specified by the user. Example:os__session_duration.count,os__click.count,CustomOutcomeName.sum 
+const outcomeNames: string = "os__session_duration.count,os__click.count";
+// string | Optional If outcome names contain any commas, then please specify only one value at a time. Example: outcome_names[]=os__click.count&outcome_names[]=Sales, Purchase.count where \"Sales, Purchase\" is the custom outcomes with a comma in the name.  (optional)
+const outcomeNames2: string = "os__session_duration.count";
+// string | Optional Time range for the returned data. The values can be 1h (for the last 1 hour data), 1d (for the last 1 day data), or 1mo (for the last 1 month data). Default is 1h if the parameter is omitted.  (optional)
+const outcomeTimeRange: string = "1d";
+// string | Optional Platform id. Refer device\'s platform ids for values. Example: outcome_platform=0 for iOS outcome_platform=7,8 for Safari and Firefox Default is data from all platforms if the parameter is omitted.  (optional)
+const outcomePlatforms: string = "0,1";
+// string | Optional Attribution type for the outcomes. The values can be direct or influenced or unattributed. Example: outcome_attribution=direct Default is total (returns direct+influenced+unattributed) if the parameter is omitted.  (optional)
+const outcomeAttribution: string = "direct";
 
 try {
-  const response = await apiInstance.getOutcomes(body);
+  const response = await apiInstance.getOutcomes(appId, outcomeNames, outcomeNames2, outcomeTimeRange, outcomePlatforms, outcomeAttribution);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -2412,7 +2342,6 @@ Name | Type | Description  | Notes
  **outcomeTimeRange** | [**string**] | Optional Time range for the returned data. The values can be 1h (for the last 1 hour data), 1d (for the last 1 day data), or 1mo (for the last 1 month data). Default is 1h if the parameter is omitted.  | (optional) defaults to undefined
  **outcomePlatforms** | [**string**] | Optional Platform id. Refer device\&#39;s platform ids for values. Example: outcome_platform&#x3D;0 for iOS outcome_platform&#x3D;7,8 for Safari and Firefox Default is data from all platforms if the parameter is omitted.  | (optional) defaults to undefined
  **outcomeAttribution** | [**string**] | Optional Attribution type for the outcomes. The values can be direct or influenced or unattributed. Example: outcome_attribution&#x3D;direct Default is total (returns direct+influenced+unattributed) if the parameter is omitted.  | (optional) defaults to undefined
-
 
 ### Return type
 
@@ -2439,7 +2368,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **getSegments**
-> GetSegmentsSuccessResponse getSegments()
+> GetSegmentsSuccessResponse getSegments(appId, offset, limit)
 
 Returns an array of segments from an app.
 
@@ -2454,17 +2383,15 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiGetSegmentsRequest = {
-  // string | The OneSignal App ID for your app.  Available in Keys & IDs.
-  appId: "00000000-0000-0000-0000-000000000000",
-  // number | Segments are listed in ascending order of created_at date. offset will omit that number of segments from the beginning of the list. Eg offset 5, will remove the 5 earliest created Segments. (optional)
-  offset: 0,
-  // number | The amount of Segments in the response. Maximum 300. (optional)
-  limit: 10,
-};
+// string | The OneSignal App ID for your app.  Available in Keys & IDs.
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// number | Segments are listed in ascending order of created_at date. offset will omit that number of segments from the beginning of the list. Eg offset 5, will remove the 5 earliest created Segments. (optional)
+const offset: number = 0;
+// number | The amount of Segments in the response. Maximum 300. (optional)
+const limit: number = 10;
 
 try {
-  const response = await apiInstance.getSegments(body);
+  const response = await apiInstance.getSegments(appId, offset, limit);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -2485,7 +2412,6 @@ Name | Type | Description  | Notes
  **appId** | [**string**] | The OneSignal App ID for your app.  Available in Keys &amp; IDs. | defaults to undefined
  **offset** | [**number**] | Segments are listed in ascending order of created_at date. offset will omit that number of segments from the beginning of the list. Eg offset 5, will remove the 5 earliest created Segments. | (optional) defaults to undefined
  **limit** | [**number**] | The amount of Segments in the response. Maximum 300. | (optional) defaults to undefined
-
 
 ### Return type
 
@@ -2512,7 +2438,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **getUser**
-> User getUser()
+> User getUser(appId, aliasLabel, aliasId)
 
 Returns the User’s properties, Aliases, and Subscriptions.
 
@@ -2527,17 +2453,15 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiGetUserRequest = {
-  // string
-  appId: "00000000-0000-0000-0000-000000000000",
-  // string
-  aliasLabel: "external_id",
-  // string
-  aliasId: "YOUR_USER_EXTERNAL_ID",
-};
+// string
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// string
+const aliasLabel: string = "external_id";
+// string
+const aliasId: string = "YOUR_USER_EXTERNAL_ID";
 
 try {
-  const response = await apiInstance.getUser(body);
+  const response = await apiInstance.getUser(appId, aliasLabel, aliasId);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -2558,7 +2482,6 @@ Name | Type | Description  | Notes
  **appId** | [**string**] |  | defaults to undefined
  **aliasLabel** | [**string**] |  | defaults to undefined
  **aliasId** | [**string**] |  | defaults to undefined
-
 
 ### Return type
 
@@ -2586,7 +2509,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **rotateApiKey**
-> CreateApiKeyResponse rotateApiKey()
+> CreateApiKeyResponse rotateApiKey(appId, tokenId)
 
 Rotate a Rich Authentication Token (App API Key) for a OneSignal app. Rotating a key revokes the current token and generates a new one under the same configuration—ideal when a token is lost or compromised but you don’t want to recreate and reconfigure it from scratch.
 
@@ -2601,15 +2524,13 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiRotateApiKeyRequest = {
-  // string
-  appId: "00000000-0000-0000-0000-000000000000",
-  // string
-  tokenId: "0aa1b2c3-d4e5-46f7-8899-aabbccddeeff",
-};
+// string
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// string
+const tokenId: string = "0aa1b2c3-d4e5-46f7-8899-aabbccddeeff";
 
 try {
-  const response = await apiInstance.rotateApiKey(body);
+  const response = await apiInstance.rotateApiKey(appId, tokenId);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -2629,7 +2550,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **appId** | [**string**] |  | defaults to undefined
  **tokenId** | [**string**] |  | defaults to undefined
-
 
 ### Return type
 
@@ -2655,7 +2575,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **startLiveActivity**
-> StartLiveActivitySuccessResponse startLiveActivity(startLiveActivityRequest)
+> StartLiveActivitySuccessResponse startLiveActivity(appId, activityType, startLiveActivityRequest)
 
 Remotely start a Live Activity on iOS devices via OneSignal’s REST API.
 
@@ -2670,13 +2590,12 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiStartLiveActivityRequest = {
-  // string | Your OneSignal App ID in UUID v4 format.
-  appId: "00000000-0000-0000-0000-000000000000",
-  // string | The name of the Live Activity defined in your app. This should match the attributes struct used in your app\'s Live Activity implementation.
-  activityType: "order_status",
-  // StartLiveActivityRequest
-  startLiveActivityRequest: {
+// string | Your OneSignal App ID in UUID v4 format.
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// string | The name of the Live Activity defined in your app. This should match the attributes struct used in your app\'s Live Activity implementation.
+const activityType: string = "order_status";
+// StartLiveActivityRequest
+const startLiveActivityRequest: Onesignal.StartLiveActivityRequest = {
     name: "name_example",
     event: "start",
     activity_id: "activity_id_example",
@@ -2791,13 +2710,21 @@ let body: Onesignal.DefaultApiStartLiveActivityRequest = {
       "excluded_segments_example",
     ],
     filters: [
-      null,
+      {
+        field: "field_example",
+        key: "key_example",
+        value: "value_example",
+        hours_ago: "hours_ago_example",
+        radius: 3.14,
+        lat: 3.14,
+        long: 3.14,
+        relation: ">",
+      },
     ],
-  },
-};
+  };
 
 try {
-  const response = await apiInstance.startLiveActivity(body);
+  const response = await apiInstance.startLiveActivity(appId, activityType, startLiveActivityRequest);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -2815,10 +2742,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **startLiveActivityRequest** | **StartLiveActivityRequest**|  |
  **appId** | [**string**] | Your OneSignal App ID in UUID v4 format. | defaults to undefined
  **activityType** | [**string**] | The name of the Live Activity defined in your app. This should match the attributes struct used in your app\&#39;s Live Activity implementation. | defaults to undefined
-
+ **startLiveActivityRequest** | **StartLiveActivityRequest** |  |
 
 ### Return type
 
@@ -2845,7 +2771,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **transferSubscription**
-> UserIdentityBody transferSubscription(transferSubscriptionRequestBody)
+> UserIdentityBody transferSubscription(appId, subscriptionId, transferSubscriptionRequestBody)
 
 Transfers this Subscription to the User identified by the identity in the payload.
 
@@ -2860,21 +2786,19 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiTransferSubscriptionRequest = {
-  // string
-  appId: "00000000-0000-0000-0000-000000000000",
-  // string
-  subscriptionId: "7e4c5b9a-1f60-4d07-9b1a-2e8c8d2cae51",
-  // TransferSubscriptionRequestBody
-  transferSubscriptionRequestBody: {
+// string
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// string
+const subscriptionId: string = "7e4c5b9a-1f60-4d07-9b1a-2e8c8d2cae51";
+// TransferSubscriptionRequestBody
+const transferSubscriptionRequestBody: Onesignal.TransferSubscriptionRequestBody = {
     identity: {
       "key": "key_example",
     },
-  },
-};
+  };
 
 try {
-  const response = await apiInstance.transferSubscription(body);
+  const response = await apiInstance.transferSubscription(appId, subscriptionId, transferSubscriptionRequestBody);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -2892,10 +2816,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **transferSubscriptionRequestBody** | **TransferSubscriptionRequestBody**|  |
  **appId** | [**string**] |  | defaults to undefined
  **subscriptionId** | [**string**] |  | defaults to undefined
-
+ **transferSubscriptionRequestBody** | **TransferSubscriptionRequestBody** |  |
 
 ### Return type
 
@@ -2924,7 +2847,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **unsubscribeEmailWithToken**
-> GenericSuccessBoolResponse unsubscribeEmailWithToken()
+> GenericSuccessBoolResponse unsubscribeEmailWithToken(appId, notificationId, token)
 
 Unsubscribe an email with a token when using your own custom email unsubscribe landing page
 
@@ -2939,17 +2862,15 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiUnsubscribeEmailWithTokenRequest = {
-  // string | The OneSignal App ID for your app.  Available in Keys & IDs.
-  appId: "00000000-0000-0000-0000-000000000000",
-  // string | The id of the message found in the creation notification POST response, View Notifications GET response, or URL within the Message Report.
-  notificationId: "b3a0c8bd-3a4c-4b22-9a73-3f1a8c2d1b88",
-  // string | The unsubscribe token that is generated via liquid syntax in {{subscription.unsubscribe_token}} when personalizing an email.
-  token: "YOUR_TOKEN_ID",
-};
+// string | The OneSignal App ID for your app.  Available in Keys & IDs.
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// string | The id of the message found in the creation notification POST response, View Notifications GET response, or URL within the Message Report.
+const notificationId: string = "b3a0c8bd-3a4c-4b22-9a73-3f1a8c2d1b88";
+// string | The unsubscribe token that is generated via liquid syntax in {{subscription.unsubscribe_token}} when personalizing an email.
+const token: string = "YOUR_TOKEN_ID";
 
 try {
-  const response = await apiInstance.unsubscribeEmailWithToken(body);
+  const response = await apiInstance.unsubscribeEmailWithToken(appId, notificationId, token);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -2970,7 +2891,6 @@ Name | Type | Description  | Notes
  **appId** | [**string**] | The OneSignal App ID for your app.  Available in Keys &amp; IDs. | defaults to undefined
  **notificationId** | [**string**] | The id of the message found in the creation notification POST response, View Notifications GET response, or URL within the Message Report. | defaults to undefined
  **token** | [**string**] | The unsubscribe token that is generated via liquid syntax in {{subscription.unsubscribe_token}} when personalizing an email. | defaults to undefined
-
 
 ### Return type
 
@@ -2997,7 +2917,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **updateApiKey**
-> object updateApiKey(updateApiKeyRequest)
+> object updateApiKey(appId, tokenId, updateApiKeyRequest)
 
 Update a Rich Authentication Token (App API Key) for a OneSignal app.
 
@@ -3012,23 +2932,21 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiUpdateApiKeyRequest = {
-  // string
-  appId: "00000000-0000-0000-0000-000000000000",
-  // string
-  tokenId: "0aa1b2c3-d4e5-46f7-8899-aabbccddeeff",
-  // UpdateApiKeyRequest
-  updateApiKeyRequest: {
+// string
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// string
+const tokenId: string = "0aa1b2c3-d4e5-46f7-8899-aabbccddeeff";
+// UpdateApiKeyRequest
+const updateApiKeyRequest: Onesignal.UpdateApiKeyRequest = {
     name: "name_example",
     ip_allowlist_mode: "disabled",
     ip_allowlist: [
       "ip_allowlist_example",
     ],
-  },
-};
+  };
 
 try {
-  const response = await apiInstance.updateApiKey(body);
+  const response = await apiInstance.updateApiKey(appId, tokenId, updateApiKeyRequest);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -3046,10 +2964,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **updateApiKeyRequest** | **UpdateApiKeyRequest**|  |
  **appId** | [**string**] |  | defaults to undefined
  **tokenId** | [**string**] |  | defaults to undefined
-
+ **updateApiKeyRequest** | **UpdateApiKeyRequest** |  |
 
 ### Return type
 
@@ -3075,7 +2992,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **updateApp**
-> App updateApp(app)
+> App updateApp(appId, app)
 
 Updates the name or configuration settings of an existing OneSignal app
 
@@ -3090,11 +3007,10 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiUpdateAppRequest = {
-  // string | An app id
-  appId: "00000000-0000-0000-0000-000000000000",
-  // App
-  app: {
+// string | An app id
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// App
+const app: Onesignal.App = {
     name: "name_example",
     android_gcm_sender_id: "android_gcm_sender_id_example",
     gcm_key: "gcm_key_example",
@@ -3116,11 +3032,10 @@ let body: Onesignal.DefaultApiUpdateAppRequest = {
     site_name: "site_name_example",
     organization_id: "organization_id_example",
     additional_data_is_root_payload: true,
-  },
-};
+  };
 
 try {
-  const response = await apiInstance.updateApp(body);
+  const response = await apiInstance.updateApp(appId, app);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -3138,9 +3053,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **app** | **App**|  |
  **appId** | [**string**] | An app id | defaults to undefined
-
+ **app** | **App** |  |
 
 ### Return type
 
@@ -3167,7 +3081,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **updateLiveActivity**
-> UpdateLiveActivitySuccessResponse updateLiveActivity(updateLiveActivityRequest)
+> UpdateLiveActivitySuccessResponse updateLiveActivity(appId, activityId, updateLiveActivityRequest)
 
 Updates a specified live activity.
 
@@ -3182,13 +3096,12 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiUpdateLiveActivityRequest = {
-  // string | The OneSignal App ID for your app.  Available in Keys & IDs.
-  appId: "00000000-0000-0000-0000-000000000000",
-  // string | Live Activity record ID
-  activityId: "12345",
-  // UpdateLiveActivityRequest
-  updateLiveActivityRequest: {
+// string | The OneSignal App ID for your app.  Available in Keys & IDs.
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// string | Live Activity record ID
+const activityId: string = "12345";
+// UpdateLiveActivityRequest
+const updateLiveActivityRequest: Onesignal.UpdateLiveActivityRequest = {
     name: "name_example",
     event: "update",
     event_updates: {},
@@ -3286,11 +3199,10 @@ let body: Onesignal.DefaultApiUpdateLiveActivityRequest = {
     stale_date: 1,
     dismissal_date: 1,
     priority: 1,
-  },
-};
+  };
 
 try {
-  const response = await apiInstance.updateLiveActivity(body);
+  const response = await apiInstance.updateLiveActivity(appId, activityId, updateLiveActivityRequest);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -3308,10 +3220,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **updateLiveActivityRequest** | **UpdateLiveActivityRequest**|  |
  **appId** | [**string**] | The OneSignal App ID for your app.  Available in Keys &amp; IDs. | defaults to undefined
  **activityId** | [**string**] | Live Activity record ID | defaults to undefined
-
+ **updateLiveActivityRequest** | **UpdateLiveActivityRequest** |  |
 
 ### Return type
 
@@ -3338,7 +3249,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **updateSubscription**
-> void updateSubscription(subscriptionBody)
+> void updateSubscription(appId, subscriptionId, subscriptionBody)
 
 Updates an existing Subscription’s properties.
 
@@ -3353,13 +3264,12 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiUpdateSubscriptionRequest = {
-  // string
-  appId: "00000000-0000-0000-0000-000000000000",
-  // string
-  subscriptionId: "7e4c5b9a-1f60-4d07-9b1a-2e8c8d2cae51",
-  // SubscriptionBody
-  subscriptionBody: {
+// string
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// string
+const subscriptionId: string = "7e4c5b9a-1f60-4d07-9b1a-2e8c8d2cae51";
+// SubscriptionBody
+const subscriptionBody: Onesignal.SubscriptionBody = {
     subscription: {
       id: "id_example",
       type: "iOSPush",
@@ -3379,11 +3289,10 @@ let body: Onesignal.DefaultApiUpdateSubscriptionRequest = {
       web_auth: "web_auth_example",
       web_p256: "web_p256_example",
     },
-  },
-};
+  };
 
 try {
-  const response = await apiInstance.updateSubscription(body);
+  const response = await apiInstance.updateSubscription(appId, subscriptionId, subscriptionBody);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -3401,10 +3310,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **subscriptionBody** | **SubscriptionBody**|  |
  **appId** | [**string**] |  | defaults to undefined
  **subscriptionId** | [**string**] |  | defaults to undefined
-
+ **subscriptionBody** | **SubscriptionBody** |  |
 
 ### Return type
 
@@ -3433,7 +3341,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **updateSubscriptionByToken**
-> object updateSubscriptionByToken(subscriptionBody)
+> object updateSubscriptionByToken(appId, tokenType, token, subscriptionBody)
 
 Update properties on an existing OneSignal subscription using its token.
 
@@ -3448,15 +3356,14 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiUpdateSubscriptionByTokenRequest = {
-  // string | Your OneSignal App ID in UUID v4 format.
-  appId: "00000000-0000-0000-0000-000000000000",
-  // string | The type of token to use when looking up the subscription. See Subscription Types.
-  tokenType: "Email",
-  // string | The value of the token to lookup by (e.g., email address, phone number).
-  token: "user@example.com",
-  // SubscriptionBody
-  subscriptionBody: {
+// string | Your OneSignal App ID in UUID v4 format.
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// string | The type of token to use when looking up the subscription. See Subscription Types.
+const tokenType: string = "Email";
+// string | The value of the token to lookup by (e.g., email address, phone number).
+const token: string = "user@example.com";
+// SubscriptionBody
+const subscriptionBody: Onesignal.SubscriptionBody = {
     subscription: {
       id: "id_example",
       type: "iOSPush",
@@ -3476,11 +3383,10 @@ let body: Onesignal.DefaultApiUpdateSubscriptionByTokenRequest = {
       web_auth: "web_auth_example",
       web_p256: "web_p256_example",
     },
-  },
-};
+  };
 
 try {
-  const response = await apiInstance.updateSubscriptionByToken(body);
+  const response = await apiInstance.updateSubscriptionByToken(appId, tokenType, token, subscriptionBody);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -3498,11 +3404,10 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **subscriptionBody** | **SubscriptionBody**|  |
  **appId** | [**string**] | Your OneSignal App ID in UUID v4 format. | defaults to undefined
  **tokenType** | [**string**] | The type of token to use when looking up the subscription. See Subscription Types. | defaults to undefined
  **token** | [**string**] | The value of the token to lookup by (e.g., email address, phone number). | defaults to undefined
-
+ **subscriptionBody** | **SubscriptionBody** |  |
 
 ### Return type
 
@@ -3529,7 +3434,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **updateTemplate**
-> TemplateResource updateTemplate(updateTemplateRequest)
+> TemplateResource updateTemplate(templateId, appId, updateTemplateRequest)
 
 Update an existing template.
 
@@ -3544,13 +3449,12 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiUpdateTemplateRequest = {
-  // string
-  templateId: "e4d3c2b1-a09f-4f1e-8d7c-6b5a4f3e2d1c",
-  // string
-  appId: "00000000-0000-0000-0000-000000000000",
-  // UpdateTemplateRequest
-  updateTemplateRequest: {
+// string
+const templateId: string = "e4d3c2b1-a09f-4f1e-8d7c-6b5a4f3e2d1c";
+// string
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// UpdateTemplateRequest
+const updateTemplateRequest: Onesignal.UpdateTemplateRequest = {
     name: "name_example",
     contents: {
       en: "en_example",
@@ -3695,11 +3599,10 @@ let body: Onesignal.DefaultApiUpdateTemplateRequest = {
     ],
     is_sms: true,
     dynamic_content: "dynamic_content_example",
-  },
-};
+  };
 
 try {
-  const response = await apiInstance.updateTemplate(body);
+  const response = await apiInstance.updateTemplate(templateId, appId, updateTemplateRequest);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -3717,10 +3620,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **updateTemplateRequest** | **UpdateTemplateRequest**|  |
  **templateId** | [**string**] |  | defaults to undefined
  **appId** | [**string**] |  | defaults to undefined
-
+ **updateTemplateRequest** | **UpdateTemplateRequest** |  |
 
 ### Return type
 
@@ -3746,7 +3648,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **updateUser**
-> PropertiesBody updateUser(updateUserRequest)
+> PropertiesBody updateUser(appId, aliasLabel, aliasId, updateUserRequest)
 
 Updates an existing User’s properties.
 
@@ -3761,15 +3663,14 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiUpdateUserRequest = {
-  // string
-  appId: "00000000-0000-0000-0000-000000000000",
-  // string
-  aliasLabel: "external_id",
-  // string
-  aliasId: "YOUR_USER_EXTERNAL_ID",
-  // UpdateUserRequest
-  updateUserRequest: {
+// string
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// string
+const aliasLabel: string = "external_id";
+// string
+const aliasId: string = "YOUR_USER_EXTERNAL_ID";
+// UpdateUserRequest
+const updateUserRequest: Onesignal.UpdateUserRequest = {
     properties: {
       tags: {},
       language: "language_example",
@@ -3803,11 +3704,10 @@ let body: Onesignal.DefaultApiUpdateUserRequest = {
         },
       ],
     },
-  },
-};
+  };
 
 try {
-  const response = await apiInstance.updateUser(body);
+  const response = await apiInstance.updateUser(appId, aliasLabel, aliasId, updateUserRequest);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -3825,11 +3725,10 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **updateUserRequest** | **UpdateUserRequest**|  |
  **appId** | [**string**] |  | defaults to undefined
  **aliasLabel** | [**string**] |  | defaults to undefined
  **aliasId** | [**string**] |  | defaults to undefined
-
+ **updateUserRequest** | **UpdateUserRequest** |  |
 
 ### Return type
 
@@ -3857,7 +3756,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **viewApiKeys**
-> ApiKeyTokensListResponse viewApiKeys()
+> ApiKeyTokensListResponse viewApiKeys(appId)
 
 View the details of all of your current app API keys (Rich Authentication Token) for a single OneSignal app.
 
@@ -3872,13 +3771,11 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiViewApiKeysRequest = {
-  // string
-  appId: "00000000-0000-0000-0000-000000000000",
-};
+// string
+const appId: string = "00000000-0000-0000-0000-000000000000";
 
 try {
-  const response = await apiInstance.viewApiKeys(body);
+  const response = await apiInstance.viewApiKeys(appId);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -3897,7 +3794,6 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **appId** | [**string**] |  | defaults to undefined
-
 
 ### Return type
 
@@ -3923,7 +3819,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **viewTemplate**
-> TemplateResource viewTemplate()
+> TemplateResource viewTemplate(templateId, appId)
 
 Fetch a single template by id.
 
@@ -3938,15 +3834,13 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiViewTemplateRequest = {
-  // string
-  templateId: "e4d3c2b1-a09f-4f1e-8d7c-6b5a4f3e2d1c",
-  // string
-  appId: "00000000-0000-0000-0000-000000000000",
-};
+// string
+const templateId: string = "e4d3c2b1-a09f-4f1e-8d7c-6b5a4f3e2d1c";
+// string
+const appId: string = "00000000-0000-0000-0000-000000000000";
 
 try {
-  const response = await apiInstance.viewTemplate(body);
+  const response = await apiInstance.viewTemplate(templateId, appId);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -3966,7 +3860,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **templateId** | [**string**] |  | defaults to undefined
  **appId** | [**string**] |  | defaults to undefined
-
 
 ### Return type
 
@@ -3993,7 +3886,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **viewTemplates**
-> TemplatesListResponse viewTemplates()
+> TemplatesListResponse viewTemplates(appId, limit, offset, channel)
 
 List templates for an app.
 
@@ -4008,19 +3901,17 @@ const configuration = Onesignal.createConfiguration({
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
-let body: Onesignal.DefaultApiViewTemplatesRequest = {
-  // string | Your OneSignal App ID in UUID v4 format.
-  appId: "00000000-0000-0000-0000-000000000000",
-  // number | Maximum number of templates. Default and max is 50. (optional)
-  limit: 10,
-  // number | Pagination offset. (optional)
-  offset: 0,
-  // 'push' | 'email' | 'sms' | Filter by delivery channel. (optional)
-  channel: "push",
-};
+// string | Your OneSignal App ID in UUID v4 format.
+const appId: string = "00000000-0000-0000-0000-000000000000";
+// number | Maximum number of templates. Default and max is 50. (optional)
+const limit: number = 10;
+// number | Pagination offset. (optional)
+const offset: number = 0;
+// 'push' | 'email' | 'sms' | Filter by delivery channel. (optional)
+const channel: 'push' | 'email' | 'sms' = "push";
 
 try {
-  const response = await apiInstance.viewTemplates(body);
+  const response = await apiInstance.viewTemplates(appId, limit, offset, channel);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -4042,7 +3933,6 @@ Name | Type | Description  | Notes
  **limit** | [**number**] | Maximum number of templates. Default and max is 50. | (optional) defaults to 50
  **offset** | [**number**] | Pagination offset. | (optional) defaults to 0
  **channel** | [**&#39;push&#39; | &#39;email&#39; | &#39;sms&#39;**]**Array<&#39;push&#39; &#124; &#39;email&#39; &#124; &#39;sms&#39;>** | Filter by delivery channel. | (optional) defaults to undefined
-
 
 ### Return type
 
