@@ -13,6 +13,8 @@
 
 The OneSignal Node client is a server SDK for NodeJS. A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at [onesignal.com](https://onesignal.com).
 
+> **Building with an AI agent or LLM?** See [AGENTS.md](https://github.com/OneSignal/node-onesignal/blob/main/AGENTS.md) for an agent-oriented integration guide — authentication, calling conventions, idempotent retries, and the full API reference.
+
 ## Installation
 
 ```sh
