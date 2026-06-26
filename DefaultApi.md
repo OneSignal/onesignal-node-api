@@ -85,6 +85,20 @@ The hero `createNotification` example below demonstrates the branch pattern expl
 
 Set `include_aliases.external_id` to a list of External IDs and set `target_channel` to `push` / `email` / `sms`. The alias label must be the literal string `external_id` — camelCase variants such as `externalId` are silently ignored and yield zero recipients. **Do not confuse** this with the deprecated top-level `external_id` notification field — a separate correlation/idempotency field with its own 30-day dedup keyspace (parallel to `idempotency_key`, not an alias) and no targeting effect.
 
+### `…Enum` types are string unions, not enums
+
+Generated type aliases whose names end in `Enum` — e.g. `FilterRelationEnum` (`">" | "<" | "=" | …`), `OperatorOperatorEnum` (`"OR" | "AND"`), and the `target_channel` types `NotificationTargetChannelEnum` / `BasicNotificationTargetChannelEnum` (`"push" | "email" | "sms"`) — are **TypeScript string-literal unions, not runtime `enum`s**. Assign the literal string directly; there is no enum object to import and no cast is required:
+
+```typescript
+const filter: Onesignal.Filter = { field: 'tag', key: 'level', relation: '>', value: '10' };
+const operator: Onesignal.Operator = { operator: 'AND' };
+
+const notification = new Onesignal.Notification();
+notification.target_channel = 'push'; // not NotificationTargetChannelEnum.Push
+```
+
+TypeScript still checks the literal against the allowed set — `relation: '>'` compiles, `relation: 'gt'` is a compile error — so you keep autocomplete and type-safety without `enum` syntax or casts.
+
 # **cancelNotification**
 > GenericSuccessBoolResponse cancelNotification(appId, notificationId)
 
