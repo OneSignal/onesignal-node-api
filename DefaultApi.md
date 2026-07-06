@@ -111,7 +111,7 @@ Used to stop a scheduled or currently outgoing notification
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -179,7 +179,7 @@ Copy a template to a destination app.
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    organizationApiKey: '<YOUR_ORGANIZATION_API_KEY>',
+    organizationApiKey: 'YOUR_ORGANIZATION_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -250,7 +250,7 @@ Upserts one or more Aliases to an existing User identified by (:alias_label, :al
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -329,7 +329,7 @@ Upserts one or more Aliases for the User identified by :subscription_id.
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -405,7 +405,7 @@ Use this API to create a new App API Key (also called a Rich Authentication Toke
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    organizationApiKey: '<YOUR_ORGANIZATION_API_KEY>',
+    organizationApiKey: 'YOUR_ORGANIZATION_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -477,7 +477,7 @@ Creates a new OneSignal app
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    organizationApiKey: '<YOUR_ORGANIZATION_API_KEY>',
+    organizationApiKey: 'YOUR_ORGANIZATION_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -563,7 +563,7 @@ The Custom Events API allows you to record user events. Custom events can repres
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -642,7 +642,7 @@ import Onesignal from '@onesignal/node-onesignal';
 import { randomUUID } from 'node:crypto';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -693,7 +693,7 @@ The `createNotificationWithRetry` method mirrors `createNotification` but genera
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const client = new Onesignal.DefaultApi(configuration);
 
@@ -765,7 +765,7 @@ Create a segment visible and usable in the dashboard and API - Required: OneSign
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -848,7 +848,7 @@ Creates a new Subscription under the User provided. Useful to add email addresse
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -944,7 +944,7 @@ Create reusable message templates for push, email, and SMS channels.
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -1154,7 +1154,7 @@ Creates a User, optionally Subscriptions owned by the User as well as Aliases. A
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -1281,7 +1281,7 @@ Deletes an alias by alias label
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -1356,7 +1356,7 @@ Delete a specific Rich Authentication Token (App API Key) for a OneSignal app. R
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    organizationApiKey: '<YOUR_ORGANIZATION_API_KEY>',
+    organizationApiKey: 'YOUR_ORGANIZATION_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -1422,7 +1422,7 @@ Delete a segment (not user devices) - Required: OneSignal Paid Plan You can dele
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -1490,7 +1490,7 @@ Deletes the Subscription.
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -1559,7 +1559,7 @@ Delete a template by id.
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -1626,7 +1626,7 @@ Removes the User identified by (:alias_label, :alias_id), and all Subscriptions 
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -1697,7 +1697,7 @@ Generate a compressed CSV report of all of the events data for a notification. T
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -1765,7 +1765,7 @@ Generate a compressed CSV export of all of your current user data This method ca
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -1838,7 +1838,7 @@ Lists all Aliases for the User identified by (:alias_label, :alias_id).
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -1909,7 +1909,7 @@ Lists all Aliases for the User identified by :subscription_id.
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -1976,7 +1976,7 @@ View the details of a single OneSignal app
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    organizationApiKey: '<YOUR_ORGANIZATION_API_KEY>',
+    organizationApiKey: 'YOUR_ORGANIZATION_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -2040,7 +2040,7 @@ View the details of all of your current OneSignal apps
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    organizationApiKey: '<YOUR_ORGANIZATION_API_KEY>',
+    organizationApiKey: 'YOUR_ORGANIZATION_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -2098,7 +2098,7 @@ View the details of a single notification and outcomes associated with it
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -2166,7 +2166,7 @@ Name | Type | Description  | Notes
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -2238,7 +2238,7 @@ View the details of multiple notifications
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -2314,7 +2314,7 @@ View the details of all the outcomes associated with your app  &#x1F6A7; Require
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -2393,7 +2393,7 @@ Returns an array of segments from an app.
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -2463,7 +2463,7 @@ Returns the User’s properties, Aliases, and Subscriptions.
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -2534,7 +2534,7 @@ Rotate a Rich Authentication Token (App API Key) for a OneSignal app. Rotating a
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    organizationApiKey: '<YOUR_ORGANIZATION_API_KEY>',
+    organizationApiKey: 'YOUR_ORGANIZATION_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -2600,7 +2600,7 @@ Remotely start a Live Activity on iOS devices via OneSignal’s REST API.
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -2796,7 +2796,7 @@ Transfers this Subscription to the User identified by the identity in the payloa
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -2872,7 +2872,7 @@ Unsubscribe an email with a token when using your own custom email unsubscribe l
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -2942,7 +2942,7 @@ Update a Rich Authentication Token (App API Key) for a OneSignal app.
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    organizationApiKey: '<YOUR_ORGANIZATION_API_KEY>',
+    organizationApiKey: 'YOUR_ORGANIZATION_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -3017,7 +3017,7 @@ Updates the name or configuration settings of an existing OneSignal app
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    organizationApiKey: '<YOUR_ORGANIZATION_API_KEY>',
+    organizationApiKey: 'YOUR_ORGANIZATION_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -3106,7 +3106,7 @@ Updates a specified live activity.
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -3274,7 +3274,7 @@ Updates an existing Subscription’s properties.
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -3366,7 +3366,7 @@ Update properties on an existing OneSignal subscription using its token.
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -3459,7 +3459,7 @@ Update an existing template.
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -3673,7 +3673,7 @@ Updates an existing User’s properties.
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -3781,7 +3781,7 @@ View the details of all of your current app API keys (Rich Authentication Token)
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    organizationApiKey: '<YOUR_ORGANIZATION_API_KEY>',
+    organizationApiKey: 'YOUR_ORGANIZATION_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -3844,7 +3844,7 @@ Fetch a single template by id.
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
@@ -3911,7 +3911,7 @@ List templates for an app.
 import Onesignal from '@onesignal/node-onesignal';
 
 const configuration = Onesignal.createConfiguration({
-    restApiKey: '<YOUR_REST_API_KEY>',
+    restApiKey: 'YOUR_REST_API_KEY',
 });
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
