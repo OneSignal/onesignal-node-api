@@ -1,5 +1,7 @@
 # Changelog
 
+## [5.11.0](https://github.com/OneSignal/onesignal-node-api/compare/v5.10.0...v5.11.0) (2026-07-09)
+
 ## [5.10.0](https://github.com/OneSignal/onesignal-node-api/compare/v5.9.0...v5.10.0) (2026-06-24)
 
 ### Features
