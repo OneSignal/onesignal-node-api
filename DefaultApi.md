@@ -116,7 +116,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // string
 const notificationId: string = "b3a0c8bd-3a4c-4b22-9a73-3f1a8c2d1b88";
 
@@ -186,7 +186,7 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 // string
 const templateId: string = "e4d3c2b1-a09f-4f1e-8d7c-6b5a4f3e2d1c";
 // string
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // CopyTemplateRequest
 const copyTemplateRequest: Onesignal.CopyTemplateRequest = {
     target_app_id: "target_app_id_example",
@@ -255,7 +255,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // string
 const aliasLabel: string = "external_id";
 // string
@@ -334,7 +334,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // string
 const subscriptionId: string = "7e4c5b9a-1f60-4d07-9b1a-2e8c8d2cae51";
 // UserIdentityBody
@@ -410,7 +410,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // CreateApiKeyRequest
 const createApiKeyRequest: Onesignal.CreateApiKeyRequest = {
     name: "name_example",
@@ -568,7 +568,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string | Your OneSignal App ID in UUID v4 format.
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // CustomEventsRequest
 const customEventsRequest: Onesignal.CustomEventsRequest = {
     events: [
@@ -700,6 +700,7 @@ const client = new Onesignal.DefaultApi(configuration);
 const notification = new Onesignal.Notification();
 notification.app_id = 'YOUR_APP_ID';
 notification.contents = { en: 'Hello from OneSignal!' };
+notification.headings = { en: 'Push Notification' };
 notification.include_aliases = { external_id: ['YOUR_USER_EXTERNAL_ID'] };
 notification.target_channel = 'push';
 // No idempotency_key set: the helper generates a UUIDv4 and reuses it across retries.
@@ -770,17 +771,17 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string | The OneSignal App ID for your app.  Available in Keys & IDs.
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // Segment (optional)
 const segment: Onesignal.Segment = {
-    id: "id_example",
-    name: "name_example",
+    id: "d5d4d1a8-1c9e-42fb-b3f2-56d3a5a9a8b7",
+    name: "Inactive 30 days",
     filters: [
       {
-        field: "field_example",
-        key: "key_example",
-        value: "value_example",
-        hours_ago: "hours_ago_example",
+        field: "tag",
+        key: "level",
+        value: "10",
+        hours_ago: "24",
         radius: 3.14,
         lat: 3.14,
         long: 3.14,
@@ -853,7 +854,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // string
 const aliasLabel: string = "external_id";
 // string
@@ -861,23 +862,23 @@ const aliasId: string = "YOUR_USER_EXTERNAL_ID";
 // SubscriptionBody
 const subscriptionBody: Onesignal.SubscriptionBody = {
     subscription: {
-      id: "id_example",
+      id: "e4e87830-b954-4363-b7bc-1f01dbaee5c8",
       type: "iOSPush",
-      token: "token_example",
+      token: "d5d4d1a8-1c9e-42fb-b3f2-56d3a5a9a8b7",
       enabled: true,
       notification_types: 1,
-      session_time: 1,
+      session_time: 60,
       session_count: 1,
-      sdk: "sdk_example",
-      device_model: "device_model_example",
-      device_os: "device_os_example",
+      sdk: "5.2.0",
+      device_model: "iPhone14,2",
+      device_os: "17.1",
       rooted: true,
       test_type: 1,
-      app_version: "app_version_example",
+      app_version: "1.0.0",
       net_type: 1,
-      carrier: "carrier_example",
-      web_auth: "web_auth_example",
-      web_p256: "web_p256_example",
+      carrier: "Verizon",
+      web_auth: "5DUmpGmLuTxWCLj5lJpwLQ",
+      web_p256: "BM5-r8DauQXOb2E-3PgLPjSvjT0Ao9v5oJhw8bZ0cW7Vh6BbmPYcqbbCEJ1P2sK0hZ7HxSh9zGyU5pQk1jJmZ8A",
     },
   };
 
@@ -1159,51 +1160,51 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // User
 const user: Onesignal.User = {
     properties: {
       tags: {},
-      language: "language_example",
-      timezone_id: "timezone_id_example",
+      language: "en",
+      timezone_id: "America/Los_Angeles",
       lat: 3.14,
       long: 3.14,
-      country: "country_example",
+      country: "US",
       first_active: 1,
       last_active: 1,
       amount_spent: 3.14,
       purchases: [
         {
-          sku: "sku_example",
-          amount: "amount_example",
-          iso: "iso_example",
+          sku: "com.example.coins100",
+          amount: "0.99",
+          iso: "USD",
           count: 1,
         },
       ],
-      ip: "ip_example",
+      ip: "203.0.113.10",
     },
     identity: {
       "key": "key_example",
     },
     subscriptions: [
       {
-        id: "id_example",
+        id: "e4e87830-b954-4363-b7bc-1f01dbaee5c8",
         type: "iOSPush",
-        token: "token_example",
+        token: "d5d4d1a8-1c9e-42fb-b3f2-56d3a5a9a8b7",
         enabled: true,
         notification_types: 1,
-        session_time: 1,
+        session_time: 60,
         session_count: 1,
-        sdk: "sdk_example",
-        device_model: "device_model_example",
-        device_os: "device_os_example",
+        sdk: "5.2.0",
+        device_model: "iPhone14,2",
+        device_os: "17.1",
         rooted: true,
         test_type: 1,
-        app_version: "app_version_example",
+        app_version: "1.0.0",
         net_type: 1,
-        carrier: "carrier_example",
-        web_auth: "web_auth_example",
-        web_p256: "web_p256_example",
+        carrier: "Verizon",
+        web_auth: "5DUmpGmLuTxWCLj5lJpwLQ",
+        web_p256: "BM5-r8DauQXOb2E-3PgLPjSvjT0Ao9v5oJhw8bZ0cW7Vh6BbmPYcqbbCEJ1P2sK0hZ7HxSh9zGyU5pQk1jJmZ8A",
       },
     ],
   };
@@ -1286,7 +1287,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // string
 const aliasLabel: string = "external_id";
 // string
@@ -1361,7 +1362,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // string
 const tokenId: string = "0aa1b2c3-d4e5-46f7-8899-aabbccddeeff";
 
@@ -1427,7 +1428,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string | The OneSignal App ID for your app.  Available in Keys & IDs.
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // string | The segment_id can be found in the URL of the segment when viewing it in the dashboard.
 const segmentId: string = "d6c5a3e1-9f17-44a1-9d10-7c0e4a2b1c8e";
 
@@ -1495,7 +1496,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // string
 const subscriptionId: string = "7e4c5b9a-1f60-4d07-9b1a-2e8c8d2cae51";
 
@@ -1566,7 +1567,7 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 // string
 const templateId: string = "e4d3c2b1-a09f-4f1e-8d7c-6b5a4f3e2d1c";
 // string
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 
 try {
   const response = await apiInstance.deleteTemplate(templateId, appId);
@@ -1631,7 +1632,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // string
 const aliasLabel: string = "external_id";
 // string
@@ -1704,7 +1705,7 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 // string | The ID of the notification to export events from.
 const notificationId: string = "b3a0c8bd-3a4c-4b22-9a73-3f1a8c2d1b88";
 // string | The ID of the app that the notification belongs to.
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 
 try {
   const response = await apiInstance.exportEvents(notificationId, appId);
@@ -1770,7 +1771,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string | The app ID that you want to export devices from
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // ExportSubscriptionsRequestBody (optional)
 const exportSubscriptionsRequestBody: Onesignal.ExportSubscriptionsRequestBody = {
     extra_fields: [
@@ -1843,7 +1844,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // string
 const aliasLabel: string = "external_id";
 // string
@@ -1914,7 +1915,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // string
 const subscriptionId: string = "7e4c5b9a-1f60-4d07-9b1a-2e8c8d2cae51";
 
@@ -1981,7 +1982,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string | An app id
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 
 try {
   const response = await apiInstance.getApp(appId);
@@ -2103,7 +2104,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // string
 const notificationId: string = "b3a0c8bd-3a4c-4b22-9a73-3f1a8c2d1b88";
 
@@ -2243,7 +2244,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string | The app ID that you want to view notifications from
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // number | How many notifications to return.  Max is 50.  Default is 50. (optional)
 const limit: number = 10;
 // number | Page offset.  Default is 0.  Results are sorted by queued_at in descending order.  queued_at is a representation of the time that the notification was queued at. (optional)
@@ -2319,7 +2320,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string | The OneSignal App ID for your app.  Available in Keys & IDs.
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // string | Required Comma-separated list of names and the value (sum/count) for the returned outcome data. Note: Clicks only support count aggregation. For out-of-the-box OneSignal outcomes such as click and session duration, please use the \"os\" prefix with two underscores. For other outcomes, please use the name specified by the user. Example:os__session_duration.count,os__click.count,CustomOutcomeName.sum 
 const outcomeNames: string = "os__session_duration.count,os__click.count";
 // string | Optional If outcome names contain any commas, then please specify only one value at a time. Example: outcome_names[]=os__click.count&outcome_names[]=Sales, Purchase.count where \"Sales, Purchase\" is the custom outcomes with a comma in the name.  (optional)
@@ -2398,7 +2399,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string | The OneSignal App ID for your app.  Available in Keys & IDs.
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // number | Segments are listed in ascending order of created_at date. offset will omit that number of segments from the beginning of the list. Eg offset 5, will remove the 5 earliest created Segments. (optional)
 const offset: number = 0;
 // number | The amount of Segments in the response. Maximum 300. (optional)
@@ -2468,7 +2469,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // string
 const aliasLabel: string = "external_id";
 // string
@@ -2539,7 +2540,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // string
 const tokenId: string = "0aa1b2c3-d4e5-46f7-8899-aabbccddeeff";
 
@@ -2605,7 +2606,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string | Your OneSignal App ID in UUID v4 format.
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // string | The name of the Live Activity defined in your app. This should match the attributes struct used in your app\'s Live Activity implementation.
 const activityType: string = "order_status";
 // StartLiveActivityRequest
@@ -2725,10 +2726,10 @@ const startLiveActivityRequest: Onesignal.StartLiveActivityRequest = {
     ],
     filters: [
       {
-        field: "field_example",
-        key: "key_example",
-        value: "value_example",
-        hours_ago: "hours_ago_example",
+        field: "tag",
+        key: "level",
+        value: "10",
+        hours_ago: "24",
         radius: 3.14,
         lat: 3.14,
         long: 3.14,
@@ -2801,7 +2802,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // string
 const subscriptionId: string = "7e4c5b9a-1f60-4d07-9b1a-2e8c8d2cae51";
 // TransferSubscriptionRequestBody
@@ -2877,7 +2878,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string | The OneSignal App ID for your app.  Available in Keys & IDs.
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // string | The id of the message found in the creation notification POST response, View Notifications GET response, or URL within the Message Report.
 const notificationId: string = "b3a0c8bd-3a4c-4b22-9a73-3f1a8c2d1b88";
 // string | The unsubscribe token that is generated via liquid syntax in {{subscription.unsubscribe_token}} when personalizing an email.
@@ -2947,7 +2948,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // string
 const tokenId: string = "0aa1b2c3-d4e5-46f7-8899-aabbccddeeff";
 // UpdateApiKeyRequest
@@ -3022,7 +3023,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string | An app id
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // App
 const app: Onesignal.App = {
     name: "name_example",
@@ -3111,7 +3112,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string | The OneSignal App ID for your app.  Available in Keys & IDs.
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // string | Live Activity record ID
 const activityId: string = "12345";
 // UpdateLiveActivityRequest
@@ -3279,29 +3280,29 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // string
 const subscriptionId: string = "7e4c5b9a-1f60-4d07-9b1a-2e8c8d2cae51";
 // SubscriptionBody
 const subscriptionBody: Onesignal.SubscriptionBody = {
     subscription: {
-      id: "id_example",
+      id: "e4e87830-b954-4363-b7bc-1f01dbaee5c8",
       type: "iOSPush",
-      token: "token_example",
+      token: "d5d4d1a8-1c9e-42fb-b3f2-56d3a5a9a8b7",
       enabled: true,
       notification_types: 1,
-      session_time: 1,
+      session_time: 60,
       session_count: 1,
-      sdk: "sdk_example",
-      device_model: "device_model_example",
-      device_os: "device_os_example",
+      sdk: "5.2.0",
+      device_model: "iPhone14,2",
+      device_os: "17.1",
       rooted: true,
       test_type: 1,
-      app_version: "app_version_example",
+      app_version: "1.0.0",
       net_type: 1,
-      carrier: "carrier_example",
-      web_auth: "web_auth_example",
-      web_p256: "web_p256_example",
+      carrier: "Verizon",
+      web_auth: "5DUmpGmLuTxWCLj5lJpwLQ",
+      web_p256: "BM5-r8DauQXOb2E-3PgLPjSvjT0Ao9v5oJhw8bZ0cW7Vh6BbmPYcqbbCEJ1P2sK0hZ7HxSh9zGyU5pQk1jJmZ8A",
     },
   };
 
@@ -3371,7 +3372,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string | Your OneSignal App ID in UUID v4 format.
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // string | The type of token to use when looking up the subscription. See Subscription Types.
 const tokenType: string = "Email";
 // string | The value of the token to lookup by (e.g., email address, phone number).
@@ -3379,23 +3380,23 @@ const token: string = "user@example.com";
 // SubscriptionBody
 const subscriptionBody: Onesignal.SubscriptionBody = {
     subscription: {
-      id: "id_example",
+      id: "e4e87830-b954-4363-b7bc-1f01dbaee5c8",
       type: "iOSPush",
-      token: "token_example",
+      token: "d5d4d1a8-1c9e-42fb-b3f2-56d3a5a9a8b7",
       enabled: true,
       notification_types: 1,
-      session_time: 1,
+      session_time: 60,
       session_count: 1,
-      sdk: "sdk_example",
-      device_model: "device_model_example",
-      device_os: "device_os_example",
+      sdk: "5.2.0",
+      device_model: "iPhone14,2",
+      device_os: "17.1",
       rooted: true,
       test_type: 1,
-      app_version: "app_version_example",
+      app_version: "1.0.0",
       net_type: 1,
-      carrier: "carrier_example",
-      web_auth: "web_auth_example",
-      web_p256: "web_p256_example",
+      carrier: "Verizon",
+      web_auth: "5DUmpGmLuTxWCLj5lJpwLQ",
+      web_p256: "BM5-r8DauQXOb2E-3PgLPjSvjT0Ao9v5oJhw8bZ0cW7Vh6BbmPYcqbbCEJ1P2sK0hZ7HxSh9zGyU5pQk1jJmZ8A",
     },
   };
 
@@ -3466,7 +3467,7 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 // string
 const templateId: string = "e4d3c2b1-a09f-4f1e-8d7c-6b5a4f3e2d1c";
 // string
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // UpdateTemplateRequest
 const updateTemplateRequest: Onesignal.UpdateTemplateRequest = {
     name: "name_example",
@@ -3678,7 +3679,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // string
 const aliasLabel: string = "external_id";
 // string
@@ -3687,23 +3688,23 @@ const aliasId: string = "YOUR_USER_EXTERNAL_ID";
 const updateUserRequest: Onesignal.UpdateUserRequest = {
     properties: {
       tags: {},
-      language: "language_example",
-      timezone_id: "timezone_id_example",
+      language: "en",
+      timezone_id: "America/Los_Angeles",
       lat: 3.14,
       long: 3.14,
-      country: "country_example",
+      country: "US",
       first_active: 1,
       last_active: 1,
       amount_spent: 3.14,
       purchases: [
         {
-          sku: "sku_example",
-          amount: "amount_example",
-          iso: "iso_example",
+          sku: "com.example.coins100",
+          amount: "0.99",
+          iso: "USD",
           count: 1,
         },
       ],
-      ip: "ip_example",
+      ip: "203.0.113.10",
     },
     refresh_device_metadata: false,
     deltas: {
@@ -3711,9 +3712,9 @@ const updateUserRequest: Onesignal.UpdateUserRequest = {
       session_count: 1,
       purchases: [
         {
-          sku: "sku_example",
-          amount: "amount_example",
-          iso: "iso_example",
+          sku: "com.example.coins100",
+          amount: "0.99",
+          iso: "USD",
           count: 1,
         },
       ],
@@ -3786,7 +3787,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 
 try {
   const response = await apiInstance.viewApiKeys(appId);
@@ -3851,7 +3852,7 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 // string
 const templateId: string = "e4d3c2b1-a09f-4f1e-8d7c-6b5a4f3e2d1c";
 // string
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 
 try {
   const response = await apiInstance.viewTemplate(templateId, appId);
@@ -3916,7 +3917,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // string | Your OneSignal App ID in UUID v4 format.
-const appId: string = "00000000-0000-0000-0000-000000000000";
+const appId: string = "YOUR_APP_ID";
 // number | Maximum number of templates. Default and max is 50. (optional)
 const limit: number = 10;
 // number | Pagination offset. (optional)
