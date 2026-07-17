@@ -23,5 +23,5 @@ export declare class FilterExpression {
     }[];
     constructor();
 }
-export type FilterExpressionRelationEnum = ">" | "<" | "=" | "!=" | "exists" | "not_exists" | "time_elapsed_gt" | "time_elapsed_lt";
+export type FilterExpressionRelationEnum = ">" | "<" | "=" | "!=" | "exists" | "not_exists" | "time_elapsed_gt" | "time_elapsed_lt" | "in_array" | "not_in_array";
 export type FilterExpressionOperatorEnum = "OR" | "AND";
