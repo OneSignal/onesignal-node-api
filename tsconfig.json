@@ -6,7 +6,6 @@
     "target": "es2020",
     "module": "commonjs",
     "esModuleInterop": true,
-    "moduleResolution": "node",
     "declaration": true,
 
     /* Additional Checks */
