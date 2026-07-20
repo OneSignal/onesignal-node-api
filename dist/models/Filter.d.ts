@@ -22,4 +22,4 @@ export declare class Filter {
     }[];
     constructor();
 }
-export type FilterRelationEnum = ">" | "<" | "=" | "!=" | "exists" | "not_exists" | "time_elapsed_gt" | "time_elapsed_lt";
+export type FilterRelationEnum = ">" | "<" | "=" | "!=" | "exists" | "not_exists" | "time_elapsed_gt" | "time_elapsed_lt" | "in_array" | "not_in_array";
