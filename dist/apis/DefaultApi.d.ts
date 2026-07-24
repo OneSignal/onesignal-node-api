@@ -15,6 +15,7 @@ import { ExportSubscriptionsRequestBody } from '../models/ExportSubscriptionsReq
 import { ExportSubscriptionsSuccessResponse } from '../models/ExportSubscriptionsSuccessResponse';
 import { GenericSuccessBoolResponse } from '../models/GenericSuccessBoolResponse';
 import { GetNotificationHistoryRequestBody } from '../models/GetNotificationHistoryRequestBody';
+import { GetSegmentSuccessResponse } from '../models/GetSegmentSuccessResponse';
 import { GetSegmentsSuccessResponse } from '../models/GetSegmentsSuccessResponse';
 import { Notification } from '../models/Notification';
 import { NotificationHistorySuccessResponse } from '../models/NotificationHistorySuccessResponse';
@@ -65,6 +66,7 @@ export declare class DefaultApiRequestFactory extends BaseAPIRequestFactory {
     getNotificationHistory(notificationId: string, getNotificationHistoryRequestBody: GetNotificationHistoryRequestBody, _options?: Configuration): Promise<RequestContext>;
     getNotifications(appId: string, limit?: number, offset?: number, kind?: 0 | 1 | 3, timeOffset?: string, _options?: Configuration): Promise<RequestContext>;
     getOutcomes(appId: string, outcomeNames: string, outcomeNames2?: string, outcomeTimeRange?: string, outcomePlatforms?: string, outcomeAttribution?: string, _options?: Configuration): Promise<RequestContext>;
+    getSegment(appId: string, segmentId: string, includeSegmentDetail?: boolean, _options?: Configuration): Promise<RequestContext>;
     getSegments(appId: string, offset?: number, limit?: number, _options?: Configuration): Promise<RequestContext>;
     getUser(appId: string, aliasLabel: string, aliasId: string, _options?: Configuration): Promise<RequestContext>;
     rotateApiKey(appId: string, tokenId: string, _options?: Configuration): Promise<RequestContext>;
@@ -111,6 +113,7 @@ export declare class DefaultApiResponseProcessor {
     getNotificationHistory(response: ResponseContext): Promise<NotificationHistorySuccessResponse>;
     getNotifications(response: ResponseContext): Promise<NotificationSlice>;
     getOutcomes(response: ResponseContext): Promise<OutcomesData>;
+    getSegment(response: ResponseContext): Promise<GetSegmentSuccessResponse>;
     getSegments(response: ResponseContext): Promise<GetSegmentsSuccessResponse>;
     getUser(response: ResponseContext): Promise<User>;
     rotateApiKey(response: ResponseContext): Promise<CreateApiKeyResponse>;

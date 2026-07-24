@@ -32,6 +32,7 @@ Method | HTTP request | Description
 [**getNotificationHistory**](DefaultApi.md#getNotificationHistory) | **POST** /notifications/{notification_id}/history | Notification History
 [**getNotifications**](DefaultApi.md#getNotifications) | **GET** /notifications | View notifications
 [**getOutcomes**](DefaultApi.md#getOutcomes) | **GET** /apps/{app_id}/outcomes | View Outcomes
+[**getSegment**](DefaultApi.md#getSegment) | **GET** /apps/{app_id}/segments/{segment_id} | View Segment
 [**getSegments**](DefaultApi.md#getSegments) | **GET** /apps/{app_id}/segments | Get Segments
 [**getUser**](DefaultApi.md#getUser) | **GET** /apps/{app_id}/users/by/{alias_label}/{alias_id} | 
 [**rotateApiKey**](DefaultApi.md#rotateApiKey) | **POST** /apps/{app_id}/auth/tokens/{token_id}/rotate | Rotate API key
@@ -2377,6 +2378,77 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | OK |  -  |
 **400** | Bad Request |  -  |
+**429** | Rate Limit Exceeded |  -  |
+**0** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
+
+# **getSegment**
+> GetSegmentSuccessResponse getSegment(appId, segmentId, includeSegmentDetail)
+
+Retrieve details for a single segment by its ID, including subscriber count and optionally segment metadata and filters.
+
+### Example
+
+
+```typescript
+import Onesignal from '@onesignal/node-onesignal';
+
+const configuration = Onesignal.createConfiguration({
+    restApiKey: 'YOUR_REST_API_KEY',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
+
+// string | The OneSignal App ID for your app.  Available in Keys & IDs.
+const appId: string = "YOUR_APP_ID";
+// string | The segment\'s unique identifier. Can be found using the View Segments API or in the URL of the segment when viewing it in the dashboard.
+const segmentId: string = "d6c5a3e1-9f17-44a1-9d10-7c0e4a2b1c8e";
+// boolean | Set to true to include segment metadata and filters in the response. (optional)
+const includeSegmentDetail: boolean = true;
+
+try {
+  const response = await apiInstance.getSegment(appId, segmentId, includeSegmentDetail);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("getSegment failed: HTTP " + e.code, e.errorMessages);
+  } else {
+    throw e;
+  }
+}
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **appId** | [**string**] | The OneSignal App ID for your app.  Available in Keys &amp; IDs. | defaults to undefined
+ **segmentId** | [**string**] | The segment\&#39;s unique identifier. Can be found using the View Segments API or in the URL of the segment when viewing it in the dashboard. | defaults to undefined
+ **includeSegmentDetail** | [**boolean**] | Set to true to include segment metadata and filters in the response. | (optional) defaults to undefined
+
+### Return type
+
+**GetSegmentSuccessResponse**
+
+### Authorization
+
+[rest_api_key](https://github.com/OneSignal/node-onesignal#configuration)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+**404** | Not Found |  -  |
 **429** | Rate Limit Exceeded |  -  |
 **0** | Unexpected error |  -  |
 

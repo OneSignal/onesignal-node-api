@@ -32,6 +32,7 @@ import { FilterExpression } from '../models/FilterExpression';
 import { GenericError } from '../models/GenericError';
 import { GenericSuccessBoolResponse } from '../models/GenericSuccessBoolResponse';
 import { GetNotificationHistoryRequestBody } from '../models/GetNotificationHistoryRequestBody';
+import { GetSegmentSuccessResponse } from '../models/GetSegmentSuccessResponse';
 import { GetSegmentsSuccessResponse } from '../models/GetSegmentsSuccessResponse';
 import { LanguageStringMap } from '../models/LanguageStringMap';
 import { Notification } from '../models/Notification';
@@ -54,6 +55,7 @@ import { Purchase } from '../models/Purchase';
 import { RateLimitError } from '../models/RateLimitError';
 import { Segment } from '../models/Segment';
 import { SegmentData } from '../models/SegmentData';
+import { SegmentDetails } from '../models/SegmentDetails';
 import { SegmentNotificationTarget } from '../models/SegmentNotificationTarget';
 import { StartLiveActivityRequest } from '../models/StartLiveActivityRequest';
 import { StartLiveActivitySuccessResponse } from '../models/StartLiveActivitySuccessResponse';
@@ -405,6 +407,18 @@ export class PromiseDefaultApi {
      */
     public getOutcomes(appId: string, outcomeNames: string, outcomeNames2?: string, outcomeTimeRange?: string, outcomePlatforms?: string, outcomeAttribution?: string, _options?: Configuration): Promise<OutcomesData> {
         const result = this.api.getOutcomes(appId, outcomeNames, outcomeNames2, outcomeTimeRange, outcomePlatforms, outcomeAttribution, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Retrieve details for a single segment by its ID, including subscriber count and optionally segment metadata and filters.
+     * View Segment
+     * @param appId The OneSignal App ID for your app.  Available in Keys &amp; IDs.
+     * @param segmentId The segment\&#39;s unique identifier. Can be found using the View Segments API or in the URL of the segment when viewing it in the dashboard.
+     * @param includeSegmentDetail Set to true to include segment metadata and filters in the response.
+     */
+    public getSegment(appId: string, segmentId: string, includeSegmentDetail?: boolean, _options?: Configuration): Promise<GetSegmentSuccessResponse> {
+        const result = this.api.getSegment(appId, segmentId, includeSegmentDetail, _options);
         return result.toPromise();
     }
 

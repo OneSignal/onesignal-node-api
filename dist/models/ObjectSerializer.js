@@ -43,6 +43,7 @@ __exportStar(require("./FilterExpression"), exports);
 __exportStar(require("./GenericError"), exports);
 __exportStar(require("./GenericSuccessBoolResponse"), exports);
 __exportStar(require("./GetNotificationHistoryRequestBody"), exports);
+__exportStar(require("./GetSegmentSuccessResponse"), exports);
 __exportStar(require("./GetSegmentsSuccessResponse"), exports);
 __exportStar(require("./LanguageStringMap"), exports);
 __exportStar(require("./Notification"), exports);
@@ -65,6 +66,7 @@ __exportStar(require("./Purchase"), exports);
 __exportStar(require("./RateLimitError"), exports);
 __exportStar(require("./Segment"), exports);
 __exportStar(require("./SegmentData"), exports);
+__exportStar(require("./SegmentDetails"), exports);
 __exportStar(require("./SegmentNotificationTarget"), exports);
 __exportStar(require("./StartLiveActivityRequest"), exports);
 __exportStar(require("./StartLiveActivitySuccessResponse"), exports);
@@ -110,6 +112,7 @@ const FilterExpression_1 = require("./FilterExpression");
 const GenericError_1 = require("./GenericError");
 const GenericSuccessBoolResponse_1 = require("./GenericSuccessBoolResponse");
 const GetNotificationHistoryRequestBody_1 = require("./GetNotificationHistoryRequestBody");
+const GetSegmentSuccessResponse_1 = require("./GetSegmentSuccessResponse");
 const GetSegmentsSuccessResponse_1 = require("./GetSegmentsSuccessResponse");
 const LanguageStringMap_1 = require("./LanguageStringMap");
 const Notification_1 = require("./Notification");
@@ -132,6 +135,7 @@ const Purchase_1 = require("./Purchase");
 const RateLimitError_1 = require("./RateLimitError");
 const Segment_1 = require("./Segment");
 const SegmentData_1 = require("./SegmentData");
+const SegmentDetails_1 = require("./SegmentDetails");
 const SegmentNotificationTarget_1 = require("./SegmentNotificationTarget");
 const StartLiveActivityRequest_1 = require("./StartLiveActivityRequest");
 const StartLiveActivitySuccessResponse_1 = require("./StartLiveActivitySuccessResponse");
@@ -186,6 +190,7 @@ let enumsMap = new Set([
     "NotificationWithMetaHuaweiCategoryEnum",
     "OperatorOperatorEnum",
     "OutcomeDataAggregationEnum",
+    "SegmentDetailsSourceEnum",
     "StartLiveActivityRequestEventEnum",
     "SubscriptionTypeEnum",
     "SubscriptionNotificationTargetTargetChannelEnum",
@@ -222,6 +227,7 @@ let typeMap = {
     "GenericError": GenericError_1.GenericError,
     "GenericSuccessBoolResponse": GenericSuccessBoolResponse_1.GenericSuccessBoolResponse,
     "GetNotificationHistoryRequestBody": GetNotificationHistoryRequestBody_1.GetNotificationHistoryRequestBody,
+    "GetSegmentSuccessResponse": GetSegmentSuccessResponse_1.GetSegmentSuccessResponse,
     "GetSegmentsSuccessResponse": GetSegmentsSuccessResponse_1.GetSegmentsSuccessResponse,
     "LanguageStringMap": LanguageStringMap_1.LanguageStringMap,
     "Notification": Notification_1.Notification,
@@ -244,6 +250,7 @@ let typeMap = {
     "RateLimitError": RateLimitError_1.RateLimitError,
     "Segment": Segment_1.Segment,
     "SegmentData": SegmentData_1.SegmentData,
+    "SegmentDetails": SegmentDetails_1.SegmentDetails,
     "SegmentNotificationTarget": SegmentNotificationTarget_1.SegmentNotificationTarget,
     "StartLiveActivityRequest": StartLiveActivityRequest_1.StartLiveActivityRequest,
     "StartLiveActivitySuccessResponse": StartLiveActivitySuccessResponse_1.StartLiveActivitySuccessResponse,

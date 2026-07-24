@@ -31,6 +31,7 @@ import { FilterExpression } from '../models/FilterExpression';
 import { GenericError } from '../models/GenericError';
 import { GenericSuccessBoolResponse } from '../models/GenericSuccessBoolResponse';
 import { GetNotificationHistoryRequestBody } from '../models/GetNotificationHistoryRequestBody';
+import { GetSegmentSuccessResponse } from '../models/GetSegmentSuccessResponse';
 import { GetSegmentsSuccessResponse } from '../models/GetSegmentsSuccessResponse';
 import { LanguageStringMap } from '../models/LanguageStringMap';
 import { Notification } from '../models/Notification';
@@ -53,6 +54,7 @@ import { Purchase } from '../models/Purchase';
 import { RateLimitError } from '../models/RateLimitError';
 import { Segment } from '../models/Segment';
 import { SegmentData } from '../models/SegmentData';
+import { SegmentDetails } from '../models/SegmentDetails';
 import { SegmentNotificationTarget } from '../models/SegmentNotificationTarget';
 import { StartLiveActivityRequest } from '../models/StartLiveActivityRequest';
 import { StartLiveActivitySuccessResponse } from '../models/StartLiveActivitySuccessResponse';
@@ -786,6 +788,32 @@ export class ObservableDefaultApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getOutcomes(rsp)));
+            }));
+    }
+
+    /**
+     * Retrieve details for a single segment by its ID, including subscriber count and optionally segment metadata and filters.
+     * View Segment
+     * @param appId The OneSignal App ID for your app.  Available in Keys &amp; IDs.
+     * @param segmentId The segment\&#39;s unique identifier. Can be found using the View Segments API or in the URL of the segment when viewing it in the dashboard.
+     * @param includeSegmentDetail Set to true to include segment metadata and filters in the response.
+     */
+    public getSegment(appId: string, segmentId: string, includeSegmentDetail?: boolean, _options?: Configuration): Observable<GetSegmentSuccessResponse> {
+        const requestContextPromise = this.requestFactory.getSegment(appId, segmentId, includeSegmentDetail, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getSegment(rsp)));
             }));
     }
 

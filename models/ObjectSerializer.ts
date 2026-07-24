@@ -26,6 +26,7 @@ export * from './FilterExpression';
 export * from './GenericError';
 export * from './GenericSuccessBoolResponse';
 export * from './GetNotificationHistoryRequestBody';
+export * from './GetSegmentSuccessResponse';
 export * from './GetSegmentsSuccessResponse';
 export * from './LanguageStringMap';
 export * from './Notification';
@@ -48,6 +49,7 @@ export * from './Purchase';
 export * from './RateLimitError';
 export * from './Segment';
 export * from './SegmentData';
+export * from './SegmentDetails';
 export * from './SegmentNotificationTarget';
 export * from './StartLiveActivityRequest';
 export * from './StartLiveActivitySuccessResponse';
@@ -94,6 +96,7 @@ import { FilterExpression       , FilterExpressionRelationEnum  , FilterExpressi
 import { GenericError } from './GenericError';
 import { GenericSuccessBoolResponse } from './GenericSuccessBoolResponse';
 import { GetNotificationHistoryRequestBody, GetNotificationHistoryRequestBodyEventsEnum     } from './GetNotificationHistoryRequestBody';
+import { GetSegmentSuccessResponse } from './GetSegmentSuccessResponse';
 import { GetSegmentsSuccessResponse } from './GetSegmentsSuccessResponse';
 import { LanguageStringMap } from './LanguageStringMap';
 import { Notification             , NotificationTargetChannelEnum     , NotificationAggregationEnum                                                                                                   , NotificationHuaweiCategoryEnum     } from './Notification';
@@ -116,6 +119,7 @@ import { Purchase } from './Purchase';
 import { RateLimitError } from './RateLimitError';
 import { Segment } from './Segment';
 import { SegmentData } from './SegmentData';
+import { SegmentDetails    , SegmentDetailsSourceEnum    } from './SegmentDetails';
 import { SegmentNotificationTarget } from './SegmentNotificationTarget';
 import { StartLiveActivityRequest , StartLiveActivityRequestEventEnum                 } from './StartLiveActivityRequest';
 import { StartLiveActivitySuccessResponse } from './StartLiveActivitySuccessResponse';
@@ -175,6 +179,7 @@ let enumsMap: Set<string> = new Set<string>([
     "NotificationWithMetaHuaweiCategoryEnum",
     "OperatorOperatorEnum",
     "OutcomeDataAggregationEnum",
+    "SegmentDetailsSourceEnum",
     "StartLiveActivityRequestEventEnum",
     "SubscriptionTypeEnum",
     "SubscriptionNotificationTargetTargetChannelEnum",
@@ -212,6 +217,7 @@ let typeMap: {[index: string]: any} = {
     "GenericError": GenericError,
     "GenericSuccessBoolResponse": GenericSuccessBoolResponse,
     "GetNotificationHistoryRequestBody": GetNotificationHistoryRequestBody,
+    "GetSegmentSuccessResponse": GetSegmentSuccessResponse,
     "GetSegmentsSuccessResponse": GetSegmentsSuccessResponse,
     "LanguageStringMap": LanguageStringMap,
     "Notification": Notification,
@@ -234,6 +240,7 @@ let typeMap: {[index: string]: any} = {
     "RateLimitError": RateLimitError,
     "Segment": Segment,
     "SegmentData": SegmentData,
+    "SegmentDetails": SegmentDetails,
     "SegmentNotificationTarget": SegmentNotificationTarget,
     "StartLiveActivityRequest": StartLiveActivityRequest,
     "StartLiveActivitySuccessResponse": StartLiveActivitySuccessResponse,
