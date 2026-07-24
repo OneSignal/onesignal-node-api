@@ -123,6 +123,10 @@ class PromiseDefaultApi {
         const result = this.api.getOutcomes(appId, outcomeNames, outcomeNames2, outcomeTimeRange, outcomePlatforms, outcomeAttribution, _options);
         return result.toPromise();
     }
+    getSegment(appId, segmentId, includeSegmentDetail, _options) {
+        const result = this.api.getSegment(appId, segmentId, includeSegmentDetail, _options);
+        return result.toPromise();
+    }
     getSegments(appId, offset, limit, _options) {
         const result = this.api.getSegments(appId, offset, limit, _options);
         return result.toPromise();

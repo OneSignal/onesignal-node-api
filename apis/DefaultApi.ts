@@ -27,6 +27,7 @@ import { ExportSubscriptionsSuccessResponse } from '../models/ExportSubscription
 import { GenericError } from '../models/GenericError';
 import { GenericSuccessBoolResponse } from '../models/GenericSuccessBoolResponse';
 import { GetNotificationHistoryRequestBody } from '../models/GetNotificationHistoryRequestBody';
+import { GetSegmentSuccessResponse } from '../models/GetSegmentSuccessResponse';
 import { GetSegmentsSuccessResponse } from '../models/GetSegmentsSuccessResponse';
 import { Notification } from '../models/Notification';
 import { NotificationHistorySuccessResponse } from '../models/NotificationHistorySuccessResponse';
@@ -1628,6 +1629,62 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         // Query Params
         if (outcomeAttribution !== undefined) {
             requestContext.setQueryParam("outcome_attribution", ObjectSerializer.serialize(outcomeAttribution, "string", ""));
+        }
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["rest_api_key"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Retrieve details for a single segment by its ID, including subscriber count and optionally segment metadata and filters.
+     * View Segment
+     * @param appId The OneSignal App ID for your app.  Available in Keys &amp; IDs.
+     * @param segmentId The segment\&#39;s unique identifier. Can be found using the View Segments API or in the URL of the segment when viewing it in the dashboard.
+     * @param includeSegmentDetail Set to true to include segment metadata and filters in the response.
+     */
+    public async getSegment(appId: string, segmentId: string, includeSegmentDetail?: boolean, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("DefaultApi", "getSegment", "appId");
+        }
+
+
+        // verify required parameter 'segmentId' is not null or undefined
+        if (segmentId === null || segmentId === undefined) {
+            throw new RequiredError("DefaultApi", "getSegment", "segmentId");
+        }
+
+
+
+        // Path Params
+        const localVarPath = '/apps/{app_id}/segments/{segment_id}'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'segment_id' + '}', encodeURIComponent(String(segmentId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Always add the One Signal telemetry to the request.
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+
+        // Query Params
+        if (includeSegmentDetail !== undefined) {
+            requestContext.setQueryParam("include-segment-detail", ObjectSerializer.serialize(includeSegmentDetail, "boolean", ""));
         }
 
 
@@ -4169,6 +4226,63 @@ export class DefaultApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "OutcomesData", ""
             ) as OutcomesData;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to getSegment
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async getSegment(response: ResponseContext): Promise<GetSegmentSuccessResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: GetSegmentSuccessResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GetSegmentSuccessResponse", ""
+            ) as GetSegmentSuccessResponse;
+            return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("404", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(404, "Not Found", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimitError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimitError", ""
+            ) as RateLimitError;
+            throw new ApiException<RateLimitError>(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if (isCodeInRange("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: GetSegmentSuccessResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GetSegmentSuccessResponse", ""
+            ) as GetSegmentSuccessResponse;
             return body;
         }
 

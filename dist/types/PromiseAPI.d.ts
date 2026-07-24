@@ -15,6 +15,7 @@ import { ExportSubscriptionsRequestBody } from '../models/ExportSubscriptionsReq
 import { ExportSubscriptionsSuccessResponse } from '../models/ExportSubscriptionsSuccessResponse';
 import { GenericSuccessBoolResponse } from '../models/GenericSuccessBoolResponse';
 import { GetNotificationHistoryRequestBody } from '../models/GetNotificationHistoryRequestBody';
+import { GetSegmentSuccessResponse } from '../models/GetSegmentSuccessResponse';
 import { GetSegmentsSuccessResponse } from '../models/GetSegmentsSuccessResponse';
 import { Notification } from '../models/Notification';
 import { NotificationHistorySuccessResponse } from '../models/NotificationHistorySuccessResponse';
@@ -70,6 +71,7 @@ export declare class PromiseDefaultApi {
     getNotificationHistory(notificationId: string, getNotificationHistoryRequestBody: GetNotificationHistoryRequestBody, _options?: Configuration): Promise<NotificationHistorySuccessResponse>;
     getNotifications(appId: string, limit?: number, offset?: number, kind?: 0 | 1 | 3, timeOffset?: string, _options?: Configuration): Promise<NotificationSlice>;
     getOutcomes(appId: string, outcomeNames: string, outcomeNames2?: string, outcomeTimeRange?: string, outcomePlatforms?: string, outcomeAttribution?: string, _options?: Configuration): Promise<OutcomesData>;
+    getSegment(appId: string, segmentId: string, includeSegmentDetail?: boolean, _options?: Configuration): Promise<GetSegmentSuccessResponse>;
     getSegments(appId: string, offset?: number, limit?: number, _options?: Configuration): Promise<GetSegmentsSuccessResponse>;
     getUser(appId: string, aliasLabel: string, aliasId: string, _options?: Configuration): Promise<User>;
     rotateApiKey(appId: string, tokenId: string, _options?: Configuration): Promise<CreateApiKeyResponse>;

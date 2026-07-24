@@ -90,6 +90,9 @@ class ObjectDefaultApi {
     getOutcomes(param, options) {
         return this.api.getOutcomes(param.appId, param.outcomeNames, param.outcomeNames2, param.outcomeTimeRange, param.outcomePlatforms, param.outcomeAttribution, options).toPromise();
     }
+    getSegment(param, options) {
+        return this.api.getSegment(param.appId, param.segmentId, param.includeSegmentDetail, options).toPromise();
+    }
     getSegments(param, options) {
         return this.api.getSegments(param.appId, param.offset, param.limit, options).toPromise();
     }

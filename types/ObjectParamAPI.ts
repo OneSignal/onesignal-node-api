@@ -30,6 +30,7 @@ import { FilterExpression } from '../models/FilterExpression';
 import { GenericError } from '../models/GenericError';
 import { GenericSuccessBoolResponse } from '../models/GenericSuccessBoolResponse';
 import { GetNotificationHistoryRequestBody } from '../models/GetNotificationHistoryRequestBody';
+import { GetSegmentSuccessResponse } from '../models/GetSegmentSuccessResponse';
 import { GetSegmentsSuccessResponse } from '../models/GetSegmentsSuccessResponse';
 import { LanguageStringMap } from '../models/LanguageStringMap';
 import { Notification } from '../models/Notification';
@@ -52,6 +53,7 @@ import { Purchase } from '../models/Purchase';
 import { RateLimitError } from '../models/RateLimitError';
 import { Segment } from '../models/Segment';
 import { SegmentData } from '../models/SegmentData';
+import { SegmentDetails } from '../models/SegmentDetails';
 import { SegmentNotificationTarget } from '../models/SegmentNotificationTarget';
 import { StartLiveActivityRequest } from '../models/StartLiveActivityRequest';
 import { StartLiveActivitySuccessResponse } from '../models/StartLiveActivitySuccessResponse';
@@ -557,6 +559,27 @@ export interface DefaultApiGetOutcomesRequest {
      * @memberof DefaultApigetOutcomes
      */
     outcomeAttribution?: string
+}
+
+export interface DefaultApiGetSegmentRequest {
+    /**
+     * The OneSignal App ID for your app.  Available in Keys &amp; IDs.
+     * @type string
+     * @memberof DefaultApigetSegment
+     */
+    appId: string
+    /**
+     * The segment\&#39;s unique identifier. Can be found using the View Segments API or in the URL of the segment when viewing it in the dashboard.
+     * @type string
+     * @memberof DefaultApigetSegment
+     */
+    segmentId: string
+    /**
+     * Set to true to include segment metadata and filters in the response.
+     * @type boolean
+     * @memberof DefaultApigetSegment
+     */
+    includeSegmentDetail?: boolean
 }
 
 export interface DefaultApiGetSegmentsRequest {
@@ -1131,6 +1154,15 @@ export class ObjectDefaultApi {
      */
     public getOutcomes(param: DefaultApiGetOutcomesRequest, options?: Configuration): Promise<OutcomesData> {
         return this.api.getOutcomes(param.appId, param.outcomeNames, param.outcomeNames2, param.outcomeTimeRange, param.outcomePlatforms, param.outcomeAttribution,  options).toPromise();
+    }
+
+    /**
+     * Retrieve details for a single segment by its ID, including subscriber count and optionally segment metadata and filters.
+     * View Segment
+     * @param param the request object
+     */
+    public getSegment(param: DefaultApiGetSegmentRequest, options?: Configuration): Promise<GetSegmentSuccessResponse> {
+        return this.api.getSegment(param.appId, param.segmentId, param.includeSegmentDetail,  options).toPromise();
     }
 
     /**
