@@ -5,6 +5,10 @@ import { Configuration} from '../configuration'
 import { ApiKeyToken } from '../models/ApiKeyToken';
 import { ApiKeyTokensListResponse } from '../models/ApiKeyTokensListResponse';
 import { App } from '../models/App';
+import { AuditLogActor } from '../models/AuditLogActor';
+import { AuditLogContext } from '../models/AuditLogContext';
+import { AuditLogEvent } from '../models/AuditLogEvent';
+import { AuditLogTarget } from '../models/AuditLogTarget';
 import { BasicNotification } from '../models/BasicNotification';
 import { BasicNotificationAllOf } from '../models/BasicNotificationAllOf';
 import { BasicNotificationAllOfAndroidBackgroundLayout } from '../models/BasicNotificationAllOfAndroidBackgroundLayout';
@@ -30,8 +34,10 @@ import { FilterExpression } from '../models/FilterExpression';
 import { GenericError } from '../models/GenericError';
 import { GenericSuccessBoolResponse } from '../models/GenericSuccessBoolResponse';
 import { GetNotificationHistoryRequestBody } from '../models/GetNotificationHistoryRequestBody';
+import { GetSegmentSuccessResponse } from '../models/GetSegmentSuccessResponse';
 import { GetSegmentsSuccessResponse } from '../models/GetSegmentsSuccessResponse';
 import { LanguageStringMap } from '../models/LanguageStringMap';
+import { ListAuditLogsSuccessResponse } from '../models/ListAuditLogsSuccessResponse';
 import { Notification } from '../models/Notification';
 import { NotificationAllOf } from '../models/NotificationAllOf';
 import { NotificationHistorySuccessResponse } from '../models/NotificationHistorySuccessResponse';
@@ -52,6 +58,7 @@ import { Purchase } from '../models/Purchase';
 import { RateLimitError } from '../models/RateLimitError';
 import { Segment } from '../models/Segment';
 import { SegmentData } from '../models/SegmentData';
+import { SegmentDetails } from '../models/SegmentDetails';
 import { SegmentNotificationTarget } from '../models/SegmentNotificationTarget';
 import { StartLiveActivityRequest } from '../models/StartLiveActivityRequest';
 import { StartLiveActivitySuccessResponse } from '../models/StartLiveActivitySuccessResponse';
@@ -64,6 +71,8 @@ import { TransferSubscriptionRequestBody } from '../models/TransferSubscriptionR
 import { UpdateApiKeyRequest } from '../models/UpdateApiKeyRequest';
 import { UpdateLiveActivityRequest } from '../models/UpdateLiveActivityRequest';
 import { UpdateLiveActivitySuccessResponse } from '../models/UpdateLiveActivitySuccessResponse';
+import { UpdateSegmentRequest } from '../models/UpdateSegmentRequest';
+import { UpdateSegmentSuccessResponse } from '../models/UpdateSegmentSuccessResponse';
 import { UpdateTemplateRequest } from '../models/UpdateTemplateRequest';
 import { UpdateUserRequest } from '../models/UpdateUserRequest';
 import { User } from '../models/User';
@@ -559,6 +568,27 @@ export interface DefaultApiGetOutcomesRequest {
     outcomeAttribution?: string
 }
 
+export interface DefaultApiGetSegmentRequest {
+    /**
+     * The OneSignal App ID for your app.  Available in Keys &amp; IDs.
+     * @type string
+     * @memberof DefaultApigetSegment
+     */
+    appId: string
+    /**
+     * The segment\&#39;s unique identifier. Can be found using the View Segments API or in the URL of the segment when viewing it in the dashboard.
+     * @type string
+     * @memberof DefaultApigetSegment
+     */
+    segmentId: string
+    /**
+     * Set to true to include segment metadata and filters in the response.
+     * @type boolean
+     * @memberof DefaultApigetSegment
+     */
+    includeSegmentDetail?: boolean
+}
+
 export interface DefaultApiGetSegmentsRequest {
     /**
      * The OneSignal App ID for your app.  Available in Keys &amp; IDs.
@@ -599,6 +629,81 @@ export interface DefaultApiGetUserRequest {
      * @memberof DefaultApigetUser
      */
     aliasId: string
+}
+
+export interface DefaultApiListAuditLogsRequest {
+    /**
+     * The UUID of the organization to retrieve audit logs for. Must match the authenticated Organization API Key.
+     * @type string
+     * @memberof DefaultApilistAuditLogs
+     */
+    organizationId: string
+    /**
+     * Start of the time range in ISO 8601 format (e.g. 2026-02-01T00:00:00Z). Required unless cursor is provided. Must be within the last 90 days.
+     * @type string
+     * @memberof DefaultApilistAuditLogs
+     */
+    startTime?: string
+    /**
+     * End of the time range in ISO 8601 format. Defaults to the current time. Must be after start_time.
+     * @type string
+     * @memberof DefaultApilistAuditLogs
+     */
+    endTime?: string
+    /**
+     * Pagination cursor returned in a previous response as next_cursor. When provided, start_time and end_time are ignored.
+     * @type string
+     * @memberof DefaultApilistAuditLogs
+     */
+    cursor?: string
+    /**
+     * Maximum number of events to return per page. Minimum 1, maximum 100. Values outside this range are clamped automatically by the server.
+     * @type number
+     * @memberof DefaultApilistAuditLogs
+     */
+    limit?: number
+    /**
+     * Filter events by app UUID. Accepts up to 10 values. Org-level events are always included.
+     * @type Array&lt;string&gt;
+     * @memberof DefaultApilistAuditLogs
+     */
+    appIds?: Array<string>
+    /**
+     * Filter by action type (e.g. notification.sent, segment.created). Accepts up to 20 values.
+     * @type Array&lt;string&gt;
+     * @memberof DefaultApilistAuditLogs
+     */
+    actions?: Array<string>
+    /**
+     * Filter by actor UUID (the user or service that performed the action). Accepts up to 10 values.
+     * @type Array&lt;string&gt;
+     * @memberof DefaultApilistAuditLogs
+     */
+    actorIds?: Array<string>
+    /**
+     * Filter by actor email address. Accepts up to 10 values.
+     * @type Array&lt;string&gt;
+     * @memberof DefaultApilistAuditLogs
+     */
+    actorEmails?: Array<string>
+    /**
+     * Filter by the type of resource the action was performed on (e.g. notification, segment, journey). Accepts up to 10 values.
+     * @type Array&lt;string&gt;
+     * @memberof DefaultApilistAuditLogs
+     */
+    targetTypes?: Array<string>
+    /**
+     * Filter by the UUID of the resource the action was performed on. Accepts up to 10 values.
+     * @type Array&lt;string&gt;
+     * @memberof DefaultApilistAuditLogs
+     */
+    targetIds?: Array<string>
+    /**
+     * Filter by the IP address the action originated from. Accepts up to 10 values.
+     * @type Array&lt;string&gt;
+     * @memberof DefaultApilistAuditLogs
+     */
+    ipAddresses?: Array<string>
 }
 
 export interface DefaultApiRotateApiKeyRequest {
@@ -734,6 +839,27 @@ export interface DefaultApiUpdateLiveActivityRequest {
      * @memberof DefaultApiupdateLiveActivity
      */
     updateLiveActivityRequest: UpdateLiveActivityRequest
+}
+
+export interface DefaultApiUpdateSegmentRequest {
+    /**
+     * The OneSignal App ID for your app.  Available in Keys &amp; IDs.
+     * @type string
+     * @memberof DefaultApiupdateSegment
+     */
+    appId: string
+    /**
+     * The segment\&#39;s unique identifier. Can be found using the View Segments API or in the URL of the segment when viewing it in the dashboard.
+     * @type string
+     * @memberof DefaultApiupdateSegment
+     */
+    segmentId: string
+    /**
+     * 
+     * @type UpdateSegmentRequest
+     * @memberof DefaultApiupdateSegment
+     */
+    updateSegmentRequest?: UpdateSegmentRequest
 }
 
 export interface DefaultApiUpdateSubscriptionRequest {
@@ -1134,6 +1260,15 @@ export class ObjectDefaultApi {
     }
 
     /**
+     * Retrieve details for a single segment by its ID, including subscriber count and optionally segment metadata and filters.
+     * View Segment
+     * @param param the request object
+     */
+    public getSegment(param: DefaultApiGetSegmentRequest, options?: Configuration): Promise<GetSegmentSuccessResponse> {
+        return this.api.getSegment(param.appId, param.segmentId, param.includeSegmentDetail,  options).toPromise();
+    }
+
+    /**
      * Returns an array of segments from an app.
      * Get Segments
      * @param param the request object
@@ -1148,6 +1283,15 @@ export class ObjectDefaultApi {
      */
     public getUser(param: DefaultApiGetUserRequest, options?: Configuration): Promise<User> {
         return this.api.getUser(param.appId, param.aliasLabel, param.aliasId,  options).toPromise();
+    }
+
+    /**
+     * Retrieve a paginated, time-scoped list of audit log events for an organization. Requires an Enterprise plan with the audit logs entitlement enabled.
+     * List audit logs
+     * @param param the request object
+     */
+    public listAuditLogs(param: DefaultApiListAuditLogsRequest, options?: Configuration): Promise<ListAuditLogsSuccessResponse> {
+        return this.api.listAuditLogs(param.organizationId, param.startTime, param.endTime, param.cursor, param.limit, param.appIds, param.actions, param.actorIds, param.actorEmails, param.targetTypes, param.targetIds, param.ipAddresses,  options).toPromise();
     }
 
     /**
@@ -1210,6 +1354,15 @@ export class ObjectDefaultApi {
      */
     public updateLiveActivity(param: DefaultApiUpdateLiveActivityRequest, options?: Configuration): Promise<UpdateLiveActivitySuccessResponse> {
         return this.api.updateLiveActivity(param.appId, param.activityId, param.updateLiveActivityRequest,  options).toPromise();
+    }
+
+    /**
+     * Update an existing segment\'s name and/or filters. The name parameter is always required. When filters are provided, all existing filters are replaced with the new ones.
+     * Update Segment
+     * @param param the request object
+     */
+    public updateSegment(param: DefaultApiUpdateSegmentRequest, options?: Configuration): Promise<UpdateSegmentSuccessResponse> {
+        return this.api.updateSegment(param.appId, param.segmentId, param.updateSegmentRequest,  options).toPromise();
     }
 
     /**

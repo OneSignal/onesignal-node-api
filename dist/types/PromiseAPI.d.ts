@@ -15,7 +15,9 @@ import { ExportSubscriptionsRequestBody } from '../models/ExportSubscriptionsReq
 import { ExportSubscriptionsSuccessResponse } from '../models/ExportSubscriptionsSuccessResponse';
 import { GenericSuccessBoolResponse } from '../models/GenericSuccessBoolResponse';
 import { GetNotificationHistoryRequestBody } from '../models/GetNotificationHistoryRequestBody';
+import { GetSegmentSuccessResponse } from '../models/GetSegmentSuccessResponse';
 import { GetSegmentsSuccessResponse } from '../models/GetSegmentsSuccessResponse';
+import { ListAuditLogsSuccessResponse } from '../models/ListAuditLogsSuccessResponse';
 import { Notification } from '../models/Notification';
 import { NotificationHistorySuccessResponse } from '../models/NotificationHistorySuccessResponse';
 import { NotificationSlice } from '../models/NotificationSlice';
@@ -32,6 +34,8 @@ import { TransferSubscriptionRequestBody } from '../models/TransferSubscriptionR
 import { UpdateApiKeyRequest } from '../models/UpdateApiKeyRequest';
 import { UpdateLiveActivityRequest } from '../models/UpdateLiveActivityRequest';
 import { UpdateLiveActivitySuccessResponse } from '../models/UpdateLiveActivitySuccessResponse';
+import { UpdateSegmentRequest } from '../models/UpdateSegmentRequest';
+import { UpdateSegmentSuccessResponse } from '../models/UpdateSegmentSuccessResponse';
 import { UpdateTemplateRequest } from '../models/UpdateTemplateRequest';
 import { UpdateUserRequest } from '../models/UpdateUserRequest';
 import { User } from '../models/User';
@@ -70,8 +74,10 @@ export declare class PromiseDefaultApi {
     getNotificationHistory(notificationId: string, getNotificationHistoryRequestBody: GetNotificationHistoryRequestBody, _options?: Configuration): Promise<NotificationHistorySuccessResponse>;
     getNotifications(appId: string, limit?: number, offset?: number, kind?: 0 | 1 | 3, timeOffset?: string, _options?: Configuration): Promise<NotificationSlice>;
     getOutcomes(appId: string, outcomeNames: string, outcomeNames2?: string, outcomeTimeRange?: string, outcomePlatforms?: string, outcomeAttribution?: string, _options?: Configuration): Promise<OutcomesData>;
+    getSegment(appId: string, segmentId: string, includeSegmentDetail?: boolean, _options?: Configuration): Promise<GetSegmentSuccessResponse>;
     getSegments(appId: string, offset?: number, limit?: number, _options?: Configuration): Promise<GetSegmentsSuccessResponse>;
     getUser(appId: string, aliasLabel: string, aliasId: string, _options?: Configuration): Promise<User>;
+    listAuditLogs(organizationId: string, startTime?: string, endTime?: string, cursor?: string, limit?: number, appIds?: Array<string>, actions?: Array<string>, actorIds?: Array<string>, actorEmails?: Array<string>, targetTypes?: Array<string>, targetIds?: Array<string>, ipAddresses?: Array<string>, _options?: Configuration): Promise<ListAuditLogsSuccessResponse>;
     rotateApiKey(appId: string, tokenId: string, _options?: Configuration): Promise<CreateApiKeyResponse>;
     startLiveActivity(appId: string, activityType: string, startLiveActivityRequest: StartLiveActivityRequest, _options?: Configuration): Promise<StartLiveActivitySuccessResponse>;
     transferSubscription(appId: string, subscriptionId: string, transferSubscriptionRequestBody: TransferSubscriptionRequestBody, _options?: Configuration): Promise<UserIdentityBody>;
@@ -79,6 +85,7 @@ export declare class PromiseDefaultApi {
     updateApiKey(appId: string, tokenId: string, updateApiKeyRequest: UpdateApiKeyRequest, _options?: Configuration): Promise<object>;
     updateApp(appId: string, app: App, _options?: Configuration): Promise<App>;
     updateLiveActivity(appId: string, activityId: string, updateLiveActivityRequest: UpdateLiveActivityRequest, _options?: Configuration): Promise<UpdateLiveActivitySuccessResponse>;
+    updateSegment(appId: string, segmentId: string, updateSegmentRequest?: UpdateSegmentRequest, _options?: Configuration): Promise<UpdateSegmentSuccessResponse>;
     updateSubscription(appId: string, subscriptionId: string, subscriptionBody: SubscriptionBody, _options?: Configuration): Promise<void>;
     updateSubscriptionByToken(appId: string, tokenType: string, token: string, subscriptionBody: SubscriptionBody, _options?: Configuration): Promise<object>;
     updateTemplate(templateId: string, appId: string, updateTemplateRequest: UpdateTemplateRequest, _options?: Configuration): Promise<TemplateResource>;

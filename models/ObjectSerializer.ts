@@ -1,6 +1,10 @@
 export * from './ApiKeyToken';
 export * from './ApiKeyTokensListResponse';
 export * from './App';
+export * from './AuditLogActor';
+export * from './AuditLogContext';
+export * from './AuditLogEvent';
+export * from './AuditLogTarget';
 export * from './BasicNotification';
 export * from './BasicNotificationAllOf';
 export * from './BasicNotificationAllOfAndroidBackgroundLayout';
@@ -26,8 +30,10 @@ export * from './FilterExpression';
 export * from './GenericError';
 export * from './GenericSuccessBoolResponse';
 export * from './GetNotificationHistoryRequestBody';
+export * from './GetSegmentSuccessResponse';
 export * from './GetSegmentsSuccessResponse';
 export * from './LanguageStringMap';
+export * from './ListAuditLogsSuccessResponse';
 export * from './Notification';
 export * from './NotificationAllOf';
 export * from './NotificationHistorySuccessResponse';
@@ -48,6 +54,7 @@ export * from './Purchase';
 export * from './RateLimitError';
 export * from './Segment';
 export * from './SegmentData';
+export * from './SegmentDetails';
 export * from './SegmentNotificationTarget';
 export * from './StartLiveActivityRequest';
 export * from './StartLiveActivitySuccessResponse';
@@ -60,6 +67,8 @@ export * from './TransferSubscriptionRequestBody';
 export * from './UpdateApiKeyRequest';
 export * from './UpdateLiveActivityRequest';
 export * from './UpdateLiveActivitySuccessResponse';
+export * from './UpdateSegmentRequest';
+export * from './UpdateSegmentSuccessResponse';
 export * from './UpdateTemplateRequest';
 export * from './UpdateUserRequest';
 export * from './User';
@@ -69,6 +78,10 @@ export * from './WebButton';
 import { ApiKeyToken    , ApiKeyTokenIpAllowlistModeEnum    } from './ApiKeyToken';
 import { ApiKeyTokensListResponse } from './ApiKeyTokensListResponse';
 import { App            , AppApnsEnvEnum                        } from './App';
+import { AuditLogActor } from './AuditLogActor';
+import { AuditLogContext } from './AuditLogContext';
+import { AuditLogEvent } from './AuditLogEvent';
+import { AuditLogTarget } from './AuditLogTarget';
 import { BasicNotification             , BasicNotificationTargetChannelEnum     , BasicNotificationAggregationEnum                                                                                                   , BasicNotificationHuaweiCategoryEnum    } from './BasicNotification';
 import { BasicNotificationAllOf   , BasicNotificationAllOfAggregationEnum                                                                                                   , BasicNotificationAllOfHuaweiCategoryEnum    } from './BasicNotificationAllOf';
 import { BasicNotificationAllOfAndroidBackgroundLayout } from './BasicNotificationAllOfAndroidBackgroundLayout';
@@ -94,8 +107,10 @@ import { FilterExpression       , FilterExpressionRelationEnum  , FilterExpressi
 import { GenericError } from './GenericError';
 import { GenericSuccessBoolResponse } from './GenericSuccessBoolResponse';
 import { GetNotificationHistoryRequestBody, GetNotificationHistoryRequestBodyEventsEnum     } from './GetNotificationHistoryRequestBody';
+import { GetSegmentSuccessResponse } from './GetSegmentSuccessResponse';
 import { GetSegmentsSuccessResponse } from './GetSegmentsSuccessResponse';
 import { LanguageStringMap } from './LanguageStringMap';
+import { ListAuditLogsSuccessResponse } from './ListAuditLogsSuccessResponse';
 import { Notification             , NotificationTargetChannelEnum     , NotificationAggregationEnum                                                                                                   , NotificationHuaweiCategoryEnum     } from './Notification';
 import { NotificationAllOf } from './NotificationAllOf';
 import { NotificationHistorySuccessResponse } from './NotificationHistorySuccessResponse';
@@ -116,6 +131,7 @@ import { Purchase } from './Purchase';
 import { RateLimitError } from './RateLimitError';
 import { Segment } from './Segment';
 import { SegmentData } from './SegmentData';
+import { SegmentDetails    , SegmentDetailsSourceEnum    } from './SegmentDetails';
 import { SegmentNotificationTarget } from './SegmentNotificationTarget';
 import { StartLiveActivityRequest , StartLiveActivityRequestEventEnum                 } from './StartLiveActivityRequest';
 import { StartLiveActivitySuccessResponse } from './StartLiveActivitySuccessResponse';
@@ -128,6 +144,8 @@ import { TransferSubscriptionRequestBody } from './TransferSubscriptionRequestBo
 import { UpdateApiKeyRequest , UpdateApiKeyRequestIpAllowlistModeEnum    } from './UpdateApiKeyRequest';
 import { UpdateLiveActivityRequest , UpdateLiveActivityRequestEventEnum          } from './UpdateLiveActivityRequest';
 import { UpdateLiveActivitySuccessResponse } from './UpdateLiveActivitySuccessResponse';
+import { UpdateSegmentRequest } from './UpdateSegmentRequest';
+import { UpdateSegmentSuccessResponse } from './UpdateSegmentSuccessResponse';
 import { UpdateTemplateRequest } from './UpdateTemplateRequest';
 import { UpdateUserRequest } from './UpdateUserRequest';
 import { User } from './User';
@@ -175,6 +193,7 @@ let enumsMap: Set<string> = new Set<string>([
     "NotificationWithMetaHuaweiCategoryEnum",
     "OperatorOperatorEnum",
     "OutcomeDataAggregationEnum",
+    "SegmentDetailsSourceEnum",
     "StartLiveActivityRequestEventEnum",
     "SubscriptionTypeEnum",
     "SubscriptionNotificationTargetTargetChannelEnum",
@@ -187,6 +206,10 @@ let typeMap: {[index: string]: any} = {
     "ApiKeyToken": ApiKeyToken,
     "ApiKeyTokensListResponse": ApiKeyTokensListResponse,
     "App": App,
+    "AuditLogActor": AuditLogActor,
+    "AuditLogContext": AuditLogContext,
+    "AuditLogEvent": AuditLogEvent,
+    "AuditLogTarget": AuditLogTarget,
     "BasicNotification": BasicNotification,
     "BasicNotificationAllOf": BasicNotificationAllOf,
     "BasicNotificationAllOfAndroidBackgroundLayout": BasicNotificationAllOfAndroidBackgroundLayout,
@@ -212,8 +235,10 @@ let typeMap: {[index: string]: any} = {
     "GenericError": GenericError,
     "GenericSuccessBoolResponse": GenericSuccessBoolResponse,
     "GetNotificationHistoryRequestBody": GetNotificationHistoryRequestBody,
+    "GetSegmentSuccessResponse": GetSegmentSuccessResponse,
     "GetSegmentsSuccessResponse": GetSegmentsSuccessResponse,
     "LanguageStringMap": LanguageStringMap,
+    "ListAuditLogsSuccessResponse": ListAuditLogsSuccessResponse,
     "Notification": Notification,
     "NotificationAllOf": NotificationAllOf,
     "NotificationHistorySuccessResponse": NotificationHistorySuccessResponse,
@@ -234,6 +259,7 @@ let typeMap: {[index: string]: any} = {
     "RateLimitError": RateLimitError,
     "Segment": Segment,
     "SegmentData": SegmentData,
+    "SegmentDetails": SegmentDetails,
     "SegmentNotificationTarget": SegmentNotificationTarget,
     "StartLiveActivityRequest": StartLiveActivityRequest,
     "StartLiveActivitySuccessResponse": StartLiveActivitySuccessResponse,
@@ -246,6 +272,8 @@ let typeMap: {[index: string]: any} = {
     "UpdateApiKeyRequest": UpdateApiKeyRequest,
     "UpdateLiveActivityRequest": UpdateLiveActivityRequest,
     "UpdateLiveActivitySuccessResponse": UpdateLiveActivitySuccessResponse,
+    "UpdateSegmentRequest": UpdateSegmentRequest,
+    "UpdateSegmentSuccessResponse": UpdateSegmentSuccessResponse,
     "UpdateTemplateRequest": UpdateTemplateRequest,
     "UpdateUserRequest": UpdateUserRequest,
     "User": User,

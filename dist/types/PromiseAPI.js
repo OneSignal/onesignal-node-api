@@ -123,12 +123,20 @@ class PromiseDefaultApi {
         const result = this.api.getOutcomes(appId, outcomeNames, outcomeNames2, outcomeTimeRange, outcomePlatforms, outcomeAttribution, _options);
         return result.toPromise();
     }
+    getSegment(appId, segmentId, includeSegmentDetail, _options) {
+        const result = this.api.getSegment(appId, segmentId, includeSegmentDetail, _options);
+        return result.toPromise();
+    }
     getSegments(appId, offset, limit, _options) {
         const result = this.api.getSegments(appId, offset, limit, _options);
         return result.toPromise();
     }
     getUser(appId, aliasLabel, aliasId, _options) {
         const result = this.api.getUser(appId, aliasLabel, aliasId, _options);
+        return result.toPromise();
+    }
+    listAuditLogs(organizationId, startTime, endTime, cursor, limit, appIds, actions, actorIds, actorEmails, targetTypes, targetIds, ipAddresses, _options) {
+        const result = this.api.listAuditLogs(organizationId, startTime, endTime, cursor, limit, appIds, actions, actorIds, actorEmails, targetTypes, targetIds, ipAddresses, _options);
         return result.toPromise();
     }
     rotateApiKey(appId, tokenId, _options) {
@@ -157,6 +165,10 @@ class PromiseDefaultApi {
     }
     updateLiveActivity(appId, activityId, updateLiveActivityRequest, _options) {
         const result = this.api.updateLiveActivity(appId, activityId, updateLiveActivityRequest, _options);
+        return result.toPromise();
+    }
+    updateSegment(appId, segmentId, updateSegmentRequest, _options) {
+        const result = this.api.updateSegment(appId, segmentId, updateSegmentRequest, _options);
         return result.toPromise();
     }
     updateSubscription(appId, subscriptionId, subscriptionBody, _options) {
