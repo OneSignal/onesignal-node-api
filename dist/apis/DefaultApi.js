@@ -547,7 +547,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
         if (appId === null || appId === undefined) {
             throw new baseapi_1.RequiredError("DefaultApi", "exportEvents", "appId");
         }
-        const localVarPath = '/notifications/{notification_id}/export_events?app_id={app_id}'
+        const localVarPath = '/notifications/{notification_id}/export_events'
             .replace('{' + 'notification_id' + '}', encodeURIComponent(String(notificationId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");

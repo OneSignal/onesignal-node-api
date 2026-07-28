@@ -35,6 +35,7 @@ export declare class BasicNotificationAllOf {
     'mutable_content'?: boolean;
     'target_content_identifier'?: string;
     'big_picture'?: string;
+    'global_image'?: string;
     'huawei_big_picture'?: string;
     'adm_big_picture'?: string;
     'chrome_big_picture'?: string;
