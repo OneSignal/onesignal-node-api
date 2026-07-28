@@ -1121,7 +1121,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/notifications/{notification_id}/export_events?app_id={app_id}'
+        const localVarPath = '/notifications/{notification_id}/export_events'
             .replace('{' + 'notification_id' + '}', encodeURIComponent(String(notificationId)));
 
         // Make Request Context

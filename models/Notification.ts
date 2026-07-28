@@ -176,6 +176,10 @@ export class Notification {
     */
     'big_picture'?: string;
     /**
+    * Channel: Push Notifications Platform: All Picture to display on all platforms that support it. Must be a URL to an image file. Platform-specific picture fields (big_picture, huawei_big_picture, adm_big_picture, chrome_web_image, ios_attachments, firefox_icon) take precedence over this value when set. 
+    */
+    'global_image'?: string;
+    /**
     * Channel: Push Notifications Platform: Huawei Picture to display in the expanded view. Can be a drawable resource name or a URL. 
     */
     'huawei_big_picture'?: string;
@@ -732,6 +736,12 @@ export class Notification {
         {
             "name": "big_picture",
             "baseName": "big_picture",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "global_image",
+            "baseName": "global_image",
             "type": "string",
             "format": ""
         },

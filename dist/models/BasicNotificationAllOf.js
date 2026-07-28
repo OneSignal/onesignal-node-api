@@ -198,6 +198,12 @@ BasicNotificationAllOf.attributeTypeMap = [
         "format": ""
     },
     {
+        "name": "global_image",
+        "baseName": "global_image",
+        "type": "string",
+        "format": ""
+    },
+    {
         "name": "huawei_big_picture",
         "baseName": "huawei_big_picture",
         "type": "string",

@@ -402,6 +402,9 @@ class ObjectSerializer {
             if (!typeMap[type]) {
                 return data;
             }
+            if (typeof data !== "object") {
+                return data;
+            }
             let instance = new typeMap[type]();
             let attributeTypes = typeMap[type].getAttributeTypeMap();
             for (let index in attributeTypes) {
@@ -448,10 +451,15 @@ class ObjectSerializer {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
         }
-        if (mediaType === "application/json") {
+        if (mediaType === "application/json" || mediaType.endsWith("+json")) {
             return JSON.parse(rawData);
         }
-        throw new Error("The mediaType " + mediaType + " is not supported by ObjectSerializer.parse.");
+        try {
+            return JSON.parse(rawData);
+        }
+        catch (err) {
+            return rawData;
+        }
     }
 }
 exports.ObjectSerializer = ObjectSerializer;
