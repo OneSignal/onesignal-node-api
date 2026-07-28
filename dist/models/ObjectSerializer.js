@@ -18,6 +18,10 @@ exports.ObjectSerializer = void 0;
 __exportStar(require("./ApiKeyToken"), exports);
 __exportStar(require("./ApiKeyTokensListResponse"), exports);
 __exportStar(require("./App"), exports);
+__exportStar(require("./AuditLogActor"), exports);
+__exportStar(require("./AuditLogContext"), exports);
+__exportStar(require("./AuditLogEvent"), exports);
+__exportStar(require("./AuditLogTarget"), exports);
 __exportStar(require("./BasicNotification"), exports);
 __exportStar(require("./BasicNotificationAllOf"), exports);
 __exportStar(require("./BasicNotificationAllOfAndroidBackgroundLayout"), exports);
@@ -43,8 +47,10 @@ __exportStar(require("./FilterExpression"), exports);
 __exportStar(require("./GenericError"), exports);
 __exportStar(require("./GenericSuccessBoolResponse"), exports);
 __exportStar(require("./GetNotificationHistoryRequestBody"), exports);
+__exportStar(require("./GetSegmentSuccessResponse"), exports);
 __exportStar(require("./GetSegmentsSuccessResponse"), exports);
 __exportStar(require("./LanguageStringMap"), exports);
+__exportStar(require("./ListAuditLogsSuccessResponse"), exports);
 __exportStar(require("./Notification"), exports);
 __exportStar(require("./NotificationAllOf"), exports);
 __exportStar(require("./NotificationHistorySuccessResponse"), exports);
@@ -65,6 +71,7 @@ __exportStar(require("./Purchase"), exports);
 __exportStar(require("./RateLimitError"), exports);
 __exportStar(require("./Segment"), exports);
 __exportStar(require("./SegmentData"), exports);
+__exportStar(require("./SegmentDetails"), exports);
 __exportStar(require("./SegmentNotificationTarget"), exports);
 __exportStar(require("./StartLiveActivityRequest"), exports);
 __exportStar(require("./StartLiveActivitySuccessResponse"), exports);
@@ -77,6 +84,8 @@ __exportStar(require("./TransferSubscriptionRequestBody"), exports);
 __exportStar(require("./UpdateApiKeyRequest"), exports);
 __exportStar(require("./UpdateLiveActivityRequest"), exports);
 __exportStar(require("./UpdateLiveActivitySuccessResponse"), exports);
+__exportStar(require("./UpdateSegmentRequest"), exports);
+__exportStar(require("./UpdateSegmentSuccessResponse"), exports);
 __exportStar(require("./UpdateTemplateRequest"), exports);
 __exportStar(require("./UpdateUserRequest"), exports);
 __exportStar(require("./User"), exports);
@@ -85,6 +94,10 @@ __exportStar(require("./WebButton"), exports);
 const ApiKeyToken_1 = require("./ApiKeyToken");
 const ApiKeyTokensListResponse_1 = require("./ApiKeyTokensListResponse");
 const App_1 = require("./App");
+const AuditLogActor_1 = require("./AuditLogActor");
+const AuditLogContext_1 = require("./AuditLogContext");
+const AuditLogEvent_1 = require("./AuditLogEvent");
+const AuditLogTarget_1 = require("./AuditLogTarget");
 const BasicNotification_1 = require("./BasicNotification");
 const BasicNotificationAllOf_1 = require("./BasicNotificationAllOf");
 const BasicNotificationAllOfAndroidBackgroundLayout_1 = require("./BasicNotificationAllOfAndroidBackgroundLayout");
@@ -110,8 +123,10 @@ const FilterExpression_1 = require("./FilterExpression");
 const GenericError_1 = require("./GenericError");
 const GenericSuccessBoolResponse_1 = require("./GenericSuccessBoolResponse");
 const GetNotificationHistoryRequestBody_1 = require("./GetNotificationHistoryRequestBody");
+const GetSegmentSuccessResponse_1 = require("./GetSegmentSuccessResponse");
 const GetSegmentsSuccessResponse_1 = require("./GetSegmentsSuccessResponse");
 const LanguageStringMap_1 = require("./LanguageStringMap");
+const ListAuditLogsSuccessResponse_1 = require("./ListAuditLogsSuccessResponse");
 const Notification_1 = require("./Notification");
 const NotificationAllOf_1 = require("./NotificationAllOf");
 const NotificationHistorySuccessResponse_1 = require("./NotificationHistorySuccessResponse");
@@ -132,6 +147,7 @@ const Purchase_1 = require("./Purchase");
 const RateLimitError_1 = require("./RateLimitError");
 const Segment_1 = require("./Segment");
 const SegmentData_1 = require("./SegmentData");
+const SegmentDetails_1 = require("./SegmentDetails");
 const SegmentNotificationTarget_1 = require("./SegmentNotificationTarget");
 const StartLiveActivityRequest_1 = require("./StartLiveActivityRequest");
 const StartLiveActivitySuccessResponse_1 = require("./StartLiveActivitySuccessResponse");
@@ -144,6 +160,8 @@ const TransferSubscriptionRequestBody_1 = require("./TransferSubscriptionRequest
 const UpdateApiKeyRequest_1 = require("./UpdateApiKeyRequest");
 const UpdateLiveActivityRequest_1 = require("./UpdateLiveActivityRequest");
 const UpdateLiveActivitySuccessResponse_1 = require("./UpdateLiveActivitySuccessResponse");
+const UpdateSegmentRequest_1 = require("./UpdateSegmentRequest");
+const UpdateSegmentSuccessResponse_1 = require("./UpdateSegmentSuccessResponse");
 const UpdateTemplateRequest_1 = require("./UpdateTemplateRequest");
 const UpdateUserRequest_1 = require("./UpdateUserRequest");
 const User_1 = require("./User");
@@ -186,6 +204,7 @@ let enumsMap = new Set([
     "NotificationWithMetaHuaweiCategoryEnum",
     "OperatorOperatorEnum",
     "OutcomeDataAggregationEnum",
+    "SegmentDetailsSourceEnum",
     "StartLiveActivityRequestEventEnum",
     "SubscriptionTypeEnum",
     "SubscriptionNotificationTargetTargetChannelEnum",
@@ -197,6 +216,10 @@ let typeMap = {
     "ApiKeyToken": ApiKeyToken_1.ApiKeyToken,
     "ApiKeyTokensListResponse": ApiKeyTokensListResponse_1.ApiKeyTokensListResponse,
     "App": App_1.App,
+    "AuditLogActor": AuditLogActor_1.AuditLogActor,
+    "AuditLogContext": AuditLogContext_1.AuditLogContext,
+    "AuditLogEvent": AuditLogEvent_1.AuditLogEvent,
+    "AuditLogTarget": AuditLogTarget_1.AuditLogTarget,
     "BasicNotification": BasicNotification_1.BasicNotification,
     "BasicNotificationAllOf": BasicNotificationAllOf_1.BasicNotificationAllOf,
     "BasicNotificationAllOfAndroidBackgroundLayout": BasicNotificationAllOfAndroidBackgroundLayout_1.BasicNotificationAllOfAndroidBackgroundLayout,
@@ -222,8 +245,10 @@ let typeMap = {
     "GenericError": GenericError_1.GenericError,
     "GenericSuccessBoolResponse": GenericSuccessBoolResponse_1.GenericSuccessBoolResponse,
     "GetNotificationHistoryRequestBody": GetNotificationHistoryRequestBody_1.GetNotificationHistoryRequestBody,
+    "GetSegmentSuccessResponse": GetSegmentSuccessResponse_1.GetSegmentSuccessResponse,
     "GetSegmentsSuccessResponse": GetSegmentsSuccessResponse_1.GetSegmentsSuccessResponse,
     "LanguageStringMap": LanguageStringMap_1.LanguageStringMap,
+    "ListAuditLogsSuccessResponse": ListAuditLogsSuccessResponse_1.ListAuditLogsSuccessResponse,
     "Notification": Notification_1.Notification,
     "NotificationAllOf": NotificationAllOf_1.NotificationAllOf,
     "NotificationHistorySuccessResponse": NotificationHistorySuccessResponse_1.NotificationHistorySuccessResponse,
@@ -244,6 +269,7 @@ let typeMap = {
     "RateLimitError": RateLimitError_1.RateLimitError,
     "Segment": Segment_1.Segment,
     "SegmentData": SegmentData_1.SegmentData,
+    "SegmentDetails": SegmentDetails_1.SegmentDetails,
     "SegmentNotificationTarget": SegmentNotificationTarget_1.SegmentNotificationTarget,
     "StartLiveActivityRequest": StartLiveActivityRequest_1.StartLiveActivityRequest,
     "StartLiveActivitySuccessResponse": StartLiveActivitySuccessResponse_1.StartLiveActivitySuccessResponse,
@@ -256,6 +282,8 @@ let typeMap = {
     "UpdateApiKeyRequest": UpdateApiKeyRequest_1.UpdateApiKeyRequest,
     "UpdateLiveActivityRequest": UpdateLiveActivityRequest_1.UpdateLiveActivityRequest,
     "UpdateLiveActivitySuccessResponse": UpdateLiveActivitySuccessResponse_1.UpdateLiveActivitySuccessResponse,
+    "UpdateSegmentRequest": UpdateSegmentRequest_1.UpdateSegmentRequest,
+    "UpdateSegmentSuccessResponse": UpdateSegmentSuccessResponse_1.UpdateSegmentSuccessResponse,
     "UpdateTemplateRequest": UpdateTemplateRequest_1.UpdateTemplateRequest,
     "UpdateUserRequest": UpdateUserRequest_1.UpdateUserRequest,
     "User": User_1.User,

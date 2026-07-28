@@ -36,7 +36,7 @@ export declare class RequestContext {
         [key: string]: string;
     };
     getBody(): RequestBody;
-    setQueryParam(name: string, value: string): void;
+    setQueryParam(name: string, value: string | string[]): void;
     addCookie(name: string, value: string): void;
     setHeaderParam(key: string, value: string): void;
 }

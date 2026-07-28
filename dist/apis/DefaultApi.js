@@ -19,7 +19,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'notification_id' + '}', encodeURIComponent(String(notificationId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.DELETE);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         if (appId !== undefined) {
             requestContext.setQueryParam("app_id", ObjectSerializer_1.ObjectSerializer.serialize(appId, "string", ""));
         }
@@ -49,7 +49,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'template_id' + '}', encodeURIComponent(String(templateId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         if (appId !== undefined) {
             requestContext.setQueryParam("app_id", ObjectSerializer_1.ObjectSerializer.serialize(appId, "string", ""));
         }
@@ -90,7 +90,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'alias_id' + '}', encodeURIComponent(String(aliasId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.PATCH);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -124,7 +124,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'subscription_id' + '}', encodeURIComponent(String(subscriptionId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.PATCH);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -154,7 +154,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -180,7 +180,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
         const localVarPath = '/apps';
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -210,7 +210,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -236,7 +236,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
         const localVarPath = '/notifications';
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -263,7 +263,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -301,7 +301,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'alias_id' + '}', encodeURIComponent(String(aliasId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -327,7 +327,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
         const localVarPath = '/templates';
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -357,7 +357,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -396,7 +396,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'alias_label_to_delete' + '}', encodeURIComponent(String(aliasLabelToDelete)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.DELETE);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         let authMethod;
         authMethod = _config.authMethods["rest_api_key"];
         if (authMethod?.applySecurityAuthentication) {
@@ -421,7 +421,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'token_id' + '}', encodeURIComponent(String(tokenId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.DELETE);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         let authMethod;
         authMethod = _config.authMethods["organization_api_key"];
         if (authMethod?.applySecurityAuthentication) {
@@ -446,7 +446,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'segment_id' + '}', encodeURIComponent(String(segmentId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.DELETE);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         let authMethod;
         authMethod = _config.authMethods["rest_api_key"];
         if (authMethod?.applySecurityAuthentication) {
@@ -471,7 +471,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'subscription_id' + '}', encodeURIComponent(String(subscriptionId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.DELETE);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         let authMethod;
         authMethod = _config.authMethods["rest_api_key"];
         if (authMethod?.applySecurityAuthentication) {
@@ -495,7 +495,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'template_id' + '}', encodeURIComponent(String(templateId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.DELETE);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         if (appId !== undefined) {
             requestContext.setQueryParam("app_id", ObjectSerializer_1.ObjectSerializer.serialize(appId, "string", ""));
         }
@@ -527,7 +527,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'alias_id' + '}', encodeURIComponent(String(aliasId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.DELETE);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         let authMethod;
         authMethod = _config.authMethods["rest_api_key"];
         if (authMethod?.applySecurityAuthentication) {
@@ -551,7 +551,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'notification_id' + '}', encodeURIComponent(String(notificationId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         if (appId !== undefined) {
             requestContext.setQueryParam("app_id", ObjectSerializer_1.ObjectSerializer.serialize(appId, "string", ""));
         }
@@ -575,7 +575,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -610,7 +610,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'alias_id' + '}', encodeURIComponent(String(aliasId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         let authMethod;
         authMethod = _config.authMethods["rest_api_key"];
         if (authMethod?.applySecurityAuthentication) {
@@ -635,7 +635,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'subscription_id' + '}', encodeURIComponent(String(subscriptionId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         let authMethod;
         authMethod = _config.authMethods["rest_api_key"];
         if (authMethod?.applySecurityAuthentication) {
@@ -656,7 +656,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         let authMethod;
         authMethod = _config.authMethods["organization_api_key"];
         if (authMethod?.applySecurityAuthentication) {
@@ -673,7 +673,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
         const localVarPath = '/apps';
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         let authMethod;
         authMethod = _config.authMethods["organization_api_key"];
         if (authMethod?.applySecurityAuthentication) {
@@ -697,7 +697,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'notification_id' + '}', encodeURIComponent(String(notificationId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         if (appId !== undefined) {
             requestContext.setQueryParam("app_id", ObjectSerializer_1.ObjectSerializer.serialize(appId, "string", ""));
         }
@@ -724,7 +724,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'notification_id' + '}', encodeURIComponent(String(notificationId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -750,7 +750,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
         const localVarPath = '/notifications';
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         if (appId !== undefined) {
             requestContext.setQueryParam("app_id", ObjectSerializer_1.ObjectSerializer.serialize(appId, "string", ""));
         }
@@ -789,7 +789,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         if (outcomeNames !== undefined) {
             requestContext.setQueryParam("outcome_names", ObjectSerializer_1.ObjectSerializer.serialize(outcomeNames, "string", ""));
         }
@@ -816,6 +816,34 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
         }
         return requestContext;
     }
+    async getSegment(appId, segmentId, includeSegmentDetail, _options) {
+        let _config = _options || this.configuration;
+        if (appId === null || appId === undefined) {
+            throw new baseapi_1.RequiredError("DefaultApi", "getSegment", "appId");
+        }
+        if (segmentId === null || segmentId === undefined) {
+            throw new baseapi_1.RequiredError("DefaultApi", "getSegment", "segmentId");
+        }
+        const localVarPath = '/apps/{app_id}/segments/{segment_id}'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'segment_id' + '}', encodeURIComponent(String(segmentId)));
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
+        if (includeSegmentDetail !== undefined) {
+            requestContext.setQueryParam("include-segment-detail", ObjectSerializer_1.ObjectSerializer.serialize(includeSegmentDetail, "boolean", ""));
+        }
+        let authMethod;
+        authMethod = _config.authMethods["rest_api_key"];
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        const defaultAuth = _options?.authMethods?.default || this.configuration?.authMethods?.default;
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+        return requestContext;
+    }
     async getSegments(appId, offset, limit, _options) {
         let _config = _options || this.configuration;
         if (appId === null || appId === undefined) {
@@ -825,7 +853,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         if (offset !== undefined) {
             requestContext.setQueryParam("offset", ObjectSerializer_1.ObjectSerializer.serialize(offset, "number", ""));
         }
@@ -860,9 +888,63 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'alias_id' + '}', encodeURIComponent(String(aliasId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         let authMethod;
         authMethod = _config.authMethods["rest_api_key"];
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        const defaultAuth = _options?.authMethods?.default || this.configuration?.authMethods?.default;
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+        return requestContext;
+    }
+    async listAuditLogs(organizationId, startTime, endTime, cursor, limit, appIds, actions, actorIds, actorEmails, targetTypes, targetIds, ipAddresses, _options) {
+        let _config = _options || this.configuration;
+        if (organizationId === null || organizationId === undefined) {
+            throw new baseapi_1.RequiredError("DefaultApi", "listAuditLogs", "organizationId");
+        }
+        const localVarPath = '/organizations/{organization_id}/audit_logs'
+            .replace('{' + 'organization_id' + '}', encodeURIComponent(String(organizationId)));
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
+        if (startTime !== undefined) {
+            requestContext.setQueryParam("start_time", ObjectSerializer_1.ObjectSerializer.serialize(startTime, "string", ""));
+        }
+        if (endTime !== undefined) {
+            requestContext.setQueryParam("end_time", ObjectSerializer_1.ObjectSerializer.serialize(endTime, "string", ""));
+        }
+        if (cursor !== undefined) {
+            requestContext.setQueryParam("cursor", ObjectSerializer_1.ObjectSerializer.serialize(cursor, "string", ""));
+        }
+        if (limit !== undefined) {
+            requestContext.setQueryParam("limit", ObjectSerializer_1.ObjectSerializer.serialize(limit, "number", ""));
+        }
+        if (appIds !== undefined) {
+            requestContext.setQueryParam("app_ids", ObjectSerializer_1.ObjectSerializer.serialize(appIds, "Array<string>", ""));
+        }
+        if (actions !== undefined) {
+            requestContext.setQueryParam("actions", ObjectSerializer_1.ObjectSerializer.serialize(actions, "Array<string>", ""));
+        }
+        if (actorIds !== undefined) {
+            requestContext.setQueryParam("actor_ids", ObjectSerializer_1.ObjectSerializer.serialize(actorIds, "Array<string>", ""));
+        }
+        if (actorEmails !== undefined) {
+            requestContext.setQueryParam("actor_emails", ObjectSerializer_1.ObjectSerializer.serialize(actorEmails, "Array<string>", ""));
+        }
+        if (targetTypes !== undefined) {
+            requestContext.setQueryParam("target_types", ObjectSerializer_1.ObjectSerializer.serialize(targetTypes, "Array<string>", ""));
+        }
+        if (targetIds !== undefined) {
+            requestContext.setQueryParam("target_ids", ObjectSerializer_1.ObjectSerializer.serialize(targetIds, "Array<string>", ""));
+        }
+        if (ipAddresses !== undefined) {
+            requestContext.setQueryParam("ip_addresses", ObjectSerializer_1.ObjectSerializer.serialize(ipAddresses, "Array<string>", ""));
+        }
+        let authMethod;
+        authMethod = _config.authMethods["organization_api_key"];
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
@@ -885,7 +967,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'token_id' + '}', encodeURIComponent(String(tokenId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         let authMethod;
         authMethod = _config.authMethods["organization_api_key"];
         if (authMethod?.applySecurityAuthentication) {
@@ -913,7 +995,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'activity_type' + '}', encodeURIComponent(String(activityType)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -947,7 +1029,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'subscription_id' + '}', encodeURIComponent(String(subscriptionId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.PATCH);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -981,7 +1063,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'notification_id' + '}', encodeURIComponent(String(notificationId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         if (token !== undefined) {
             requestContext.setQueryParam("token", ObjectSerializer_1.ObjectSerializer.serialize(token, "string", ""));
         }
@@ -1012,7 +1094,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'token_id' + '}', encodeURIComponent(String(tokenId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.PATCH);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -1042,7 +1124,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.PUT);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -1076,12 +1158,43 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'activity_id' + '}', encodeURIComponent(String(activityId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer_1.ObjectSerializer.stringify(ObjectSerializer_1.ObjectSerializer.serialize(updateLiveActivityRequest, "UpdateLiveActivityRequest", ""), contentType);
+        requestContext.setBody(serializedBody);
+        let authMethod;
+        authMethod = _config.authMethods["rest_api_key"];
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        const defaultAuth = _options?.authMethods?.default || this.configuration?.authMethods?.default;
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+        return requestContext;
+    }
+    async updateSegment(appId, segmentId, updateSegmentRequest, _options) {
+        let _config = _options || this.configuration;
+        if (appId === null || appId === undefined) {
+            throw new baseapi_1.RequiredError("DefaultApi", "updateSegment", "appId");
+        }
+        if (segmentId === null || segmentId === undefined) {
+            throw new baseapi_1.RequiredError("DefaultApi", "updateSegment", "segmentId");
+        }
+        const localVarPath = '/apps/{app_id}/segments/{segment_id}'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'segment_id' + '}', encodeURIComponent(String(segmentId)));
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.PATCH);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
+        const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer_1.ObjectSerializer.stringify(ObjectSerializer_1.ObjectSerializer.serialize(updateSegmentRequest, "UpdateSegmentRequest", ""), contentType);
         requestContext.setBody(serializedBody);
         let authMethod;
         authMethod = _config.authMethods["rest_api_key"];
@@ -1110,7 +1223,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'subscription_id' + '}', encodeURIComponent(String(subscriptionId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.PATCH);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -1148,7 +1261,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'token' + '}', encodeURIComponent(String(token)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.PATCH);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -1181,7 +1294,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'template_id' + '}', encodeURIComponent(String(templateId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.PATCH);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         if (appId !== undefined) {
             requestContext.setQueryParam("app_id", ObjectSerializer_1.ObjectSerializer.serialize(appId, "string", ""));
         }
@@ -1222,7 +1335,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'alias_id' + '}', encodeURIComponent(String(aliasId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.PATCH);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
             "application/json"
         ]);
@@ -1249,7 +1362,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         let authMethod;
         authMethod = _config.authMethods["organization_api_key"];
         if (authMethod?.applySecurityAuthentication) {
@@ -1273,7 +1386,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
             .replace('{' + 'template_id' + '}', encodeURIComponent(String(templateId)));
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         if (appId !== undefined) {
             requestContext.setQueryParam("app_id", ObjectSerializer_1.ObjectSerializer.serialize(appId, "string", ""));
         }
@@ -1296,7 +1409,7 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
         const localVarPath = '/templates';
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.11.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.12.0");
         if (appId !== undefined) {
             requestContext.setQueryParam("app_id", ObjectSerializer_1.ObjectSerializer.serialize(appId, "string", ""));
         }
@@ -2073,6 +2186,34 @@ class DefaultApiResponseProcessor {
         }
         throw new exception_1.ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
+    async getSegment(response) {
+        const contentType = ObjectSerializer_1.ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if ((0, util_1.isCodeInRange)("200", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GetSegmentSuccessResponse", "");
+            return body;
+        }
+        if ((0, util_1.isCodeInRange)("400", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(400, "Bad Request", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("404", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(404, "Not Found", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
+            throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GetSegmentSuccessResponse", "");
+            return body;
+        }
+        throw new exception_1.ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
     async getSegments(response) {
         const contentType = ObjectSerializer_1.ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if ((0, util_1.isCodeInRange)("201", response.httpStatusCode)) {
@@ -2121,6 +2262,38 @@ class DefaultApiResponseProcessor {
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "User", "");
+            return body;
+        }
+        throw new exception_1.ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+    async listAuditLogs(response) {
+        const contentType = ObjectSerializer_1.ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if ((0, util_1.isCodeInRange)("200", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "ListAuditLogsSuccessResponse", "");
+            return body;
+        }
+        if ((0, util_1.isCodeInRange)("400", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(400, "Bad Request", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("403", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(403, "Forbidden", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("404", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(404, "Not Found", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
+            throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "ListAuditLogsSuccessResponse", "");
             return body;
         }
         throw new exception_1.ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -2289,6 +2462,38 @@ class DefaultApiResponseProcessor {
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "UpdateLiveActivitySuccessResponse", "");
+            return body;
+        }
+        throw new exception_1.ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+    async updateSegment(response) {
+        const contentType = ObjectSerializer_1.ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if ((0, util_1.isCodeInRange)("200", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "UpdateSegmentSuccessResponse", "");
+            return body;
+        }
+        if ((0, util_1.isCodeInRange)("400", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(400, "Bad Request", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("403", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(403, "Forbidden", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("404", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(404, "Not Found", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
+            throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "UpdateSegmentSuccessResponse", "");
             return body;
         }
         throw new exception_1.ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

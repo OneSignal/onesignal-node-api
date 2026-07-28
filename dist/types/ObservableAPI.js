@@ -430,6 +430,21 @@ class ObservableDefaultApi {
             return middlewarePostObservable.pipe((0, rxjsStub_2.map)((rsp) => this.responseProcessor.getOutcomes(rsp)));
         }));
     }
+    getSegment(appId, segmentId, includeSegmentDetail, _options) {
+        const requestContextPromise = this.requestFactory.getSegment(appId, segmentId, includeSegmentDetail, _options);
+        let middlewarePreObservable = (0, rxjsStub_1.from)(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => middleware.pre(ctx)));
+        }
+        return middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => this.configuration.httpApi.send(ctx))).
+            pipe((0, rxjsStub_2.mergeMap)((response) => {
+            let middlewarePostObservable = (0, rxjsStub_1.of)(response);
+            for (let middleware of this.configuration.middleware) {
+                middlewarePostObservable = middlewarePostObservable.pipe((0, rxjsStub_2.mergeMap)((rsp) => middleware.post(rsp)));
+            }
+            return middlewarePostObservable.pipe((0, rxjsStub_2.map)((rsp) => this.responseProcessor.getSegment(rsp)));
+        }));
+    }
     getSegments(appId, offset, limit, _options) {
         const requestContextPromise = this.requestFactory.getSegments(appId, offset, limit, _options);
         let middlewarePreObservable = (0, rxjsStub_1.from)(requestContextPromise);
@@ -458,6 +473,21 @@ class ObservableDefaultApi {
                 middlewarePostObservable = middlewarePostObservable.pipe((0, rxjsStub_2.mergeMap)((rsp) => middleware.post(rsp)));
             }
             return middlewarePostObservable.pipe((0, rxjsStub_2.map)((rsp) => this.responseProcessor.getUser(rsp)));
+        }));
+    }
+    listAuditLogs(organizationId, startTime, endTime, cursor, limit, appIds, actions, actorIds, actorEmails, targetTypes, targetIds, ipAddresses, _options) {
+        const requestContextPromise = this.requestFactory.listAuditLogs(organizationId, startTime, endTime, cursor, limit, appIds, actions, actorIds, actorEmails, targetTypes, targetIds, ipAddresses, _options);
+        let middlewarePreObservable = (0, rxjsStub_1.from)(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => middleware.pre(ctx)));
+        }
+        return middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => this.configuration.httpApi.send(ctx))).
+            pipe((0, rxjsStub_2.mergeMap)((response) => {
+            let middlewarePostObservable = (0, rxjsStub_1.of)(response);
+            for (let middleware of this.configuration.middleware) {
+                middlewarePostObservable = middlewarePostObservable.pipe((0, rxjsStub_2.mergeMap)((rsp) => middleware.post(rsp)));
+            }
+            return middlewarePostObservable.pipe((0, rxjsStub_2.map)((rsp) => this.responseProcessor.listAuditLogs(rsp)));
         }));
     }
     rotateApiKey(appId, tokenId, _options) {
@@ -563,6 +593,21 @@ class ObservableDefaultApi {
                 middlewarePostObservable = middlewarePostObservable.pipe((0, rxjsStub_2.mergeMap)((rsp) => middleware.post(rsp)));
             }
             return middlewarePostObservable.pipe((0, rxjsStub_2.map)((rsp) => this.responseProcessor.updateLiveActivity(rsp)));
+        }));
+    }
+    updateSegment(appId, segmentId, updateSegmentRequest, _options) {
+        const requestContextPromise = this.requestFactory.updateSegment(appId, segmentId, updateSegmentRequest, _options);
+        let middlewarePreObservable = (0, rxjsStub_1.from)(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => middleware.pre(ctx)));
+        }
+        return middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => this.configuration.httpApi.send(ctx))).
+            pipe((0, rxjsStub_2.mergeMap)((response) => {
+            let middlewarePostObservable = (0, rxjsStub_1.of)(response);
+            for (let middleware of this.configuration.middleware) {
+                middlewarePostObservable = middlewarePostObservable.pipe((0, rxjsStub_2.mergeMap)((rsp) => middleware.post(rsp)));
+            }
+            return middlewarePostObservable.pipe((0, rxjsStub_2.map)((rsp) => this.responseProcessor.updateSegment(rsp)));
         }));
     }
     updateSubscription(appId, subscriptionId, subscriptionBody, _options) {

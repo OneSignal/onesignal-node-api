@@ -61,6 +61,13 @@ class RequestContext {
         return this.body;
     }
     setQueryParam(name, value) {
+        if (Array.isArray(value)) {
+            this.url.searchParams.delete(name);
+            for (const item of value) {
+                this.url.searchParams.append(name, item);
+            }
+            return;
+        }
         this.url.searchParams.set(name, value);
     }
     addCookie(name, value) {

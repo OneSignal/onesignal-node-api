@@ -8,51 +8,57 @@
 
 import { HttpFile } from '../http/http';
 
-export class Purchase {
+/**
+* Request context at the time of the event. Absent if context was not captured.
+*/
+export class AuditLogContext {
     /**
-    * The unique identifier of the purchased item.
+    * Country code derived from the request IP.
     */
-    'sku': string;
+    'country'?: string;
     /**
-    * The amount, in USD, spent purchasing the item.
+    * IP address the request originated from.
     */
-    'amount': string;
+    'ip'?: string;
     /**
-    * The 3-letter ISO 4217 currency code. Required for correct storage and conversion of amount.
+    * Additional context-specific data.
     */
-    'iso': string;
-    'count'?: number;
+    'metadata'?: object;
+    /**
+    * User agent of the client that made the request.
+    */
+    'user_agent'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "sku",
-            "baseName": "sku",
+            "name": "country",
+            "baseName": "country",
             "type": "string",
             "format": ""
         },
         {
-            "name": "amount",
-            "baseName": "amount",
+            "name": "ip",
+            "baseName": "ip",
             "type": "string",
             "format": ""
         },
         {
-            "name": "iso",
-            "baseName": "iso",
-            "type": "string",
+            "name": "metadata",
+            "baseName": "metadata",
+            "type": "object",
             "format": ""
         },
         {
-            "name": "count",
-            "baseName": "count",
-            "type": "number",
+            "name": "user_agent",
+            "baseName": "user_agent",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return Purchase.attributeTypeMap;
+        return AuditLogContext.attributeTypeMap;
     }
 
     public constructor() {

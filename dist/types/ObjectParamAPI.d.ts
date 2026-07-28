@@ -13,7 +13,9 @@ import { ExportSubscriptionsRequestBody } from '../models/ExportSubscriptionsReq
 import { ExportSubscriptionsSuccessResponse } from '../models/ExportSubscriptionsSuccessResponse';
 import { GenericSuccessBoolResponse } from '../models/GenericSuccessBoolResponse';
 import { GetNotificationHistoryRequestBody } from '../models/GetNotificationHistoryRequestBody';
+import { GetSegmentSuccessResponse } from '../models/GetSegmentSuccessResponse';
 import { GetSegmentsSuccessResponse } from '../models/GetSegmentsSuccessResponse';
+import { ListAuditLogsSuccessResponse } from '../models/ListAuditLogsSuccessResponse';
 import { Notification } from '../models/Notification';
 import { NotificationHistorySuccessResponse } from '../models/NotificationHistorySuccessResponse';
 import { NotificationSlice } from '../models/NotificationSlice';
@@ -30,6 +32,8 @@ import { TransferSubscriptionRequestBody } from '../models/TransferSubscriptionR
 import { UpdateApiKeyRequest } from '../models/UpdateApiKeyRequest';
 import { UpdateLiveActivityRequest } from '../models/UpdateLiveActivityRequest';
 import { UpdateLiveActivitySuccessResponse } from '../models/UpdateLiveActivitySuccessResponse';
+import { UpdateSegmentRequest } from '../models/UpdateSegmentRequest';
+import { UpdateSegmentSuccessResponse } from '../models/UpdateSegmentSuccessResponse';
 import { UpdateTemplateRequest } from '../models/UpdateTemplateRequest';
 import { UpdateUserRequest } from '../models/UpdateUserRequest';
 import { User } from '../models/User';
@@ -158,6 +162,11 @@ export interface DefaultApiGetOutcomesRequest {
     outcomePlatforms?: string;
     outcomeAttribution?: string;
 }
+export interface DefaultApiGetSegmentRequest {
+    appId: string;
+    segmentId: string;
+    includeSegmentDetail?: boolean;
+}
 export interface DefaultApiGetSegmentsRequest {
     appId: string;
     offset?: number;
@@ -167,6 +176,20 @@ export interface DefaultApiGetUserRequest {
     appId: string;
     aliasLabel: string;
     aliasId: string;
+}
+export interface DefaultApiListAuditLogsRequest {
+    organizationId: string;
+    startTime?: string;
+    endTime?: string;
+    cursor?: string;
+    limit?: number;
+    appIds?: Array<string>;
+    actions?: Array<string>;
+    actorIds?: Array<string>;
+    actorEmails?: Array<string>;
+    targetTypes?: Array<string>;
+    targetIds?: Array<string>;
+    ipAddresses?: Array<string>;
 }
 export interface DefaultApiRotateApiKeyRequest {
     appId: string;
@@ -200,6 +223,11 @@ export interface DefaultApiUpdateLiveActivityRequest {
     appId: string;
     activityId: string;
     updateLiveActivityRequest: UpdateLiveActivityRequest;
+}
+export interface DefaultApiUpdateSegmentRequest {
+    appId: string;
+    segmentId: string;
+    updateSegmentRequest?: UpdateSegmentRequest;
 }
 export interface DefaultApiUpdateSubscriptionRequest {
     appId: string;
@@ -267,8 +295,10 @@ export declare class ObjectDefaultApi {
     getNotificationHistory(param: DefaultApiGetNotificationHistoryRequest, options?: Configuration): Promise<NotificationHistorySuccessResponse>;
     getNotifications(param: DefaultApiGetNotificationsRequest, options?: Configuration): Promise<NotificationSlice>;
     getOutcomes(param: DefaultApiGetOutcomesRequest, options?: Configuration): Promise<OutcomesData>;
+    getSegment(param: DefaultApiGetSegmentRequest, options?: Configuration): Promise<GetSegmentSuccessResponse>;
     getSegments(param: DefaultApiGetSegmentsRequest, options?: Configuration): Promise<GetSegmentsSuccessResponse>;
     getUser(param: DefaultApiGetUserRequest, options?: Configuration): Promise<User>;
+    listAuditLogs(param: DefaultApiListAuditLogsRequest, options?: Configuration): Promise<ListAuditLogsSuccessResponse>;
     rotateApiKey(param: DefaultApiRotateApiKeyRequest, options?: Configuration): Promise<CreateApiKeyResponse>;
     startLiveActivity(param: DefaultApiStartLiveActivityRequest, options?: Configuration): Promise<StartLiveActivitySuccessResponse>;
     transferSubscription(param: DefaultApiTransferSubscriptionRequest, options?: Configuration): Promise<UserIdentityBody>;
@@ -276,6 +306,7 @@ export declare class ObjectDefaultApi {
     updateApiKey(param: DefaultApiUpdateApiKeyRequest, options?: Configuration): Promise<object>;
     updateApp(param: DefaultApiUpdateAppRequest, options?: Configuration): Promise<App>;
     updateLiveActivity(param: DefaultApiUpdateLiveActivityRequest, options?: Configuration): Promise<UpdateLiveActivitySuccessResponse>;
+    updateSegment(param: DefaultApiUpdateSegmentRequest, options?: Configuration): Promise<UpdateSegmentSuccessResponse>;
     updateSubscription(param: DefaultApiUpdateSubscriptionRequest, options?: Configuration): Promise<void>;
     updateSubscriptionByToken(param: DefaultApiUpdateSubscriptionByTokenRequest, options?: Configuration): Promise<object>;
     updateTemplate(param: DefaultApiUpdateTemplateRequest, options?: Configuration): Promise<TemplateResource>;
