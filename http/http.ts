@@ -98,7 +98,15 @@ export class RequestContext {
         return this.body;
     }
 
-	public setQueryParam(name: string, value: string) {
+	public setQueryParam(name: string, value: string | string[]) {
+        if (Array.isArray(value)) {
+            // style: form, explode: true — repeat the parameter once per element.
+            this.url.searchParams.delete(name);
+            for (const item of value) {
+                this.url.searchParams.append(name, item);
+            }
+            return;
+        }
         this.url.searchParams.set(name, value);
     }
 

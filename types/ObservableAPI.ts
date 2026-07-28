@@ -6,6 +6,10 @@ import {mergeMap, map} from  '../rxjsStub';
 import { ApiKeyToken } from '../models/ApiKeyToken';
 import { ApiKeyTokensListResponse } from '../models/ApiKeyTokensListResponse';
 import { App } from '../models/App';
+import { AuditLogActor } from '../models/AuditLogActor';
+import { AuditLogContext } from '../models/AuditLogContext';
+import { AuditLogEvent } from '../models/AuditLogEvent';
+import { AuditLogTarget } from '../models/AuditLogTarget';
 import { BasicNotification } from '../models/BasicNotification';
 import { BasicNotificationAllOf } from '../models/BasicNotificationAllOf';
 import { BasicNotificationAllOfAndroidBackgroundLayout } from '../models/BasicNotificationAllOfAndroidBackgroundLayout';
@@ -31,8 +35,10 @@ import { FilterExpression } from '../models/FilterExpression';
 import { GenericError } from '../models/GenericError';
 import { GenericSuccessBoolResponse } from '../models/GenericSuccessBoolResponse';
 import { GetNotificationHistoryRequestBody } from '../models/GetNotificationHistoryRequestBody';
+import { GetSegmentSuccessResponse } from '../models/GetSegmentSuccessResponse';
 import { GetSegmentsSuccessResponse } from '../models/GetSegmentsSuccessResponse';
 import { LanguageStringMap } from '../models/LanguageStringMap';
+import { ListAuditLogsSuccessResponse } from '../models/ListAuditLogsSuccessResponse';
 import { Notification } from '../models/Notification';
 import { NotificationAllOf } from '../models/NotificationAllOf';
 import { NotificationHistorySuccessResponse } from '../models/NotificationHistorySuccessResponse';
@@ -53,6 +59,7 @@ import { Purchase } from '../models/Purchase';
 import { RateLimitError } from '../models/RateLimitError';
 import { Segment } from '../models/Segment';
 import { SegmentData } from '../models/SegmentData';
+import { SegmentDetails } from '../models/SegmentDetails';
 import { SegmentNotificationTarget } from '../models/SegmentNotificationTarget';
 import { StartLiveActivityRequest } from '../models/StartLiveActivityRequest';
 import { StartLiveActivitySuccessResponse } from '../models/StartLiveActivitySuccessResponse';
@@ -65,6 +72,8 @@ import { TransferSubscriptionRequestBody } from '../models/TransferSubscriptionR
 import { UpdateApiKeyRequest } from '../models/UpdateApiKeyRequest';
 import { UpdateLiveActivityRequest } from '../models/UpdateLiveActivityRequest';
 import { UpdateLiveActivitySuccessResponse } from '../models/UpdateLiveActivitySuccessResponse';
+import { UpdateSegmentRequest } from '../models/UpdateSegmentRequest';
+import { UpdateSegmentSuccessResponse } from '../models/UpdateSegmentSuccessResponse';
 import { UpdateTemplateRequest } from '../models/UpdateTemplateRequest';
 import { UpdateUserRequest } from '../models/UpdateUserRequest';
 import { User } from '../models/User';
@@ -790,6 +799,32 @@ export class ObservableDefaultApi {
     }
 
     /**
+     * Retrieve details for a single segment by its ID, including subscriber count and optionally segment metadata and filters.
+     * View Segment
+     * @param appId The OneSignal App ID for your app.  Available in Keys &amp; IDs.
+     * @param segmentId The segment\&#39;s unique identifier. Can be found using the View Segments API or in the URL of the segment when viewing it in the dashboard.
+     * @param includeSegmentDetail Set to true to include segment metadata and filters in the response.
+     */
+    public getSegment(appId: string, segmentId: string, includeSegmentDetail?: boolean, _options?: Configuration): Observable<GetSegmentSuccessResponse> {
+        const requestContextPromise = this.requestFactory.getSegment(appId, segmentId, includeSegmentDetail, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getSegment(rsp)));
+            }));
+    }
+
+    /**
      * Returns an array of segments from an app.
      * Get Segments
      * @param appId The OneSignal App ID for your app.  Available in Keys &amp; IDs.
@@ -837,6 +872,41 @@ export class ObservableDefaultApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getUser(rsp)));
+            }));
+    }
+
+    /**
+     * Retrieve a paginated, time-scoped list of audit log events for an organization. Requires an Enterprise plan with the audit logs entitlement enabled.
+     * List audit logs
+     * @param organizationId The UUID of the organization to retrieve audit logs for. Must match the authenticated Organization API Key.
+     * @param startTime Start of the time range in ISO 8601 format (e.g. 2026-02-01T00:00:00Z). Required unless cursor is provided. Must be within the last 90 days.
+     * @param endTime End of the time range in ISO 8601 format. Defaults to the current time. Must be after start_time.
+     * @param cursor Pagination cursor returned in a previous response as next_cursor. When provided, start_time and end_time are ignored.
+     * @param limit Maximum number of events to return per page. Minimum 1, maximum 100. Values outside this range are clamped automatically by the server.
+     * @param appIds Filter events by app UUID. Accepts up to 10 values. Org-level events are always included.
+     * @param actions Filter by action type (e.g. notification.sent, segment.created). Accepts up to 20 values.
+     * @param actorIds Filter by actor UUID (the user or service that performed the action). Accepts up to 10 values.
+     * @param actorEmails Filter by actor email address. Accepts up to 10 values.
+     * @param targetTypes Filter by the type of resource the action was performed on (e.g. notification, segment, journey). Accepts up to 10 values.
+     * @param targetIds Filter by the UUID of the resource the action was performed on. Accepts up to 10 values.
+     * @param ipAddresses Filter by the IP address the action originated from. Accepts up to 10 values.
+     */
+    public listAuditLogs(organizationId: string, startTime?: string, endTime?: string, cursor?: string, limit?: number, appIds?: Array<string>, actions?: Array<string>, actorIds?: Array<string>, actorEmails?: Array<string>, targetTypes?: Array<string>, targetIds?: Array<string>, ipAddresses?: Array<string>, _options?: Configuration): Observable<ListAuditLogsSuccessResponse> {
+        const requestContextPromise = this.requestFactory.listAuditLogs(organizationId, startTime, endTime, cursor, limit, appIds, actions, actorIds, actorEmails, targetTypes, targetIds, ipAddresses, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listAuditLogs(rsp)));
             }));
     }
 
@@ -1016,6 +1086,32 @@ export class ObservableDefaultApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateLiveActivity(rsp)));
+            }));
+    }
+
+    /**
+     * Update an existing segment\'s name and/or filters. The name parameter is always required. When filters are provided, all existing filters are replaced with the new ones.
+     * Update Segment
+     * @param appId The OneSignal App ID for your app.  Available in Keys &amp; IDs.
+     * @param segmentId The segment\&#39;s unique identifier. Can be found using the View Segments API or in the URL of the segment when viewing it in the dashboard.
+     * @param updateSegmentRequest 
+     */
+    public updateSegment(appId: string, segmentId: string, updateSegmentRequest?: UpdateSegmentRequest, _options?: Configuration): Observable<UpdateSegmentSuccessResponse> {
+        const requestContextPromise = this.requestFactory.updateSegment(appId, segmentId, updateSegmentRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateSegment(rsp)));
             }));
     }
 

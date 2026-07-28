@@ -90,11 +90,17 @@ class ObjectDefaultApi {
     getOutcomes(param, options) {
         return this.api.getOutcomes(param.appId, param.outcomeNames, param.outcomeNames2, param.outcomeTimeRange, param.outcomePlatforms, param.outcomeAttribution, options).toPromise();
     }
+    getSegment(param, options) {
+        return this.api.getSegment(param.appId, param.segmentId, param.includeSegmentDetail, options).toPromise();
+    }
     getSegments(param, options) {
         return this.api.getSegments(param.appId, param.offset, param.limit, options).toPromise();
     }
     getUser(param, options) {
         return this.api.getUser(param.appId, param.aliasLabel, param.aliasId, options).toPromise();
+    }
+    listAuditLogs(param, options) {
+        return this.api.listAuditLogs(param.organizationId, param.startTime, param.endTime, param.cursor, param.limit, param.appIds, param.actions, param.actorIds, param.actorEmails, param.targetTypes, param.targetIds, param.ipAddresses, options).toPromise();
     }
     rotateApiKey(param, options) {
         return this.api.rotateApiKey(param.appId, param.tokenId, options).toPromise();
@@ -116,6 +122,9 @@ class ObjectDefaultApi {
     }
     updateLiveActivity(param, options) {
         return this.api.updateLiveActivity(param.appId, param.activityId, param.updateLiveActivityRequest, options).toPromise();
+    }
+    updateSegment(param, options) {
+        return this.api.updateSegment(param.appId, param.segmentId, param.updateSegmentRequest, options).toPromise();
     }
     updateSubscription(param, options) {
         return this.api.updateSubscription(param.appId, param.subscriptionId, param.subscriptionBody, options).toPromise();

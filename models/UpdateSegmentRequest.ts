@@ -9,32 +9,32 @@
 import { FilterExpression } from './FilterExpression';
 import { HttpFile } from '../http/http';
 
-export class Segment {
+export class UpdateSegmentRequest {
     /**
-    * UUID of the segment.  If left empty, it will be assigned automaticaly.
-    */
-    'id'?: string;
-    /**
-    * Name of the segment.  You\'ll see this name on the Web UI.
+    * Required. The segment name. Maximum 128 characters.
     */
     'name': string;
     /**
-    * Filter or operators the segment will have.  For a list of available filters with details, please see Send to Users Based on Filters.
+    * Optional human-readable description for the segment. Maximum 255 characters. Pass an empty string to clear; omit to leave unchanged.
     */
-    'filters': Array<FilterExpression>;
+    'description'?: string;
+    /**
+    * Optional. When provided, replaces all existing filters. Filters define the segment based on user properties like tags, activity, or location using flexible AND/OR logic. Limited to 200 total entries, including fields and OR operators.
+    */
+    'filters'?: Array<FilterExpression>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "description",
+            "baseName": "description",
             "type": "string",
             "format": ""
         },
@@ -46,7 +46,7 @@ export class Segment {
         }    ];
 
     static getAttributeTypeMap() {
-        return Segment.attributeTypeMap;
+        return UpdateSegmentRequest.attributeTypeMap;
     }
 
     public constructor() {

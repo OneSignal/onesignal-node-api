@@ -8,10 +8,26 @@
 
 import { HttpFile } from '../http/http';
 
-export class Button {
-    'id': string;
-    'text'?: string;
-    'icon'?: string;
+/**
+* A resource the action was performed on.
+*/
+export class AuditLogTarget {
+    /**
+    * UUID of the resource.
+    */
+    'id'?: string;
+    /**
+    * Additional resource-specific data.
+    */
+    'metadata'?: object;
+    /**
+    * Display name of the resource. Absent if unavailable.
+    */
+    'name'?: string;
+    /**
+    * Resource type (e.g. notification, segment, journey, app).
+    */
+    'type'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -23,20 +39,26 @@ export class Button {
             "format": ""
         },
         {
-            "name": "text",
-            "baseName": "text",
+            "name": "metadata",
+            "baseName": "metadata",
+            "type": "object",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
         {
-            "name": "icon",
-            "baseName": "icon",
+            "name": "type",
+            "baseName": "type",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return Button.attributeTypeMap;
+        return AuditLogTarget.attributeTypeMap;
     }
 
     public constructor() {

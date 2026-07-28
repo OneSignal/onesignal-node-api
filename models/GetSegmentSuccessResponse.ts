@@ -6,26 +6,34 @@
  * Contact: devrel@onesignal.com
  */
 
+import { SegmentDetails } from './SegmentDetails';
 import { HttpFile } from '../http/http';
 
-export class CopyTemplateRequest {
+export class GetSegmentSuccessResponse {
     /**
-    * Destination OneSignal App ID in UUID v4 format.
+    * The number of subscribers matching this segment.
     */
-    'target_app_id': string;
+    'subscriber_count'?: number;
+    'payload'?: SegmentDetails;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "target_app_id",
-            "baseName": "target_app_id",
-            "type": "string",
+            "name": "subscriber_count",
+            "baseName": "subscriber_count",
+            "type": "number",
+            "format": ""
+        },
+        {
+            "name": "payload",
+            "baseName": "payload",
+            "type": "SegmentDetails",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CopyTemplateRequest.attributeTypeMap;
+        return GetSegmentSuccessResponse.attributeTypeMap;
     }
 
     public constructor() {

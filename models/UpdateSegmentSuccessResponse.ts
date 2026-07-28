@@ -8,24 +8,34 @@
 
 import { HttpFile } from '../http/http';
 
-export class CopyTemplateRequest {
+export class UpdateSegmentSuccessResponse {
     /**
-    * Destination OneSignal App ID in UUID v4 format.
+    * true if the segment was updated successfully, false otherwise.
     */
-    'target_app_id': string;
+    'success'?: boolean;
+    /**
+    * UUID of the updated segment.
+    */
+    'id'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "target_app_id",
-            "baseName": "target_app_id",
+            "name": "success",
+            "baseName": "success",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CopyTemplateRequest.attributeTypeMap;
+        return UpdateSegmentSuccessResponse.attributeTypeMap;
     }
 
     public constructor() {

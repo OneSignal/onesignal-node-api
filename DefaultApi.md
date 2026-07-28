@@ -32,8 +32,10 @@ Method | HTTP request | Description
 [**getNotificationHistory**](DefaultApi.md#getNotificationHistory) | **POST** /notifications/{notification_id}/history | Notification History
 [**getNotifications**](DefaultApi.md#getNotifications) | **GET** /notifications | View notifications
 [**getOutcomes**](DefaultApi.md#getOutcomes) | **GET** /apps/{app_id}/outcomes | View Outcomes
+[**getSegment**](DefaultApi.md#getSegment) | **GET** /apps/{app_id}/segments/{segment_id} | View Segment
 [**getSegments**](DefaultApi.md#getSegments) | **GET** /apps/{app_id}/segments | Get Segments
 [**getUser**](DefaultApi.md#getUser) | **GET** /apps/{app_id}/users/by/{alias_label}/{alias_id} | 
+[**listAuditLogs**](DefaultApi.md#listAuditLogs) | **GET** /organizations/{organization_id}/audit_logs | List audit logs
 [**rotateApiKey**](DefaultApi.md#rotateApiKey) | **POST** /apps/{app_id}/auth/tokens/{token_id}/rotate | Rotate API key
 [**startLiveActivity**](DefaultApi.md#startLiveActivity) | **POST** /apps/{app_id}/activities/activity/{activity_type} | Start Live Activity
 [**transferSubscription**](DefaultApi.md#transferSubscription) | **PATCH** /apps/{app_id}/subscriptions/{subscription_id}/owner | 
@@ -41,6 +43,7 @@ Method | HTTP request | Description
 [**updateApiKey**](DefaultApi.md#updateApiKey) | **PATCH** /apps/{app_id}/auth/tokens/{token_id} | Update API key
 [**updateApp**](DefaultApi.md#updateApp) | **PUT** /apps/{app_id} | Update an app
 [**updateLiveActivity**](DefaultApi.md#updateLiveActivity) | **POST** /apps/{app_id}/live_activities/{activity_id}/notifications | Update a Live Activity via Push
+[**updateSegment**](DefaultApi.md#updateSegment) | **PATCH** /apps/{app_id}/segments/{segment_id} | Update Segment
 [**updateSubscription**](DefaultApi.md#updateSubscription) | **PATCH** /apps/{app_id}/subscriptions/{subscription_id} | 
 [**updateSubscriptionByToken**](DefaultApi.md#updateSubscriptionByToken) | **PATCH** /apps/{app_id}/subscriptions_by_token/{token_type}/{token} | Update subscription by token
 [**updateTemplate**](DefaultApi.md#updateTemplate) | **PATCH** /templates/{template_id} | Update template
@@ -2382,6 +2385,77 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
+# **getSegment**
+> GetSegmentSuccessResponse getSegment(appId, segmentId, includeSegmentDetail)
+
+Retrieve details for a single segment by its ID, including subscriber count and optionally segment metadata and filters.
+
+### Example
+
+
+```typescript
+import Onesignal from '@onesignal/node-onesignal';
+
+const configuration = Onesignal.createConfiguration({
+    restApiKey: 'YOUR_REST_API_KEY',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
+
+// string | The OneSignal App ID for your app.  Available in Keys & IDs.
+const appId: string = "YOUR_APP_ID";
+// string | The segment\'s unique identifier. Can be found using the View Segments API or in the URL of the segment when viewing it in the dashboard.
+const segmentId: string = "d6c5a3e1-9f17-44a1-9d10-7c0e4a2b1c8e";
+// boolean | Set to true to include segment metadata and filters in the response. (optional)
+const includeSegmentDetail: boolean = true;
+
+try {
+  const response = await apiInstance.getSegment(appId, segmentId, includeSegmentDetail);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("getSegment failed: HTTP " + e.code, e.errorMessages);
+  } else {
+    throw e;
+  }
+}
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **appId** | [**string**] | The OneSignal App ID for your app.  Available in Keys &amp; IDs. | defaults to undefined
+ **segmentId** | [**string**] | The segment\&#39;s unique identifier. Can be found using the View Segments API or in the URL of the segment when viewing it in the dashboard. | defaults to undefined
+ **includeSegmentDetail** | [**boolean**] | Set to true to include segment metadata and filters in the response. | (optional) defaults to undefined
+
+### Return type
+
+**GetSegmentSuccessResponse**
+
+### Authorization
+
+[rest_api_key](https://github.com/OneSignal/node-onesignal#configuration)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+**404** | Not Found |  -  |
+**429** | Rate Limit Exceeded |  -  |
+**0** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
+
 # **getSegments**
 > GetSegmentsSuccessResponse getSegments(appId, offset, limit)
 
@@ -2517,6 +2591,119 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | OK |  -  |
 **400** | Bad Request |  -  |
+**404** | Not Found |  -  |
+**429** | Rate Limit Exceeded |  -  |
+**0** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
+
+# **listAuditLogs**
+> ListAuditLogsSuccessResponse listAuditLogs(organizationId, startTime, endTime, cursor, limit, appIds, actions, actorIds, actorEmails, targetTypes, targetIds, ipAddresses)
+
+Retrieve a paginated, time-scoped list of audit log events for an organization. Requires an Enterprise plan with the audit logs entitlement enabled.
+
+### Example
+
+
+```typescript
+import Onesignal from '@onesignal/node-onesignal';
+
+const configuration = Onesignal.createConfiguration({
+    organizationApiKey: 'YOUR_ORGANIZATION_API_KEY',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
+
+// string | The UUID of the organization to retrieve audit logs for. Must match the authenticated Organization API Key.
+const organizationId: string = "YOUR_ORG_ID";
+// string | Start of the time range in ISO 8601 format (e.g. 2026-02-01T00:00:00Z). Required unless cursor is provided. Must be within the last 90 days. (optional)
+const startTime: string = "start_time_example";
+// string | End of the time range in ISO 8601 format. Defaults to the current time. Must be after start_time. (optional)
+const endTime: string = "end_time_example";
+// string | Pagination cursor returned in a previous response as next_cursor. When provided, start_time and end_time are ignored. (optional)
+const cursor: string = "cursor_example";
+// number | Maximum number of events to return per page. Minimum 1, maximum 100. Values outside this range are clamped automatically by the server. (optional)
+const limit: number = 1;
+// Array<string> | Filter events by app UUID. Accepts up to 10 values. Org-level events are always included. (optional)
+const appIds: Onesignal.Array<string> = [
+    "app_ids_example",
+  ];
+// Array<string> | Filter by action type (e.g. notification.sent, segment.created). Accepts up to 20 values. (optional)
+const actions: Onesignal.Array<string> = [
+    "actions_example",
+  ];
+// Array<string> | Filter by actor UUID (the user or service that performed the action). Accepts up to 10 values. (optional)
+const actorIds: Onesignal.Array<string> = [
+    "actor_ids_example",
+  ];
+// Array<string> | Filter by actor email address. Accepts up to 10 values. (optional)
+const actorEmails: Onesignal.Array<string> = [
+    "actor_emails_example",
+  ];
+// Array<string> | Filter by the type of resource the action was performed on (e.g. notification, segment, journey). Accepts up to 10 values. (optional)
+const targetTypes: Onesignal.Array<string> = [
+    "target_types_example",
+  ];
+// Array<string> | Filter by the UUID of the resource the action was performed on. Accepts up to 10 values. (optional)
+const targetIds: Onesignal.Array<string> = [
+    "target_ids_example",
+  ];
+// Array<string> | Filter by the IP address the action originated from. Accepts up to 10 values. (optional)
+const ipAddresses: Onesignal.Array<string> = [
+    "ip_addresses_example",
+  ];
+
+try {
+  const response = await apiInstance.listAuditLogs(organizationId, startTime, endTime, cursor, limit, appIds, actions, actorIds, actorEmails, targetTypes, targetIds, ipAddresses);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("listAuditLogs failed: HTTP " + e.code, e.errorMessages);
+  } else {
+    throw e;
+  }
+}
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **organizationId** | [**string**] | The UUID of the organization to retrieve audit logs for. Must match the authenticated Organization API Key. | defaults to undefined
+ **startTime** | [**string**] | Start of the time range in ISO 8601 format (e.g. 2026-02-01T00:00:00Z). Required unless cursor is provided. Must be within the last 90 days. | (optional) defaults to undefined
+ **endTime** | [**string**] | End of the time range in ISO 8601 format. Defaults to the current time. Must be after start_time. | (optional) defaults to undefined
+ **cursor** | [**string**] | Pagination cursor returned in a previous response as next_cursor. When provided, start_time and end_time are ignored. | (optional) defaults to undefined
+ **limit** | [**number**] | Maximum number of events to return per page. Minimum 1, maximum 100. Values outside this range are clamped automatically by the server. | (optional) defaults to undefined
+ **appIds** | **Array<string>** | Filter events by app UUID. Accepts up to 10 values. Org-level events are always included. | (optional) defaults to undefined
+ **actions** | **Array<string>** | Filter by action type (e.g. notification.sent, segment.created). Accepts up to 20 values. | (optional) defaults to undefined
+ **actorIds** | **Array<string>** | Filter by actor UUID (the user or service that performed the action). Accepts up to 10 values. | (optional) defaults to undefined
+ **actorEmails** | **Array<string>** | Filter by actor email address. Accepts up to 10 values. | (optional) defaults to undefined
+ **targetTypes** | **Array<string>** | Filter by the type of resource the action was performed on (e.g. notification, segment, journey). Accepts up to 10 values. | (optional) defaults to undefined
+ **targetIds** | **Array<string>** | Filter by the UUID of the resource the action was performed on. Accepts up to 10 values. | (optional) defaults to undefined
+ **ipAddresses** | **Array<string>** | Filter by the IP address the action originated from. Accepts up to 10 values. | (optional) defaults to undefined
+
+### Return type
+
+**ListAuditLogsSuccessResponse**
+
+### Authorization
+
+[organization_api_key](https://github.com/OneSignal/node-onesignal#configuration)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+**403** | Forbidden |  -  |
 **404** | Not Found |  -  |
 **429** | Rate Limit Exceeded |  -  |
 **0** | Unexpected error |  -  |
@@ -3258,6 +3445,93 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | OK |  -  |
 **400** | Bad Request |  -  |
+**429** | Rate Limit Exceeded |  -  |
+**0** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
+
+# **updateSegment**
+> UpdateSegmentSuccessResponse updateSegment(appId, segmentId, updateSegmentRequest)
+
+Update an existing segment\'s name and/or filters. The name parameter is always required. When filters are provided, all existing filters are replaced with the new ones.
+
+### Example
+
+
+```typescript
+import Onesignal from '@onesignal/node-onesignal';
+
+const configuration = Onesignal.createConfiguration({
+    restApiKey: 'YOUR_REST_API_KEY',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
+
+// string | The OneSignal App ID for your app.  Available in Keys & IDs.
+const appId: string = "YOUR_APP_ID";
+// string | The segment\'s unique identifier. Can be found using the View Segments API or in the URL of the segment when viewing it in the dashboard.
+const segmentId: string = "d6c5a3e1-9f17-44a1-9d10-7c0e4a2b1c8e";
+// UpdateSegmentRequest (optional)
+const updateSegmentRequest: Onesignal.UpdateSegmentRequest = {
+    name: "name_example",
+    description: "description_example",
+    filters: [
+      {
+        field: "tag",
+        key: "level",
+        value: "10",
+        hours_ago: "24",
+        radius: 3.14,
+        lat: 3.14,
+        long: 3.14,
+        relation: ">",
+      },
+    ],
+  };
+
+try {
+  const response = await apiInstance.updateSegment(appId, segmentId, updateSegmentRequest);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("updateSegment failed: HTTP " + e.code, e.errorMessages);
+  } else {
+    throw e;
+  }
+}
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **appId** | [**string**] | The OneSignal App ID for your app.  Available in Keys &amp; IDs. | defaults to undefined
+ **segmentId** | [**string**] | The segment\&#39;s unique identifier. Can be found using the View Segments API or in the URL of the segment when viewing it in the dashboard. | defaults to undefined
+ **updateSegmentRequest** | **UpdateSegmentRequest** |  |
+
+### Return type
+
+**UpdateSegmentSuccessResponse**
+
+### Authorization
+
+[rest_api_key](https://github.com/OneSignal/node-onesignal#configuration)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
 **429** | Rate Limit Exceeded |  -  |
 **0** | Unexpected error |  -  |
 

@@ -8,33 +8,50 @@
 
 import { HttpFile } from '../http/http';
 
-export class ApiKeyToken {
-    'token_id'?: string;
-    'updated_at'?: string;
-    'created_at'?: string;
+/**
+* The user or service that performed the action. Absent if the actor is unknown.
+*/
+export class AuditLogActor {
+    /**
+    * Email address of the actor. Absent if unavailable.
+    */
+    'email'?: string;
+    /**
+    * UUID of the actor.
+    */
+    'id'?: string;
+    /**
+    * Additional actor-specific data.
+    */
+    'metadata'?: object;
+    /**
+    * Display name of the actor. Absent if unavailable.
+    */
     'name'?: string;
-    'ip_allowlist_mode'?: ApiKeyTokenIpAllowlistModeEnum;
-    'ip_allowlist'?: Array<string>;
+    /**
+    * Actor type (e.g. member, api_key, system).
+    */
+    'type'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "token_id",
-            "baseName": "token_id",
+            "name": "email",
+            "baseName": "email",
             "type": "string",
             "format": ""
         },
         {
-            "name": "updated_at",
-            "baseName": "updated_at",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },
         {
-            "name": "created_at",
-            "baseName": "created_at",
-            "type": "string",
+            "name": "metadata",
+            "baseName": "metadata",
+            "type": "object",
             "format": ""
         },
         {
@@ -44,26 +61,17 @@ export class ApiKeyToken {
             "format": ""
         },
         {
-            "name": "ip_allowlist_mode",
-            "baseName": "ip_allowlist_mode",
-            "type": "ApiKeyTokenIpAllowlistModeEnum",
-            "format": ""
-        },
-        {
-            "name": "ip_allowlist",
-            "baseName": "ip_allowlist",
-            "type": "Array<string>",
+            "name": "type",
+            "baseName": "type",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ApiKeyToken.attributeTypeMap;
+        return AuditLogActor.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
-export type ApiKeyTokenIpAllowlistModeEnum = "disabled" | "explicit" ;
 
