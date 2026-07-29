@@ -82,8 +82,8 @@ import { AuditLogActor } from './AuditLogActor';
 import { AuditLogContext } from './AuditLogContext';
 import { AuditLogEvent } from './AuditLogEvent';
 import { AuditLogTarget } from './AuditLogTarget';
-import { BasicNotification             , BasicNotificationTargetChannelEnum     , BasicNotificationAggregationEnum                                                                                                   , BasicNotificationHuaweiCategoryEnum    } from './BasicNotification';
-import { BasicNotificationAllOf   , BasicNotificationAllOfAggregationEnum                                                                                                   , BasicNotificationAllOfHuaweiCategoryEnum    } from './BasicNotificationAllOf';
+import { BasicNotification             , BasicNotificationTargetChannelEnum     , BasicNotificationAggregationEnum                                                                                                    , BasicNotificationHuaweiCategoryEnum    } from './BasicNotification';
+import { BasicNotificationAllOf   , BasicNotificationAllOfAggregationEnum                                                                                                    , BasicNotificationAllOfHuaweiCategoryEnum    } from './BasicNotificationAllOf';
 import { BasicNotificationAllOfAndroidBackgroundLayout } from './BasicNotificationAllOfAndroidBackgroundLayout';
 import { Button } from './Button';
 import { CopyTemplateRequest } from './CopyTemplateRequest';
@@ -111,12 +111,12 @@ import { GetSegmentSuccessResponse } from './GetSegmentSuccessResponse';
 import { GetSegmentsSuccessResponse } from './GetSegmentsSuccessResponse';
 import { LanguageStringMap } from './LanguageStringMap';
 import { ListAuditLogsSuccessResponse } from './ListAuditLogsSuccessResponse';
-import { Notification             , NotificationTargetChannelEnum     , NotificationAggregationEnum                                                                                                   , NotificationHuaweiCategoryEnum     } from './Notification';
+import { Notification             , NotificationTargetChannelEnum     , NotificationAggregationEnum                                                                                                    , NotificationHuaweiCategoryEnum     } from './Notification';
 import { NotificationAllOf } from './NotificationAllOf';
 import { NotificationHistorySuccessResponse } from './NotificationHistorySuccessResponse';
 import { NotificationSlice } from './NotificationSlice';
 import { NotificationTarget             , NotificationTargetTargetChannelEnum   } from './NotificationTarget';
-import { NotificationWithMeta             , NotificationWithMetaTargetChannelEnum     , NotificationWithMetaAggregationEnum                                                                                                   , NotificationWithMetaHuaweiCategoryEnum                 } from './NotificationWithMeta';
+import { NotificationWithMeta             , NotificationWithMetaTargetChannelEnum     , NotificationWithMetaAggregationEnum                                                                                                    , NotificationWithMetaHuaweiCategoryEnum                 } from './NotificationWithMeta';
 import { NotificationWithMetaAllOf } from './NotificationWithMetaAllOf';
 import { Operator, OperatorOperatorEnum   } from './Operator';
 import { OutcomeData  , OutcomeDataAggregationEnum   } from './OutcomeData';
@@ -390,6 +390,13 @@ export class ObjectSerializer {
             if (!typeMap[type]) { // dont know the type
                 return data;
             }
+            if (typeof data !== "object") {
+                // A model type was requested but the data isn't an object —
+                // e.g. the raw string parse() falls back to for non-JSON error
+                // bodies. Return it unchanged so the raw text stays available
+                // on ApiException.body instead of an empty model instance.
+                return data;
+            }
             let instance = new typeMap[type]();
             let attributeTypes = typeMap[type].getAttributeTypeMap();
             for (let index in attributeTypes) {
@@ -465,10 +472,18 @@ export class ObjectSerializer {
             throw new Error("Cannot parse content. No Content-Type defined.");
         }
 
-        if (mediaType === "application/json") {
+        if (mediaType === "application/json" || mediaType.endsWith("+json")) {
             return JSON.parse(rawData);
         }
 
-        throw new Error("The mediaType " + mediaType + " is not supported by ObjectSerializer.parse.");
+        // Some responses (e.g. edge/proxy errors) declare a non-JSON media
+        // type such as text/plain while carrying a JSON body. Attempt JSON so
+        // the response processors can still construct a typed ApiException
+        // with the real error payload instead of throwing here and masking it.
+        try {
+            return JSON.parse(rawData);
+        } catch (err) {
+            return rawData;
+        }
     }
 }
