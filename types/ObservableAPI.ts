@@ -17,6 +17,7 @@ import { Button } from '../models/Button';
 import { CopyTemplateRequest } from '../models/CopyTemplateRequest';
 import { CreateApiKeyRequest } from '../models/CreateApiKeyRequest';
 import { CreateApiKeyResponse } from '../models/CreateApiKeyResponse';
+import { CreateJourneyRequest } from '../models/CreateJourneyRequest';
 import { CreateNotificationSuccessResponse } from '../models/CreateNotificationSuccessResponse';
 import { CreateSegmentConflictResponse } from '../models/CreateSegmentConflictResponse';
 import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
@@ -37,6 +38,28 @@ import { GenericSuccessBoolResponse } from '../models/GenericSuccessBoolResponse
 import { GetNotificationHistoryRequestBody } from '../models/GetNotificationHistoryRequestBody';
 import { GetSegmentSuccessResponse } from '../models/GetSegmentSuccessResponse';
 import { GetSegmentsSuccessResponse } from '../models/GetSegmentsSuccessResponse';
+import { Journey } from '../models/Journey';
+import { JourneyAudience } from '../models/JourneyAudience';
+import { JourneyBranch } from '../models/JourneyBranch';
+import { JourneyBranchStats } from '../models/JourneyBranchStats';
+import { JourneyCondition } from '../models/JourneyCondition';
+import { JourneyEarlyExit } from '../models/JourneyEarlyExit';
+import { JourneyEarlyExitRules } from '../models/JourneyEarlyExitRules';
+import { JourneyEarlyExitRulesOnEvent } from '../models/JourneyEarlyExitRulesOnEvent';
+import { JourneyEarlyExitRulesOnSegment } from '../models/JourneyEarlyExitRulesOnSegment';
+import { JourneyEventAttribute } from '../models/JourneyEventAttribute';
+import { JourneyListAudience } from '../models/JourneyListAudience';
+import { JourneyListItem } from '../models/JourneyListItem';
+import { JourneyListResponse } from '../models/JourneyListResponse';
+import { JourneyMessageStats } from '../models/JourneyMessageStats';
+import { JourneyNode } from '../models/JourneyNode';
+import { JourneyNodeStats } from '../models/JourneyNodeStats';
+import { JourneyReentryRules } from '../models/JourneyReentryRules';
+import { JourneySchedule } from '../models/JourneySchedule';
+import { JourneyStats } from '../models/JourneyStats';
+import { JourneyTimePoint } from '../models/JourneyTimePoint';
+import { JourneyTimeWindow } from '../models/JourneyTimeWindow';
+import { JourneyWaitUntilExpiration } from '../models/JourneyWaitUntilExpiration';
 import { LanguageStringMap } from '../models/LanguageStringMap';
 import { ListAuditLogsSuccessResponse } from '../models/ListAuditLogsSuccessResponse';
 import { Notification } from '../models/Notification';
@@ -70,6 +93,8 @@ import { TemplateResource } from '../models/TemplateResource';
 import { TemplatesListResponse } from '../models/TemplatesListResponse';
 import { TransferSubscriptionRequestBody } from '../models/TransferSubscriptionRequestBody';
 import { UpdateApiKeyRequest } from '../models/UpdateApiKeyRequest';
+import { UpdateJourneyNodeRequest } from '../models/UpdateJourneyNodeRequest';
+import { UpdateJourneyRequest } from '../models/UpdateJourneyRequest';
 import { UpdateLiveActivityRequest } from '../models/UpdateLiveActivityRequest';
 import { UpdateLiveActivitySuccessResponse } from '../models/UpdateLiveActivitySuccessResponse';
 import { UpdateSegmentRequest } from '../models/UpdateSegmentRequest';
@@ -273,6 +298,31 @@ export class ObservableDefaultApi {
     }
 
     /**
+     * The Journeys API is in beta. Endpoints and response fields can still change. Create a new journey with an audience and a node graph. Journeys are always created in the draft state. The authenticated App API key must have permission to create journeys.
+     * Create journey
+     * @param appId Your OneSignal App ID in UUID v4 format.
+     * @param createJourneyRequest 
+     */
+    public createJourney(appId: string, createJourneyRequest: CreateJourneyRequest, _options?: Configuration): Observable<Journey> {
+        const requestContextPromise = this.requestFactory.createJourney(appId, createJourneyRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createJourney(rsp)));
+            }));
+    }
+
+    /**
      * Sends notifications to your users.  **Target by External ID (push example):** set `include_aliases` to `{ \"external_id\": [\"your-user-id\"] }` and set `target_channel` to `push` (or `email` / `sms` for those channels). Alias object keys must match API labels exactly (for example `external_id`, not camelCase).  **Do not confuse** the notification-level `external_id` field with External ID targeting: top-level `external_id` / `idempotency_key` are for idempotent notification requests only, not for selecting recipients.  **Targeting compatibility:** `include_aliases` must not be combined with other targeting modes (segments, filters, subscription IDs, legacy player IDs, etc.). Clients should send only one targeting strategy per request. 
      * Create notification
      * @param notification 
@@ -443,6 +493,31 @@ export class ObservableDefaultApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteApiKey(rsp)));
+            }));
+    }
+
+    /**
+     * The Journeys API is in beta. Endpoints and response fields can still change. Permanently delete a journey by its UUID. Returns { \"success\": true } on success. The authenticated App API key must have permission to delete journeys. Deleting a journey stops any in-flight users and cannot be undone. Archive a running journey instead if you need to keep its data.
+     * Delete journey
+     * @param appId Your OneSignal App ID in UUID v4 format.
+     * @param journeyId UUID of the journey to delete.
+     */
+    public deleteJourney(appId: string, journeyId: string, _options?: Configuration): Observable<GenericSuccessBoolResponse> {
+        const requestContextPromise = this.requestFactory.deleteJourney(appId, journeyId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteJourney(rsp)));
             }));
     }
 
@@ -1064,6 +1139,59 @@ export class ObservableDefaultApi {
     }
 
     /**
+     * The Journeys API is in beta. Endpoints and response fields can still change. Apply a partial update to a journey using JSON Merge Patch (RFC 7396). Send only the fields you want to change; omitted fields are left unchanged. A null value clears a nullable field, and arrays such as nodes are replaced wholesale. Set state to active to activate a draft journey.
+     * Update journey
+     * @param appId Your OneSignal App ID in UUID v4 format.
+     * @param journeyId UUID of the journey to update.
+     * @param updateJourneyRequest 
+     */
+    public updateJourney(appId: string, journeyId: string, updateJourneyRequest: UpdateJourneyRequest, _options?: Configuration): Observable<Journey> {
+        const requestContextPromise = this.requestFactory.updateJourney(appId, journeyId, updateJourneyRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateJourney(rsp)));
+            }));
+    }
+
+    /**
+     * The Journeys API is in beta. Endpoints and response fields can still change. Apply a partial update to a single node, located by its server-assigned id, using JSON Merge Patch (RFC 7396). Send only the node fields you want to change; the rest of the node and the rest of the journey graph are left untouched. Returns the full updated journey.
+     * Update journey node
+     * @param appId Your OneSignal App ID in UUID v4 format.
+     * @param journeyId UUID of the journey that owns the node.
+     * @param nodeId Server-assigned UUID of the node to update, from a prior View journey fetch.
+     * @param updateJourneyNodeRequest 
+     */
+    public updateJourneyNode(appId: string, journeyId: string, nodeId: string, updateJourneyNodeRequest: UpdateJourneyNodeRequest, _options?: Configuration): Observable<Journey> {
+        const requestContextPromise = this.requestFactory.updateJourneyNode(appId, journeyId, nodeId, updateJourneyNodeRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateJourneyNode(rsp)));
+            }));
+    }
+
+    /**
      * Updates a specified live activity.
      * Update a Live Activity via Push
      * @param appId The OneSignal App ID for your app.  Available in Keys &amp; IDs.
@@ -1240,6 +1368,82 @@ export class ObservableDefaultApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.viewApiKeys(rsp)));
+            }));
+    }
+
+    /**
+     * The Journeys API is in beta. Endpoints and response fields can still change. Retrieve the full configuration of a single journey by its UUID, including its audience and node graph.
+     * View journey
+     * @param appId Your OneSignal App ID in UUID v4 format.
+     * @param journeyId UUID of the journey to retrieve.
+     */
+    public viewJourney(appId: string, journeyId: string, _options?: Configuration): Observable<Journey> {
+        const requestContextPromise = this.requestFactory.viewJourney(appId, journeyId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.viewJourney(rsp)));
+            }));
+    }
+
+    /**
+     * The Journeys API is in beta. Endpoints and response fields can still change. Retrieve performance stats for a single journey: journey-level entry and exit counts, per-node counts keyed by node id, per-branch counts keyed by branch id, and channel delivery stats for message-sending nodes. The response carries no definition detail, so join it by id against the journey from View journey.
+     * View journey stats
+     * @param appId Your OneSignal App ID in UUID v4 format.
+     * @param journeyId UUID of the journey to retrieve stats for.
+     */
+    public viewJourneyStats(appId: string, journeyId: string, _options?: Configuration): Observable<JourneyStats> {
+        const requestContextPromise = this.requestFactory.viewJourneyStats(appId, journeyId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.viewJourneyStats(rsp)));
+            }));
+    }
+
+    /**
+     * The Journeys API is in beta. Endpoints and response fields can still change. Retrieve a paginated list of journeys for an app. Returns a summary representation of each journey; use View journey for the full configuration. Uses forward-only cursor-based pagination.
+     * View journeys
+     * @param appId Your OneSignal App ID in UUID v4 format.
+     * @param cursor Opaque pagination token from a previous response\&#39;s next_cursor. Omit for the first page.
+     * @param limit Maximum journeys to return per page. Minimum 1, maximum 50.
+     */
+    public viewJourneys(appId: string, cursor?: string, limit?: number, _options?: Configuration): Observable<JourneyListResponse> {
+        const requestContextPromise = this.requestFactory.viewJourneys(appId, cursor, limit, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.viewJourneys(rsp)));
             }));
     }
 

@@ -29,6 +29,7 @@ __exportStar(require("./Button"), exports);
 __exportStar(require("./CopyTemplateRequest"), exports);
 __exportStar(require("./CreateApiKeyRequest"), exports);
 __exportStar(require("./CreateApiKeyResponse"), exports);
+__exportStar(require("./CreateJourneyRequest"), exports);
 __exportStar(require("./CreateNotificationSuccessResponse"), exports);
 __exportStar(require("./CreateSegmentConflictResponse"), exports);
 __exportStar(require("./CreateSegmentSuccessResponse"), exports);
@@ -49,6 +50,28 @@ __exportStar(require("./GenericSuccessBoolResponse"), exports);
 __exportStar(require("./GetNotificationHistoryRequestBody"), exports);
 __exportStar(require("./GetSegmentSuccessResponse"), exports);
 __exportStar(require("./GetSegmentsSuccessResponse"), exports);
+__exportStar(require("./Journey"), exports);
+__exportStar(require("./JourneyAudience"), exports);
+__exportStar(require("./JourneyBranch"), exports);
+__exportStar(require("./JourneyBranchStats"), exports);
+__exportStar(require("./JourneyCondition"), exports);
+__exportStar(require("./JourneyEarlyExit"), exports);
+__exportStar(require("./JourneyEarlyExitRules"), exports);
+__exportStar(require("./JourneyEarlyExitRulesOnEvent"), exports);
+__exportStar(require("./JourneyEarlyExitRulesOnSegment"), exports);
+__exportStar(require("./JourneyEventAttribute"), exports);
+__exportStar(require("./JourneyListAudience"), exports);
+__exportStar(require("./JourneyListItem"), exports);
+__exportStar(require("./JourneyListResponse"), exports);
+__exportStar(require("./JourneyMessageStats"), exports);
+__exportStar(require("./JourneyNode"), exports);
+__exportStar(require("./JourneyNodeStats"), exports);
+__exportStar(require("./JourneyReentryRules"), exports);
+__exportStar(require("./JourneySchedule"), exports);
+__exportStar(require("./JourneyStats"), exports);
+__exportStar(require("./JourneyTimePoint"), exports);
+__exportStar(require("./JourneyTimeWindow"), exports);
+__exportStar(require("./JourneyWaitUntilExpiration"), exports);
 __exportStar(require("./LanguageStringMap"), exports);
 __exportStar(require("./ListAuditLogsSuccessResponse"), exports);
 __exportStar(require("./Notification"), exports);
@@ -82,6 +105,8 @@ __exportStar(require("./TemplateResource"), exports);
 __exportStar(require("./TemplatesListResponse"), exports);
 __exportStar(require("./TransferSubscriptionRequestBody"), exports);
 __exportStar(require("./UpdateApiKeyRequest"), exports);
+__exportStar(require("./UpdateJourneyNodeRequest"), exports);
+__exportStar(require("./UpdateJourneyRequest"), exports);
 __exportStar(require("./UpdateLiveActivityRequest"), exports);
 __exportStar(require("./UpdateLiveActivitySuccessResponse"), exports);
 __exportStar(require("./UpdateSegmentRequest"), exports);
@@ -105,6 +130,7 @@ const Button_1 = require("./Button");
 const CopyTemplateRequest_1 = require("./CopyTemplateRequest");
 const CreateApiKeyRequest_1 = require("./CreateApiKeyRequest");
 const CreateApiKeyResponse_1 = require("./CreateApiKeyResponse");
+const CreateJourneyRequest_1 = require("./CreateJourneyRequest");
 const CreateNotificationSuccessResponse_1 = require("./CreateNotificationSuccessResponse");
 const CreateSegmentConflictResponse_1 = require("./CreateSegmentConflictResponse");
 const CreateSegmentSuccessResponse_1 = require("./CreateSegmentSuccessResponse");
@@ -125,6 +151,28 @@ const GenericSuccessBoolResponse_1 = require("./GenericSuccessBoolResponse");
 const GetNotificationHistoryRequestBody_1 = require("./GetNotificationHistoryRequestBody");
 const GetSegmentSuccessResponse_1 = require("./GetSegmentSuccessResponse");
 const GetSegmentsSuccessResponse_1 = require("./GetSegmentsSuccessResponse");
+const Journey_1 = require("./Journey");
+const JourneyAudience_1 = require("./JourneyAudience");
+const JourneyBranch_1 = require("./JourneyBranch");
+const JourneyBranchStats_1 = require("./JourneyBranchStats");
+const JourneyCondition_1 = require("./JourneyCondition");
+const JourneyEarlyExit_1 = require("./JourneyEarlyExit");
+const JourneyEarlyExitRules_1 = require("./JourneyEarlyExitRules");
+const JourneyEarlyExitRulesOnEvent_1 = require("./JourneyEarlyExitRulesOnEvent");
+const JourneyEarlyExitRulesOnSegment_1 = require("./JourneyEarlyExitRulesOnSegment");
+const JourneyEventAttribute_1 = require("./JourneyEventAttribute");
+const JourneyListAudience_1 = require("./JourneyListAudience");
+const JourneyListItem_1 = require("./JourneyListItem");
+const JourneyListResponse_1 = require("./JourneyListResponse");
+const JourneyMessageStats_1 = require("./JourneyMessageStats");
+const JourneyNode_1 = require("./JourneyNode");
+const JourneyNodeStats_1 = require("./JourneyNodeStats");
+const JourneyReentryRules_1 = require("./JourneyReentryRules");
+const JourneySchedule_1 = require("./JourneySchedule");
+const JourneyStats_1 = require("./JourneyStats");
+const JourneyTimePoint_1 = require("./JourneyTimePoint");
+const JourneyTimeWindow_1 = require("./JourneyTimeWindow");
+const JourneyWaitUntilExpiration_1 = require("./JourneyWaitUntilExpiration");
 const LanguageStringMap_1 = require("./LanguageStringMap");
 const ListAuditLogsSuccessResponse_1 = require("./ListAuditLogsSuccessResponse");
 const Notification_1 = require("./Notification");
@@ -158,6 +206,8 @@ const TemplateResource_1 = require("./TemplateResource");
 const TemplatesListResponse_1 = require("./TemplatesListResponse");
 const TransferSubscriptionRequestBody_1 = require("./TransferSubscriptionRequestBody");
 const UpdateApiKeyRequest_1 = require("./UpdateApiKeyRequest");
+const UpdateJourneyNodeRequest_1 = require("./UpdateJourneyNodeRequest");
+const UpdateJourneyRequest_1 = require("./UpdateJourneyRequest");
 const UpdateLiveActivityRequest_1 = require("./UpdateLiveActivityRequest");
 const UpdateLiveActivitySuccessResponse_1 = require("./UpdateLiveActivitySuccessResponse");
 const UpdateSegmentRequest_1 = require("./UpdateSegmentRequest");
@@ -195,6 +245,16 @@ let enumsMap = new Set([
     "FilterExpressionRelationEnum",
     "FilterExpressionOperatorEnum",
     "GetNotificationHistoryRequestBodyEventsEnum",
+    "JourneyStateEnum",
+    "JourneyAudienceKindEnum",
+    "JourneyConditionKindEnum",
+    "JourneyConditionActionEnum",
+    "JourneyEventAttributeOperatorEnum",
+    "JourneyListAudienceKindEnum",
+    "JourneyListItemStateEnum",
+    "JourneyNodeKindEnum",
+    "JourneyNodeRelativeToEnum",
+    "JourneyNodeStatsKindEnum",
     "NotificationTargetChannelEnum",
     "NotificationAggregationEnum",
     "NotificationHuaweiCategoryEnum",
@@ -210,6 +270,8 @@ let enumsMap = new Set([
     "SubscriptionNotificationTargetTargetChannelEnum",
     "TemplateResourceChannelEnum",
     "UpdateApiKeyRequestIpAllowlistModeEnum",
+    "UpdateJourneyNodeRequestRelativeToEnum",
+    "UpdateJourneyRequestStateEnum",
     "UpdateLiveActivityRequestEventEnum",
 ]);
 let typeMap = {
@@ -227,6 +289,7 @@ let typeMap = {
     "CopyTemplateRequest": CopyTemplateRequest_1.CopyTemplateRequest,
     "CreateApiKeyRequest": CreateApiKeyRequest_1.CreateApiKeyRequest,
     "CreateApiKeyResponse": CreateApiKeyResponse_1.CreateApiKeyResponse,
+    "CreateJourneyRequest": CreateJourneyRequest_1.CreateJourneyRequest,
     "CreateNotificationSuccessResponse": CreateNotificationSuccessResponse_1.CreateNotificationSuccessResponse,
     "CreateSegmentConflictResponse": CreateSegmentConflictResponse_1.CreateSegmentConflictResponse,
     "CreateSegmentSuccessResponse": CreateSegmentSuccessResponse_1.CreateSegmentSuccessResponse,
@@ -247,6 +310,28 @@ let typeMap = {
     "GetNotificationHistoryRequestBody": GetNotificationHistoryRequestBody_1.GetNotificationHistoryRequestBody,
     "GetSegmentSuccessResponse": GetSegmentSuccessResponse_1.GetSegmentSuccessResponse,
     "GetSegmentsSuccessResponse": GetSegmentsSuccessResponse_1.GetSegmentsSuccessResponse,
+    "Journey": Journey_1.Journey,
+    "JourneyAudience": JourneyAudience_1.JourneyAudience,
+    "JourneyBranch": JourneyBranch_1.JourneyBranch,
+    "JourneyBranchStats": JourneyBranchStats_1.JourneyBranchStats,
+    "JourneyCondition": JourneyCondition_1.JourneyCondition,
+    "JourneyEarlyExit": JourneyEarlyExit_1.JourneyEarlyExit,
+    "JourneyEarlyExitRules": JourneyEarlyExitRules_1.JourneyEarlyExitRules,
+    "JourneyEarlyExitRulesOnEvent": JourneyEarlyExitRulesOnEvent_1.JourneyEarlyExitRulesOnEvent,
+    "JourneyEarlyExitRulesOnSegment": JourneyEarlyExitRulesOnSegment_1.JourneyEarlyExitRulesOnSegment,
+    "JourneyEventAttribute": JourneyEventAttribute_1.JourneyEventAttribute,
+    "JourneyListAudience": JourneyListAudience_1.JourneyListAudience,
+    "JourneyListItem": JourneyListItem_1.JourneyListItem,
+    "JourneyListResponse": JourneyListResponse_1.JourneyListResponse,
+    "JourneyMessageStats": JourneyMessageStats_1.JourneyMessageStats,
+    "JourneyNode": JourneyNode_1.JourneyNode,
+    "JourneyNodeStats": JourneyNodeStats_1.JourneyNodeStats,
+    "JourneyReentryRules": JourneyReentryRules_1.JourneyReentryRules,
+    "JourneySchedule": JourneySchedule_1.JourneySchedule,
+    "JourneyStats": JourneyStats_1.JourneyStats,
+    "JourneyTimePoint": JourneyTimePoint_1.JourneyTimePoint,
+    "JourneyTimeWindow": JourneyTimeWindow_1.JourneyTimeWindow,
+    "JourneyWaitUntilExpiration": JourneyWaitUntilExpiration_1.JourneyWaitUntilExpiration,
     "LanguageStringMap": LanguageStringMap_1.LanguageStringMap,
     "ListAuditLogsSuccessResponse": ListAuditLogsSuccessResponse_1.ListAuditLogsSuccessResponse,
     "Notification": Notification_1.Notification,
@@ -280,6 +365,8 @@ let typeMap = {
     "TemplatesListResponse": TemplatesListResponse_1.TemplatesListResponse,
     "TransferSubscriptionRequestBody": TransferSubscriptionRequestBody_1.TransferSubscriptionRequestBody,
     "UpdateApiKeyRequest": UpdateApiKeyRequest_1.UpdateApiKeyRequest,
+    "UpdateJourneyNodeRequest": UpdateJourneyNodeRequest_1.UpdateJourneyNodeRequest,
+    "UpdateJourneyRequest": UpdateJourneyRequest_1.UpdateJourneyRequest,
     "UpdateLiveActivityRequest": UpdateLiveActivityRequest_1.UpdateLiveActivityRequest,
     "UpdateLiveActivitySuccessResponse": UpdateLiveActivitySuccessResponse_1.UpdateLiveActivitySuccessResponse,
     "UpdateSegmentRequest": UpdateSegmentRequest_1.UpdateSegmentRequest,

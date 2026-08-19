@@ -6,6 +6,7 @@ import { App } from '../models/App';
 import { CopyTemplateRequest } from '../models/CopyTemplateRequest';
 import { CreateApiKeyRequest } from '../models/CreateApiKeyRequest';
 import { CreateApiKeyResponse } from '../models/CreateApiKeyResponse';
+import { CreateJourneyRequest } from '../models/CreateJourneyRequest';
 import { CreateNotificationSuccessResponse } from '../models/CreateNotificationSuccessResponse';
 import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
 import { CreateTemplateRequest } from '../models/CreateTemplateRequest';
@@ -17,6 +18,9 @@ import { GenericSuccessBoolResponse } from '../models/GenericSuccessBoolResponse
 import { GetNotificationHistoryRequestBody } from '../models/GetNotificationHistoryRequestBody';
 import { GetSegmentSuccessResponse } from '../models/GetSegmentSuccessResponse';
 import { GetSegmentsSuccessResponse } from '../models/GetSegmentsSuccessResponse';
+import { Journey } from '../models/Journey';
+import { JourneyListResponse } from '../models/JourneyListResponse';
+import { JourneyStats } from '../models/JourneyStats';
 import { ListAuditLogsSuccessResponse } from '../models/ListAuditLogsSuccessResponse';
 import { Notification } from '../models/Notification';
 import { NotificationHistorySuccessResponse } from '../models/NotificationHistorySuccessResponse';
@@ -32,6 +36,8 @@ import { TemplateResource } from '../models/TemplateResource';
 import { TemplatesListResponse } from '../models/TemplatesListResponse';
 import { TransferSubscriptionRequestBody } from '../models/TransferSubscriptionRequestBody';
 import { UpdateApiKeyRequest } from '../models/UpdateApiKeyRequest';
+import { UpdateJourneyNodeRequest } from '../models/UpdateJourneyNodeRequest';
+import { UpdateJourneyRequest } from '../models/UpdateJourneyRequest';
 import { UpdateLiveActivityRequest } from '../models/UpdateLiveActivityRequest';
 import { UpdateLiveActivitySuccessResponse } from '../models/UpdateLiveActivitySuccessResponse';
 import { UpdateSegmentRequest } from '../models/UpdateSegmentRequest';
@@ -48,6 +54,7 @@ export declare class DefaultApiRequestFactory extends BaseAPIRequestFactory {
     createApiKey(appId: string, createApiKeyRequest: CreateApiKeyRequest, _options?: Configuration): Promise<RequestContext>;
     createApp(app: App, _options?: Configuration): Promise<RequestContext>;
     createCustomEvents(appId: string, customEventsRequest: CustomEventsRequest, _options?: Configuration): Promise<RequestContext>;
+    createJourney(appId: string, createJourneyRequest: CreateJourneyRequest, _options?: Configuration): Promise<RequestContext>;
     createNotification(notification: Notification, _options?: Configuration): Promise<RequestContext>;
     createSegment(appId: string, segment?: Segment, _options?: Configuration): Promise<RequestContext>;
     createSubscription(appId: string, aliasLabel: string, aliasId: string, subscriptionBody: SubscriptionBody, _options?: Configuration): Promise<RequestContext>;
@@ -55,6 +62,7 @@ export declare class DefaultApiRequestFactory extends BaseAPIRequestFactory {
     createUser(appId: string, user: User, _options?: Configuration): Promise<RequestContext>;
     deleteAlias(appId: string, aliasLabel: string, aliasId: string, aliasLabelToDelete: string, _options?: Configuration): Promise<RequestContext>;
     deleteApiKey(appId: string, tokenId: string, _options?: Configuration): Promise<RequestContext>;
+    deleteJourney(appId: string, journeyId: string, _options?: Configuration): Promise<RequestContext>;
     deleteSegment(appId: string, segmentId: string, _options?: Configuration): Promise<RequestContext>;
     deleteSubscription(appId: string, subscriptionId: string, _options?: Configuration): Promise<RequestContext>;
     deleteTemplate(templateId: string, appId: string, _options?: Configuration): Promise<RequestContext>;
@@ -79,6 +87,8 @@ export declare class DefaultApiRequestFactory extends BaseAPIRequestFactory {
     unsubscribeEmailWithToken(appId: string, notificationId: string, token: string, _options?: Configuration): Promise<RequestContext>;
     updateApiKey(appId: string, tokenId: string, updateApiKeyRequest: UpdateApiKeyRequest, _options?: Configuration): Promise<RequestContext>;
     updateApp(appId: string, app: App, _options?: Configuration): Promise<RequestContext>;
+    updateJourney(appId: string, journeyId: string, updateJourneyRequest: UpdateJourneyRequest, _options?: Configuration): Promise<RequestContext>;
+    updateJourneyNode(appId: string, journeyId: string, nodeId: string, updateJourneyNodeRequest: UpdateJourneyNodeRequest, _options?: Configuration): Promise<RequestContext>;
     updateLiveActivity(appId: string, activityId: string, updateLiveActivityRequest: UpdateLiveActivityRequest, _options?: Configuration): Promise<RequestContext>;
     updateSegment(appId: string, segmentId: string, updateSegmentRequest?: UpdateSegmentRequest, _options?: Configuration): Promise<RequestContext>;
     updateSubscription(appId: string, subscriptionId: string, subscriptionBody: SubscriptionBody, _options?: Configuration): Promise<RequestContext>;
@@ -86,6 +96,9 @@ export declare class DefaultApiRequestFactory extends BaseAPIRequestFactory {
     updateTemplate(templateId: string, appId: string, updateTemplateRequest: UpdateTemplateRequest, _options?: Configuration): Promise<RequestContext>;
     updateUser(appId: string, aliasLabel: string, aliasId: string, updateUserRequest: UpdateUserRequest, _options?: Configuration): Promise<RequestContext>;
     viewApiKeys(appId: string, _options?: Configuration): Promise<RequestContext>;
+    viewJourney(appId: string, journeyId: string, _options?: Configuration): Promise<RequestContext>;
+    viewJourneyStats(appId: string, journeyId: string, _options?: Configuration): Promise<RequestContext>;
+    viewJourneys(appId: string, cursor?: string, limit?: number, _options?: Configuration): Promise<RequestContext>;
     viewTemplate(templateId: string, appId: string, _options?: Configuration): Promise<RequestContext>;
     viewTemplates(appId: string, limit?: number, offset?: number, channel?: 'push' | 'email' | 'sms', _options?: Configuration): Promise<RequestContext>;
 }
@@ -97,6 +110,7 @@ export declare class DefaultApiResponseProcessor {
     createApiKey(response: ResponseContext): Promise<CreateApiKeyResponse>;
     createApp(response: ResponseContext): Promise<App>;
     createCustomEvents(response: ResponseContext): Promise<object>;
+    createJourney(response: ResponseContext): Promise<Journey>;
     createNotification(response: ResponseContext): Promise<CreateNotificationSuccessResponse>;
     createSegment(response: ResponseContext): Promise<CreateSegmentSuccessResponse>;
     createSubscription(response: ResponseContext): Promise<SubscriptionBody>;
@@ -104,6 +118,7 @@ export declare class DefaultApiResponseProcessor {
     createUser(response: ResponseContext): Promise<User>;
     deleteAlias(response: ResponseContext): Promise<UserIdentityBody>;
     deleteApiKey(response: ResponseContext): Promise<object>;
+    deleteJourney(response: ResponseContext): Promise<GenericSuccessBoolResponse>;
     deleteSegment(response: ResponseContext): Promise<GenericSuccessBoolResponse>;
     deleteSubscription(response: ResponseContext): Promise<void>;
     deleteTemplate(response: ResponseContext): Promise<GenericSuccessBoolResponse>;
@@ -128,6 +143,8 @@ export declare class DefaultApiResponseProcessor {
     unsubscribeEmailWithToken(response: ResponseContext): Promise<GenericSuccessBoolResponse>;
     updateApiKey(response: ResponseContext): Promise<object>;
     updateApp(response: ResponseContext): Promise<App>;
+    updateJourney(response: ResponseContext): Promise<Journey>;
+    updateJourneyNode(response: ResponseContext): Promise<Journey>;
     updateLiveActivity(response: ResponseContext): Promise<UpdateLiveActivitySuccessResponse>;
     updateSegment(response: ResponseContext): Promise<UpdateSegmentSuccessResponse>;
     updateSubscription(response: ResponseContext): Promise<void>;
@@ -135,6 +152,9 @@ export declare class DefaultApiResponseProcessor {
     updateTemplate(response: ResponseContext): Promise<TemplateResource>;
     updateUser(response: ResponseContext): Promise<PropertiesBody>;
     viewApiKeys(response: ResponseContext): Promise<ApiKeyTokensListResponse>;
+    viewJourney(response: ResponseContext): Promise<Journey>;
+    viewJourneyStats(response: ResponseContext): Promise<JourneyStats>;
+    viewJourneys(response: ResponseContext): Promise<JourneyListResponse>;
     viewTemplate(response: ResponseContext): Promise<TemplateResource>;
     viewTemplates(response: ResponseContext): Promise<TemplatesListResponse>;
 }

@@ -115,6 +115,21 @@ class ObservableDefaultApi {
             return middlewarePostObservable.pipe((0, rxjsStub_2.map)((rsp) => this.responseProcessor.createCustomEvents(rsp)));
         }));
     }
+    createJourney(appId, createJourneyRequest, _options) {
+        const requestContextPromise = this.requestFactory.createJourney(appId, createJourneyRequest, _options);
+        let middlewarePreObservable = (0, rxjsStub_1.from)(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => middleware.pre(ctx)));
+        }
+        return middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => this.configuration.httpApi.send(ctx))).
+            pipe((0, rxjsStub_2.mergeMap)((response) => {
+            let middlewarePostObservable = (0, rxjsStub_1.of)(response);
+            for (let middleware of this.configuration.middleware) {
+                middlewarePostObservable = middlewarePostObservable.pipe((0, rxjsStub_2.mergeMap)((rsp) => middleware.post(rsp)));
+            }
+            return middlewarePostObservable.pipe((0, rxjsStub_2.map)((rsp) => this.responseProcessor.createJourney(rsp)));
+        }));
+    }
     createNotification(notification, _options) {
         const requestContextPromise = this.requestFactory.createNotification(notification, _options);
         let middlewarePreObservable = (0, rxjsStub_1.from)(requestContextPromise);
@@ -218,6 +233,21 @@ class ObservableDefaultApi {
                 middlewarePostObservable = middlewarePostObservable.pipe((0, rxjsStub_2.mergeMap)((rsp) => middleware.post(rsp)));
             }
             return middlewarePostObservable.pipe((0, rxjsStub_2.map)((rsp) => this.responseProcessor.deleteApiKey(rsp)));
+        }));
+    }
+    deleteJourney(appId, journeyId, _options) {
+        const requestContextPromise = this.requestFactory.deleteJourney(appId, journeyId, _options);
+        let middlewarePreObservable = (0, rxjsStub_1.from)(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => middleware.pre(ctx)));
+        }
+        return middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => this.configuration.httpApi.send(ctx))).
+            pipe((0, rxjsStub_2.mergeMap)((response) => {
+            let middlewarePostObservable = (0, rxjsStub_1.of)(response);
+            for (let middleware of this.configuration.middleware) {
+                middlewarePostObservable = middlewarePostObservable.pipe((0, rxjsStub_2.mergeMap)((rsp) => middleware.post(rsp)));
+            }
+            return middlewarePostObservable.pipe((0, rxjsStub_2.map)((rsp) => this.responseProcessor.deleteJourney(rsp)));
         }));
     }
     deleteSegment(appId, segmentId, _options) {
@@ -580,6 +610,36 @@ class ObservableDefaultApi {
             return middlewarePostObservable.pipe((0, rxjsStub_2.map)((rsp) => this.responseProcessor.updateApp(rsp)));
         }));
     }
+    updateJourney(appId, journeyId, updateJourneyRequest, _options) {
+        const requestContextPromise = this.requestFactory.updateJourney(appId, journeyId, updateJourneyRequest, _options);
+        let middlewarePreObservable = (0, rxjsStub_1.from)(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => middleware.pre(ctx)));
+        }
+        return middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => this.configuration.httpApi.send(ctx))).
+            pipe((0, rxjsStub_2.mergeMap)((response) => {
+            let middlewarePostObservable = (0, rxjsStub_1.of)(response);
+            for (let middleware of this.configuration.middleware) {
+                middlewarePostObservable = middlewarePostObservable.pipe((0, rxjsStub_2.mergeMap)((rsp) => middleware.post(rsp)));
+            }
+            return middlewarePostObservable.pipe((0, rxjsStub_2.map)((rsp) => this.responseProcessor.updateJourney(rsp)));
+        }));
+    }
+    updateJourneyNode(appId, journeyId, nodeId, updateJourneyNodeRequest, _options) {
+        const requestContextPromise = this.requestFactory.updateJourneyNode(appId, journeyId, nodeId, updateJourneyNodeRequest, _options);
+        let middlewarePreObservable = (0, rxjsStub_1.from)(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => middleware.pre(ctx)));
+        }
+        return middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => this.configuration.httpApi.send(ctx))).
+            pipe((0, rxjsStub_2.mergeMap)((response) => {
+            let middlewarePostObservable = (0, rxjsStub_1.of)(response);
+            for (let middleware of this.configuration.middleware) {
+                middlewarePostObservable = middlewarePostObservable.pipe((0, rxjsStub_2.mergeMap)((rsp) => middleware.post(rsp)));
+            }
+            return middlewarePostObservable.pipe((0, rxjsStub_2.map)((rsp) => this.responseProcessor.updateJourneyNode(rsp)));
+        }));
+    }
     updateLiveActivity(appId, activityId, updateLiveActivityRequest, _options) {
         const requestContextPromise = this.requestFactory.updateLiveActivity(appId, activityId, updateLiveActivityRequest, _options);
         let middlewarePreObservable = (0, rxjsStub_1.from)(requestContextPromise);
@@ -683,6 +743,51 @@ class ObservableDefaultApi {
                 middlewarePostObservable = middlewarePostObservable.pipe((0, rxjsStub_2.mergeMap)((rsp) => middleware.post(rsp)));
             }
             return middlewarePostObservable.pipe((0, rxjsStub_2.map)((rsp) => this.responseProcessor.viewApiKeys(rsp)));
+        }));
+    }
+    viewJourney(appId, journeyId, _options) {
+        const requestContextPromise = this.requestFactory.viewJourney(appId, journeyId, _options);
+        let middlewarePreObservable = (0, rxjsStub_1.from)(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => middleware.pre(ctx)));
+        }
+        return middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => this.configuration.httpApi.send(ctx))).
+            pipe((0, rxjsStub_2.mergeMap)((response) => {
+            let middlewarePostObservable = (0, rxjsStub_1.of)(response);
+            for (let middleware of this.configuration.middleware) {
+                middlewarePostObservable = middlewarePostObservable.pipe((0, rxjsStub_2.mergeMap)((rsp) => middleware.post(rsp)));
+            }
+            return middlewarePostObservable.pipe((0, rxjsStub_2.map)((rsp) => this.responseProcessor.viewJourney(rsp)));
+        }));
+    }
+    viewJourneyStats(appId, journeyId, _options) {
+        const requestContextPromise = this.requestFactory.viewJourneyStats(appId, journeyId, _options);
+        let middlewarePreObservable = (0, rxjsStub_1.from)(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => middleware.pre(ctx)));
+        }
+        return middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => this.configuration.httpApi.send(ctx))).
+            pipe((0, rxjsStub_2.mergeMap)((response) => {
+            let middlewarePostObservable = (0, rxjsStub_1.of)(response);
+            for (let middleware of this.configuration.middleware) {
+                middlewarePostObservable = middlewarePostObservable.pipe((0, rxjsStub_2.mergeMap)((rsp) => middleware.post(rsp)));
+            }
+            return middlewarePostObservable.pipe((0, rxjsStub_2.map)((rsp) => this.responseProcessor.viewJourneyStats(rsp)));
+        }));
+    }
+    viewJourneys(appId, cursor, limit, _options) {
+        const requestContextPromise = this.requestFactory.viewJourneys(appId, cursor, limit, _options);
+        let middlewarePreObservable = (0, rxjsStub_1.from)(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => middleware.pre(ctx)));
+        }
+        return middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => this.configuration.httpApi.send(ctx))).
+            pipe((0, rxjsStub_2.mergeMap)((response) => {
+            let middlewarePostObservable = (0, rxjsStub_1.of)(response);
+            for (let middleware of this.configuration.middleware) {
+                middlewarePostObservable = middlewarePostObservable.pipe((0, rxjsStub_2.mergeMap)((rsp) => middleware.post(rsp)));
+            }
+            return middlewarePostObservable.pipe((0, rxjsStub_2.map)((rsp) => this.responseProcessor.viewJourneys(rsp)));
         }));
     }
     viewTemplate(templateId, appId, _options) {

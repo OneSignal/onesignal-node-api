@@ -6,6 +6,7 @@ import { App } from '../models/App';
 import { CopyTemplateRequest } from '../models/CopyTemplateRequest';
 import { CreateApiKeyRequest } from '../models/CreateApiKeyRequest';
 import { CreateApiKeyResponse } from '../models/CreateApiKeyResponse';
+import { CreateJourneyRequest } from '../models/CreateJourneyRequest';
 import { CreateNotificationSuccessResponse } from '../models/CreateNotificationSuccessResponse';
 import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
 import { CreateTemplateRequest } from '../models/CreateTemplateRequest';
@@ -17,6 +18,9 @@ import { GenericSuccessBoolResponse } from '../models/GenericSuccessBoolResponse
 import { GetNotificationHistoryRequestBody } from '../models/GetNotificationHistoryRequestBody';
 import { GetSegmentSuccessResponse } from '../models/GetSegmentSuccessResponse';
 import { GetSegmentsSuccessResponse } from '../models/GetSegmentsSuccessResponse';
+import { Journey } from '../models/Journey';
+import { JourneyListResponse } from '../models/JourneyListResponse';
+import { JourneyStats } from '../models/JourneyStats';
 import { ListAuditLogsSuccessResponse } from '../models/ListAuditLogsSuccessResponse';
 import { Notification } from '../models/Notification';
 import { NotificationHistorySuccessResponse } from '../models/NotificationHistorySuccessResponse';
@@ -32,6 +36,8 @@ import { TemplateResource } from '../models/TemplateResource';
 import { TemplatesListResponse } from '../models/TemplatesListResponse';
 import { TransferSubscriptionRequestBody } from '../models/TransferSubscriptionRequestBody';
 import { UpdateApiKeyRequest } from '../models/UpdateApiKeyRequest';
+import { UpdateJourneyNodeRequest } from '../models/UpdateJourneyNodeRequest';
+import { UpdateJourneyRequest } from '../models/UpdateJourneyRequest';
 import { UpdateLiveActivityRequest } from '../models/UpdateLiveActivityRequest';
 import { UpdateLiveActivitySuccessResponse } from '../models/UpdateLiveActivitySuccessResponse';
 import { UpdateSegmentRequest } from '../models/UpdateSegmentRequest';
@@ -53,6 +59,7 @@ export declare class PromiseDefaultApi {
     createApiKey(appId: string, createApiKeyRequest: CreateApiKeyRequest, _options?: Configuration): Promise<CreateApiKeyResponse>;
     createApp(app: App, _options?: Configuration): Promise<App>;
     createCustomEvents(appId: string, customEventsRequest: CustomEventsRequest, _options?: Configuration): Promise<object>;
+    createJourney(appId: string, createJourneyRequest: CreateJourneyRequest, _options?: Configuration): Promise<Journey>;
     createNotification(notification: Notification, _options?: Configuration): Promise<CreateNotificationSuccessResponse>;
     createSegment(appId: string, segment?: Segment, _options?: Configuration): Promise<CreateSegmentSuccessResponse>;
     createSubscription(appId: string, aliasLabel: string, aliasId: string, subscriptionBody: SubscriptionBody, _options?: Configuration): Promise<SubscriptionBody>;
@@ -60,6 +67,7 @@ export declare class PromiseDefaultApi {
     createUser(appId: string, user: User, _options?: Configuration): Promise<User>;
     deleteAlias(appId: string, aliasLabel: string, aliasId: string, aliasLabelToDelete: string, _options?: Configuration): Promise<UserIdentityBody>;
     deleteApiKey(appId: string, tokenId: string, _options?: Configuration): Promise<object>;
+    deleteJourney(appId: string, journeyId: string, _options?: Configuration): Promise<GenericSuccessBoolResponse>;
     deleteSegment(appId: string, segmentId: string, _options?: Configuration): Promise<GenericSuccessBoolResponse>;
     deleteSubscription(appId: string, subscriptionId: string, _options?: Configuration): Promise<void>;
     deleteTemplate(templateId: string, appId: string, _options?: Configuration): Promise<GenericSuccessBoolResponse>;
@@ -84,6 +92,8 @@ export declare class PromiseDefaultApi {
     unsubscribeEmailWithToken(appId: string, notificationId: string, token: string, _options?: Configuration): Promise<GenericSuccessBoolResponse>;
     updateApiKey(appId: string, tokenId: string, updateApiKeyRequest: UpdateApiKeyRequest, _options?: Configuration): Promise<object>;
     updateApp(appId: string, app: App, _options?: Configuration): Promise<App>;
+    updateJourney(appId: string, journeyId: string, updateJourneyRequest: UpdateJourneyRequest, _options?: Configuration): Promise<Journey>;
+    updateJourneyNode(appId: string, journeyId: string, nodeId: string, updateJourneyNodeRequest: UpdateJourneyNodeRequest, _options?: Configuration): Promise<Journey>;
     updateLiveActivity(appId: string, activityId: string, updateLiveActivityRequest: UpdateLiveActivityRequest, _options?: Configuration): Promise<UpdateLiveActivitySuccessResponse>;
     updateSegment(appId: string, segmentId: string, updateSegmentRequest?: UpdateSegmentRequest, _options?: Configuration): Promise<UpdateSegmentSuccessResponse>;
     updateSubscription(appId: string, subscriptionId: string, subscriptionBody: SubscriptionBody, _options?: Configuration): Promise<void>;
@@ -91,6 +101,9 @@ export declare class PromiseDefaultApi {
     updateTemplate(templateId: string, appId: string, updateTemplateRequest: UpdateTemplateRequest, _options?: Configuration): Promise<TemplateResource>;
     updateUser(appId: string, aliasLabel: string, aliasId: string, updateUserRequest: UpdateUserRequest, _options?: Configuration): Promise<PropertiesBody>;
     viewApiKeys(appId: string, _options?: Configuration): Promise<ApiKeyTokensListResponse>;
+    viewJourney(appId: string, journeyId: string, _options?: Configuration): Promise<Journey>;
+    viewJourneyStats(appId: string, journeyId: string, _options?: Configuration): Promise<JourneyStats>;
+    viewJourneys(appId: string, cursor?: string, limit?: number, _options?: Configuration): Promise<JourneyListResponse>;
     viewTemplate(templateId: string, appId: string, _options?: Configuration): Promise<TemplateResource>;
     viewTemplates(appId: string, limit?: number, offset?: number, channel?: 'push' | 'email' | 'sms', _options?: Configuration): Promise<TemplatesListResponse>;
 }

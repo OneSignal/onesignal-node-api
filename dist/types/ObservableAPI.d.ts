@@ -5,6 +5,7 @@ import { App } from '../models/App';
 import { CopyTemplateRequest } from '../models/CopyTemplateRequest';
 import { CreateApiKeyRequest } from '../models/CreateApiKeyRequest';
 import { CreateApiKeyResponse } from '../models/CreateApiKeyResponse';
+import { CreateJourneyRequest } from '../models/CreateJourneyRequest';
 import { CreateNotificationSuccessResponse } from '../models/CreateNotificationSuccessResponse';
 import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
 import { CreateTemplateRequest } from '../models/CreateTemplateRequest';
@@ -16,6 +17,9 @@ import { GenericSuccessBoolResponse } from '../models/GenericSuccessBoolResponse
 import { GetNotificationHistoryRequestBody } from '../models/GetNotificationHistoryRequestBody';
 import { GetSegmentSuccessResponse } from '../models/GetSegmentSuccessResponse';
 import { GetSegmentsSuccessResponse } from '../models/GetSegmentsSuccessResponse';
+import { Journey } from '../models/Journey';
+import { JourneyListResponse } from '../models/JourneyListResponse';
+import { JourneyStats } from '../models/JourneyStats';
 import { ListAuditLogsSuccessResponse } from '../models/ListAuditLogsSuccessResponse';
 import { Notification } from '../models/Notification';
 import { NotificationHistorySuccessResponse } from '../models/NotificationHistorySuccessResponse';
@@ -31,6 +35,8 @@ import { TemplateResource } from '../models/TemplateResource';
 import { TemplatesListResponse } from '../models/TemplatesListResponse';
 import { TransferSubscriptionRequestBody } from '../models/TransferSubscriptionRequestBody';
 import { UpdateApiKeyRequest } from '../models/UpdateApiKeyRequest';
+import { UpdateJourneyNodeRequest } from '../models/UpdateJourneyNodeRequest';
+import { UpdateJourneyRequest } from '../models/UpdateJourneyRequest';
 import { UpdateLiveActivityRequest } from '../models/UpdateLiveActivityRequest';
 import { UpdateLiveActivitySuccessResponse } from '../models/UpdateLiveActivitySuccessResponse';
 import { UpdateSegmentRequest } from '../models/UpdateSegmentRequest';
@@ -52,6 +58,7 @@ export declare class ObservableDefaultApi {
     createApiKey(appId: string, createApiKeyRequest: CreateApiKeyRequest, _options?: Configuration): Observable<CreateApiKeyResponse>;
     createApp(app: App, _options?: Configuration): Observable<App>;
     createCustomEvents(appId: string, customEventsRequest: CustomEventsRequest, _options?: Configuration): Observable<object>;
+    createJourney(appId: string, createJourneyRequest: CreateJourneyRequest, _options?: Configuration): Observable<Journey>;
     createNotification(notification: Notification, _options?: Configuration): Observable<CreateNotificationSuccessResponse>;
     createSegment(appId: string, segment?: Segment, _options?: Configuration): Observable<CreateSegmentSuccessResponse>;
     createSubscription(appId: string, aliasLabel: string, aliasId: string, subscriptionBody: SubscriptionBody, _options?: Configuration): Observable<SubscriptionBody>;
@@ -59,6 +66,7 @@ export declare class ObservableDefaultApi {
     createUser(appId: string, user: User, _options?: Configuration): Observable<User>;
     deleteAlias(appId: string, aliasLabel: string, aliasId: string, aliasLabelToDelete: string, _options?: Configuration): Observable<UserIdentityBody>;
     deleteApiKey(appId: string, tokenId: string, _options?: Configuration): Observable<object>;
+    deleteJourney(appId: string, journeyId: string, _options?: Configuration): Observable<GenericSuccessBoolResponse>;
     deleteSegment(appId: string, segmentId: string, _options?: Configuration): Observable<GenericSuccessBoolResponse>;
     deleteSubscription(appId: string, subscriptionId: string, _options?: Configuration): Observable<void>;
     deleteTemplate(templateId: string, appId: string, _options?: Configuration): Observable<GenericSuccessBoolResponse>;
@@ -83,6 +91,8 @@ export declare class ObservableDefaultApi {
     unsubscribeEmailWithToken(appId: string, notificationId: string, token: string, _options?: Configuration): Observable<GenericSuccessBoolResponse>;
     updateApiKey(appId: string, tokenId: string, updateApiKeyRequest: UpdateApiKeyRequest, _options?: Configuration): Observable<object>;
     updateApp(appId: string, app: App, _options?: Configuration): Observable<App>;
+    updateJourney(appId: string, journeyId: string, updateJourneyRequest: UpdateJourneyRequest, _options?: Configuration): Observable<Journey>;
+    updateJourneyNode(appId: string, journeyId: string, nodeId: string, updateJourneyNodeRequest: UpdateJourneyNodeRequest, _options?: Configuration): Observable<Journey>;
     updateLiveActivity(appId: string, activityId: string, updateLiveActivityRequest: UpdateLiveActivityRequest, _options?: Configuration): Observable<UpdateLiveActivitySuccessResponse>;
     updateSegment(appId: string, segmentId: string, updateSegmentRequest?: UpdateSegmentRequest, _options?: Configuration): Observable<UpdateSegmentSuccessResponse>;
     updateSubscription(appId: string, subscriptionId: string, subscriptionBody: SubscriptionBody, _options?: Configuration): Observable<void>;
@@ -90,6 +100,9 @@ export declare class ObservableDefaultApi {
     updateTemplate(templateId: string, appId: string, updateTemplateRequest: UpdateTemplateRequest, _options?: Configuration): Observable<TemplateResource>;
     updateUser(appId: string, aliasLabel: string, aliasId: string, updateUserRequest: UpdateUserRequest, _options?: Configuration): Observable<PropertiesBody>;
     viewApiKeys(appId: string, _options?: Configuration): Observable<ApiKeyTokensListResponse>;
+    viewJourney(appId: string, journeyId: string, _options?: Configuration): Observable<Journey>;
+    viewJourneyStats(appId: string, journeyId: string, _options?: Configuration): Observable<JourneyStats>;
+    viewJourneys(appId: string, cursor?: string, limit?: number, _options?: Configuration): Observable<JourneyListResponse>;
     viewTemplate(templateId: string, appId: string, _options?: Configuration): Observable<TemplateResource>;
     viewTemplates(appId: string, limit?: number, offset?: number, channel?: 'push' | 'email' | 'sms', _options?: Configuration): Observable<TemplatesListResponse>;
 }
