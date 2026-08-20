@@ -38,5 +38,5 @@ jobs:
               -p @semantic-release/git \
               -p @semantic-release/github \
               -p @semantic-release/npm \
-              -p conventional-changelog-conventionalcommits \
+              -p conventional-changelog-conventionalcommits@9 \
               semantic-release
