@@ -16,6 +16,7 @@ import { Button } from '../models/Button';
 import { CopyTemplateRequest } from '../models/CopyTemplateRequest';
 import { CreateApiKeyRequest } from '../models/CreateApiKeyRequest';
 import { CreateApiKeyResponse } from '../models/CreateApiKeyResponse';
+import { CreateJourneyRequest } from '../models/CreateJourneyRequest';
 import { CreateNotificationSuccessResponse } from '../models/CreateNotificationSuccessResponse';
 import { CreateSegmentConflictResponse } from '../models/CreateSegmentConflictResponse';
 import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
@@ -36,6 +37,28 @@ import { GenericSuccessBoolResponse } from '../models/GenericSuccessBoolResponse
 import { GetNotificationHistoryRequestBody } from '../models/GetNotificationHistoryRequestBody';
 import { GetSegmentSuccessResponse } from '../models/GetSegmentSuccessResponse';
 import { GetSegmentsSuccessResponse } from '../models/GetSegmentsSuccessResponse';
+import { Journey } from '../models/Journey';
+import { JourneyAudience } from '../models/JourneyAudience';
+import { JourneyBranch } from '../models/JourneyBranch';
+import { JourneyBranchStats } from '../models/JourneyBranchStats';
+import { JourneyCondition } from '../models/JourneyCondition';
+import { JourneyEarlyExit } from '../models/JourneyEarlyExit';
+import { JourneyEarlyExitRules } from '../models/JourneyEarlyExitRules';
+import { JourneyEarlyExitRulesOnEvent } from '../models/JourneyEarlyExitRulesOnEvent';
+import { JourneyEarlyExitRulesOnSegment } from '../models/JourneyEarlyExitRulesOnSegment';
+import { JourneyEventAttribute } from '../models/JourneyEventAttribute';
+import { JourneyListAudience } from '../models/JourneyListAudience';
+import { JourneyListItem } from '../models/JourneyListItem';
+import { JourneyListResponse } from '../models/JourneyListResponse';
+import { JourneyMessageStats } from '../models/JourneyMessageStats';
+import { JourneyNode } from '../models/JourneyNode';
+import { JourneyNodeStats } from '../models/JourneyNodeStats';
+import { JourneyReentryRules } from '../models/JourneyReentryRules';
+import { JourneySchedule } from '../models/JourneySchedule';
+import { JourneyStats } from '../models/JourneyStats';
+import { JourneyTimePoint } from '../models/JourneyTimePoint';
+import { JourneyTimeWindow } from '../models/JourneyTimeWindow';
+import { JourneyWaitUntilExpiration } from '../models/JourneyWaitUntilExpiration';
 import { LanguageStringMap } from '../models/LanguageStringMap';
 import { ListAuditLogsSuccessResponse } from '../models/ListAuditLogsSuccessResponse';
 import { Notification } from '../models/Notification';
@@ -69,6 +92,8 @@ import { TemplateResource } from '../models/TemplateResource';
 import { TemplatesListResponse } from '../models/TemplatesListResponse';
 import { TransferSubscriptionRequestBody } from '../models/TransferSubscriptionRequestBody';
 import { UpdateApiKeyRequest } from '../models/UpdateApiKeyRequest';
+import { UpdateJourneyNodeRequest } from '../models/UpdateJourneyNodeRequest';
+import { UpdateJourneyRequest } from '../models/UpdateJourneyRequest';
 import { UpdateLiveActivityRequest } from '../models/UpdateLiveActivityRequest';
 import { UpdateLiveActivitySuccessResponse } from '../models/UpdateLiveActivitySuccessResponse';
 import { UpdateSegmentRequest } from '../models/UpdateSegmentRequest';
@@ -205,6 +230,21 @@ export interface DefaultApiCreateCustomEventsRequest {
     customEventsRequest: CustomEventsRequest
 }
 
+export interface DefaultApiCreateJourneyRequest {
+    /**
+     * Your OneSignal App ID in UUID v4 format.
+     * @type string
+     * @memberof DefaultApicreateJourney
+     */
+    appId: string
+    /**
+     * 
+     * @type CreateJourneyRequest
+     * @memberof DefaultApicreateJourney
+     */
+    createJourneyRequest: CreateJourneyRequest
+}
+
 export interface DefaultApiCreateNotificationRequest {
     /**
      * 
@@ -320,6 +360,21 @@ export interface DefaultApiDeleteApiKeyRequest {
      * @memberof DefaultApideleteApiKey
      */
     tokenId: string
+}
+
+export interface DefaultApiDeleteJourneyRequest {
+    /**
+     * Your OneSignal App ID in UUID v4 format.
+     * @type string
+     * @memberof DefaultApideleteJourney
+     */
+    appId: string
+    /**
+     * UUID of the journey to delete.
+     * @type string
+     * @memberof DefaultApideleteJourney
+     */
+    journeyId: string
 }
 
 export interface DefaultApiDeleteSegmentRequest {
@@ -820,6 +875,54 @@ export interface DefaultApiUpdateAppRequest {
     app: App
 }
 
+export interface DefaultApiUpdateJourneyRequest {
+    /**
+     * Your OneSignal App ID in UUID v4 format.
+     * @type string
+     * @memberof DefaultApiupdateJourney
+     */
+    appId: string
+    /**
+     * UUID of the journey to update.
+     * @type string
+     * @memberof DefaultApiupdateJourney
+     */
+    journeyId: string
+    /**
+     * 
+     * @type UpdateJourneyRequest
+     * @memberof DefaultApiupdateJourney
+     */
+    updateJourneyRequest: UpdateJourneyRequest
+}
+
+export interface DefaultApiUpdateJourneyNodeRequest {
+    /**
+     * Your OneSignal App ID in UUID v4 format.
+     * @type string
+     * @memberof DefaultApiupdateJourneyNode
+     */
+    appId: string
+    /**
+     * UUID of the journey that owns the node.
+     * @type string
+     * @memberof DefaultApiupdateJourneyNode
+     */
+    journeyId: string
+    /**
+     * Server-assigned UUID of the node to update, from a prior View journey fetch.
+     * @type string
+     * @memberof DefaultApiupdateJourneyNode
+     */
+    nodeId: string
+    /**
+     * 
+     * @type UpdateJourneyNodeRequest
+     * @memberof DefaultApiupdateJourneyNode
+     */
+    updateJourneyNodeRequest: UpdateJourneyNodeRequest
+}
+
 export interface DefaultApiUpdateLiveActivityRequest {
     /**
      * The OneSignal App ID for your app.  Available in Keys &amp; IDs.
@@ -967,6 +1070,57 @@ export interface DefaultApiViewApiKeysRequest {
     appId: string
 }
 
+export interface DefaultApiViewJourneyRequest {
+    /**
+     * Your OneSignal App ID in UUID v4 format.
+     * @type string
+     * @memberof DefaultApiviewJourney
+     */
+    appId: string
+    /**
+     * UUID of the journey to retrieve.
+     * @type string
+     * @memberof DefaultApiviewJourney
+     */
+    journeyId: string
+}
+
+export interface DefaultApiViewJourneyStatsRequest {
+    /**
+     * Your OneSignal App ID in UUID v4 format.
+     * @type string
+     * @memberof DefaultApiviewJourneyStats
+     */
+    appId: string
+    /**
+     * UUID of the journey to retrieve stats for.
+     * @type string
+     * @memberof DefaultApiviewJourneyStats
+     */
+    journeyId: string
+}
+
+export interface DefaultApiViewJourneysRequest {
+    /**
+     * Your OneSignal App ID in UUID v4 format.
+     * @type string
+     * @memberof DefaultApiviewJourneys
+     */
+    appId: string
+    /**
+     * Opaque pagination token from a previous response\&#39;s next_cursor. Omit for the first page.
+     * @type string
+     * @memberof DefaultApiviewJourneys
+     */
+    cursor?: string
+    /**
+     * Maximum journeys to return per page. Minimum 1, maximum 50.
+     * @type number
+     * @memberof DefaultApiviewJourneys
+     */
+    limit?: number
+}
+
 export interface DefaultApiViewTemplateRequest {
     /**
      * 
@@ -1078,6 +1232,15 @@ export class ObjectDefaultApi {
     }
 
     /**
+     * The Journeys API is in beta. Endpoints and response fields can still change. Create a new journey with an audience and a node graph. Journeys are always created in the draft state. The authenticated App API key must have permission to create journeys.
+     * Create journey
+     * @param param the request object
+     */
+    public createJourney(param: DefaultApiCreateJourneyRequest, options?: Configuration): Promise<Journey> {
+        return this.api.createJourney(param.appId, param.createJourneyRequest,  options).toPromise();
+    }
+
+    /**
      * Sends notifications to your users.  **Target by External ID (push example):** set `include_aliases` to `{ \"external_id\": [\"your-user-id\"] }` and set `target_channel` to `push` (or `email` / `sms` for those channels). Alias object keys must match API labels exactly (for example `external_id`, not camelCase).  **Do not confuse** the notification-level `external_id` field with External ID targeting: top-level `external_id` / `idempotency_key` are for idempotent notification requests only, not for selecting recipients.  **Targeting compatibility:** `include_aliases` must not be combined with other targeting modes (segments, filters, subscription IDs, legacy player IDs, etc.). Clients should send only one targeting strategy per request. 
      * Create notification
      * @param param the request object
@@ -1135,6 +1298,15 @@ export class ObjectDefaultApi {
      */
     public deleteApiKey(param: DefaultApiDeleteApiKeyRequest, options?: Configuration): Promise<object> {
         return this.api.deleteApiKey(param.appId, param.tokenId,  options).toPromise();
+    }
+
+    /**
+     * The Journeys API is in beta. Endpoints and response fields can still change. Permanently delete a journey by its UUID. Returns { \"success\": true } on success. The authenticated App API key must have permission to delete journeys. Deleting a journey stops any in-flight users and cannot be undone. Archive a running journey instead if you need to keep its data.
+     * Delete journey
+     * @param param the request object
+     */
+    public deleteJourney(param: DefaultApiDeleteJourneyRequest, options?: Configuration): Promise<GenericSuccessBoolResponse> {
+        return this.api.deleteJourney(param.appId, param.journeyId,  options).toPromise();
     }
 
     /**
@@ -1348,6 +1520,24 @@ export class ObjectDefaultApi {
     }
 
     /**
+     * The Journeys API is in beta. Endpoints and response fields can still change. Apply a partial update to a journey using JSON Merge Patch (RFC 7396). Send only the fields you want to change; omitted fields are left unchanged. A null value clears a nullable field, and arrays such as nodes are replaced wholesale. Set state to active to activate a draft journey.
+     * Update journey
+     * @param param the request object
+     */
+    public updateJourney(param: DefaultApiUpdateJourneyRequest, options?: Configuration): Promise<Journey> {
+        return this.api.updateJourney(param.appId, param.journeyId, param.updateJourneyRequest,  options).toPromise();
+    }
+
+    /**
+     * The Journeys API is in beta. Endpoints and response fields can still change. Apply a partial update to a single node, located by its server-assigned id, using JSON Merge Patch (RFC 7396). Send only the node fields you want to change; the rest of the node and the rest of the journey graph are left untouched. Returns the full updated journey.
+     * Update journey node
+     * @param param the request object
+     */
+    public updateJourneyNode(param: DefaultApiUpdateJourneyNodeRequest, options?: Configuration): Promise<Journey> {
+        return this.api.updateJourneyNode(param.appId, param.journeyId, param.nodeId, param.updateJourneyNodeRequest,  options).toPromise();
+    }
+
+    /**
      * Updates a specified live activity.
      * Update a Live Activity via Push
      * @param param the request object
@@ -1406,6 +1596,33 @@ export class ObjectDefaultApi {
      */
     public viewApiKeys(param: DefaultApiViewApiKeysRequest, options?: Configuration): Promise<ApiKeyTokensListResponse> {
         return this.api.viewApiKeys(param.appId,  options).toPromise();
+    }
+
+    /**
+     * The Journeys API is in beta. Endpoints and response fields can still change. Retrieve the full configuration of a single journey by its UUID, including its audience and node graph.
+     * View journey
+     * @param param the request object
+     */
+    public viewJourney(param: DefaultApiViewJourneyRequest, options?: Configuration): Promise<Journey> {
+        return this.api.viewJourney(param.appId, param.journeyId,  options).toPromise();
+    }
+
+    /**
+     * The Journeys API is in beta. Endpoints and response fields can still change. Retrieve performance stats for a single journey: journey-level entry and exit counts, per-node counts keyed by node id, per-branch counts keyed by branch id, and channel delivery stats for message-sending nodes. The response carries no definition detail, so join it by id against the journey from View journey.
+     * View journey stats
+     * @param param the request object
+     */
+    public viewJourneyStats(param: DefaultApiViewJourneyStatsRequest, options?: Configuration): Promise<JourneyStats> {
+        return this.api.viewJourneyStats(param.appId, param.journeyId,  options).toPromise();
+    }
+
+    /**
+     * The Journeys API is in beta. Endpoints and response fields can still change. Retrieve a paginated list of journeys for an app. Returns a summary representation of each journey; use View journey for the full configuration. Uses forward-only cursor-based pagination.
+     * View journeys
+     * @param param the request object
+     */
+    public viewJourneys(param: DefaultApiViewJourneysRequest, options?: Configuration): Promise<JourneyListResponse> {
+        return this.api.viewJourneys(param.appId, param.cursor, param.limit,  options).toPromise();
     }
 
     /**

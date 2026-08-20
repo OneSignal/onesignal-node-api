@@ -12,6 +12,7 @@ export * from './Button';
 export * from './CopyTemplateRequest';
 export * from './CreateApiKeyRequest';
 export * from './CreateApiKeyResponse';
+export * from './CreateJourneyRequest';
 export * from './CreateNotificationSuccessResponse';
 export * from './CreateSegmentConflictResponse';
 export * from './CreateSegmentSuccessResponse';
@@ -32,6 +33,28 @@ export * from './GenericSuccessBoolResponse';
 export * from './GetNotificationHistoryRequestBody';
 export * from './GetSegmentSuccessResponse';
 export * from './GetSegmentsSuccessResponse';
+export * from './Journey';
+export * from './JourneyAudience';
+export * from './JourneyBranch';
+export * from './JourneyBranchStats';
+export * from './JourneyCondition';
+export * from './JourneyEarlyExit';
+export * from './JourneyEarlyExitRules';
+export * from './JourneyEarlyExitRulesOnEvent';
+export * from './JourneyEarlyExitRulesOnSegment';
+export * from './JourneyEventAttribute';
+export * from './JourneyListAudience';
+export * from './JourneyListItem';
+export * from './JourneyListResponse';
+export * from './JourneyMessageStats';
+export * from './JourneyNode';
+export * from './JourneyNodeStats';
+export * from './JourneyReentryRules';
+export * from './JourneySchedule';
+export * from './JourneyStats';
+export * from './JourneyTimePoint';
+export * from './JourneyTimeWindow';
+export * from './JourneyWaitUntilExpiration';
 export * from './LanguageStringMap';
 export * from './ListAuditLogsSuccessResponse';
 export * from './Notification';
@@ -65,6 +88,8 @@ export * from './TemplateResource';
 export * from './TemplatesListResponse';
 export * from './TransferSubscriptionRequestBody';
 export * from './UpdateApiKeyRequest';
+export * from './UpdateJourneyNodeRequest';
+export * from './UpdateJourneyRequest';
 export * from './UpdateLiveActivityRequest';
 export * from './UpdateLiveActivitySuccessResponse';
 export * from './UpdateSegmentRequest';
@@ -89,6 +114,7 @@ import { Button } from './Button';
 import { CopyTemplateRequest } from './CopyTemplateRequest';
 import { CreateApiKeyRequest , CreateApiKeyRequestIpAllowlistModeEnum    } from './CreateApiKeyRequest';
 import { CreateApiKeyResponse } from './CreateApiKeyResponse';
+import { CreateJourneyRequest } from './CreateJourneyRequest';
 import { CreateNotificationSuccessResponse } from './CreateNotificationSuccessResponse';
 import { CreateSegmentConflictResponse } from './CreateSegmentConflictResponse';
 import { CreateSegmentSuccessResponse } from './CreateSegmentSuccessResponse';
@@ -109,6 +135,28 @@ import { GenericSuccessBoolResponse } from './GenericSuccessBoolResponse';
 import { GetNotificationHistoryRequestBody, GetNotificationHistoryRequestBodyEventsEnum     } from './GetNotificationHistoryRequestBody';
 import { GetSegmentSuccessResponse } from './GetSegmentSuccessResponse';
 import { GetSegmentsSuccessResponse } from './GetSegmentsSuccessResponse';
+import { Journey    , JourneyStateEnum              } from './Journey';
+import { JourneyAudience, JourneyAudienceKindEnum        } from './JourneyAudience';
+import { JourneyBranch } from './JourneyBranch';
+import { JourneyBranchStats } from './JourneyBranchStats';
+import { JourneyCondition, JourneyConditionKindEnum    , JourneyConditionActionEnum        } from './JourneyCondition';
+import { JourneyEarlyExit } from './JourneyEarlyExit';
+import { JourneyEarlyExitRules } from './JourneyEarlyExitRules';
+import { JourneyEarlyExitRulesOnEvent } from './JourneyEarlyExitRulesOnEvent';
+import { JourneyEarlyExitRulesOnSegment } from './JourneyEarlyExitRulesOnSegment';
+import { JourneyEventAttribute , JourneyEventAttributeOperatorEnum    } from './JourneyEventAttribute';
+import { JourneyListAudience, JourneyListAudienceKindEnum   } from './JourneyListAudience';
+import { JourneyListItem   , JourneyListItemStateEnum           } from './JourneyListItem';
+import { JourneyListResponse } from './JourneyListResponse';
+import { JourneyMessageStats } from './JourneyMessageStats';
+import { JourneyNode , JourneyNodeKindEnum     , JourneyNodeRelativeToEnum              } from './JourneyNode';
+import { JourneyNodeStats, JourneyNodeStatsKindEnum       } from './JourneyNodeStats';
+import { JourneyReentryRules } from './JourneyReentryRules';
+import { JourneySchedule } from './JourneySchedule';
+import { JourneyStats } from './JourneyStats';
+import { JourneyTimePoint } from './JourneyTimePoint';
+import { JourneyTimeWindow } from './JourneyTimeWindow';
+import { JourneyWaitUntilExpiration } from './JourneyWaitUntilExpiration';
 import { LanguageStringMap } from './LanguageStringMap';
 import { ListAuditLogsSuccessResponse } from './ListAuditLogsSuccessResponse';
 import { Notification             , NotificationTargetChannelEnum     , NotificationAggregationEnum                                                                                                    , NotificationHuaweiCategoryEnum     } from './Notification';
@@ -142,6 +190,8 @@ import { TemplateResource    , TemplateResourceChannelEnum    } from './Template
 import { TemplatesListResponse } from './TemplatesListResponse';
 import { TransferSubscriptionRequestBody } from './TransferSubscriptionRequestBody';
 import { UpdateApiKeyRequest , UpdateApiKeyRequestIpAllowlistModeEnum    } from './UpdateApiKeyRequest';
+import { UpdateJourneyNodeRequest   , UpdateJourneyNodeRequestRelativeToEnum               } from './UpdateJourneyNodeRequest';
+import { UpdateJourneyRequest       , UpdateJourneyRequestStateEnum    } from './UpdateJourneyRequest';
 import { UpdateLiveActivityRequest , UpdateLiveActivityRequestEventEnum          } from './UpdateLiveActivityRequest';
 import { UpdateLiveActivitySuccessResponse } from './UpdateLiveActivitySuccessResponse';
 import { UpdateSegmentRequest } from './UpdateSegmentRequest';
@@ -184,6 +234,16 @@ let enumsMap: Set<string> = new Set<string>([
     "FilterExpressionRelationEnum",
     "FilterExpressionOperatorEnum",
     "GetNotificationHistoryRequestBodyEventsEnum",
+    "JourneyStateEnum",
+    "JourneyAudienceKindEnum",
+    "JourneyConditionKindEnum",
+    "JourneyConditionActionEnum",
+    "JourneyEventAttributeOperatorEnum",
+    "JourneyListAudienceKindEnum",
+    "JourneyListItemStateEnum",
+    "JourneyNodeKindEnum",
+    "JourneyNodeRelativeToEnum",
+    "JourneyNodeStatsKindEnum",
     "NotificationTargetChannelEnum",
     "NotificationAggregationEnum",
     "NotificationHuaweiCategoryEnum",
@@ -199,6 +259,8 @@ let enumsMap: Set<string> = new Set<string>([
     "SubscriptionNotificationTargetTargetChannelEnum",
     "TemplateResourceChannelEnum",
     "UpdateApiKeyRequestIpAllowlistModeEnum",
+    "UpdateJourneyNodeRequestRelativeToEnum",
+    "UpdateJourneyRequestStateEnum",
     "UpdateLiveActivityRequestEventEnum",
 ]);
 
@@ -217,6 +279,7 @@ let typeMap: {[index: string]: any} = {
     "CopyTemplateRequest": CopyTemplateRequest,
     "CreateApiKeyRequest": CreateApiKeyRequest,
     "CreateApiKeyResponse": CreateApiKeyResponse,
+    "CreateJourneyRequest": CreateJourneyRequest,
     "CreateNotificationSuccessResponse": CreateNotificationSuccessResponse,
     "CreateSegmentConflictResponse": CreateSegmentConflictResponse,
     "CreateSegmentSuccessResponse": CreateSegmentSuccessResponse,
@@ -237,6 +300,28 @@ let typeMap: {[index: string]: any} = {
     "GetNotificationHistoryRequestBody": GetNotificationHistoryRequestBody,
     "GetSegmentSuccessResponse": GetSegmentSuccessResponse,
     "GetSegmentsSuccessResponse": GetSegmentsSuccessResponse,
+    "Journey": Journey,
+    "JourneyAudience": JourneyAudience,
+    "JourneyBranch": JourneyBranch,
+    "JourneyBranchStats": JourneyBranchStats,
+    "JourneyCondition": JourneyCondition,
+    "JourneyEarlyExit": JourneyEarlyExit,
+    "JourneyEarlyExitRules": JourneyEarlyExitRules,
+    "JourneyEarlyExitRulesOnEvent": JourneyEarlyExitRulesOnEvent,
+    "JourneyEarlyExitRulesOnSegment": JourneyEarlyExitRulesOnSegment,
+    "JourneyEventAttribute": JourneyEventAttribute,
+    "JourneyListAudience": JourneyListAudience,
+    "JourneyListItem": JourneyListItem,
+    "JourneyListResponse": JourneyListResponse,
+    "JourneyMessageStats": JourneyMessageStats,
+    "JourneyNode": JourneyNode,
+    "JourneyNodeStats": JourneyNodeStats,
+    "JourneyReentryRules": JourneyReentryRules,
+    "JourneySchedule": JourneySchedule,
+    "JourneyStats": JourneyStats,
+    "JourneyTimePoint": JourneyTimePoint,
+    "JourneyTimeWindow": JourneyTimeWindow,
+    "JourneyWaitUntilExpiration": JourneyWaitUntilExpiration,
     "LanguageStringMap": LanguageStringMap,
     "ListAuditLogsSuccessResponse": ListAuditLogsSuccessResponse,
     "Notification": Notification,
@@ -270,6 +355,8 @@ let typeMap: {[index: string]: any} = {
     "TemplatesListResponse": TemplatesListResponse,
     "TransferSubscriptionRequestBody": TransferSubscriptionRequestBody,
     "UpdateApiKeyRequest": UpdateApiKeyRequest,
+    "UpdateJourneyNodeRequest": UpdateJourneyNodeRequest,
+    "UpdateJourneyRequest": UpdateJourneyRequest,
     "UpdateLiveActivityRequest": UpdateLiveActivityRequest,
     "UpdateLiveActivitySuccessResponse": UpdateLiveActivitySuccessResponse,
     "UpdateSegmentRequest": UpdateSegmentRequest,

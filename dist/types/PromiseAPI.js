@@ -39,6 +39,10 @@ class PromiseDefaultApi {
         const result = this.api.createCustomEvents(appId, customEventsRequest, _options);
         return result.toPromise();
     }
+    createJourney(appId, createJourneyRequest, _options) {
+        const result = this.api.createJourney(appId, createJourneyRequest, _options);
+        return result.toPromise();
+    }
     createNotification(notification, _options) {
         const result = this.api.createNotification(notification, _options);
         return result.toPromise();
@@ -65,6 +69,10 @@ class PromiseDefaultApi {
     }
     deleteApiKey(appId, tokenId, _options) {
         const result = this.api.deleteApiKey(appId, tokenId, _options);
+        return result.toPromise();
+    }
+    deleteJourney(appId, journeyId, _options) {
+        const result = this.api.deleteJourney(appId, journeyId, _options);
         return result.toPromise();
     }
     deleteSegment(appId, segmentId, _options) {
@@ -163,6 +171,14 @@ class PromiseDefaultApi {
         const result = this.api.updateApp(appId, app, _options);
         return result.toPromise();
     }
+    updateJourney(appId, journeyId, updateJourneyRequest, _options) {
+        const result = this.api.updateJourney(appId, journeyId, updateJourneyRequest, _options);
+        return result.toPromise();
+    }
+    updateJourneyNode(appId, journeyId, nodeId, updateJourneyNodeRequest, _options) {
+        const result = this.api.updateJourneyNode(appId, journeyId, nodeId, updateJourneyNodeRequest, _options);
+        return result.toPromise();
+    }
     updateLiveActivity(appId, activityId, updateLiveActivityRequest, _options) {
         const result = this.api.updateLiveActivity(appId, activityId, updateLiveActivityRequest, _options);
         return result.toPromise();
@@ -189,6 +205,18 @@ class PromiseDefaultApi {
     }
     viewApiKeys(appId, _options) {
         const result = this.api.viewApiKeys(appId, _options);
+        return result.toPromise();
+    }
+    viewJourney(appId, journeyId, _options) {
+        const result = this.api.viewJourney(appId, journeyId, _options);
+        return result.toPromise();
+    }
+    viewJourneyStats(appId, journeyId, _options) {
+        const result = this.api.viewJourneyStats(appId, journeyId, _options);
+        return result.toPromise();
+    }
+    viewJourneys(appId, cursor, limit, _options) {
+        const result = this.api.viewJourneys(appId, cursor, limit, _options);
         return result.toPromise();
     }
     viewTemplate(templateId, appId, _options) {

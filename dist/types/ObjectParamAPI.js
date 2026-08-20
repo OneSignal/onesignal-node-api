@@ -27,6 +27,9 @@ class ObjectDefaultApi {
     createCustomEvents(param, options) {
         return this.api.createCustomEvents(param.appId, param.customEventsRequest, options).toPromise();
     }
+    createJourney(param, options) {
+        return this.api.createJourney(param.appId, param.createJourneyRequest, options).toPromise();
+    }
     createNotification(param, options) {
         return this.api.createNotification(param.notification, options).toPromise();
     }
@@ -47,6 +50,9 @@ class ObjectDefaultApi {
     }
     deleteApiKey(param, options) {
         return this.api.deleteApiKey(param.appId, param.tokenId, options).toPromise();
+    }
+    deleteJourney(param, options) {
+        return this.api.deleteJourney(param.appId, param.journeyId, options).toPromise();
     }
     deleteSegment(param, options) {
         return this.api.deleteSegment(param.appId, param.segmentId, options).toPromise();
@@ -120,6 +126,12 @@ class ObjectDefaultApi {
     updateApp(param, options) {
         return this.api.updateApp(param.appId, param.app, options).toPromise();
     }
+    updateJourney(param, options) {
+        return this.api.updateJourney(param.appId, param.journeyId, param.updateJourneyRequest, options).toPromise();
+    }
+    updateJourneyNode(param, options) {
+        return this.api.updateJourneyNode(param.appId, param.journeyId, param.nodeId, param.updateJourneyNodeRequest, options).toPromise();
+    }
     updateLiveActivity(param, options) {
         return this.api.updateLiveActivity(param.appId, param.activityId, param.updateLiveActivityRequest, options).toPromise();
     }
@@ -140,6 +152,15 @@ class ObjectDefaultApi {
     }
     viewApiKeys(param, options) {
         return this.api.viewApiKeys(param.appId, options).toPromise();
+    }
+    viewJourney(param, options) {
+        return this.api.viewJourney(param.appId, param.journeyId, options).toPromise();
+    }
+    viewJourneyStats(param, options) {
+        return this.api.viewJourneyStats(param.appId, param.journeyId, options).toPromise();
+    }
+    viewJourneys(param, options) {
+        return this.api.viewJourneys(param.appId, param.cursor, param.limit, options).toPromise();
     }
     viewTemplate(param, options) {
         return this.api.viewTemplate(param.templateId, param.appId, options).toPromise();

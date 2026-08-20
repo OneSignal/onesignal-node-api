@@ -4,6 +4,7 @@ import { App } from '../models/App';
 import { CopyTemplateRequest } from '../models/CopyTemplateRequest';
 import { CreateApiKeyRequest } from '../models/CreateApiKeyRequest';
 import { CreateApiKeyResponse } from '../models/CreateApiKeyResponse';
+import { CreateJourneyRequest } from '../models/CreateJourneyRequest';
 import { CreateNotificationSuccessResponse } from '../models/CreateNotificationSuccessResponse';
 import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
 import { CreateTemplateRequest } from '../models/CreateTemplateRequest';
@@ -15,6 +16,9 @@ import { GenericSuccessBoolResponse } from '../models/GenericSuccessBoolResponse
 import { GetNotificationHistoryRequestBody } from '../models/GetNotificationHistoryRequestBody';
 import { GetSegmentSuccessResponse } from '../models/GetSegmentSuccessResponse';
 import { GetSegmentsSuccessResponse } from '../models/GetSegmentsSuccessResponse';
+import { Journey } from '../models/Journey';
+import { JourneyListResponse } from '../models/JourneyListResponse';
+import { JourneyStats } from '../models/JourneyStats';
 import { ListAuditLogsSuccessResponse } from '../models/ListAuditLogsSuccessResponse';
 import { Notification } from '../models/Notification';
 import { NotificationHistorySuccessResponse } from '../models/NotificationHistorySuccessResponse';
@@ -30,6 +34,8 @@ import { TemplateResource } from '../models/TemplateResource';
 import { TemplatesListResponse } from '../models/TemplatesListResponse';
 import { TransferSubscriptionRequestBody } from '../models/TransferSubscriptionRequestBody';
 import { UpdateApiKeyRequest } from '../models/UpdateApiKeyRequest';
+import { UpdateJourneyNodeRequest } from '../models/UpdateJourneyNodeRequest';
+import { UpdateJourneyRequest } from '../models/UpdateJourneyRequest';
 import { UpdateLiveActivityRequest } from '../models/UpdateLiveActivityRequest';
 import { UpdateLiveActivitySuccessResponse } from '../models/UpdateLiveActivitySuccessResponse';
 import { UpdateSegmentRequest } from '../models/UpdateSegmentRequest';
@@ -70,6 +76,10 @@ export interface DefaultApiCreateCustomEventsRequest {
     appId: string;
     customEventsRequest: CustomEventsRequest;
 }
+export interface DefaultApiCreateJourneyRequest {
+    appId: string;
+    createJourneyRequest: CreateJourneyRequest;
+}
 export interface DefaultApiCreateNotificationRequest {
     notification: Notification;
 }
@@ -99,6 +109,10 @@ export interface DefaultApiDeleteAliasRequest {
 export interface DefaultApiDeleteApiKeyRequest {
     appId: string;
     tokenId: string;
+}
+export interface DefaultApiDeleteJourneyRequest {
+    appId: string;
+    journeyId: string;
 }
 export interface DefaultApiDeleteSegmentRequest {
     appId: string;
@@ -219,6 +233,17 @@ export interface DefaultApiUpdateAppRequest {
     appId: string;
     app: App;
 }
+export interface DefaultApiUpdateJourneyRequest {
+    appId: string;
+    journeyId: string;
+    updateJourneyRequest: UpdateJourneyRequest;
+}
+export interface DefaultApiUpdateJourneyNodeRequest {
+    appId: string;
+    journeyId: string;
+    nodeId: string;
+    updateJourneyNodeRequest: UpdateJourneyNodeRequest;
+}
 export interface DefaultApiUpdateLiveActivityRequest {
     appId: string;
     activityId: string;
@@ -254,6 +279,19 @@ export interface DefaultApiUpdateUserRequest {
 export interface DefaultApiViewApiKeysRequest {
     appId: string;
 }
+export interface DefaultApiViewJourneyRequest {
+    appId: string;
+    journeyId: string;
+}
+export interface DefaultApiViewJourneyStatsRequest {
+    appId: string;
+    journeyId: string;
+}
+export interface DefaultApiViewJourneysRequest {
+    appId: string;
+    cursor?: string;
+    limit?: number;
+}
 export interface DefaultApiViewTemplateRequest {
     templateId: string;
     appId: string;
@@ -274,6 +312,7 @@ export declare class ObjectDefaultApi {
     createApiKey(param: DefaultApiCreateApiKeyRequest, options?: Configuration): Promise<CreateApiKeyResponse>;
     createApp(param: DefaultApiCreateAppRequest, options?: Configuration): Promise<App>;
     createCustomEvents(param: DefaultApiCreateCustomEventsRequest, options?: Configuration): Promise<object>;
+    createJourney(param: DefaultApiCreateJourneyRequest, options?: Configuration): Promise<Journey>;
     createNotification(param: DefaultApiCreateNotificationRequest, options?: Configuration): Promise<CreateNotificationSuccessResponse>;
     createSegment(param: DefaultApiCreateSegmentRequest, options?: Configuration): Promise<CreateSegmentSuccessResponse>;
     createSubscription(param: DefaultApiCreateSubscriptionRequest, options?: Configuration): Promise<SubscriptionBody>;
@@ -281,6 +320,7 @@ export declare class ObjectDefaultApi {
     createUser(param: DefaultApiCreateUserRequest, options?: Configuration): Promise<User>;
     deleteAlias(param: DefaultApiDeleteAliasRequest, options?: Configuration): Promise<UserIdentityBody>;
     deleteApiKey(param: DefaultApiDeleteApiKeyRequest, options?: Configuration): Promise<object>;
+    deleteJourney(param: DefaultApiDeleteJourneyRequest, options?: Configuration): Promise<GenericSuccessBoolResponse>;
     deleteSegment(param: DefaultApiDeleteSegmentRequest, options?: Configuration): Promise<GenericSuccessBoolResponse>;
     deleteSubscription(param: DefaultApiDeleteSubscriptionRequest, options?: Configuration): Promise<void>;
     deleteTemplate(param: DefaultApiDeleteTemplateRequest, options?: Configuration): Promise<GenericSuccessBoolResponse>;
@@ -305,6 +345,8 @@ export declare class ObjectDefaultApi {
     unsubscribeEmailWithToken(param: DefaultApiUnsubscribeEmailWithTokenRequest, options?: Configuration): Promise<GenericSuccessBoolResponse>;
     updateApiKey(param: DefaultApiUpdateApiKeyRequest, options?: Configuration): Promise<object>;
     updateApp(param: DefaultApiUpdateAppRequest, options?: Configuration): Promise<App>;
+    updateJourney(param: DefaultApiUpdateJourneyRequest, options?: Configuration): Promise<Journey>;
+    updateJourneyNode(param: DefaultApiUpdateJourneyNodeRequest, options?: Configuration): Promise<Journey>;
     updateLiveActivity(param: DefaultApiUpdateLiveActivityRequest, options?: Configuration): Promise<UpdateLiveActivitySuccessResponse>;
     updateSegment(param: DefaultApiUpdateSegmentRequest, options?: Configuration): Promise<UpdateSegmentSuccessResponse>;
     updateSubscription(param: DefaultApiUpdateSubscriptionRequest, options?: Configuration): Promise<void>;
@@ -312,6 +354,9 @@ export declare class ObjectDefaultApi {
     updateTemplate(param: DefaultApiUpdateTemplateRequest, options?: Configuration): Promise<TemplateResource>;
     updateUser(param: DefaultApiUpdateUserRequest, options?: Configuration): Promise<PropertiesBody>;
     viewApiKeys(param: DefaultApiViewApiKeysRequest, options?: Configuration): Promise<ApiKeyTokensListResponse>;
+    viewJourney(param: DefaultApiViewJourneyRequest, options?: Configuration): Promise<Journey>;
+    viewJourneyStats(param: DefaultApiViewJourneyStatsRequest, options?: Configuration): Promise<JourneyStats>;
+    viewJourneys(param: DefaultApiViewJourneysRequest, options?: Configuration): Promise<JourneyListResponse>;
     viewTemplate(param: DefaultApiViewTemplateRequest, options?: Configuration): Promise<TemplateResource>;
     viewTemplates(param: DefaultApiViewTemplatesRequest, options?: Configuration): Promise<TemplatesListResponse>;
 }
