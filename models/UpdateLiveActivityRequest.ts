@@ -22,9 +22,13 @@ export class UpdateLiveActivityRequest {
     'contents'?: LanguageStringMap;
     'headings'?: LanguageStringMap;
     /**
-    * Sound file that is included in your app to play instead of the default device notification sound. Omit to disable vibration and sound for the notification.
+    * Deprecated. The API ignores this field. Use `ios_sound`.
     */
     'sound'?: string;
+    /**
+    * Sound file that is included in your app to play instead of the default device notification sound. Omit to disable vibration and sound for the notification. Requires `headings` on the same request: ActivityKit ignores an update whose alert has no title, which silently drops the sound. Supersedes the deprecated `sound` field. 
+    */
+    'ios_sound'?: string;
     /**
     * Accepts Unix timestamp in seconds. When time reaches the configured stale date, the system considers the Live Activity out of date, and the ActivityState of the Live Activity changes to ActivityState.stale.
     */
@@ -34,9 +38,13 @@ export class UpdateLiveActivityRequest {
     */
     'dismissal_date'?: number;
     /**
-    * Delivery priority through the the push provider (APNs). Pass 10 for higher priority notifications, or 5 for lower priority notifications. Lower priority notifications are sent based on the power considerations of the end user\'s device. If not set, defaults to 10. Some providers (APNs) allow for a limited budget of high priority notifications per hour, and if that budget is exceeded, the provider may throttle notification delivery.
+    * Delivery priority through the push provider (APNs). Pass 10 for higher priority notifications, or 5 for lower priority notifications. Lower priority notifications are sent based on the power considerations of the end user\'s device. If not set, defaults to 10. Some providers (APNs) allow for a limited budget of high priority notifications per hour, and if that budget is exceeded, the provider may throttle notification delivery.
     */
     'priority'?: number;
+    /**
+    * A value between 0 and 1. When more than one Live Activity is active for your app, the one with the highest relevance score shows in the Dynamic Island. If the scores are equal, the system shows the Live Activity that started first. The score also sets the order of Live Activities on the Lock Screen. Only available on iOS 16.2 and later.
+    */
+    'ios_relevance_score'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -78,6 +86,12 @@ export class UpdateLiveActivityRequest {
             "format": ""
         },
         {
+            "name": "ios_sound",
+            "baseName": "ios_sound",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "stale_date",
             "baseName": "stale_date",
             "type": "number",
@@ -92,6 +106,12 @@ export class UpdateLiveActivityRequest {
         {
             "name": "priority",
             "baseName": "priority",
+            "type": "number",
+            "format": ""
+        },
+        {
+            "name": "ios_relevance_score",
+            "baseName": "ios_relevance_score",
             "type": "number",
             "format": ""
         }    ];

@@ -48,6 +48,12 @@ UpdateLiveActivityRequest.attributeTypeMap = [
         "format": ""
     },
     {
+        "name": "ios_sound",
+        "baseName": "ios_sound",
+        "type": "string",
+        "format": ""
+    },
+    {
         "name": "stale_date",
         "baseName": "stale_date",
         "type": "number",
@@ -62,6 +68,12 @@ UpdateLiveActivityRequest.attributeTypeMap = [
     {
         "name": "priority",
         "baseName": "priority",
+        "type": "number",
+        "format": ""
+    },
+    {
+        "name": "ios_relevance_score",
+        "baseName": "ios_relevance_score",
         "type": "number",
         "format": ""
     }
