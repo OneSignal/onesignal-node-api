@@ -192,7 +192,7 @@ import { TransferSubscriptionRequestBody } from './TransferSubscriptionRequestBo
 import { UpdateApiKeyRequest , UpdateApiKeyRequestIpAllowlistModeEnum    } from './UpdateApiKeyRequest';
 import { UpdateJourneyNodeRequest   , UpdateJourneyNodeRequestRelativeToEnum               } from './UpdateJourneyNodeRequest';
 import { UpdateJourneyRequest       , UpdateJourneyRequestStateEnum    } from './UpdateJourneyRequest';
-import { UpdateLiveActivityRequest , UpdateLiveActivityRequestEventEnum          } from './UpdateLiveActivityRequest';
+import { UpdateLiveActivityRequest , UpdateLiveActivityRequestEventEnum            } from './UpdateLiveActivityRequest';
 import { UpdateLiveActivitySuccessResponse } from './UpdateLiveActivitySuccessResponse';
 import { UpdateSegmentRequest } from './UpdateSegmentRequest';
 import { UpdateSegmentSuccessResponse } from './UpdateSegmentSuccessResponse';

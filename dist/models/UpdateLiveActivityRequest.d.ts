@@ -6,9 +6,11 @@ export declare class UpdateLiveActivityRequest {
     'contents'?: LanguageStringMap;
     'headings'?: LanguageStringMap;
     'sound'?: string;
+    'ios_sound'?: string;
     'stale_date'?: number;
     'dismissal_date'?: number;
     'priority'?: number;
+    'ios_relevance_score'?: number;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
