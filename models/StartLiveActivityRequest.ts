@@ -2,7 +2,7 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 5.12.0
+ * API Version: 5.13.0
  * Contact: devrel@onesignal.com
  */
 
@@ -39,7 +39,7 @@ export class StartLiveActivityRequest {
     */
     'priority'?: number;
     /**
-    * iOS 15+. A score to indicate how a notification should be displayed when grouped. Use a float between 0-1.
+    * A value between 0 and 1. When more than one Live Activity is active for your app, the one with the highest relevance score shows in the Dynamic Island. If the scores are equal, the system shows the Live Activity that started first. The score also sets the order of Live Activities on the Lock Screen. Only available on iOS 16.2 and later.
     */
     'ios_relevance_score'?: number;
     /**
