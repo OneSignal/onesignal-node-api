@@ -28,6 +28,9 @@ import { CreateUserConflictResponseErrorsItemsMeta } from '../models/CreateUserC
 import { CustomEvent } from '../models/CustomEvent';
 import { CustomEventsRequest } from '../models/CustomEventsRequest';
 import { DeliveryData } from '../models/DeliveryData';
+import { EmailWarmUp } from '../models/EmailWarmUp';
+import { EmailWarmUpRequest } from '../models/EmailWarmUpRequest';
+import { EmailWarmUpStage } from '../models/EmailWarmUpStage';
 import { ExportEventsSuccessResponse } from '../models/ExportEventsSuccessResponse';
 import { ExportSubscriptionsRequestBody } from '../models/ExportSubscriptionsRequestBody';
 import { ExportSubscriptionsSuccessResponse } from '../models/ExportSubscriptionsSuccessResponse';

@@ -1,3 +1,4 @@
+import { EmailWarmUp } from './EmailWarmUp';
 import { PlatformDeliveryData } from './PlatformDeliveryData';
 export declare class NotificationWithMetaAllOf {
     'remaining'?: number;
@@ -14,6 +15,7 @@ export declare class NotificationWithMetaAllOf {
     'canceled'?: boolean;
     'email_bcc'?: Array<string>;
     'bcc_sent'?: number;
+    'email_warm_up'?: EmailWarmUp;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;

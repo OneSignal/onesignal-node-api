@@ -582,6 +582,18 @@ BasicNotificationAllOf.attributeTypeMap = [
         "format": ""
     },
     {
+        "name": "kind",
+        "baseName": "kind",
+        "type": "BasicNotificationAllOfKindEnum",
+        "format": ""
+    },
+    {
+        "name": "email_warm_up",
+        "baseName": "email_warm_up",
+        "type": "EmailWarmUpRequest",
+        "format": ""
+    },
+    {
         "name": "sms_from",
         "baseName": "sms_from",
         "type": "string",

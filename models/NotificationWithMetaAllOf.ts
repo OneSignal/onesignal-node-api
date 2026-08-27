@@ -2,10 +2,10 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 5.13.0
  * Contact: devrel@onesignal.com
  */
 
+import { EmailWarmUp } from './EmailWarmUp';
 import { PlatformDeliveryData } from './PlatformDeliveryData';
 import { HttpFile } from '../http/http';
 
@@ -63,6 +63,7 @@ export class NotificationWithMetaAllOf {
     * Number of BCC copies successfully sent for this notification.
     */
     'bcc_sent'?: number;
+    'email_warm_up'?: EmailWarmUp;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -149,6 +150,12 @@ export class NotificationWithMetaAllOf {
             "name": "bcc_sent",
             "baseName": "bcc_sent",
             "type": "number",
+            "format": ""
+        },
+        {
+            "name": "email_warm_up",
+            "baseName": "email_warm_up",
+            "type": "EmailWarmUp",
             "format": ""
         }    ];
 
