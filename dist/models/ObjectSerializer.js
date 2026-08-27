@@ -40,6 +40,9 @@ __exportStar(require("./CreateUserConflictResponseErrorsItemsMeta"), exports);
 __exportStar(require("./CustomEvent"), exports);
 __exportStar(require("./CustomEventsRequest"), exports);
 __exportStar(require("./DeliveryData"), exports);
+__exportStar(require("./EmailWarmUp"), exports);
+__exportStar(require("./EmailWarmUpRequest"), exports);
+__exportStar(require("./EmailWarmUpStage"), exports);
 __exportStar(require("./ExportEventsSuccessResponse"), exports);
 __exportStar(require("./ExportSubscriptionsRequestBody"), exports);
 __exportStar(require("./ExportSubscriptionsSuccessResponse"), exports);
@@ -141,6 +144,9 @@ const CreateUserConflictResponseErrorsItemsMeta_1 = require("./CreateUserConflic
 const CustomEvent_1 = require("./CustomEvent");
 const CustomEventsRequest_1 = require("./CustomEventsRequest");
 const DeliveryData_1 = require("./DeliveryData");
+const EmailWarmUp_1 = require("./EmailWarmUp");
+const EmailWarmUpRequest_1 = require("./EmailWarmUpRequest");
+const EmailWarmUpStage_1 = require("./EmailWarmUpStage");
 const ExportEventsSuccessResponse_1 = require("./ExportEventsSuccessResponse");
 const ExportSubscriptionsRequestBody_1 = require("./ExportSubscriptionsRequestBody");
 const ExportSubscriptionsSuccessResponse_1 = require("./ExportSubscriptionsSuccessResponse");
@@ -237,10 +243,15 @@ let enumsMap = new Set([
     "AppApnsEnvEnum",
     "BasicNotificationTargetChannelEnum",
     "BasicNotificationAggregationEnum",
+    "BasicNotificationKindEnum",
     "BasicNotificationHuaweiCategoryEnum",
     "BasicNotificationAllOfAggregationEnum",
+    "BasicNotificationAllOfKindEnum",
     "BasicNotificationAllOfHuaweiCategoryEnum",
     "CreateApiKeyRequestIpAllowlistModeEnum",
+    "EmailWarmUpStrategyEnum",
+    "EmailWarmUpStatusEnum",
+    "EmailWarmUpRequestStrategyEnum",
     "FilterRelationEnum",
     "FilterExpressionRelationEnum",
     "FilterExpressionOperatorEnum",
@@ -257,10 +268,12 @@ let enumsMap = new Set([
     "JourneyNodeStatsKindEnum",
     "NotificationTargetChannelEnum",
     "NotificationAggregationEnum",
+    "NotificationKindEnum",
     "NotificationHuaweiCategoryEnum",
     "NotificationTargetTargetChannelEnum",
     "NotificationWithMetaTargetChannelEnum",
     "NotificationWithMetaAggregationEnum",
+    "NotificationWithMetaKindEnum",
     "NotificationWithMetaHuaweiCategoryEnum",
     "OperatorOperatorEnum",
     "OutcomeDataAggregationEnum",
@@ -300,6 +313,9 @@ let typeMap = {
     "CustomEvent": CustomEvent_1.CustomEvent,
     "CustomEventsRequest": CustomEventsRequest_1.CustomEventsRequest,
     "DeliveryData": DeliveryData_1.DeliveryData,
+    "EmailWarmUp": EmailWarmUp_1.EmailWarmUp,
+    "EmailWarmUpRequest": EmailWarmUpRequest_1.EmailWarmUpRequest,
+    "EmailWarmUpStage": EmailWarmUpStage_1.EmailWarmUpStage,
     "ExportEventsSuccessResponse": ExportEventsSuccessResponse_1.ExportEventsSuccessResponse,
     "ExportSubscriptionsRequestBody": ExportSubscriptionsRequestBody_1.ExportSubscriptionsRequestBody,
     "ExportSubscriptionsSuccessResponse": ExportSubscriptionsSuccessResponse_1.ExportSubscriptionsSuccessResponse,

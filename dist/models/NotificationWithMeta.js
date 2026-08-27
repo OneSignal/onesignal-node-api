@@ -666,6 +666,18 @@ NotificationWithMeta.attributeTypeMap = [
         "format": ""
     },
     {
+        "name": "kind",
+        "baseName": "kind",
+        "type": "NotificationWithMetaKindEnum",
+        "format": ""
+    },
+    {
+        "name": "email_warm_up",
+        "baseName": "email_warm_up",
+        "type": "EmailWarmUp",
+        "format": ""
+    },
+    {
         "name": "sms_from",
         "baseName": "sms_from",
         "type": "string",

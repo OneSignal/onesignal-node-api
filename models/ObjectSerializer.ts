@@ -23,6 +23,9 @@ export * from './CreateUserConflictResponseErrorsItemsMeta';
 export * from './CustomEvent';
 export * from './CustomEventsRequest';
 export * from './DeliveryData';
+export * from './EmailWarmUp';
+export * from './EmailWarmUpRequest';
+export * from './EmailWarmUpStage';
 export * from './ExportEventsSuccessResponse';
 export * from './ExportSubscriptionsRequestBody';
 export * from './ExportSubscriptionsSuccessResponse';
@@ -107,8 +110,8 @@ import { AuditLogActor } from './AuditLogActor';
 import { AuditLogContext } from './AuditLogContext';
 import { AuditLogEvent } from './AuditLogEvent';
 import { AuditLogTarget } from './AuditLogTarget';
-import { BasicNotification             , BasicNotificationTargetChannelEnum     , BasicNotificationAggregationEnum                                                                                                    , BasicNotificationHuaweiCategoryEnum    } from './BasicNotification';
-import { BasicNotificationAllOf   , BasicNotificationAllOfAggregationEnum                                                                                                    , BasicNotificationAllOfHuaweiCategoryEnum    } from './BasicNotificationAllOf';
+import { BasicNotification             , BasicNotificationTargetChannelEnum     , BasicNotificationAggregationEnum                                                                                             , BasicNotificationKindEnum          , BasicNotificationHuaweiCategoryEnum    } from './BasicNotification';
+import { BasicNotificationAllOf   , BasicNotificationAllOfAggregationEnum                                                                                             , BasicNotificationAllOfKindEnum          , BasicNotificationAllOfHuaweiCategoryEnum    } from './BasicNotificationAllOf';
 import { BasicNotificationAllOfAndroidBackgroundLayout } from './BasicNotificationAllOfAndroidBackgroundLayout';
 import { Button } from './Button';
 import { CopyTemplateRequest } from './CopyTemplateRequest';
@@ -125,6 +128,9 @@ import { CreateUserConflictResponseErrorsItemsMeta } from './CreateUserConflictR
 import { CustomEvent } from './CustomEvent';
 import { CustomEventsRequest } from './CustomEventsRequest';
 import { DeliveryData } from './DeliveryData';
+import { EmailWarmUp , EmailWarmUpStrategyEnum  , EmailWarmUpStatusEnum    } from './EmailWarmUp';
+import { EmailWarmUpRequest , EmailWarmUpRequestStrategyEnum   } from './EmailWarmUpRequest';
+import { EmailWarmUpStage } from './EmailWarmUpStage';
 import { ExportEventsSuccessResponse } from './ExportEventsSuccessResponse';
 import { ExportSubscriptionsRequestBody } from './ExportSubscriptionsRequestBody';
 import { ExportSubscriptionsSuccessResponse } from './ExportSubscriptionsSuccessResponse';
@@ -159,12 +165,12 @@ import { JourneyTimeWindow } from './JourneyTimeWindow';
 import { JourneyWaitUntilExpiration } from './JourneyWaitUntilExpiration';
 import { LanguageStringMap } from './LanguageStringMap';
 import { ListAuditLogsSuccessResponse } from './ListAuditLogsSuccessResponse';
-import { Notification             , NotificationTargetChannelEnum     , NotificationAggregationEnum                                                                                                    , NotificationHuaweiCategoryEnum     } from './Notification';
+import { Notification             , NotificationTargetChannelEnum     , NotificationAggregationEnum                                                                                             , NotificationKindEnum          , NotificationHuaweiCategoryEnum     } from './Notification';
 import { NotificationAllOf } from './NotificationAllOf';
 import { NotificationHistorySuccessResponse } from './NotificationHistorySuccessResponse';
 import { NotificationSlice } from './NotificationSlice';
 import { NotificationTarget             , NotificationTargetTargetChannelEnum   } from './NotificationTarget';
-import { NotificationWithMeta             , NotificationWithMetaTargetChannelEnum     , NotificationWithMetaAggregationEnum                                                                                                    , NotificationWithMetaHuaweiCategoryEnum                 } from './NotificationWithMeta';
+import { NotificationWithMeta             , NotificationWithMetaTargetChannelEnum     , NotificationWithMetaAggregationEnum                                                                                             , NotificationWithMetaKindEnum          , NotificationWithMetaHuaweiCategoryEnum                 } from './NotificationWithMeta';
 import { NotificationWithMetaAllOf } from './NotificationWithMetaAllOf';
 import { Operator, OperatorOperatorEnum   } from './Operator';
 import { OutcomeData  , OutcomeDataAggregationEnum   } from './OutcomeData';
@@ -226,10 +232,15 @@ let enumsMap: Set<string> = new Set<string>([
     "AppApnsEnvEnum",
     "BasicNotificationTargetChannelEnum",
     "BasicNotificationAggregationEnum",
+    "BasicNotificationKindEnum",
     "BasicNotificationHuaweiCategoryEnum",
     "BasicNotificationAllOfAggregationEnum",
+    "BasicNotificationAllOfKindEnum",
     "BasicNotificationAllOfHuaweiCategoryEnum",
     "CreateApiKeyRequestIpAllowlistModeEnum",
+    "EmailWarmUpStrategyEnum",
+    "EmailWarmUpStatusEnum",
+    "EmailWarmUpRequestStrategyEnum",
     "FilterRelationEnum",
     "FilterExpressionRelationEnum",
     "FilterExpressionOperatorEnum",
@@ -246,10 +257,12 @@ let enumsMap: Set<string> = new Set<string>([
     "JourneyNodeStatsKindEnum",
     "NotificationTargetChannelEnum",
     "NotificationAggregationEnum",
+    "NotificationKindEnum",
     "NotificationHuaweiCategoryEnum",
     "NotificationTargetTargetChannelEnum",
     "NotificationWithMetaTargetChannelEnum",
     "NotificationWithMetaAggregationEnum",
+    "NotificationWithMetaKindEnum",
     "NotificationWithMetaHuaweiCategoryEnum",
     "OperatorOperatorEnum",
     "OutcomeDataAggregationEnum",
@@ -290,6 +303,9 @@ let typeMap: {[index: string]: any} = {
     "CustomEvent": CustomEvent,
     "CustomEventsRequest": CustomEventsRequest,
     "DeliveryData": DeliveryData,
+    "EmailWarmUp": EmailWarmUp,
+    "EmailWarmUpRequest": EmailWarmUpRequest,
+    "EmailWarmUpStage": EmailWarmUpStage,
     "ExportEventsSuccessResponse": ExportEventsSuccessResponse,
     "ExportSubscriptionsRequestBody": ExportSubscriptionsRequestBody,
     "ExportSubscriptionsSuccessResponse": ExportSubscriptionsSuccessResponse,

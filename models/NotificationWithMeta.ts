@@ -2,7 +2,6 @@
  * OneSignal
  * A powerful way to send personalized messages at scale and build effective customer engagement strategies. Learn more at onesignal.com
  *
- * API Version: 5.13.0
  * Contact: devrel@onesignal.com
  */
 
@@ -10,6 +9,7 @@ import { BasicNotification } from './BasicNotification';
 import { BasicNotificationAllOfAndroidBackgroundLayout } from './BasicNotificationAllOfAndroidBackgroundLayout';
 import { Button } from './Button';
 import { DeliveryData } from './DeliveryData';
+import { EmailWarmUp } from './EmailWarmUp';
 import { FilterExpression } from './FilterExpression';
 import { LanguageStringMap } from './LanguageStringMap';
 import { NotificationWithMetaAllOf } from './NotificationWithMetaAllOf';
@@ -393,7 +393,7 @@ export class NotificationWithMeta {
     */
     'ios_interruption_level'?: string;
     /**
-    * Channel: Email Required.  The subject of the email. 
+    * Channel: Email Required. The subject of the email. 
     */
     'email_subject'?: string;
     /**
@@ -432,6 +432,11 @@ export class NotificationWithMeta {
     * Channel: Email Sender domain to use for the email message. Overrides the default sender domain configured for the app. Only supported when the email service provider is OneSignal Email. 
     */
     'email_sender_domain'?: string;
+    /**
+    * Channel: Email Set to \"warmup\" to send this as an Auto Warm Up campaign: a single campaign delivered gradually to your audience over several days, so you don\'t have to pace sends manually. OneSignal generates a sending schedule based on your past delivery volumes, scheduled Auto Warm Up emails, and the size of your current audience. When set, `email_warm_up` is required and describes the campaign\'s stages and (optionally) its scheduling strategy. `send_after` cannot be combined with `kind: \"warmup\"`. The campaign will be scheduled to begin at its first stage\'s `start` time. Only supported for Email notifications. 
+    */
+    'kind'?: NotificationWithMetaKindEnum;
+    'email_warm_up'?: EmailWarmUp;
     /**
     * Channel: SMS Phone Number used to send SMS. Should be a registered Twilio phone number in E.164 format. 
     */
@@ -1170,6 +1175,18 @@ export class NotificationWithMeta {
             "format": ""
         },
         {
+            "name": "kind",
+            "baseName": "kind",
+            "type": "NotificationWithMetaKindEnum",
+            "format": ""
+        },
+        {
+            "name": "email_warm_up",
+            "baseName": "email_warm_up",
+            "type": "EmailWarmUp",
+            "format": ""
+        },
+        {
             "name": "sms_from",
             "baseName": "sms_from",
             "type": "string",
@@ -1313,5 +1330,6 @@ export class NotificationWithMeta {
 
 export type NotificationWithMetaTargetChannelEnum = "push" | "email" | "sms" ;
 export type NotificationWithMetaAggregationEnum = "sum" | "count" ;
+export type NotificationWithMetaKindEnum = "warmup" ;
 export type NotificationWithMetaHuaweiCategoryEnum = "IM" | "VOIP" | "SUBSCRIPTION" | "TRAVEL" | "HEALTH" | "WORK" | "ACCOUNT" | "EXPRESS" | "FINANCE" | "DEVICE_REMINDER" | "MAIL" | "MARKETING" ;
 
