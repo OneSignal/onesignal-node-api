@@ -1,5 +1,6 @@
 import { BasicNotificationAllOfAndroidBackgroundLayout } from './BasicNotificationAllOfAndroidBackgroundLayout';
 import { Button } from './Button';
+import { EmailWarmUp } from './EmailWarmUp';
 import { FilterExpression } from './FilterExpression';
 import { LanguageStringMap } from './LanguageStringMap';
 import { OutcomeData } from './OutcomeData';
@@ -117,6 +118,8 @@ export declare class NotificationWithMeta {
     'include_unsubscribed'?: boolean;
     'email_bcc'?: Array<string>;
     'email_sender_domain'?: string;
+    'kind'?: NotificationWithMetaKindEnum;
+    'email_warm_up'?: EmailWarmUp;
     'sms_from'?: string;
     'sms_media_urls'?: Array<string>;
     'filters'?: Array<FilterExpression>;
@@ -156,4 +159,5 @@ export declare class NotificationWithMeta {
 }
 export type NotificationWithMetaTargetChannelEnum = "push" | "email" | "sms";
 export type NotificationWithMetaAggregationEnum = "sum" | "count";
+export type NotificationWithMetaKindEnum = "warmup";
 export type NotificationWithMetaHuaweiCategoryEnum = "IM" | "VOIP" | "SUBSCRIPTION" | "TRAVEL" | "HEALTH" | "WORK" | "ACCOUNT" | "EXPRESS" | "FINANCE" | "DEVICE_REMINDER" | "MAIL" | "MARKETING";

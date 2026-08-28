@@ -94,6 +94,12 @@ NotificationWithMetaAllOf.attributeTypeMap = [
         "baseName": "bcc_sent",
         "type": "number",
         "format": ""
+    },
+    {
+        "name": "email_warm_up",
+        "baseName": "email_warm_up",
+        "type": "EmailWarmUp",
+        "format": ""
     }
 ];
 //# sourceMappingURL=NotificationWithMetaAllOf.js.map
