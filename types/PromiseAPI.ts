@@ -32,6 +32,9 @@ import { DeliveryData } from '../models/DeliveryData';
 import { EmailWarmUp } from '../models/EmailWarmUp';
 import { EmailWarmUpRequest } from '../models/EmailWarmUpRequest';
 import { EmailWarmUpStage } from '../models/EmailWarmUpStage';
+import { EstimateNotificationRecipientsRequest } from '../models/EstimateNotificationRecipientsRequest';
+import { EstimateNotificationRecipientsRequestAllOf } from '../models/EstimateNotificationRecipientsRequestAllOf';
+import { EstimateNotificationRecipientsSuccessResponse } from '../models/EstimateNotificationRecipientsSuccessResponse';
 import { ExportEventsSuccessResponse } from '../models/ExportEventsSuccessResponse';
 import { ExportSubscriptionsRequestBody } from '../models/ExportSubscriptionsRequestBody';
 import { ExportSubscriptionsSuccessResponse } from '../models/ExportSubscriptionsSuccessResponse';
@@ -351,6 +354,16 @@ export class PromiseDefaultApi {
      */
     public deleteUser(appId: string, aliasLabel: string, aliasId: string, _options?: Configuration): Promise<void> {
         const result = this.api.deleteUser(appId, aliasLabel, aliasId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Returns the estimated number of recipients for a notification\'s targeting, without creating or sending anything. The returned `count` reflects the same audience-size estimate you would see under \"Choose your target audience\" when composing a message. It is based on the user targeting method you\'ve set and the specific platforms the message is targeted to send to. This endpoint only supports a subset of targeting parameters: `included_segments` is required (its `\"All\"` shorthand targets every subscriber), and `excluded_segments`, `filters`, `include_aliases`, and `target_channel` narrow that audience further. Use `target_channel` to select platforms. `include_subscription_ids` and the other raw subscription id/token fields, and the individual `isIos` / `isAndroid` / etc. platform flags, are not supported. All other notification fields (content, delivery options, and so on) are accepted, but ignored. 
+     * Estimate notification recipients
+     * @param estimateNotificationRecipientsRequest 
+     */
+    public estimateNotificationRecipients(estimateNotificationRecipientsRequest: EstimateNotificationRecipientsRequest, _options?: Configuration): Promise<EstimateNotificationRecipientsSuccessResponse> {
+        const result = this.api.estimateNotificationRecipients(estimateNotificationRecipientsRequest, _options);
         return result.toPromise();
     }
 

@@ -43,6 +43,9 @@ __exportStar(require("./DeliveryData"), exports);
 __exportStar(require("./EmailWarmUp"), exports);
 __exportStar(require("./EmailWarmUpRequest"), exports);
 __exportStar(require("./EmailWarmUpStage"), exports);
+__exportStar(require("./EstimateNotificationRecipientsRequest"), exports);
+__exportStar(require("./EstimateNotificationRecipientsRequestAllOf"), exports);
+__exportStar(require("./EstimateNotificationRecipientsSuccessResponse"), exports);
 __exportStar(require("./ExportEventsSuccessResponse"), exports);
 __exportStar(require("./ExportSubscriptionsRequestBody"), exports);
 __exportStar(require("./ExportSubscriptionsSuccessResponse"), exports);
@@ -147,6 +150,9 @@ const DeliveryData_1 = require("./DeliveryData");
 const EmailWarmUp_1 = require("./EmailWarmUp");
 const EmailWarmUpRequest_1 = require("./EmailWarmUpRequest");
 const EmailWarmUpStage_1 = require("./EmailWarmUpStage");
+const EstimateNotificationRecipientsRequest_1 = require("./EstimateNotificationRecipientsRequest");
+const EstimateNotificationRecipientsRequestAllOf_1 = require("./EstimateNotificationRecipientsRequestAllOf");
+const EstimateNotificationRecipientsSuccessResponse_1 = require("./EstimateNotificationRecipientsSuccessResponse");
 const ExportEventsSuccessResponse_1 = require("./ExportEventsSuccessResponse");
 const ExportSubscriptionsRequestBody_1 = require("./ExportSubscriptionsRequestBody");
 const ExportSubscriptionsSuccessResponse_1 = require("./ExportSubscriptionsSuccessResponse");
@@ -252,6 +258,8 @@ let enumsMap = new Set([
     "EmailWarmUpStrategyEnum",
     "EmailWarmUpStatusEnum",
     "EmailWarmUpRequestStrategyEnum",
+    "EstimateNotificationRecipientsRequestTargetChannelEnum",
+    "EstimateNotificationRecipientsRequestAllOfTargetChannelEnum",
     "FilterRelationEnum",
     "FilterExpressionRelationEnum",
     "FilterExpressionOperatorEnum",
@@ -316,6 +324,9 @@ let typeMap = {
     "EmailWarmUp": EmailWarmUp_1.EmailWarmUp,
     "EmailWarmUpRequest": EmailWarmUpRequest_1.EmailWarmUpRequest,
     "EmailWarmUpStage": EmailWarmUpStage_1.EmailWarmUpStage,
+    "EstimateNotificationRecipientsRequest": EstimateNotificationRecipientsRequest_1.EstimateNotificationRecipientsRequest,
+    "EstimateNotificationRecipientsRequestAllOf": EstimateNotificationRecipientsRequestAllOf_1.EstimateNotificationRecipientsRequestAllOf,
+    "EstimateNotificationRecipientsSuccessResponse": EstimateNotificationRecipientsSuccessResponse_1.EstimateNotificationRecipientsSuccessResponse,
     "ExportEventsSuccessResponse": ExportEventsSuccessResponse_1.ExportEventsSuccessResponse,
     "ExportSubscriptionsRequestBody": ExportSubscriptionsRequestBody_1.ExportSubscriptionsRequestBody,
     "ExportSubscriptionsSuccessResponse": ExportSubscriptionsSuccessResponse_1.ExportSubscriptionsSuccessResponse,
