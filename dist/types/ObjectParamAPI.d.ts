@@ -9,6 +9,8 @@ import { CreateNotificationSuccessResponse } from '../models/CreateNotificationS
 import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
 import { CreateTemplateRequest } from '../models/CreateTemplateRequest';
 import { CustomEventsRequest } from '../models/CustomEventsRequest';
+import { EstimateNotificationRecipientsRequest } from '../models/EstimateNotificationRecipientsRequest';
+import { EstimateNotificationRecipientsSuccessResponse } from '../models/EstimateNotificationRecipientsSuccessResponse';
 import { ExportEventsSuccessResponse } from '../models/ExportEventsSuccessResponse';
 import { ExportSubscriptionsRequestBody } from '../models/ExportSubscriptionsRequestBody';
 import { ExportSubscriptionsSuccessResponse } from '../models/ExportSubscriptionsSuccessResponse';
@@ -130,6 +132,9 @@ export interface DefaultApiDeleteUserRequest {
     appId: string;
     aliasLabel: string;
     aliasId: string;
+}
+export interface DefaultApiEstimateNotificationRecipientsRequest {
+    estimateNotificationRecipientsRequest: EstimateNotificationRecipientsRequest;
 }
 export interface DefaultApiExportEventsRequest {
     notificationId: string;
@@ -325,6 +330,7 @@ export declare class ObjectDefaultApi {
     deleteSubscription(param: DefaultApiDeleteSubscriptionRequest, options?: Configuration): Promise<void>;
     deleteTemplate(param: DefaultApiDeleteTemplateRequest, options?: Configuration): Promise<GenericSuccessBoolResponse>;
     deleteUser(param: DefaultApiDeleteUserRequest, options?: Configuration): Promise<void>;
+    estimateNotificationRecipients(param: DefaultApiEstimateNotificationRecipientsRequest, options?: Configuration): Promise<EstimateNotificationRecipientsSuccessResponse>;
     exportEvents(param: DefaultApiExportEventsRequest, options?: Configuration): Promise<ExportEventsSuccessResponse>;
     exportSubscriptions(param: DefaultApiExportSubscriptionsRequest, options?: Configuration): Promise<ExportSubscriptionsSuccessResponse>;
     getAliases(param: DefaultApiGetAliasesRequest, options?: Configuration): Promise<UserIdentityBody>;

@@ -26,6 +26,9 @@ export * from './DeliveryData';
 export * from './EmailWarmUp';
 export * from './EmailWarmUpRequest';
 export * from './EmailWarmUpStage';
+export * from './EstimateNotificationRecipientsRequest';
+export * from './EstimateNotificationRecipientsRequestAllOf';
+export * from './EstimateNotificationRecipientsSuccessResponse';
 export * from './ExportEventsSuccessResponse';
 export * from './ExportSubscriptionsRequestBody';
 export * from './ExportSubscriptionsSuccessResponse';
@@ -131,6 +134,9 @@ import { DeliveryData } from './DeliveryData';
 import { EmailWarmUp , EmailWarmUpStrategyEnum  , EmailWarmUpStatusEnum    } from './EmailWarmUp';
 import { EmailWarmUpRequest , EmailWarmUpRequestStrategyEnum   } from './EmailWarmUpRequest';
 import { EmailWarmUpStage } from './EmailWarmUpStage';
+import { EstimateNotificationRecipientsRequest     , EstimateNotificationRecipientsRequestTargetChannelEnum   } from './EstimateNotificationRecipientsRequest';
+import { EstimateNotificationRecipientsRequestAllOf   , EstimateNotificationRecipientsRequestAllOfTargetChannelEnum   } from './EstimateNotificationRecipientsRequestAllOf';
+import { EstimateNotificationRecipientsSuccessResponse } from './EstimateNotificationRecipientsSuccessResponse';
 import { ExportEventsSuccessResponse } from './ExportEventsSuccessResponse';
 import { ExportSubscriptionsRequestBody } from './ExportSubscriptionsRequestBody';
 import { ExportSubscriptionsSuccessResponse } from './ExportSubscriptionsSuccessResponse';
@@ -241,6 +247,8 @@ let enumsMap: Set<string> = new Set<string>([
     "EmailWarmUpStrategyEnum",
     "EmailWarmUpStatusEnum",
     "EmailWarmUpRequestStrategyEnum",
+    "EstimateNotificationRecipientsRequestTargetChannelEnum",
+    "EstimateNotificationRecipientsRequestAllOfTargetChannelEnum",
     "FilterRelationEnum",
     "FilterExpressionRelationEnum",
     "FilterExpressionOperatorEnum",
@@ -306,6 +314,9 @@ let typeMap: {[index: string]: any} = {
     "EmailWarmUp": EmailWarmUp,
     "EmailWarmUpRequest": EmailWarmUpRequest,
     "EmailWarmUpStage": EmailWarmUpStage,
+    "EstimateNotificationRecipientsRequest": EstimateNotificationRecipientsRequest,
+    "EstimateNotificationRecipientsRequestAllOf": EstimateNotificationRecipientsRequestAllOf,
+    "EstimateNotificationRecipientsSuccessResponse": EstimateNotificationRecipientsSuccessResponse,
     "ExportEventsSuccessResponse": ExportEventsSuccessResponse,
     "ExportSubscriptionsRequestBody": ExportSubscriptionsRequestBody,
     "ExportSubscriptionsSuccessResponse": ExportSubscriptionsSuccessResponse,
