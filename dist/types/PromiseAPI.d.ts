@@ -11,6 +11,8 @@ import { CreateNotificationSuccessResponse } from '../models/CreateNotificationS
 import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
 import { CreateTemplateRequest } from '../models/CreateTemplateRequest';
 import { CustomEventsRequest } from '../models/CustomEventsRequest';
+import { EstimateNotificationRecipientsRequest } from '../models/EstimateNotificationRecipientsRequest';
+import { EstimateNotificationRecipientsSuccessResponse } from '../models/EstimateNotificationRecipientsSuccessResponse';
 import { ExportEventsSuccessResponse } from '../models/ExportEventsSuccessResponse';
 import { ExportSubscriptionsRequestBody } from '../models/ExportSubscriptionsRequestBody';
 import { ExportSubscriptionsSuccessResponse } from '../models/ExportSubscriptionsSuccessResponse';
@@ -72,6 +74,7 @@ export declare class PromiseDefaultApi {
     deleteSubscription(appId: string, subscriptionId: string, _options?: Configuration): Promise<void>;
     deleteTemplate(templateId: string, appId: string, _options?: Configuration): Promise<GenericSuccessBoolResponse>;
     deleteUser(appId: string, aliasLabel: string, aliasId: string, _options?: Configuration): Promise<void>;
+    estimateNotificationRecipients(estimateNotificationRecipientsRequest: EstimateNotificationRecipientsRequest, _options?: Configuration): Promise<EstimateNotificationRecipientsSuccessResponse>;
     exportEvents(notificationId: string, appId: string, _options?: Configuration): Promise<ExportEventsSuccessResponse>;
     exportSubscriptions(appId: string, exportSubscriptionsRequestBody?: ExportSubscriptionsRequestBody, _options?: Configuration): Promise<ExportSubscriptionsSuccessResponse>;
     getAliases(appId: string, aliasLabel: string, aliasId: string, _options?: Configuration): Promise<UserIdentityBody>;

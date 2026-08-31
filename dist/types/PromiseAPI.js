@@ -91,6 +91,10 @@ class PromiseDefaultApi {
         const result = this.api.deleteUser(appId, aliasLabel, aliasId, _options);
         return result.toPromise();
     }
+    estimateNotificationRecipients(estimateNotificationRecipientsRequest, _options) {
+        const result = this.api.estimateNotificationRecipients(estimateNotificationRecipientsRequest, _options);
+        return result.toPromise();
+    }
     exportEvents(notificationId, appId, _options) {
         const result = this.api.exportEvents(notificationId, appId, _options);
         return result.toPromise();

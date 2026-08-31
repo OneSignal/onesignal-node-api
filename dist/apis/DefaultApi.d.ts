@@ -11,6 +11,8 @@ import { CreateNotificationSuccessResponse } from '../models/CreateNotificationS
 import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
 import { CreateTemplateRequest } from '../models/CreateTemplateRequest';
 import { CustomEventsRequest } from '../models/CustomEventsRequest';
+import { EstimateNotificationRecipientsRequest } from '../models/EstimateNotificationRecipientsRequest';
+import { EstimateNotificationRecipientsSuccessResponse } from '../models/EstimateNotificationRecipientsSuccessResponse';
 import { ExportEventsSuccessResponse } from '../models/ExportEventsSuccessResponse';
 import { ExportSubscriptionsRequestBody } from '../models/ExportSubscriptionsRequestBody';
 import { ExportSubscriptionsSuccessResponse } from '../models/ExportSubscriptionsSuccessResponse';
@@ -67,6 +69,7 @@ export declare class DefaultApiRequestFactory extends BaseAPIRequestFactory {
     deleteSubscription(appId: string, subscriptionId: string, _options?: Configuration): Promise<RequestContext>;
     deleteTemplate(templateId: string, appId: string, _options?: Configuration): Promise<RequestContext>;
     deleteUser(appId: string, aliasLabel: string, aliasId: string, _options?: Configuration): Promise<RequestContext>;
+    estimateNotificationRecipients(estimateNotificationRecipientsRequest: EstimateNotificationRecipientsRequest, _options?: Configuration): Promise<RequestContext>;
     exportEvents(notificationId: string, appId: string, _options?: Configuration): Promise<RequestContext>;
     exportSubscriptions(appId: string, exportSubscriptionsRequestBody?: ExportSubscriptionsRequestBody, _options?: Configuration): Promise<RequestContext>;
     getAliases(appId: string, aliasLabel: string, aliasId: string, _options?: Configuration): Promise<RequestContext>;
@@ -123,6 +126,7 @@ export declare class DefaultApiResponseProcessor {
     deleteSubscription(response: ResponseContext): Promise<void>;
     deleteTemplate(response: ResponseContext): Promise<GenericSuccessBoolResponse>;
     deleteUser(response: ResponseContext): Promise<void>;
+    estimateNotificationRecipients(response: ResponseContext): Promise<EstimateNotificationRecipientsSuccessResponse>;
     exportEvents(response: ResponseContext): Promise<ExportEventsSuccessResponse>;
     exportSubscriptions(response: ResponseContext): Promise<ExportSubscriptionsSuccessResponse>;
     getAliases(response: ResponseContext): Promise<UserIdentityBody>;

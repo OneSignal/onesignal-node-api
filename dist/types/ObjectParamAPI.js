@@ -66,6 +66,9 @@ class ObjectDefaultApi {
     deleteUser(param, options) {
         return this.api.deleteUser(param.appId, param.aliasLabel, param.aliasId, options).toPromise();
     }
+    estimateNotificationRecipients(param, options) {
+        return this.api.estimateNotificationRecipients(param.estimateNotificationRecipientsRequest, options).toPromise();
+    }
     exportEvents(param, options) {
         return this.api.exportEvents(param.notificationId, param.appId, options).toPromise();
     }

@@ -24,6 +24,7 @@ Method | HTTP request | Description
 [**deleteSubscription**](DefaultApi.md#deleteSubscription) | **DELETE** /apps/{app_id}/subscriptions/{subscription_id} | 
 [**deleteTemplate**](DefaultApi.md#deleteTemplate) | **DELETE** /templates/{template_id} | Delete template
 [**deleteUser**](DefaultApi.md#deleteUser) | **DELETE** /apps/{app_id}/users/by/{alias_label}/{alias_id} | 
+[**estimateNotificationRecipients**](DefaultApi.md#estimateNotificationRecipients) | **POST** /notifications/count-unsaved | Estimate notification recipients
 [**exportEvents**](DefaultApi.md#exportEvents) | **POST** /notifications/{notification_id}/export_events | Export CSV of Events
 [**exportSubscriptions**](DefaultApi.md#exportSubscriptions) | **POST** /players/csv_export?app_id&#x3D;{app_id} | Export CSV of Subscriptions
 [**getAliases**](DefaultApi.md#getAliases) | **GET** /apps/{app_id}/users/by/{alias_label}/{alias_id}/identity | 
@@ -1940,6 +1941,70 @@ Name | Type | Description  | Notes
 **200** | OK |  -  |
 **400** | Bad Request |  -  |
 **409** | Conflict |  -  |
+**429** | Rate Limit Exceeded |  -  |
+**0** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
+
+# **estimateNotificationRecipients**
+> EstimateNotificationRecipientsSuccessResponse estimateNotificationRecipients(estimateNotificationRecipientsRequest)
+
+Returns the estimated number of recipients for a notification\'s targeting, without creating or sending anything. The returned `count` reflects the same audience-size estimate you would see under \"Choose your target audience\" when composing a message. It is based on the user targeting method you\'ve set and the specific platforms the message is targeted to send to. This endpoint only supports a subset of targeting parameters: `included_segments` is required (its `\"All\"` shorthand targets every subscriber), and `excluded_segments`, `filters`, `include_aliases`, and `target_channel` narrow that audience further. Use `target_channel` to select platforms. `include_subscription_ids` and the other raw subscription id/token fields, and the individual `isIos` / `isAndroid` / etc. platform flags, are not supported. All other notification fields (content, delivery options, and so on) are accepted, but ignored. 
+
+### Example
+
+
+```typescript
+import Onesignal from '@onesignal/node-onesignal';
+
+const configuration = Onesignal.createConfiguration({
+    restApiKey: 'YOUR_REST_API_KEY',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
+
+// EstimateNotificationRecipientsRequest
+const estimateNotificationRecipientsRequest: Onesignal.EstimateNotificationRecipientsRequest = null;
+
+try {
+  const response = await apiInstance.estimateNotificationRecipients(estimateNotificationRecipientsRequest);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("estimateNotificationRecipients failed: HTTP " + e.code, e.errorMessages);
+  } else {
+    throw e;
+  }
+}
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **estimateNotificationRecipientsRequest** | **EstimateNotificationRecipientsRequest** |  |
+
+### Return type
+
+**EstimateNotificationRecipientsSuccessResponse**
+
+### Authorization
+
+[rest_api_key](https://github.com/OneSignal/node-onesignal#configuration)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
 **429** | Rate Limit Exceeded |  -  |
 **0** | Unexpected error |  -  |
 
