@@ -766,6 +766,27 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
         }
         return requestContext;
     }
+    async getEmailReputation(appId, _options) {
+        let _config = _options || this.configuration;
+        if (appId === null || appId === undefined) {
+            throw new baseapi_1.RequiredError("DefaultApi", "getEmailReputation", "appId");
+        }
+        const localVarPath = '/apps/{app_id}/email_analytics/delivery_metrics'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)));
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.17.0");
+        let authMethod;
+        authMethod = _config.authMethods["rest_api_key"];
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        const defaultAuth = _options?.authMethods?.default || this.configuration?.authMethods?.default;
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+        return requestContext;
+    }
     async getNotification(appId, notificationId, _options) {
         let _config = _options || this.configuration;
         if (appId === null || appId === undefined) {
@@ -2388,6 +2409,34 @@ class DefaultApiResponseProcessor {
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "Array<App>", "");
+            return body;
+        }
+        throw new exception_1.ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+    async getEmailReputation(response) {
+        const contentType = ObjectSerializer_1.ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if ((0, util_1.isCodeInRange)("200", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "EmailReputationResponse", "");
+            return body;
+        }
+        if ((0, util_1.isCodeInRange)("400", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(400, "Bad Request", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("404", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(404, "Not Found", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
+            throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "EmailReputationResponse", "");
             return body;
         }
         throw new exception_1.ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

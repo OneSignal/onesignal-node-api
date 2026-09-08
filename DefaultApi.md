@@ -31,6 +31,7 @@ Method | HTTP request | Description
 [**getAliasesBySubscription**](DefaultApi.md#getAliasesBySubscription) | **GET** /apps/{app_id}/subscriptions/{subscription_id}/user/identity | 
 [**getApp**](DefaultApi.md#getApp) | **GET** /apps/{app_id} | View an app
 [**getApps**](DefaultApi.md#getApps) | **GET** /apps | View apps
+[**getEmailReputation**](DefaultApi.md#getEmailReputation) | **GET** /apps/{app_id}/email_analytics/delivery_metrics | Get email reputation statistics
 [**getNotification**](DefaultApi.md#getNotification) | **GET** /notifications/{notification_id} | View notification
 [**getNotificationHistory**](DefaultApi.md#getNotificationHistory) | **POST** /notifications/{notification_id}/history | Notification History
 [**getNotifications**](DefaultApi.md#getNotifications) | **GET** /notifications | View notifications
@@ -2406,6 +2407,71 @@ This endpoint does not need any parameter.
 |-------------|-------------|------------------|
 **200** | OK |  -  |
 **400** | Bad Request |  -  |
+**429** | Rate Limit Exceeded |  -  |
+**0** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
+
+# **getEmailReputation**
+> EmailReputationResponse getEmailReputation(appId)
+
+The email bounce and spam complaint rates received for the app over the last 24 hours, 7 days, and 30 days. Rates are expressed as fractions of successfully delivered emails (for example, `0.02` means 2%). A window reports `0` for both rates when the app has not successfully delivered any email in that period. 
+
+### Example
+
+
+```typescript
+import Onesignal from '@onesignal/node-onesignal';
+
+const configuration = Onesignal.createConfiguration({
+    restApiKey: 'YOUR_REST_API_KEY',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
+
+// string | Your OneSignal App ID in UUID v4 format.
+const appId: string = "YOUR_APP_ID";
+
+try {
+  const response = await apiInstance.getEmailReputation(appId);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("getEmailReputation failed: HTTP " + e.code, e.errorMessages);
+  } else {
+    throw e;
+  }
+}
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **appId** | [**string**] | Your OneSignal App ID in UUID v4 format. | defaults to undefined
+
+### Return type
+
+**EmailReputationResponse**
+
+### Authorization
+
+[rest_api_key](https://github.com/OneSignal/node-onesignal#configuration)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+**404** | Not Found |  -  |
 **429** | Rate Limit Exceeded |  -  |
 **0** | Unexpected error |  -  |
 
