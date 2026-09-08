@@ -9,6 +9,7 @@ import { CreateNotificationSuccessResponse } from '../models/CreateNotificationS
 import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
 import { CreateTemplateRequest } from '../models/CreateTemplateRequest';
 import { CustomEventsRequest } from '../models/CustomEventsRequest';
+import { EmailReputationResponse } from '../models/EmailReputationResponse';
 import { EstimateNotificationRecipientsRequest } from '../models/EstimateNotificationRecipientsRequest';
 import { EstimateNotificationRecipientsSuccessResponse } from '../models/EstimateNotificationRecipientsSuccessResponse';
 import { ExportEventsSuccessResponse } from '../models/ExportEventsSuccessResponse';
@@ -157,6 +158,9 @@ export interface DefaultApiGetAppRequest {
     appId: string;
 }
 export interface DefaultApiGetAppsRequest {
+}
+export interface DefaultApiGetEmailReputationRequest {
+    appId: string;
 }
 export interface DefaultApiGetNotificationRequest {
     appId: string;
@@ -337,6 +341,7 @@ export declare class ObjectDefaultApi {
     getAliasesBySubscription(param: DefaultApiGetAliasesBySubscriptionRequest, options?: Configuration): Promise<UserIdentityBody>;
     getApp(param: DefaultApiGetAppRequest, options?: Configuration): Promise<App>;
     getApps(param?: DefaultApiGetAppsRequest, options?: Configuration): Promise<Array<App>>;
+    getEmailReputation(param: DefaultApiGetEmailReputationRequest, options?: Configuration): Promise<EmailReputationResponse>;
     getNotification(param: DefaultApiGetNotificationRequest, options?: Configuration): Promise<NotificationWithMeta>;
     getNotificationHistory(param: DefaultApiGetNotificationHistoryRequest, options?: Configuration): Promise<NotificationHistorySuccessResponse>;
     getNotifications(param: DefaultApiGetNotificationsRequest, options?: Configuration): Promise<NotificationSlice>;

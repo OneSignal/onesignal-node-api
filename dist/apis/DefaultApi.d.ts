@@ -11,6 +11,7 @@ import { CreateNotificationSuccessResponse } from '../models/CreateNotificationS
 import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
 import { CreateTemplateRequest } from '../models/CreateTemplateRequest';
 import { CustomEventsRequest } from '../models/CustomEventsRequest';
+import { EmailReputationResponse } from '../models/EmailReputationResponse';
 import { EstimateNotificationRecipientsRequest } from '../models/EstimateNotificationRecipientsRequest';
 import { EstimateNotificationRecipientsSuccessResponse } from '../models/EstimateNotificationRecipientsSuccessResponse';
 import { ExportEventsSuccessResponse } from '../models/ExportEventsSuccessResponse';
@@ -76,6 +77,7 @@ export declare class DefaultApiRequestFactory extends BaseAPIRequestFactory {
     getAliasesBySubscription(appId: string, subscriptionId: string, _options?: Configuration): Promise<RequestContext>;
     getApp(appId: string, _options?: Configuration): Promise<RequestContext>;
     getApps(_options?: Configuration): Promise<RequestContext>;
+    getEmailReputation(appId: string, _options?: Configuration): Promise<RequestContext>;
     getNotification(appId: string, notificationId: string, _options?: Configuration): Promise<RequestContext>;
     getNotificationHistory(notificationId: string, getNotificationHistoryRequestBody: GetNotificationHistoryRequestBody, _options?: Configuration): Promise<RequestContext>;
     getNotifications(appId: string, limit?: number, offset?: number, kind?: 0 | 1 | 3, timeOffset?: string, _options?: Configuration): Promise<RequestContext>;
@@ -133,6 +135,7 @@ export declare class DefaultApiResponseProcessor {
     getAliasesBySubscription(response: ResponseContext): Promise<UserIdentityBody>;
     getApp(response: ResponseContext): Promise<App>;
     getApps(response: ResponseContext): Promise<Array<App>>;
+    getEmailReputation(response: ResponseContext): Promise<EmailReputationResponse>;
     getNotification(response: ResponseContext): Promise<NotificationWithMeta>;
     getNotificationHistory(response: ResponseContext): Promise<NotificationHistorySuccessResponse>;
     getNotifications(response: ResponseContext): Promise<NotificationSlice>;

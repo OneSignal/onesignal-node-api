@@ -27,6 +27,8 @@ import { CreateUserConflictResponseErrorsItemsMeta } from '../models/CreateUserC
 import { CustomEvent } from '../models/CustomEvent';
 import { CustomEventsRequest } from '../models/CustomEventsRequest';
 import { DeliveryData } from '../models/DeliveryData';
+import { EmailReputationResponse } from '../models/EmailReputationResponse';
+import { EmailReputationWindow } from '../models/EmailReputationWindow';
 import { EmailWarmUp } from '../models/EmailWarmUp';
 import { EmailWarmUpRequest } from '../models/EmailWarmUpRequest';
 import { EmailWarmUpStage } from '../models/EmailWarmUpStage';
@@ -534,6 +536,15 @@ export interface DefaultApiGetAppRequest {
 }
 
 export interface DefaultApiGetAppsRequest {
+}
+
+export interface DefaultApiGetEmailReputationRequest {
+    /**
+     * Your OneSignal App ID in UUID v4 format.
+     * @type string
+     * @memberof DefaultApigetEmailReputation
+     */
+    appId: string
 }
 
 export interface DefaultApiGetNotificationRequest {
@@ -1417,6 +1428,15 @@ export class ObjectDefaultApi {
      */
     public getApps(param: DefaultApiGetAppsRequest = {}, options?: Configuration): Promise<Array<App>> {
         return this.api.getApps( options).toPromise();
+    }
+
+    /**
+     * The email bounce and spam complaint rates received for the app over the last 24 hours, 7 days, and 30 days. Rates are expressed as fractions of successfully delivered emails (for example, `0.02` means 2%). A window reports `0` for both rates when the app has not successfully delivered any email in that period. 
+     * Get email reputation statistics
+     * @param param the request object
+     */
+    public getEmailReputation(param: DefaultApiGetEmailReputationRequest, options?: Configuration): Promise<EmailReputationResponse> {
+        return this.api.getEmailReputation(param.appId,  options).toPromise();
     }
 
     /**
