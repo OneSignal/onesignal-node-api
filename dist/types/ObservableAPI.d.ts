@@ -10,6 +10,7 @@ import { CreateNotificationSuccessResponse } from '../models/CreateNotificationS
 import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
 import { CreateTemplateRequest } from '../models/CreateTemplateRequest';
 import { CustomEventsRequest } from '../models/CustomEventsRequest';
+import { EmailReputationResponse } from '../models/EmailReputationResponse';
 import { EstimateNotificationRecipientsRequest } from '../models/EstimateNotificationRecipientsRequest';
 import { EstimateNotificationRecipientsSuccessResponse } from '../models/EstimateNotificationRecipientsSuccessResponse';
 import { ExportEventsSuccessResponse } from '../models/ExportEventsSuccessResponse';
@@ -80,6 +81,7 @@ export declare class ObservableDefaultApi {
     getAliasesBySubscription(appId: string, subscriptionId: string, _options?: Configuration): Observable<UserIdentityBody>;
     getApp(appId: string, _options?: Configuration): Observable<App>;
     getApps(_options?: Configuration): Observable<Array<App>>;
+    getEmailReputation(appId: string, _options?: Configuration): Observable<EmailReputationResponse>;
     getNotification(appId: string, notificationId: string, _options?: Configuration): Observable<NotificationWithMeta>;
     getNotificationHistory(notificationId: string, getNotificationHistoryRequestBody: GetNotificationHistoryRequestBody, _options?: Configuration): Observable<NotificationHistorySuccessResponse>;
     getNotifications(appId: string, limit?: number, offset?: number, kind?: 0 | 1 | 3, timeOffset?: string, _options?: Configuration): Observable<NotificationSlice>;

@@ -23,6 +23,8 @@ export * from './CreateUserConflictResponseErrorsItemsMeta';
 export * from './CustomEvent';
 export * from './CustomEventsRequest';
 export * from './DeliveryData';
+export * from './EmailReputationResponse';
+export * from './EmailReputationWindow';
 export * from './EmailWarmUp';
 export * from './EmailWarmUpRequest';
 export * from './EmailWarmUpStage';
@@ -131,6 +133,8 @@ import { CreateUserConflictResponseErrorsItemsMeta } from './CreateUserConflictR
 import { CustomEvent } from './CustomEvent';
 import { CustomEventsRequest } from './CustomEventsRequest';
 import { DeliveryData } from './DeliveryData';
+import { EmailReputationResponse } from './EmailReputationResponse';
+import { EmailReputationWindow } from './EmailReputationWindow';
 import { EmailWarmUp , EmailWarmUpStrategyEnum  , EmailWarmUpStatusEnum    } from './EmailWarmUp';
 import { EmailWarmUpRequest , EmailWarmUpRequestStrategyEnum   } from './EmailWarmUpRequest';
 import { EmailWarmUpStage } from './EmailWarmUpStage';
@@ -311,6 +315,8 @@ let typeMap: {[index: string]: any} = {
     "CustomEvent": CustomEvent,
     "CustomEventsRequest": CustomEventsRequest,
     "DeliveryData": DeliveryData,
+    "EmailReputationResponse": EmailReputationResponse,
+    "EmailReputationWindow": EmailReputationWindow,
     "EmailWarmUp": EmailWarmUp,
     "EmailWarmUpRequest": EmailWarmUpRequest,
     "EmailWarmUpStage": EmailWarmUpStage,

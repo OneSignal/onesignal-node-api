@@ -40,6 +40,8 @@ __exportStar(require("./CreateUserConflictResponseErrorsItemsMeta"), exports);
 __exportStar(require("./CustomEvent"), exports);
 __exportStar(require("./CustomEventsRequest"), exports);
 __exportStar(require("./DeliveryData"), exports);
+__exportStar(require("./EmailReputationResponse"), exports);
+__exportStar(require("./EmailReputationWindow"), exports);
 __exportStar(require("./EmailWarmUp"), exports);
 __exportStar(require("./EmailWarmUpRequest"), exports);
 __exportStar(require("./EmailWarmUpStage"), exports);
@@ -147,6 +149,8 @@ const CreateUserConflictResponseErrorsItemsMeta_1 = require("./CreateUserConflic
 const CustomEvent_1 = require("./CustomEvent");
 const CustomEventsRequest_1 = require("./CustomEventsRequest");
 const DeliveryData_1 = require("./DeliveryData");
+const EmailReputationResponse_1 = require("./EmailReputationResponse");
+const EmailReputationWindow_1 = require("./EmailReputationWindow");
 const EmailWarmUp_1 = require("./EmailWarmUp");
 const EmailWarmUpRequest_1 = require("./EmailWarmUpRequest");
 const EmailWarmUpStage_1 = require("./EmailWarmUpStage");
@@ -321,6 +325,8 @@ let typeMap = {
     "CustomEvent": CustomEvent_1.CustomEvent,
     "CustomEventsRequest": CustomEventsRequest_1.CustomEventsRequest,
     "DeliveryData": DeliveryData_1.DeliveryData,
+    "EmailReputationResponse": EmailReputationResponse_1.EmailReputationResponse,
+    "EmailReputationWindow": EmailReputationWindow_1.EmailReputationWindow,
     "EmailWarmUp": EmailWarmUp_1.EmailWarmUp,
     "EmailWarmUpRequest": EmailWarmUpRequest_1.EmailWarmUpRequest,
     "EmailWarmUpStage": EmailWarmUpStage_1.EmailWarmUpStage,
