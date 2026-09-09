@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.18.0](https://github.com/OneSignal/onesignal-node-api/compare/v5.17.0...v5.18.0) (2026-09-09)
+
+### Features
+
+* add v5.18.0 package updates ([61b7ab5](https://github.com/OneSignal/onesignal-node-api/commit/61b7ab5fe2455fb0dbd7f896b54c2b9265291147))
+* add v5.18.0 package updates ([#219](https://github.com/OneSignal/onesignal-node-api/issues/219)) ([8c2763c](https://github.com/OneSignal/onesignal-node-api/commit/8c2763c377015557af4a9d53f711b017c7b87687)), closes [OneSignal/api-client-libraries#464](https://github.com/OneSignal/api-client-libraries/issues/464) [OneSignal/api-client-libraries#465](https://github.com/OneSignal/api-client-libraries/issues/465)
+
 ## [5.17.0](https://github.com/OneSignal/onesignal-node-api/compare/v5.16.0...v5.17.0) (2026-08-31)
 
 ### Features
