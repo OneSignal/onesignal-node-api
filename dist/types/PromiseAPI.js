@@ -119,6 +119,10 @@ class PromiseDefaultApi {
         const result = this.api.getApps(_options);
         return result.toPromise();
     }
+    getEmailReputation(appId, _options) {
+        const result = this.api.getEmailReputation(appId, _options);
+        return result.toPromise();
+    }
     getNotification(appId, notificationId, _options) {
         const result = this.api.getNotification(appId, notificationId, _options);
         return result.toPromise();

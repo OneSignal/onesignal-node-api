@@ -39,6 +39,8 @@ __exportStar(require("./CreateUserConflictResponseErrorsItemsMeta"), exports);
 __exportStar(require("./CustomEvent"), exports);
 __exportStar(require("./CustomEventsRequest"), exports);
 __exportStar(require("./DeliveryData"), exports);
+__exportStar(require("./EmailReputationResponse"), exports);
+__exportStar(require("./EmailReputationWindow"), exports);
 __exportStar(require("./EmailWarmUp"), exports);
 __exportStar(require("./EmailWarmUpRequest"), exports);
 __exportStar(require("./EmailWarmUpStage"), exports);

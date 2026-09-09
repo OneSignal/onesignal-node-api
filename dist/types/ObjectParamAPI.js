@@ -87,6 +87,9 @@ class ObjectDefaultApi {
     getApps(param = {}, options) {
         return this.api.getApps(options).toPromise();
     }
+    getEmailReputation(param, options) {
+        return this.api.getEmailReputation(param.appId, options).toPromise();
+    }
     getNotification(param, options) {
         return this.api.getNotification(param.appId, param.notificationId, options).toPromise();
     }

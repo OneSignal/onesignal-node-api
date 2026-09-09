@@ -28,6 +28,8 @@ import { CreateUserConflictResponseErrorsItemsMeta } from '../models/CreateUserC
 import { CustomEvent } from '../models/CustomEvent';
 import { CustomEventsRequest } from '../models/CustomEventsRequest';
 import { DeliveryData } from '../models/DeliveryData';
+import { EmailReputationResponse } from '../models/EmailReputationResponse';
+import { EmailReputationWindow } from '../models/EmailReputationWindow';
 import { EmailWarmUp } from '../models/EmailWarmUp';
 import { EmailWarmUpRequest } from '../models/EmailWarmUpRequest';
 import { EmailWarmUpStage } from '../models/EmailWarmUpStage';
@@ -793,6 +795,30 @@ export class ObservableDefaultApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getApps(rsp)));
+            }));
+    }
+
+    /**
+     * The email bounce and spam complaint rates received for the app over the last 24 hours, 7 days, and 30 days. Rates are expressed as fractions of successfully delivered emails (for example, `0.02` means 2%). A window reports `0` for both rates when the app has not successfully delivered any email in that period. 
+     * Get email reputation statistics
+     * @param appId Your OneSignal App ID in UUID v4 format.
+     */
+    public getEmailReputation(appId: string, _options?: Configuration): Observable<EmailReputationResponse> {
+        const requestContextPromise = this.requestFactory.getEmailReputation(appId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getEmailReputation(rsp)));
             }));
     }
 
