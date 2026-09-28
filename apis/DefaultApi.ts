@@ -22,6 +22,7 @@ import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResp
 import { CreateTemplateRequest } from '../models/CreateTemplateRequest';
 import { CreateUserConflictResponse } from '../models/CreateUserConflictResponse';
 import { CustomEventsRequest } from '../models/CustomEventsRequest';
+import { DuplicateJourneyRequest } from '../models/DuplicateJourneyRequest';
 import { EmailReputationResponse } from '../models/EmailReputationResponse';
 import { EstimateNotificationRecipientsRequest } from '../models/EstimateNotificationRecipientsRequest';
 import { EstimateNotificationRecipientsSuccessResponse } from '../models/EstimateNotificationRecipientsSuccessResponse';
@@ -1200,6 +1201,68 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         // Always add the One Signal telemetry to the request.
         requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.18.0");
 
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["rest_api_key"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * The Journeys API is in beta. Endpoints and response fields can still change. Copy an existing journey into a new draft. The source does not change. The copy is always a draft, and started_at and archived_at are null. If you omit the body, or omit overrides, the copy keeps the source description, audience, nodes, early_exit, and reentry_rules. The copy takes the source name plus \" (Copy)\". The copy does not keep schedule. Send schedule under overrides to set it. Server-controlled fields are rejected with 400. The authenticated App API key must have permission to create journeys.
+     * Duplicate journey
+     * @param appId Your OneSignal App ID in UUID v4 format.
+     * @param journeyId UUID of the journey to copy.
+     * @param duplicateJourneyRequest 
+     */
+    public async duplicateJourney(appId: string, journeyId: string, duplicateJourneyRequest?: DuplicateJourneyRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("DefaultApi", "duplicateJourney", "appId");
+        }
+
+
+        // verify required parameter 'journeyId' is not null or undefined
+        if (journeyId === null || journeyId === undefined) {
+            throw new RequiredError("DefaultApi", "duplicateJourney", "journeyId");
+        }
+
+
+
+        // Path Params
+        const localVarPath = '/apps/{app_id}/journeys/{journey_id}/duplicate'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'journey_id' + '}', encodeURIComponent(String(journeyId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Always add the One Signal telemetry to the request.
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.18.0");
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(duplicateJourneyRequest, "DuplicateJourneyRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
@@ -4499,6 +4562,70 @@ export class DefaultApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to duplicateJourney
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async duplicateJourney(response: ResponseContext): Promise<Journey > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("201", response.httpStatusCode)) {
+            const body: Journey = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Journey", ""
+            ) as Journey;
+            return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(403, "Forbidden", body, response.headers);
+        }
+        if (isCodeInRange("404", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(404, "Not Found", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimitError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimitError", ""
+            ) as RateLimitError;
+            throw new ApiException<RateLimitError>(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if (isCodeInRange("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: Journey = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Journey", ""
+            ) as Journey;
             return body;
         }
 

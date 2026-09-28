@@ -23,6 +23,8 @@ export * from './CreateUserConflictResponseErrorsItemsMeta';
 export * from './CustomEvent';
 export * from './CustomEventsRequest';
 export * from './DeliveryData';
+export * from './DuplicateJourneyOverrides';
+export * from './DuplicateJourneyRequest';
 export * from './EmailReputationResponse';
 export * from './EmailReputationWindow';
 export * from './EmailWarmUp';

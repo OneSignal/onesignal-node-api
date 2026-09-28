@@ -24,6 +24,7 @@ Method | HTTP request | Description
 [**deleteSubscription**](DefaultApi.md#deleteSubscription) | **DELETE** /apps/{app_id}/subscriptions/{subscription_id} | 
 [**deleteTemplate**](DefaultApi.md#deleteTemplate) | **DELETE** /templates/{template_id} | Delete template
 [**deleteUser**](DefaultApi.md#deleteUser) | **DELETE** /apps/{app_id}/users/by/{alias_label}/{alias_id} | 
+[**duplicateJourney**](DefaultApi.md#duplicateJourney) | **POST** /apps/{app_id}/journeys/{journey_id}/duplicate | Duplicate journey
 [**estimateNotificationRecipients**](DefaultApi.md#estimateNotificationRecipients) | **POST** /notifications/count-unsaved | Estimate notification recipients
 [**exportEvents**](DefaultApi.md#exportEvents) | **POST** /notifications/{notification_id}/export_events | Export CSV of Events
 [**exportSubscriptions**](DefaultApi.md#exportSubscriptions) | **POST** /players/csv_export?app_id&#x3D;{app_id} | Export CSV of Subscriptions
@@ -1942,6 +1943,193 @@ Name | Type | Description  | Notes
 **200** | OK |  -  |
 **400** | Bad Request |  -  |
 **409** | Conflict |  -  |
+**429** | Rate Limit Exceeded |  -  |
+**0** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
+
+# **duplicateJourney**
+> Journey duplicateJourney(appId, journeyId, duplicateJourneyRequest)
+
+The Journeys API is in beta. Endpoints and response fields can still change. Copy an existing journey into a new draft. The source does not change. The copy is always a draft, and started_at and archived_at are null. If you omit the body, or omit overrides, the copy keeps the source description, audience, nodes, early_exit, and reentry_rules. The copy takes the source name plus \" (Copy)\". The copy does not keep schedule. Send schedule under overrides to set it. Server-controlled fields are rejected with 400. The authenticated App API key must have permission to create journeys.
+
+### Example
+
+
+```typescript
+import Onesignal from '@onesignal/node-onesignal';
+
+const configuration = Onesignal.createConfiguration({
+    restApiKey: 'YOUR_REST_API_KEY',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
+
+// string | Your OneSignal App ID in UUID v4 format.
+const appId: string = "YOUR_APP_ID";
+// string | UUID of the journey to copy.
+const journeyId: string = "YOUR_JOURNEY_ID";
+// DuplicateJourneyRequest (optional)
+const duplicateJourneyRequest: Onesignal.DuplicateJourneyRequest = {
+    overrides: {
+      name: "name_example",
+      description: "description_example",
+      audience: {
+        kind: "segment",
+        included_segment_ids: [
+          "included_segment_ids_example",
+        ],
+        excluded_segment_ids: [
+          "excluded_segment_ids_example",
+        ],
+        future_additions_only: true,
+        name: "name_example",
+        attributes: [
+          [
+            {
+              key: "key_example",
+              operator: "equal",
+              value: "value_example",
+            },
+          ],
+        ],
+      },
+      early_exit: {
+        rules: {
+          on_segment: {
+            included_segment_ids: [
+              "included_segment_ids_example",
+            ],
+          },
+          when_not_in_audience: true,
+          on_session: true,
+          on_event: {
+            name: "name_example",
+          },
+        },
+        tag_on_early_exit: {
+          "key": "key_example",
+        },
+      },
+      reentry_rules: {
+        duration_seconds: 600,
+      },
+      schedule: {
+        start_at: "start_at_example",
+        stop_at: "stop_at_example",
+        error: "error_example",
+      },
+      nodes: [
+        {
+          id: "id_example",
+          kind: "wait",
+          client_node_id: "client_node_id_example",
+          annotation: "annotation_example",
+          duration_seconds: 60,
+          relative_to: "schedule_in_timezone",
+          windows: [
+            {
+              start: null,
+              end: null,
+              day_of_week: 1,
+            },
+          ],
+          time_zone: "time_zone_example",
+          use_user_time_zone: true,
+          template_id: "template_id_example",
+          iam_id: "iam_id_example",
+          user_ttl_seconds: 1,
+          webhook_id: "webhook_id_example",
+          assignments: {
+            "key": "key_example",
+          },
+          randomize_on_entry: true,
+          branches: [
+            {
+              id: "id_example",
+              condition: {
+                kind: "segment_membership",
+                included_segment_ids: [
+                  "included_segment_ids_example",
+                ],
+                excluded_segment_ids: [
+                  "excluded_segment_ids_example",
+                ],
+                action: "received",
+                sending_node_id: "sending_node_id_example",
+                client_node_id: "client_node_id_example",
+                name: "name_example",
+                attributes: [
+                  [
+                    {
+                      key: "key_example",
+                      operator: "equal",
+                      value: "value_example",
+                    },
+                  ],
+                ],
+                entry_event_match_attributes: [
+                  {},
+                ],
+              },
+              weight: 3.14,
+              nodes: [
+                ,
+              ],
+            },
+          ],
+          expiration: {
+            duration_seconds: 60,
+            exits: true,
+          },
+        },
+      ],
+    },
+  };
+
+try {
+  const response = await apiInstance.duplicateJourney(appId, journeyId, duplicateJourneyRequest);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("duplicateJourney failed: HTTP " + e.code, e.errorMessages);
+  } else {
+    throw e;
+  }
+}
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **appId** | [**string**] | Your OneSignal App ID in UUID v4 format. | defaults to undefined
+ **journeyId** | [**string**] | UUID of the journey to copy. | defaults to undefined
+ **duplicateJourneyRequest** | **DuplicateJourneyRequest** |  |
+
+### Return type
+
+**Journey**
+
+### Authorization
+
+[rest_api_key](https://github.com/OneSignal/node-onesignal#configuration)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Created |  -  |
+**400** | Bad Request |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
 **429** | Rate Limit Exceeded |  -  |
 **0** | Unexpected error |  -  |
 

@@ -29,6 +29,8 @@ import { CreateUserConflictResponseErrorsItemsMeta } from '../models/CreateUserC
 import { CustomEvent } from '../models/CustomEvent';
 import { CustomEventsRequest } from '../models/CustomEventsRequest';
 import { DeliveryData } from '../models/DeliveryData';
+import { DuplicateJourneyOverrides } from '../models/DuplicateJourneyOverrides';
+import { DuplicateJourneyRequest } from '../models/DuplicateJourneyRequest';
 import { EmailReputationResponse } from '../models/EmailReputationResponse';
 import { EmailReputationWindow } from '../models/EmailReputationWindow';
 import { EmailWarmUp } from '../models/EmailWarmUp';
@@ -356,6 +358,18 @@ export class PromiseDefaultApi {
      */
     public deleteUser(appId: string, aliasLabel: string, aliasId: string, _options?: Configuration): Promise<void> {
         const result = this.api.deleteUser(appId, aliasLabel, aliasId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * The Journeys API is in beta. Endpoints and response fields can still change. Copy an existing journey into a new draft. The source does not change. The copy is always a draft, and started_at and archived_at are null. If you omit the body, or omit overrides, the copy keeps the source description, audience, nodes, early_exit, and reentry_rules. The copy takes the source name plus \" (Copy)\". The copy does not keep schedule. Send schedule under overrides to set it. Server-controlled fields are rejected with 400. The authenticated App API key must have permission to create journeys.
+     * Duplicate journey
+     * @param appId Your OneSignal App ID in UUID v4 format.
+     * @param journeyId UUID of the journey to copy.
+     * @param duplicateJourneyRequest 
+     */
+    public duplicateJourney(appId: string, journeyId: string, duplicateJourneyRequest?: DuplicateJourneyRequest, _options?: Configuration): Promise<Journey> {
+        const result = this.api.duplicateJourney(appId, journeyId, duplicateJourneyRequest, _options);
         return result.toPromise();
     }
 
