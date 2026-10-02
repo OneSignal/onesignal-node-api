@@ -9,6 +9,7 @@ import { CreateNotificationSuccessResponse } from '../models/CreateNotificationS
 import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
 import { CreateTemplateRequest } from '../models/CreateTemplateRequest';
 import { CustomEventsRequest } from '../models/CustomEventsRequest';
+import { DuplicateJourneyRequest } from '../models/DuplicateJourneyRequest';
 import { EmailReputationResponse } from '../models/EmailReputationResponse';
 import { EstimateNotificationRecipientsRequest } from '../models/EstimateNotificationRecipientsRequest';
 import { EstimateNotificationRecipientsSuccessResponse } from '../models/EstimateNotificationRecipientsSuccessResponse';
@@ -133,6 +134,11 @@ export interface DefaultApiDeleteUserRequest {
     appId: string;
     aliasLabel: string;
     aliasId: string;
+}
+export interface DefaultApiDuplicateJourneyRequest {
+    appId: string;
+    journeyId: string;
+    duplicateJourneyRequest?: DuplicateJourneyRequest;
 }
 export interface DefaultApiEstimateNotificationRecipientsRequest {
     estimateNotificationRecipientsRequest: EstimateNotificationRecipientsRequest;
@@ -334,6 +340,7 @@ export declare class ObjectDefaultApi {
     deleteSubscription(param: DefaultApiDeleteSubscriptionRequest, options?: Configuration): Promise<void>;
     deleteTemplate(param: DefaultApiDeleteTemplateRequest, options?: Configuration): Promise<GenericSuccessBoolResponse>;
     deleteUser(param: DefaultApiDeleteUserRequest, options?: Configuration): Promise<void>;
+    duplicateJourney(param: DefaultApiDuplicateJourneyRequest, options?: Configuration): Promise<Journey>;
     estimateNotificationRecipients(param: DefaultApiEstimateNotificationRecipientsRequest, options?: Configuration): Promise<EstimateNotificationRecipientsSuccessResponse>;
     exportEvents(param: DefaultApiExportEventsRequest, options?: Configuration): Promise<ExportEventsSuccessResponse>;
     exportSubscriptions(param: DefaultApiExportSubscriptionsRequest, options?: Configuration): Promise<ExportSubscriptionsSuccessResponse>;

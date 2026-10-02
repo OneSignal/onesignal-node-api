@@ -40,6 +40,8 @@ __exportStar(require("./CreateUserConflictResponseErrorsItemsMeta"), exports);
 __exportStar(require("./CustomEvent"), exports);
 __exportStar(require("./CustomEventsRequest"), exports);
 __exportStar(require("./DeliveryData"), exports);
+__exportStar(require("./DuplicateJourneyOverrides"), exports);
+__exportStar(require("./DuplicateJourneyRequest"), exports);
 __exportStar(require("./EmailReputationResponse"), exports);
 __exportStar(require("./EmailReputationWindow"), exports);
 __exportStar(require("./EmailWarmUp"), exports);
@@ -149,6 +151,8 @@ const CreateUserConflictResponseErrorsItemsMeta_1 = require("./CreateUserConflic
 const CustomEvent_1 = require("./CustomEvent");
 const CustomEventsRequest_1 = require("./CustomEventsRequest");
 const DeliveryData_1 = require("./DeliveryData");
+const DuplicateJourneyOverrides_1 = require("./DuplicateJourneyOverrides");
+const DuplicateJourneyRequest_1 = require("./DuplicateJourneyRequest");
 const EmailReputationResponse_1 = require("./EmailReputationResponse");
 const EmailReputationWindow_1 = require("./EmailReputationWindow");
 const EmailWarmUp_1 = require("./EmailWarmUp");
@@ -325,6 +329,8 @@ let typeMap = {
     "CustomEvent": CustomEvent_1.CustomEvent,
     "CustomEventsRequest": CustomEventsRequest_1.CustomEventsRequest,
     "DeliveryData": DeliveryData_1.DeliveryData,
+    "DuplicateJourneyOverrides": DuplicateJourneyOverrides_1.DuplicateJourneyOverrides,
+    "DuplicateJourneyRequest": DuplicateJourneyRequest_1.DuplicateJourneyRequest,
     "EmailReputationResponse": EmailReputationResponse_1.EmailReputationResponse,
     "EmailReputationWindow": EmailReputationWindow_1.EmailReputationWindow,
     "EmailWarmUp": EmailWarmUp_1.EmailWarmUp,

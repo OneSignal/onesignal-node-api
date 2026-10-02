@@ -10,6 +10,7 @@ import { CreateNotificationSuccessResponse } from '../models/CreateNotificationS
 import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
 import { CreateTemplateRequest } from '../models/CreateTemplateRequest';
 import { CustomEventsRequest } from '../models/CustomEventsRequest';
+import { DuplicateJourneyRequest } from '../models/DuplicateJourneyRequest';
 import { EmailReputationResponse } from '../models/EmailReputationResponse';
 import { EstimateNotificationRecipientsRequest } from '../models/EstimateNotificationRecipientsRequest';
 import { EstimateNotificationRecipientsSuccessResponse } from '../models/EstimateNotificationRecipientsSuccessResponse';
@@ -74,6 +75,7 @@ export declare class ObservableDefaultApi {
     deleteSubscription(appId: string, subscriptionId: string, _options?: Configuration): Observable<void>;
     deleteTemplate(templateId: string, appId: string, _options?: Configuration): Observable<GenericSuccessBoolResponse>;
     deleteUser(appId: string, aliasLabel: string, aliasId: string, _options?: Configuration): Observable<void>;
+    duplicateJourney(appId: string, journeyId: string, duplicateJourneyRequest?: DuplicateJourneyRequest, _options?: Configuration): Observable<Journey>;
     estimateNotificationRecipients(estimateNotificationRecipientsRequest: EstimateNotificationRecipientsRequest, _options?: Configuration): Observable<EstimateNotificationRecipientsSuccessResponse>;
     exportEvents(notificationId: string, appId: string, _options?: Configuration): Observable<ExportEventsSuccessResponse>;
     exportSubscriptions(appId: string, exportSubscriptionsRequestBody?: ExportSubscriptionsRequestBody, _options?: Configuration): Observable<ExportSubscriptionsSuccessResponse>;

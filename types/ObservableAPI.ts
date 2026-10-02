@@ -28,6 +28,8 @@ import { CreateUserConflictResponseErrorsItemsMeta } from '../models/CreateUserC
 import { CustomEvent } from '../models/CustomEvent';
 import { CustomEventsRequest } from '../models/CustomEventsRequest';
 import { DeliveryData } from '../models/DeliveryData';
+import { DuplicateJourneyOverrides } from '../models/DuplicateJourneyOverrides';
+import { DuplicateJourneyRequest } from '../models/DuplicateJourneyRequest';
 import { EmailReputationResponse } from '../models/EmailReputationResponse';
 import { EmailReputationWindow } from '../models/EmailReputationWindow';
 import { EmailWarmUp } from '../models/EmailWarmUp';
@@ -533,7 +535,7 @@ export class ObservableDefaultApi {
      * Delete a segment (not user devices) - Required: OneSignal Paid Plan You can delete a segment under your app by calling this API. You must provide an API key in the Authorization header that has admin access on the app. The segment_id can be found in the URL of the segment when viewing it in the dashboard. 
      * Delete Segment
      * @param appId The OneSignal App ID for your app.  Available in Keys &amp; IDs.
-     * @param segmentId The segment_id can be found in the URL of the segment when viewing it in the dashboard.
+     * @param segmentId The segment\&#39;s unique identifier. In the dashboard, go to Audience &gt; Segments, open the segment\&#39;s options menu, and select Copy segment ID. You can also get it from the View Segments API or the segment\&#39;s URL in the dashboard.
      */
     public deleteSegment(appId: string, segmentId: string, _options?: Configuration): Observable<GenericSuccessBoolResponse> {
         const requestContextPromise = this.requestFactory.deleteSegment(appId, segmentId, _options);
@@ -625,6 +627,32 @@ export class ObservableDefaultApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteUser(rsp)));
+            }));
+    }
+
+    /**
+     * The Journeys API is in beta. Endpoints and response fields can still change. Copy an existing journey into a new draft. The source does not change. The copy is always a draft, and started_at and archived_at are null. If you omit the body, or omit overrides, the copy keeps the source description, audience, nodes, early_exit, and reentry_rules. The copy takes the source name plus \" (Copy)\". The copy does not keep schedule. Send schedule under overrides to set it. Server-controlled fields are rejected with 400. The authenticated App API key must have permission to create journeys.
+     * Duplicate journey
+     * @param appId Your OneSignal App ID in UUID v4 format.
+     * @param journeyId UUID of the journey to copy.
+     * @param duplicateJourneyRequest 
+     */
+    public duplicateJourney(appId: string, journeyId: string, duplicateJourneyRequest?: DuplicateJourneyRequest, _options?: Configuration): Observable<Journey> {
+        const requestContextPromise = this.requestFactory.duplicateJourney(appId, journeyId, duplicateJourneyRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.duplicateJourney(rsp)));
             }));
     }
 
@@ -933,7 +961,7 @@ export class ObservableDefaultApi {
      * Retrieve details for a single segment by its ID, including subscriber count and optionally segment metadata and filters.
      * View Segment
      * @param appId The OneSignal App ID for your app.  Available in Keys &amp; IDs.
-     * @param segmentId The segment\&#39;s unique identifier. Can be found using the View Segments API or in the URL of the segment when viewing it in the dashboard.
+     * @param segmentId The segment\&#39;s unique identifier. In the dashboard, go to Audience &gt; Segments, open the segment\&#39;s options menu, and select Copy segment ID. You can also get it from the View Segments API or the segment\&#39;s URL in the dashboard.
      * @param includeSegmentDetail Set to true to include segment metadata and filters in the response.
      */
     public getSegment(appId: string, segmentId: string, includeSegmentDetail?: boolean, _options?: Configuration): Observable<GetSegmentSuccessResponse> {
@@ -1277,7 +1305,7 @@ export class ObservableDefaultApi {
      * Update an existing segment\'s name and/or filters. The name parameter is always required. When filters are provided, all existing filters are replaced with the new ones.
      * Update Segment
      * @param appId The OneSignal App ID for your app.  Available in Keys &amp; IDs.
-     * @param segmentId The segment\&#39;s unique identifier. Can be found using the View Segments API or in the URL of the segment when viewing it in the dashboard.
+     * @param segmentId The segment\&#39;s unique identifier. In the dashboard, go to Audience &gt; Segments, open the segment\&#39;s options menu, and select Copy segment ID. You can also get it from the View Segments API or the segment\&#39;s URL in the dashboard.
      * @param updateSegmentRequest 
      */
     public updateSegment(appId: string, segmentId: string, updateSegmentRequest?: UpdateSegmentRequest, _options?: Configuration): Observable<UpdateSegmentSuccessResponse> {
