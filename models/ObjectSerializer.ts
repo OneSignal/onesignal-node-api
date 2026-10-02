@@ -23,6 +23,8 @@ export * from './CreateUserConflictResponseErrorsItemsMeta';
 export * from './CustomEvent';
 export * from './CustomEventsRequest';
 export * from './DeliveryData';
+export * from './DuplicateJourneyOverrides';
+export * from './DuplicateJourneyRequest';
 export * from './EmailReputationResponse';
 export * from './EmailReputationWindow';
 export * from './EmailWarmUp';
@@ -133,6 +135,8 @@ import { CreateUserConflictResponseErrorsItemsMeta } from './CreateUserConflictR
 import { CustomEvent } from './CustomEvent';
 import { CustomEventsRequest } from './CustomEventsRequest';
 import { DeliveryData } from './DeliveryData';
+import { DuplicateJourneyOverrides } from './DuplicateJourneyOverrides';
+import { DuplicateJourneyRequest } from './DuplicateJourneyRequest';
 import { EmailReputationResponse } from './EmailReputationResponse';
 import { EmailReputationWindow } from './EmailReputationWindow';
 import { EmailWarmUp , EmailWarmUpStrategyEnum  , EmailWarmUpStatusEnum    } from './EmailWarmUp';
@@ -315,6 +319,8 @@ let typeMap: {[index: string]: any} = {
     "CustomEvent": CustomEvent,
     "CustomEventsRequest": CustomEventsRequest,
     "DeliveryData": DeliveryData,
+    "DuplicateJourneyOverrides": DuplicateJourneyOverrides,
+    "DuplicateJourneyRequest": DuplicateJourneyRequest,
     "EmailReputationResponse": EmailReputationResponse,
     "EmailReputationWindow": EmailReputationWindow,
     "EmailWarmUp": EmailWarmUp,

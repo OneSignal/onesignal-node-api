@@ -594,6 +594,37 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
         }
         return requestContext;
     }
+    async duplicateJourney(appId, journeyId, duplicateJourneyRequest, _options) {
+        let _config = _options || this.configuration;
+        if (appId === null || appId === undefined) {
+            throw new baseapi_1.RequiredError("DefaultApi", "duplicateJourney", "appId");
+        }
+        if (journeyId === null || journeyId === undefined) {
+            throw new baseapi_1.RequiredError("DefaultApi", "duplicateJourney", "journeyId");
+        }
+        const localVarPath = '/apps/{app_id}/journeys/{journey_id}/duplicate'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'journey_id' + '}', encodeURIComponent(String(journeyId)));
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.18.0");
+        const contentType = ObjectSerializer_1.ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer_1.ObjectSerializer.stringify(ObjectSerializer_1.ObjectSerializer.serialize(duplicateJourneyRequest, "DuplicateJourneyRequest", ""), contentType);
+        requestContext.setBody(serializedBody);
+        let authMethod;
+        authMethod = _config.authMethods["rest_api_key"];
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        const defaultAuth = _options?.authMethods?.default || this.configuration?.authMethods?.default;
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+        return requestContext;
+    }
     async estimateNotificationRecipients(estimateNotificationRecipientsRequest, _options) {
         let _config = _options || this.configuration;
         if (estimateNotificationRecipientsRequest === null || estimateNotificationRecipientsRequest === undefined) {
@@ -2233,6 +2264,38 @@ class DefaultApiResponseProcessor {
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "void", "");
+            return body;
+        }
+        throw new exception_1.ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+    async duplicateJourney(response) {
+        const contentType = ObjectSerializer_1.ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if ((0, util_1.isCodeInRange)("201", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "Journey", "");
+            return body;
+        }
+        if ((0, util_1.isCodeInRange)("400", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(400, "Bad Request", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("403", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(403, "Forbidden", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("404", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(404, "Not Found", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
+            throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "Journey", "");
             return body;
         }
         throw new exception_1.ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
