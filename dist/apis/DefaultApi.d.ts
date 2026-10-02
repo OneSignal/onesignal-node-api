@@ -11,6 +11,7 @@ import { CreateNotificationSuccessResponse } from '../models/CreateNotificationS
 import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResponse';
 import { CreateTemplateRequest } from '../models/CreateTemplateRequest';
 import { CustomEventsRequest } from '../models/CustomEventsRequest';
+import { DuplicateJourneyRequest } from '../models/DuplicateJourneyRequest';
 import { EmailReputationResponse } from '../models/EmailReputationResponse';
 import { EstimateNotificationRecipientsRequest } from '../models/EstimateNotificationRecipientsRequest';
 import { EstimateNotificationRecipientsSuccessResponse } from '../models/EstimateNotificationRecipientsSuccessResponse';
@@ -70,6 +71,7 @@ export declare class DefaultApiRequestFactory extends BaseAPIRequestFactory {
     deleteSubscription(appId: string, subscriptionId: string, _options?: Configuration): Promise<RequestContext>;
     deleteTemplate(templateId: string, appId: string, _options?: Configuration): Promise<RequestContext>;
     deleteUser(appId: string, aliasLabel: string, aliasId: string, _options?: Configuration): Promise<RequestContext>;
+    duplicateJourney(appId: string, journeyId: string, duplicateJourneyRequest?: DuplicateJourneyRequest, _options?: Configuration): Promise<RequestContext>;
     estimateNotificationRecipients(estimateNotificationRecipientsRequest: EstimateNotificationRecipientsRequest, _options?: Configuration): Promise<RequestContext>;
     exportEvents(notificationId: string, appId: string, _options?: Configuration): Promise<RequestContext>;
     exportSubscriptions(appId: string, exportSubscriptionsRequestBody?: ExportSubscriptionsRequestBody, _options?: Configuration): Promise<RequestContext>;
@@ -128,6 +130,7 @@ export declare class DefaultApiResponseProcessor {
     deleteSubscription(response: ResponseContext): Promise<void>;
     deleteTemplate(response: ResponseContext): Promise<GenericSuccessBoolResponse>;
     deleteUser(response: ResponseContext): Promise<void>;
+    duplicateJourney(response: ResponseContext): Promise<Journey>;
     estimateNotificationRecipients(response: ResponseContext): Promise<EstimateNotificationRecipientsSuccessResponse>;
     exportEvents(response: ResponseContext): Promise<ExportEventsSuccessResponse>;
     exportSubscriptions(response: ResponseContext): Promise<ExportSubscriptionsSuccessResponse>;

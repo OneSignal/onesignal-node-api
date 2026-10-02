@@ -19,7 +19,7 @@ export class UpdateJourneyNodeRequest {
     */
     'client_node_id'?: string;
     /**
-    * Optional free-text label, up to 255 characters. Stored and returned as-is with no effect on journey behavior.
+    * Optional free-text label, up to 1024 characters. Stored and returned as-is with no effect on journey behavior.
     */
     'annotation'?: string;
     /**
@@ -67,7 +67,7 @@ export class UpdateJourneyNodeRequest {
     */
     'randomize_on_entry'?: boolean;
     /**
-    * Branching nodes: nested branches. split_range requires 2-20 weighted branches that sum to 100. yes_no requires exactly 2 branches. wait_until requires 1-10 condition branches.
+    * Branching nodes: nested branches. split_range requires 2-25 weighted branches that sum to 100. yes_no requires exactly 2 branches. wait_until requires 1-25 condition branches.
     */
     'branches'?: Array<JourneyBranch>;
     'expiration'?: JourneyWaitUntilExpiration;

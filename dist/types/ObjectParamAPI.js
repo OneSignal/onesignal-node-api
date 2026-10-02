@@ -66,6 +66,9 @@ class ObjectDefaultApi {
     deleteUser(param, options) {
         return this.api.deleteUser(param.appId, param.aliasLabel, param.aliasId, options).toPromise();
     }
+    duplicateJourney(param, options) {
+        return this.api.duplicateJourney(param.appId, param.journeyId, param.duplicateJourneyRequest, options).toPromise();
+    }
     estimateNotificationRecipients(param, options) {
         return this.api.estimateNotificationRecipients(param.estimateNotificationRecipientsRequest, options).toPromise();
     }
