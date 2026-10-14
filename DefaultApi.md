@@ -202,7 +202,7 @@ const templateId: string = "e4d3c2b1-a09f-4f1e-8d7c-6b5a4f3e2d1c";
 const appId: string = "YOUR_APP_ID";
 // CopyTemplateRequest
 const copyTemplateRequest: Onesignal.CopyTemplateRequest = {
-    target_app_id: "target_app_id_example",
+    target_app_id: "YOUR_TARGET_APP_ID",
   };
 
 try {
@@ -274,11 +274,7 @@ const aliasLabel: string = "external_id";
 // string
 const aliasId: string = "YOUR_USER_EXTERNAL_ID";
 // UserIdentityBody
-const userIdentityBody: Onesignal.UserIdentityBody = {
-    identity: {
-      "key": "key_example",
-    },
-  };
+const userIdentityBody: Onesignal.UserIdentityBody = {};
 
 try {
   const response = await apiInstance.createAlias(appId, aliasLabel, aliasId, userIdentityBody);
@@ -351,11 +347,7 @@ const appId: string = "YOUR_APP_ID";
 // string
 const subscriptionId: string = "7e4c5b9a-1f60-4d07-9b1a-2e8c8d2cae51";
 // UserIdentityBody
-const userIdentityBody: Onesignal.UserIdentityBody = {
-    identity: {
-      "key": "key_example",
-    },
-  };
+const userIdentityBody: Onesignal.UserIdentityBody = {};
 
 try {
   const response = await apiInstance.createAliasBySubscription(appId, subscriptionId, userIdentityBody);
@@ -425,13 +417,7 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 // string
 const appId: string = "YOUR_APP_ID";
 // CreateApiKeyRequest
-const createApiKeyRequest: Onesignal.CreateApiKeyRequest = {
-    name: "name_example",
-    ip_allowlist_mode: "disabled",
-    ip_allowlist: [
-      "ip_allowlist_example",
-    ],
-  };
+const createApiKeyRequest: Onesignal.CreateApiKeyRequest = {};
 
 try {
   const response = await apiInstance.createApiKey(appId, createApiKeyRequest);
@@ -495,29 +481,7 @@ const configuration = Onesignal.createConfiguration({
 const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // App
-const app: Onesignal.App = {
-    name: "name_example",
-    android_gcm_sender_id: "android_gcm_sender_id_example",
-    gcm_key: "gcm_key_example",
-    chrome_web_origin: "chrome_web_origin_example",
-    chrome_key: "chrome_key_example",
-    chrome_web_default_notification_icon: "chrome_web_default_notification_icon_example",
-    chrome_web_sub_domain: "chrome_web_sub_domain_example",
-    apns_env: "sandbox",
-    apns_p12: "apns_p12_example",
-    apns_p12_password: "apns_p12_password_example",
-    safari_apns_p12: "safari_apns_p12_example",
-    safari_apns_p12_password: "safari_apns_p12_password_example",
-    apns_key_id: "apns_key_id_example",
-    apns_team_id: "apns_team_id_example",
-    apns_bundle_id: "apns_bundle_id_example",
-    apns_p8: "apns_p8_example",
-    safari_site_origin: "safari_site_origin_example",
-    safari_icon_256_256: "safari_icon_256_256_example",
-    site_name: "site_name_example",
-    organization_id: "organization_id_example",
-    additional_data_is_root_payload: true,
-  };
+const app: Onesignal.App = {};
 
 try {
   const response = await apiInstance.createApp(app);
@@ -586,11 +550,7 @@ const appId: string = "YOUR_APP_ID";
 const customEventsRequest: Onesignal.CustomEventsRequest = {
     events: [
       {
-        name: "name_example",
-        external_id: "external_id_example",
-        onesignal_id: "onesignal_id_example",
-        timestamp: '1970-01-01T00:00:00.00Z',
-        payload: {},
+        name: "YOUR_NAME",
       },
     ],
   };
@@ -662,118 +622,7 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 const appId: string = "YOUR_APP_ID";
 // CreateJourneyRequest
 const createJourneyRequest: Onesignal.CreateJourneyRequest = {
-    name: "name_example",
-    description: "description_example",
-    audience: {
-      kind: "segment",
-      included_segment_ids: [
-        "included_segment_ids_example",
-      ],
-      excluded_segment_ids: [
-        "excluded_segment_ids_example",
-      ],
-      future_additions_only: true,
-      name: "name_example",
-      attributes: [
-        [
-          {
-            key: "key_example",
-            operator: "equal",
-            value: "value_example",
-          },
-        ],
-      ],
-    },
-    early_exit: {
-      rules: {
-        on_segment: {
-          included_segment_ids: [
-            "included_segment_ids_example",
-          ],
-        },
-        when_not_in_audience: true,
-        on_session: true,
-        on_event: {
-          name: "name_example",
-        },
-      },
-      tag_on_early_exit: {
-        "key": "key_example",
-      },
-    },
-    reentry_rules: {
-      duration_seconds: 600,
-    },
-    schedule: {
-      start_at: "start_at_example",
-      stop_at: "stop_at_example",
-      error: "error_example",
-    },
-    nodes: [
-      {
-        id: "id_example",
-        kind: "wait",
-        client_node_id: "client_node_id_example",
-        annotation: "annotation_example",
-        duration_seconds: 60,
-        relative_to: "schedule_in_timezone",
-        windows: [
-          {
-            start: null,
-            end: null,
-            day_of_week: 1,
-          },
-        ],
-        time_zone: "time_zone_example",
-        use_user_time_zone: true,
-        template_id: "template_id_example",
-        iam_id: "iam_id_example",
-        user_ttl_seconds: 1,
-        webhook_id: "webhook_id_example",
-        assignments: {
-          "key": "key_example",
-        },
-        randomize_on_entry: true,
-        branches: [
-          {
-            id: "id_example",
-            condition: {
-              kind: "segment_membership",
-              included_segment_ids: [
-                "included_segment_ids_example",
-              ],
-              excluded_segment_ids: [
-                "excluded_segment_ids_example",
-              ],
-              action: "received",
-              sending_node_id: "sending_node_id_example",
-              client_node_id: "client_node_id_example",
-              name: "name_example",
-              attributes: [
-                [
-                  {
-                    key: "key_example",
-                    operator: "equal",
-                    value: "value_example",
-                  },
-                ],
-              ],
-              entry_event_match_attributes: [
-                {},
-              ],
-            },
-            weight: 3.14,
-            nodes: [
-              ,
-            ],
-          },
-        ],
-        expiration: {
-          duration_seconds: 60,
-          exits: true,
-        },
-      },
-    ],
+    name: "YOUR_NAME",
   };
 
 try {
@@ -968,19 +817,9 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 const appId: string = "YOUR_APP_ID";
 // Segment (optional)
 const segment: Onesignal.Segment = {
-    id: "d5d4d1a8-1c9e-42fb-b3f2-56d3a5a9a8b7",
     name: "Inactive 30 days",
     filters: [
-      {
-        field: "tag",
-        key: "level",
-        value: "10",
-        hours_ago: "24",
-        radius: 3.14,
-        lat: 3.14,
-        long: 3.14,
-        relation: ">",
-      },
+      {},
     ],
   };
 
@@ -1054,27 +893,7 @@ const aliasLabel: string = "external_id";
 // string
 const aliasId: string = "YOUR_USER_EXTERNAL_ID";
 // SubscriptionBody
-const subscriptionBody: Onesignal.SubscriptionBody = {
-    subscription: {
-      id: "e4e87830-b954-4363-b7bc-1f01dbaee5c8",
-      type: "iOSPush",
-      token: "d5d4d1a8-1c9e-42fb-b3f2-56d3a5a9a8b7",
-      enabled: true,
-      notification_types: 1,
-      session_time: 60,
-      session_count: 1,
-      sdk: "5.2.0",
-      device_model: "iPhone14,2",
-      device_os: "17.1",
-      rooted: true,
-      test_type: 1,
-      app_version: "1.0.0",
-      net_type: 1,
-      carrier: "Verizon",
-      web_auth: "5DUmpGmLuTxWCLj5lJpwLQ",
-      web_p256: "BM5-r8DauQXOb2E-3PgLPjSvjT0Ao9v5oJhw8bZ0cW7Vh6BbmPYcqbbCEJ1P2sK0hZ7HxSh9zGyU5pQk1jJmZ8A",
-    },
-  };
+const subscriptionBody: Onesignal.SubscriptionBody = {};
 
 try {
   const response = await apiInstance.createSubscription(appId, aliasLabel, aliasId, subscriptionBody);
@@ -1145,151 +964,9 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 
 // CreateTemplateRequest
 const createTemplateRequest: Onesignal.CreateTemplateRequest = {
-    app_id: "app_id_example",
-    name: "name_example",
-    contents: {
-      en: "en_example",
-      ar: "ar_example",
-      bs: "bs_example",
-      bg: "bg_example",
-      ca: "ca_example",
-      zh_hans: "zh_hans_example",
-      zh_hant: "zh_hant_example",
-      zh: "zh_example",
-      hr: "hr_example",
-      cs: "cs_example",
-      da: "da_example",
-      nl: "nl_example",
-      et: "et_example",
-      fi: "fi_example",
-      fr: "fr_example",
-      ka: "ka_example",
-      de: "de_example",
-      el: "el_example",
-      hi: "hi_example",
-      he: "he_example",
-      hu: "hu_example",
-      id: "id_example",
-      it: "it_example",
-      ja: "ja_example",
-      ko: "ko_example",
-      lv: "lv_example",
-      lt: "lt_example",
-      ms: "ms_example",
-      nb: "nb_example",
-      pl: "pl_example",
-      fa: "fa_example",
-      pt: "pt_example",
-      pa: "pa_example",
-      ro: "ro_example",
-      ru: "ru_example",
-      sr: "sr_example",
-      sk: "sk_example",
-      es: "es_example",
-      sv: "sv_example",
-      th: "th_example",
-      tr: "tr_example",
-      uk: "uk_example",
-      vi: "vi_example",
-    },
-    headings: {
-      en: "en_example",
-      ar: "ar_example",
-      bs: "bs_example",
-      bg: "bg_example",
-      ca: "ca_example",
-      zh_hans: "zh_hans_example",
-      zh_hant: "zh_hant_example",
-      zh: "zh_example",
-      hr: "hr_example",
-      cs: "cs_example",
-      da: "da_example",
-      nl: "nl_example",
-      et: "et_example",
-      fi: "fi_example",
-      fr: "fr_example",
-      ka: "ka_example",
-      de: "de_example",
-      el: "el_example",
-      hi: "hi_example",
-      he: "he_example",
-      hu: "hu_example",
-      id: "id_example",
-      it: "it_example",
-      ja: "ja_example",
-      ko: "ko_example",
-      lv: "lv_example",
-      lt: "lt_example",
-      ms: "ms_example",
-      nb: "nb_example",
-      pl: "pl_example",
-      fa: "fa_example",
-      pt: "pt_example",
-      pa: "pa_example",
-      ro: "ro_example",
-      ru: "ru_example",
-      sr: "sr_example",
-      sk: "sk_example",
-      es: "es_example",
-      sv: "sv_example",
-      th: "th_example",
-      tr: "tr_example",
-      uk: "uk_example",
-      vi: "vi_example",
-    },
-    subtitle: {
-      en: "en_example",
-      ar: "ar_example",
-      bs: "bs_example",
-      bg: "bg_example",
-      ca: "ca_example",
-      zh_hans: "zh_hans_example",
-      zh_hant: "zh_hant_example",
-      zh: "zh_example",
-      hr: "hr_example",
-      cs: "cs_example",
-      da: "da_example",
-      nl: "nl_example",
-      et: "et_example",
-      fi: "fi_example",
-      fr: "fr_example",
-      ka: "ka_example",
-      de: "de_example",
-      el: "el_example",
-      hi: "hi_example",
-      he: "he_example",
-      hu: "hu_example",
-      id: "id_example",
-      it: "it_example",
-      ja: "ja_example",
-      ko: "ko_example",
-      lv: "lv_example",
-      lt: "lt_example",
-      ms: "ms_example",
-      nb: "nb_example",
-      pl: "pl_example",
-      fa: "fa_example",
-      pt: "pt_example",
-      pa: "pa_example",
-      ro: "ro_example",
-      ru: "ru_example",
-      sr: "sr_example",
-      sk: "sk_example",
-      es: "es_example",
-      sv: "sv_example",
-      th: "th_example",
-      tr: "tr_example",
-      uk: "uk_example",
-      vi: "vi_example",
-    },
-    is_email: true,
-    email_subject: "email_subject_example",
-    email_body: "email_body_example",
-    email_bcc: [
-      "email_bcc_example",
-    ],
-    is_sms: true,
-    dynamic_content: "dynamic_content_example",
+    app_id: "YOUR_APP_ID",
+    name: "YOUR_NAME",
+    contents: {},
   };
 
 try {
@@ -1356,52 +1033,7 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 // string
 const appId: string = "YOUR_APP_ID";
 // User
-const user: Onesignal.User = {
-    properties: {
-      tags: {},
-      language: "en",
-      timezone_id: "America/Los_Angeles",
-      lat: 3.14,
-      long: 3.14,
-      country: "US",
-      first_active: 1,
-      last_active: 1,
-      amount_spent: 3.14,
-      purchases: [
-        {
-          sku: "com.example.coins100",
-          amount: "0.99",
-          iso: "USD",
-          count: 1,
-        },
-      ],
-      ip: "203.0.113.10",
-    },
-    identity: {
-      "key": "key_example",
-    },
-    subscriptions: [
-      {
-        id: "e4e87830-b954-4363-b7bc-1f01dbaee5c8",
-        type: "iOSPush",
-        token: "d5d4d1a8-1c9e-42fb-b3f2-56d3a5a9a8b7",
-        enabled: true,
-        notification_types: 1,
-        session_time: 60,
-        session_count: 1,
-        sdk: "5.2.0",
-        device_model: "iPhone14,2",
-        device_os: "17.1",
-        rooted: true,
-        test_type: 1,
-        app_version: "1.0.0",
-        net_type: 1,
-        carrier: "Verizon",
-        web_auth: "5DUmpGmLuTxWCLj5lJpwLQ",
-        web_p256: "BM5-r8DauQXOb2E-3PgLPjSvjT0Ao9v5oJhw8bZ0cW7Vh6BbmPYcqbbCEJ1P2sK0hZ7HxSh9zGyU5pQk1jJmZ8A",
-      },
-    ],
-  };
+const user: Onesignal.User = {};
 
 try {
   const response = await apiInstance.createUser(appId, user);
@@ -1969,122 +1601,7 @@ const appId: string = "YOUR_APP_ID";
 // string | UUID of the journey to copy.
 const journeyId: string = "YOUR_JOURNEY_ID";
 // DuplicateJourneyRequest (optional)
-const duplicateJourneyRequest: Onesignal.DuplicateJourneyRequest = {
-    overrides: {
-      name: "name_example",
-      description: "description_example",
-      audience: {
-        kind: "segment",
-        included_segment_ids: [
-          "included_segment_ids_example",
-        ],
-        excluded_segment_ids: [
-          "excluded_segment_ids_example",
-        ],
-        future_additions_only: true,
-        name: "name_example",
-        attributes: [
-          [
-            {
-              key: "key_example",
-              operator: "equal",
-              value: "value_example",
-            },
-          ],
-        ],
-      },
-      early_exit: {
-        rules: {
-          on_segment: {
-            included_segment_ids: [
-              "included_segment_ids_example",
-            ],
-          },
-          when_not_in_audience: true,
-          on_session: true,
-          on_event: {
-            name: "name_example",
-          },
-        },
-        tag_on_early_exit: {
-          "key": "key_example",
-        },
-      },
-      reentry_rules: {
-        duration_seconds: 600,
-      },
-      schedule: {
-        start_at: "start_at_example",
-        stop_at: "stop_at_example",
-        error: "error_example",
-      },
-      nodes: [
-        {
-          id: "id_example",
-          kind: "wait",
-          client_node_id: "client_node_id_example",
-          annotation: "annotation_example",
-          duration_seconds: 60,
-          relative_to: "schedule_in_timezone",
-          windows: [
-            {
-              start: null,
-              end: null,
-              day_of_week: 1,
-            },
-          ],
-          time_zone: "time_zone_example",
-          use_user_time_zone: true,
-          template_id: "template_id_example",
-          iam_id: "iam_id_example",
-          user_ttl_seconds: 1,
-          webhook_id: "webhook_id_example",
-          assignments: {
-            "key": "key_example",
-          },
-          randomize_on_entry: true,
-          branches: [
-            {
-              id: "id_example",
-              condition: {
-                kind: "segment_membership",
-                included_segment_ids: [
-                  "included_segment_ids_example",
-                ],
-                excluded_segment_ids: [
-                  "excluded_segment_ids_example",
-                ],
-                action: "received",
-                sending_node_id: "sending_node_id_example",
-                client_node_id: "client_node_id_example",
-                name: "name_example",
-                attributes: [
-                  [
-                    {
-                      key: "key_example",
-                      operator: "equal",
-                      value: "value_example",
-                    },
-                  ],
-                ],
-                entry_event_match_attributes: [
-                  {},
-                ],
-              },
-              weight: 3.14,
-              nodes: [
-                ,
-              ],
-            },
-          ],
-          expiration: {
-            duration_seconds: 60,
-            exits: true,
-          },
-        },
-      ],
-    },
-  };
+const duplicateJourneyRequest: Onesignal.DuplicateJourneyRequest = {};
 
 try {
   const response = await apiInstance.duplicateJourney(appId, journeyId, duplicateJourneyRequest);
@@ -2286,13 +1803,7 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 // string | The app ID that you want to export devices from
 const appId: string = "YOUR_APP_ID";
 // ExportSubscriptionsRequestBody (optional)
-const exportSubscriptionsRequestBody: Onesignal.ExportSubscriptionsRequestBody = {
-    extra_fields: [
-      "extra_fields_example",
-    ],
-    last_active_since: "last_active_since_example",
-    segment_name: "segment_name_example",
-  };
+const exportSubscriptionsRequestBody: Onesignal.ExportSubscriptionsRequestBody = {};
 
 try {
   const response = await apiInstance.exportSubscriptions(appId, exportSubscriptionsRequestBody);
@@ -2752,11 +2263,7 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 // string | The \"id\" of the message found in the Notification object
 const notificationId: string = "b3a0c8bd-3a4c-4b22-9a73-3f1a8c2d1b88";
 // GetNotificationHistoryRequestBody
-const getNotificationHistoryRequestBody: Onesignal.GetNotificationHistoryRequestBody = {
-    events: "sent",
-    email: "email_example",
-    app_id: "app_id_example",
-  };
+const getNotificationHistoryRequestBody: Onesignal.GetNotificationHistoryRequestBody = {};
 
 try {
   const response = await apiInstance.getNotificationHistory(notificationId, getNotificationHistoryRequestBody);
@@ -3191,40 +2698,40 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 // string | The UUID of the organization to retrieve audit logs for. Must match the authenticated Organization API Key.
 const organizationId: string = "YOUR_ORG_ID";
 // string | Start of the time range in ISO 8601 format (e.g. 2026-02-01T00:00:00Z). Required unless cursor is provided. Must be within the last 90 days. (optional)
-const startTime: string = "start_time_example";
+const startTime: string = "2026-02-01T00:00:00Z";
 // string | End of the time range in ISO 8601 format. Defaults to the current time. Must be after start_time. (optional)
-const endTime: string = "end_time_example";
+const endTime: string = "2026-02-02T00:00:00Z";
 // string | Pagination cursor returned in a previous response as next_cursor. When provided, start_time and end_time are ignored. (optional)
-const cursor: string = "cursor_example";
+const cursor: string = "YOUR_NEXT_CURSOR";
 // number | Maximum number of events to return per page. Minimum 1, maximum 100. Values outside this range are clamped automatically by the server. (optional)
-const limit: number = 1;
+const limit: number = 50;
 // Array<string> | Filter events by app UUID. Accepts up to 10 values. Org-level events are always included. (optional)
 const appIds: Onesignal.Array<string> = [
-    "app_ids_example",
+    "YOUR_APP_ID",
   ];
 // Array<string> | Filter by action type (e.g. notification.sent, segment.created). Accepts up to 20 values. (optional)
 const actions: Onesignal.Array<string> = [
-    "actions_example",
+    "notification.sent",
   ];
 // Array<string> | Filter by actor UUID (the user or service that performed the action). Accepts up to 10 values. (optional)
 const actorIds: Onesignal.Array<string> = [
-    "actor_ids_example",
+    "YOUR_ACTOR_ID",
   ];
 // Array<string> | Filter by actor email address. Accepts up to 10 values. (optional)
 const actorEmails: Onesignal.Array<string> = [
-    "actor_emails_example",
+    "admin@example.com",
   ];
 // Array<string> | Filter by the type of resource the action was performed on (e.g. notification, segment, journey). Accepts up to 10 values. (optional)
 const targetTypes: Onesignal.Array<string> = [
-    "target_types_example",
+    "notification",
   ];
 // Array<string> | Filter by the UUID of the resource the action was performed on. Accepts up to 10 values. (optional)
 const targetIds: Onesignal.Array<string> = [
-    "target_ids_example",
+    "YOUR_TARGET_ID",
   ];
 // Array<string> | Filter by the IP address the action originated from. Accepts up to 10 values. (optional)
 const ipAddresses: Onesignal.Array<string> = [
-    "ip_addresses_example",
+    "203.0.113.42",
   ];
 
 try {
@@ -3373,131 +2880,13 @@ const appId: string = "YOUR_APP_ID";
 const activityType: string = "order_status";
 // StartLiveActivityRequest
 const startLiveActivityRequest: Onesignal.StartLiveActivityRequest = {
-    name: "name_example",
+    name: "YOUR_NAME",
     event: "start",
-    activity_id: "activity_id_example",
+    activity_id: "YOUR_ACTIVITY_ID",
     event_attributes: {},
     event_updates: {},
-    contents: {
-      en: "en_example",
-      ar: "ar_example",
-      bs: "bs_example",
-      bg: "bg_example",
-      ca: "ca_example",
-      zh_hans: "zh_hans_example",
-      zh_hant: "zh_hant_example",
-      zh: "zh_example",
-      hr: "hr_example",
-      cs: "cs_example",
-      da: "da_example",
-      nl: "nl_example",
-      et: "et_example",
-      fi: "fi_example",
-      fr: "fr_example",
-      ka: "ka_example",
-      de: "de_example",
-      el: "el_example",
-      hi: "hi_example",
-      he: "he_example",
-      hu: "hu_example",
-      id: "id_example",
-      it: "it_example",
-      ja: "ja_example",
-      ko: "ko_example",
-      lv: "lv_example",
-      lt: "lt_example",
-      ms: "ms_example",
-      nb: "nb_example",
-      pl: "pl_example",
-      fa: "fa_example",
-      pt: "pt_example",
-      pa: "pa_example",
-      ro: "ro_example",
-      ru: "ru_example",
-      sr: "sr_example",
-      sk: "sk_example",
-      es: "es_example",
-      sv: "sv_example",
-      th: "th_example",
-      tr: "tr_example",
-      uk: "uk_example",
-      vi: "vi_example",
-    },
-    headings: {
-      en: "en_example",
-      ar: "ar_example",
-      bs: "bs_example",
-      bg: "bg_example",
-      ca: "ca_example",
-      zh_hans: "zh_hans_example",
-      zh_hant: "zh_hant_example",
-      zh: "zh_example",
-      hr: "hr_example",
-      cs: "cs_example",
-      da: "da_example",
-      nl: "nl_example",
-      et: "et_example",
-      fi: "fi_example",
-      fr: "fr_example",
-      ka: "ka_example",
-      de: "de_example",
-      el: "el_example",
-      hi: "hi_example",
-      he: "he_example",
-      hu: "hu_example",
-      id: "id_example",
-      it: "it_example",
-      ja: "ja_example",
-      ko: "ko_example",
-      lv: "lv_example",
-      lt: "lt_example",
-      ms: "ms_example",
-      nb: "nb_example",
-      pl: "pl_example",
-      fa: "fa_example",
-      pt: "pt_example",
-      pa: "pa_example",
-      ro: "ro_example",
-      ru: "ru_example",
-      sr: "sr_example",
-      sk: "sk_example",
-      es: "es_example",
-      sv: "sv_example",
-      th: "th_example",
-      tr: "tr_example",
-      uk: "uk_example",
-      vi: "vi_example",
-    },
-    stale_date: 1,
-    priority: 1,
-    ios_relevance_score: 3.14,
-    idempotency_key: "idempotency_key_example",
-    include_aliases: {
-      "key": [
-        "key_example",
-      ],
-    },
-    include_subscription_ids: [
-      "include_subscription_ids_example",
-    ],
-    included_segments: [
-      "included_segments_example",
-    ],
-    excluded_segments: [
-      "excluded_segments_example",
-    ],
-    filters: [
-      {
-        field: "tag",
-        key: "level",
-        value: "10",
-        hours_ago: "24",
-        radius: 3.14,
-        lat: 3.14,
-        long: 3.14,
-        relation: ">",
-      },
-    ],
+    contents: {},
+    headings: {},
   };
 
 try {
@@ -3568,11 +2957,7 @@ const appId: string = "YOUR_APP_ID";
 // string
 const subscriptionId: string = "7e4c5b9a-1f60-4d07-9b1a-2e8c8d2cae51";
 // TransferSubscriptionRequestBody
-const transferSubscriptionRequestBody: Onesignal.TransferSubscriptionRequestBody = {
-    identity: {
-      "key": "key_example",
-    },
-  };
+const transferSubscriptionRequestBody: Onesignal.TransferSubscriptionRequestBody = {};
 
 try {
   const response = await apiInstance.transferSubscription(appId, subscriptionId, transferSubscriptionRequestBody);
@@ -3714,13 +3099,7 @@ const appId: string = "YOUR_APP_ID";
 // string
 const tokenId: string = "0aa1b2c3-d4e5-46f7-8899-aabbccddeeff";
 // UpdateApiKeyRequest
-const updateApiKeyRequest: Onesignal.UpdateApiKeyRequest = {
-    name: "name_example",
-    ip_allowlist_mode: "disabled",
-    ip_allowlist: [
-      "ip_allowlist_example",
-    ],
-  };
+const updateApiKeyRequest: Onesignal.UpdateApiKeyRequest = {};
 
 try {
   const response = await apiInstance.updateApiKey(appId, tokenId, updateApiKeyRequest);
@@ -3787,29 +3166,7 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 // string | An app id
 const appId: string = "YOUR_APP_ID";
 // App
-const app: Onesignal.App = {
-    name: "name_example",
-    android_gcm_sender_id: "android_gcm_sender_id_example",
-    gcm_key: "gcm_key_example",
-    chrome_web_origin: "chrome_web_origin_example",
-    chrome_key: "chrome_key_example",
-    chrome_web_default_notification_icon: "chrome_web_default_notification_icon_example",
-    chrome_web_sub_domain: "chrome_web_sub_domain_example",
-    apns_env: "sandbox",
-    apns_p12: "apns_p12_example",
-    apns_p12_password: "apns_p12_password_example",
-    safari_apns_p12: "safari_apns_p12_example",
-    safari_apns_p12_password: "safari_apns_p12_password_example",
-    apns_key_id: "apns_key_id_example",
-    apns_team_id: "apns_team_id_example",
-    apns_bundle_id: "apns_bundle_id_example",
-    apns_p8: "apns_p8_example",
-    safari_site_origin: "safari_site_origin_example",
-    safari_icon_256_256: "safari_icon_256_256_example",
-    site_name: "site_name_example",
-    organization_id: "organization_id_example",
-    additional_data_is_root_payload: true,
-  };
+const app: Onesignal.App = {};
 
 try {
   const response = await apiInstance.updateApp(appId, app);
@@ -3878,122 +3235,7 @@ const appId: string = "YOUR_APP_ID";
 // string | UUID of the journey to update.
 const journeyId: string = "YOUR_JOURNEY_ID";
 // UpdateJourneyRequest
-const updateJourneyRequest: Onesignal.UpdateJourneyRequest = {
-    name: "name_example",
-    description: "description_example",
-    audience: {
-      kind: "segment",
-      included_segment_ids: [
-        "included_segment_ids_example",
-      ],
-      excluded_segment_ids: [
-        "excluded_segment_ids_example",
-      ],
-      future_additions_only: true,
-      name: "name_example",
-      attributes: [
-        [
-          {
-            key: "key_example",
-            operator: "equal",
-            value: "value_example",
-          },
-        ],
-      ],
-    },
-    early_exit: {
-      rules: {
-        on_segment: {
-          included_segment_ids: [
-            "included_segment_ids_example",
-          ],
-        },
-        when_not_in_audience: true,
-        on_session: true,
-        on_event: {
-          name: "name_example",
-        },
-      },
-      tag_on_early_exit: {
-        "key": "key_example",
-      },
-    },
-    reentry_rules: {
-      duration_seconds: 600,
-    },
-    schedule: {
-      start_at: "start_at_example",
-      stop_at: "stop_at_example",
-      error: "error_example",
-    },
-    nodes: [
-      {
-        id: "id_example",
-        kind: "wait",
-        client_node_id: "client_node_id_example",
-        annotation: "annotation_example",
-        duration_seconds: 60,
-        relative_to: "schedule_in_timezone",
-        windows: [
-          {
-            start: null,
-            end: null,
-            day_of_week: 1,
-          },
-        ],
-        time_zone: "time_zone_example",
-        use_user_time_zone: true,
-        template_id: "template_id_example",
-        iam_id: "iam_id_example",
-        user_ttl_seconds: 1,
-        webhook_id: "webhook_id_example",
-        assignments: {
-          "key": "key_example",
-        },
-        randomize_on_entry: true,
-        branches: [
-          {
-            id: "id_example",
-            condition: {
-              kind: "segment_membership",
-              included_segment_ids: [
-                "included_segment_ids_example",
-              ],
-              excluded_segment_ids: [
-                "excluded_segment_ids_example",
-              ],
-              action: "received",
-              sending_node_id: "sending_node_id_example",
-              client_node_id: "client_node_id_example",
-              name: "name_example",
-              attributes: [
-                [
-                  {
-                    key: "key_example",
-                    operator: "equal",
-                    value: "value_example",
-                  },
-                ],
-              ],
-              entry_event_match_attributes: [
-                {},
-              ],
-            },
-            weight: 3.14,
-            nodes: [
-              ,
-            ],
-          },
-        ],
-        expiration: {
-          duration_seconds: 60,
-          exits: true,
-        },
-      },
-    ],
-    state: "draft",
-    concurrency_key: "concurrency_key_example",
-  };
+const updateJourneyRequest: Onesignal.UpdateJourneyRequest = {};
 
 try {
   const response = await apiInstance.updateJourney(appId, journeyId, updateJourneyRequest);
@@ -4069,97 +3311,7 @@ const journeyId: string = "YOUR_JOURNEY_ID";
 // string | Server-assigned UUID of the node to update, from a prior View journey fetch.
 const nodeId: string = "YOUR_NODE_ID";
 // UpdateJourneyNodeRequest
-const updateJourneyNodeRequest: Onesignal.UpdateJourneyNodeRequest = {
-    client_node_id: "client_node_id_example",
-    annotation: "annotation_example",
-    duration_seconds: 60,
-    relative_to: "schedule_in_timezone",
-    windows: [
-      {
-        start: null,
-        end: null,
-        day_of_week: 1,
-      },
-    ],
-    time_zone: "time_zone_example",
-    use_user_time_zone: true,
-    template_id: "template_id_example",
-    iam_id: "iam_id_example",
-    user_ttl_seconds: 1,
-    webhook_id: "webhook_id_example",
-    assignments: {
-      "key": "key_example",
-    },
-    randomize_on_entry: true,
-    branches: [
-      {
-        id: "id_example",
-        condition: {
-          kind: "segment_membership",
-          included_segment_ids: [
-            "included_segment_ids_example",
-          ],
-          excluded_segment_ids: [
-            "excluded_segment_ids_example",
-          ],
-          action: "received",
-          sending_node_id: "sending_node_id_example",
-          client_node_id: "client_node_id_example",
-          name: "name_example",
-          attributes: [
-            [
-              {
-                key: "key_example",
-                operator: "equal",
-                value: "value_example",
-              },
-            ],
-          ],
-          entry_event_match_attributes: [
-            {},
-          ],
-        },
-        weight: 3.14,
-        nodes: [
-          {
-            id: "id_example",
-            kind: "wait",
-            client_node_id: "client_node_id_example",
-            annotation: "annotation_example",
-            duration_seconds: 60,
-            relative_to: "schedule_in_timezone",
-            windows: [
-              {
-                start: null,
-                end: null,
-                day_of_week: 1,
-              },
-            ],
-            time_zone: "time_zone_example",
-            use_user_time_zone: true,
-            template_id: "template_id_example",
-            iam_id: "iam_id_example",
-            user_ttl_seconds: 1,
-            webhook_id: "webhook_id_example",
-            assignments: {
-              "key": "key_example",
-            },
-            randomize_on_entry: true,
-            branches: [],
-            expiration: {
-              duration_seconds: 60,
-              exits: true,
-            },
-          },
-        ],
-      },
-    ],
-    expiration: {
-      duration_seconds: 60,
-      exits: true,
-    },
-    concurrency_key: "concurrency_key_example",
-  };
+const updateJourneyNodeRequest: Onesignal.UpdateJourneyNodeRequest = {};
 
 try {
   const response = await apiInstance.updateJourneyNode(appId, journeyId, nodeId, updateJourneyNodeRequest);
@@ -4235,105 +3387,9 @@ const appId: string = "YOUR_APP_ID";
 const activityId: string = "12345";
 // UpdateLiveActivityRequest
 const updateLiveActivityRequest: Onesignal.UpdateLiveActivityRequest = {
-    name: "name_example",
+    name: "YOUR_NAME",
     event: "update",
     event_updates: {},
-    contents: {
-      en: "en_example",
-      ar: "ar_example",
-      bs: "bs_example",
-      bg: "bg_example",
-      ca: "ca_example",
-      zh_hans: "zh_hans_example",
-      zh_hant: "zh_hant_example",
-      zh: "zh_example",
-      hr: "hr_example",
-      cs: "cs_example",
-      da: "da_example",
-      nl: "nl_example",
-      et: "et_example",
-      fi: "fi_example",
-      fr: "fr_example",
-      ka: "ka_example",
-      de: "de_example",
-      el: "el_example",
-      hi: "hi_example",
-      he: "he_example",
-      hu: "hu_example",
-      id: "id_example",
-      it: "it_example",
-      ja: "ja_example",
-      ko: "ko_example",
-      lv: "lv_example",
-      lt: "lt_example",
-      ms: "ms_example",
-      nb: "nb_example",
-      pl: "pl_example",
-      fa: "fa_example",
-      pt: "pt_example",
-      pa: "pa_example",
-      ro: "ro_example",
-      ru: "ru_example",
-      sr: "sr_example",
-      sk: "sk_example",
-      es: "es_example",
-      sv: "sv_example",
-      th: "th_example",
-      tr: "tr_example",
-      uk: "uk_example",
-      vi: "vi_example",
-    },
-    headings: {
-      en: "en_example",
-      ar: "ar_example",
-      bs: "bs_example",
-      bg: "bg_example",
-      ca: "ca_example",
-      zh_hans: "zh_hans_example",
-      zh_hant: "zh_hant_example",
-      zh: "zh_example",
-      hr: "hr_example",
-      cs: "cs_example",
-      da: "da_example",
-      nl: "nl_example",
-      et: "et_example",
-      fi: "fi_example",
-      fr: "fr_example",
-      ka: "ka_example",
-      de: "de_example",
-      el: "el_example",
-      hi: "hi_example",
-      he: "he_example",
-      hu: "hu_example",
-      id: "id_example",
-      it: "it_example",
-      ja: "ja_example",
-      ko: "ko_example",
-      lv: "lv_example",
-      lt: "lt_example",
-      ms: "ms_example",
-      nb: "nb_example",
-      pl: "pl_example",
-      fa: "fa_example",
-      pt: "pt_example",
-      pa: "pa_example",
-      ro: "ro_example",
-      ru: "ru_example",
-      sr: "sr_example",
-      sk: "sk_example",
-      es: "es_example",
-      sv: "sv_example",
-      th: "th_example",
-      tr: "tr_example",
-      uk: "uk_example",
-      vi: "vi_example",
-    },
-    sound: "sound_example",
-    ios_sound: "ios_sound_example",
-    stale_date: 1,
-    dismissal_date: 1,
-    priority: 1,
-    ios_relevance_score: 3.14,
   };
 
 try {
@@ -4405,20 +3461,7 @@ const appId: string = "YOUR_APP_ID";
 const segmentId: string = "d6c5a3e1-9f17-44a1-9d10-7c0e4a2b1c8e";
 // UpdateSegmentRequest (optional)
 const updateSegmentRequest: Onesignal.UpdateSegmentRequest = {
-    name: "name_example",
-    description: "description_example",
-    filters: [
-      {
-        field: "tag",
-        key: "level",
-        value: "10",
-        hours_ago: "24",
-        radius: 3.14,
-        lat: 3.14,
-        long: 3.14,
-        relation: ">",
-      },
-    ],
+    name: "YOUR_NAME",
   };
 
 try {
@@ -4491,27 +3534,7 @@ const appId: string = "YOUR_APP_ID";
 // string
 const subscriptionId: string = "7e4c5b9a-1f60-4d07-9b1a-2e8c8d2cae51";
 // SubscriptionBody
-const subscriptionBody: Onesignal.SubscriptionBody = {
-    subscription: {
-      id: "e4e87830-b954-4363-b7bc-1f01dbaee5c8",
-      type: "iOSPush",
-      token: "d5d4d1a8-1c9e-42fb-b3f2-56d3a5a9a8b7",
-      enabled: true,
-      notification_types: 1,
-      session_time: 60,
-      session_count: 1,
-      sdk: "5.2.0",
-      device_model: "iPhone14,2",
-      device_os: "17.1",
-      rooted: true,
-      test_type: 1,
-      app_version: "1.0.0",
-      net_type: 1,
-      carrier: "Verizon",
-      web_auth: "5DUmpGmLuTxWCLj5lJpwLQ",
-      web_p256: "BM5-r8DauQXOb2E-3PgLPjSvjT0Ao9v5oJhw8bZ0cW7Vh6BbmPYcqbbCEJ1P2sK0hZ7HxSh9zGyU5pQk1jJmZ8A",
-    },
-  };
+const subscriptionBody: Onesignal.SubscriptionBody = {};
 
 try {
   const response = await apiInstance.updateSubscription(appId, subscriptionId, subscriptionBody);
@@ -4585,27 +3608,7 @@ const tokenType: string = "Email";
 // string | The value of the token to lookup by (e.g., email address, phone number).
 const token: string = "user@example.com";
 // SubscriptionBody
-const subscriptionBody: Onesignal.SubscriptionBody = {
-    subscription: {
-      id: "e4e87830-b954-4363-b7bc-1f01dbaee5c8",
-      type: "iOSPush",
-      token: "d5d4d1a8-1c9e-42fb-b3f2-56d3a5a9a8b7",
-      enabled: true,
-      notification_types: 1,
-      session_time: 60,
-      session_count: 1,
-      sdk: "5.2.0",
-      device_model: "iPhone14,2",
-      device_os: "17.1",
-      rooted: true,
-      test_type: 1,
-      app_version: "1.0.0",
-      net_type: 1,
-      carrier: "Verizon",
-      web_auth: "5DUmpGmLuTxWCLj5lJpwLQ",
-      web_p256: "BM5-r8DauQXOb2E-3PgLPjSvjT0Ao9v5oJhw8bZ0cW7Vh6BbmPYcqbbCEJ1P2sK0hZ7HxSh9zGyU5pQk1jJmZ8A",
-    },
-  };
+const subscriptionBody: Onesignal.SubscriptionBody = {};
 
 try {
   const response = await apiInstance.updateSubscriptionByToken(appId, tokenType, token, subscriptionBody);
@@ -4676,152 +3679,7 @@ const templateId: string = "e4d3c2b1-a09f-4f1e-8d7c-6b5a4f3e2d1c";
 // string
 const appId: string = "YOUR_APP_ID";
 // UpdateTemplateRequest
-const updateTemplateRequest: Onesignal.UpdateTemplateRequest = {
-    name: "name_example",
-    contents: {
-      en: "en_example",
-      ar: "ar_example",
-      bs: "bs_example",
-      bg: "bg_example",
-      ca: "ca_example",
-      zh_hans: "zh_hans_example",
-      zh_hant: "zh_hant_example",
-      zh: "zh_example",
-      hr: "hr_example",
-      cs: "cs_example",
-      da: "da_example",
-      nl: "nl_example",
-      et: "et_example",
-      fi: "fi_example",
-      fr: "fr_example",
-      ka: "ka_example",
-      de: "de_example",
-      el: "el_example",
-      hi: "hi_example",
-      he: "he_example",
-      hu: "hu_example",
-      id: "id_example",
-      it: "it_example",
-      ja: "ja_example",
-      ko: "ko_example",
-      lv: "lv_example",
-      lt: "lt_example",
-      ms: "ms_example",
-      nb: "nb_example",
-      pl: "pl_example",
-      fa: "fa_example",
-      pt: "pt_example",
-      pa: "pa_example",
-      ro: "ro_example",
-      ru: "ru_example",
-      sr: "sr_example",
-      sk: "sk_example",
-      es: "es_example",
-      sv: "sv_example",
-      th: "th_example",
-      tr: "tr_example",
-      uk: "uk_example",
-      vi: "vi_example",
-    },
-    headings: {
-      en: "en_example",
-      ar: "ar_example",
-      bs: "bs_example",
-      bg: "bg_example",
-      ca: "ca_example",
-      zh_hans: "zh_hans_example",
-      zh_hant: "zh_hant_example",
-      zh: "zh_example",
-      hr: "hr_example",
-      cs: "cs_example",
-      da: "da_example",
-      nl: "nl_example",
-      et: "et_example",
-      fi: "fi_example",
-      fr: "fr_example",
-      ka: "ka_example",
-      de: "de_example",
-      el: "el_example",
-      hi: "hi_example",
-      he: "he_example",
-      hu: "hu_example",
-      id: "id_example",
-      it: "it_example",
-      ja: "ja_example",
-      ko: "ko_example",
-      lv: "lv_example",
-      lt: "lt_example",
-      ms: "ms_example",
-      nb: "nb_example",
-      pl: "pl_example",
-      fa: "fa_example",
-      pt: "pt_example",
-      pa: "pa_example",
-      ro: "ro_example",
-      ru: "ru_example",
-      sr: "sr_example",
-      sk: "sk_example",
-      es: "es_example",
-      sv: "sv_example",
-      th: "th_example",
-      tr: "tr_example",
-      uk: "uk_example",
-      vi: "vi_example",
-    },
-    subtitle: {
-      en: "en_example",
-      ar: "ar_example",
-      bs: "bs_example",
-      bg: "bg_example",
-      ca: "ca_example",
-      zh_hans: "zh_hans_example",
-      zh_hant: "zh_hant_example",
-      zh: "zh_example",
-      hr: "hr_example",
-      cs: "cs_example",
-      da: "da_example",
-      nl: "nl_example",
-      et: "et_example",
-      fi: "fi_example",
-      fr: "fr_example",
-      ka: "ka_example",
-      de: "de_example",
-      el: "el_example",
-      hi: "hi_example",
-      he: "he_example",
-      hu: "hu_example",
-      id: "id_example",
-      it: "it_example",
-      ja: "ja_example",
-      ko: "ko_example",
-      lv: "lv_example",
-      lt: "lt_example",
-      ms: "ms_example",
-      nb: "nb_example",
-      pl: "pl_example",
-      fa: "fa_example",
-      pt: "pt_example",
-      pa: "pa_example",
-      ro: "ro_example",
-      ru: "ru_example",
-      sr: "sr_example",
-      sk: "sk_example",
-      es: "es_example",
-      sv: "sv_example",
-      th: "th_example",
-      tr: "tr_example",
-      uk: "uk_example",
-      vi: "vi_example",
-    },
-    is_email: true,
-    email_subject: "email_subject_example",
-    email_body: "email_body_example",
-    email_bcc: [
-      "email_bcc_example",
-    ],
-    is_sms: true,
-    dynamic_content: "dynamic_content_example",
-  };
+const updateTemplateRequest: Onesignal.UpdateTemplateRequest = {};
 
 try {
   const response = await apiInstance.updateTemplate(templateId, appId, updateTemplateRequest);
@@ -4892,41 +3750,7 @@ const aliasLabel: string = "external_id";
 // string
 const aliasId: string = "YOUR_USER_EXTERNAL_ID";
 // UpdateUserRequest
-const updateUserRequest: Onesignal.UpdateUserRequest = {
-    properties: {
-      tags: {},
-      language: "en",
-      timezone_id: "America/Los_Angeles",
-      lat: 3.14,
-      long: 3.14,
-      country: "US",
-      first_active: 1,
-      last_active: 1,
-      amount_spent: 3.14,
-      purchases: [
-        {
-          sku: "com.example.coins100",
-          amount: "0.99",
-          iso: "USD",
-          count: 1,
-        },
-      ],
-      ip: "203.0.113.10",
-    },
-    refresh_device_metadata: false,
-    deltas: {
-      session_time: 1,
-      session_count: 1,
-      purchases: [
-        {
-          sku: "com.example.coins100",
-          amount: "0.99",
-          iso: "USD",
-          count: 1,
-        },
-      ],
-    },
-  };
+const updateUserRequest: Onesignal.UpdateUserRequest = {};
 
 try {
   const response = await apiInstance.updateUser(appId, aliasLabel, aliasId, updateUserRequest);
@@ -5193,7 +4017,7 @@ const apiInstance = new Onesignal.DefaultApi(configuration);
 // string | Your OneSignal App ID in UUID v4 format.
 const appId: string = "YOUR_APP_ID";
 // string | Opaque pagination token from a previous response\'s next_cursor. Omit for the first page. (optional)
-const cursor: string = "cursor_example";
+const cursor: string = "YOUR_NEXT_CURSOR";
 // number | Maximum journeys to return per page. Minimum 1, maximum 50. (optional)
 const limit: number = 50;
 
