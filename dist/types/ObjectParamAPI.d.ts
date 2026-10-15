@@ -10,6 +10,8 @@ import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResp
 import { CreateTemplateRequest } from '../models/CreateTemplateRequest';
 import { CustomEventsRequest } from '../models/CustomEventsRequest';
 import { DuplicateJourneyRequest } from '../models/DuplicateJourneyRequest';
+import { EmailProviderMetricsResponse } from '../models/EmailProviderMetricsResponse';
+import { EmailProviderMetricsTimeseriesResponse } from '../models/EmailProviderMetricsTimeseriesResponse';
 import { EmailReputationResponse } from '../models/EmailReputationResponse';
 import { EstimateNotificationRecipientsRequest } from '../models/EstimateNotificationRecipientsRequest';
 import { EstimateNotificationRecipientsSuccessResponse } from '../models/EstimateNotificationRecipientsSuccessResponse';
@@ -164,6 +166,20 @@ export interface DefaultApiGetAppRequest {
     appId: string;
 }
 export interface DefaultApiGetAppsRequest {
+}
+export interface DefaultApiGetEmailProviderMetricsRequest {
+    appId: string;
+    domain: string;
+    start: string;
+    end: string;
+}
+export interface DefaultApiGetEmailProviderMetricsTimeseriesRequest {
+    appId: string;
+    domain: string;
+    start: string;
+    end: string;
+    granularity: 'hourly' | 'daily' | 'monthly';
+    providers?: Array<string>;
 }
 export interface DefaultApiGetEmailReputationRequest {
     appId: string;
@@ -348,6 +364,8 @@ export declare class ObjectDefaultApi {
     getAliasesBySubscription(param: DefaultApiGetAliasesBySubscriptionRequest, options?: Configuration): Promise<UserIdentityBody>;
     getApp(param: DefaultApiGetAppRequest, options?: Configuration): Promise<App>;
     getApps(param?: DefaultApiGetAppsRequest, options?: Configuration): Promise<Array<App>>;
+    getEmailProviderMetrics(param: DefaultApiGetEmailProviderMetricsRequest, options?: Configuration): Promise<EmailProviderMetricsResponse>;
+    getEmailProviderMetricsTimeseries(param: DefaultApiGetEmailProviderMetricsTimeseriesRequest, options?: Configuration): Promise<EmailProviderMetricsTimeseriesResponse>;
     getEmailReputation(param: DefaultApiGetEmailReputationRequest, options?: Configuration): Promise<EmailReputationResponse>;
     getNotification(param: DefaultApiGetNotificationRequest, options?: Configuration): Promise<NotificationWithMeta>;
     getNotificationHistory(param: DefaultApiGetNotificationHistoryRequest, options?: Configuration): Promise<NotificationHistorySuccessResponse>;

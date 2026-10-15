@@ -25,6 +25,11 @@ export * from './CustomEventsRequest';
 export * from './DeliveryData';
 export * from './DuplicateJourneyOverrides';
 export * from './DuplicateJourneyRequest';
+export * from './EmailMetrics';
+export * from './EmailProviderMetrics';
+export * from './EmailProviderMetricsEvent';
+export * from './EmailProviderMetricsResponse';
+export * from './EmailProviderMetricsTimeseriesResponse';
 export * from './EmailReputationResponse';
 export * from './EmailReputationWindow';
 export * from './EmailWarmUp';
@@ -137,6 +142,11 @@ import { CustomEventsRequest } from './CustomEventsRequest';
 import { DeliveryData } from './DeliveryData';
 import { DuplicateJourneyOverrides } from './DuplicateJourneyOverrides';
 import { DuplicateJourneyRequest } from './DuplicateJourneyRequest';
+import { EmailMetrics } from './EmailMetrics';
+import { EmailProviderMetrics } from './EmailProviderMetrics';
+import { EmailProviderMetricsEvent } from './EmailProviderMetricsEvent';
+import { EmailProviderMetricsResponse } from './EmailProviderMetricsResponse';
+import { EmailProviderMetricsTimeseriesResponse } from './EmailProviderMetricsTimeseriesResponse';
 import { EmailReputationResponse } from './EmailReputationResponse';
 import { EmailReputationWindow } from './EmailReputationWindow';
 import { EmailWarmUp , EmailWarmUpStrategyEnum  , EmailWarmUpStatusEnum    } from './EmailWarmUp';
@@ -321,6 +331,11 @@ let typeMap: {[index: string]: any} = {
     "DeliveryData": DeliveryData,
     "DuplicateJourneyOverrides": DuplicateJourneyOverrides,
     "DuplicateJourneyRequest": DuplicateJourneyRequest,
+    "EmailMetrics": EmailMetrics,
+    "EmailProviderMetrics": EmailProviderMetrics,
+    "EmailProviderMetricsEvent": EmailProviderMetricsEvent,
+    "EmailProviderMetricsResponse": EmailProviderMetricsResponse,
+    "EmailProviderMetricsTimeseriesResponse": EmailProviderMetricsTimeseriesResponse,
     "EmailReputationResponse": EmailReputationResponse,
     "EmailReputationWindow": EmailReputationWindow,
     "EmailWarmUp": EmailWarmUp,

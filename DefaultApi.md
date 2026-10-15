@@ -32,6 +32,8 @@ Method | HTTP request | Description
 [**getAliasesBySubscription**](DefaultApi.md#getAliasesBySubscription) | **GET** /apps/{app_id}/subscriptions/{subscription_id}/user/identity | 
 [**getApp**](DefaultApi.md#getApp) | **GET** /apps/{app_id} | View an app
 [**getApps**](DefaultApi.md#getApps) | **GET** /apps | View apps
+[**getEmailProviderMetrics**](DefaultApi.md#getEmailProviderMetrics) | **GET** /apps/{app_id}/email_analytics/provider_metrics | Get email inbox provider metrics
+[**getEmailProviderMetricsTimeseries**](DefaultApi.md#getEmailProviderMetricsTimeseries) | **GET** /apps/{app_id}/email_analytics/provider_metrics_timeseries | Get email inbox provider metrics over time
 [**getEmailReputation**](DefaultApi.md#getEmailReputation) | **GET** /apps/{app_id}/email_analytics/delivery_metrics | Get email reputation statistics
 [**getNotification**](DefaultApi.md#getNotification) | **GET** /notifications/{notification_id} | View notification
 [**getNotificationHistory**](DefaultApi.md#getNotificationHistory) | **POST** /notifications/{notification_id}/history | Notification History
@@ -2106,6 +2108,162 @@ This endpoint does not need any parameter.
 |-------------|-------------|------------------|
 **200** | OK |  -  |
 **400** | Bad Request |  -  |
+**429** | Rate Limit Exceeded |  -  |
+**0** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
+
+# **getEmailProviderMetrics**
+> EmailProviderMetricsResponse getEmailProviderMetrics(appId, domain, start, end)
+
+Email delivery, opens, clicks, bounces, failures, and spam complaints broken down by inbox provider (Gmail, Outlook, Yahoo, Apple, and more) to pinpoint where deliverability problems are coming from. Metrics are reported for a single sending domain over the requested time range. `start` must be before `end` and no more than 365 days ago. `providers` is empty when the domain is not found for the app or is not currently active for sending. 
+
+### Example
+
+
+```typescript
+import Onesignal from '@onesignal/node-onesignal';
+
+const configuration = Onesignal.createConfiguration({
+    restApiKey: 'YOUR_REST_API_KEY',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
+
+// string | Your OneSignal App ID in UUID v4 format.
+const appId: string = "YOUR_APP_ID";
+// string | The sending domain to report on. Must be an email domain configured for this app.
+const domain: string = "mail.example.com";
+// string | Start of the reporting window, as an ISO 8601 timestamp (for example, `2026-08-01T00:00:00Z`).
+const start: string = '2026-08-01T00:00:00Z';
+// string | End of the reporting window, as an ISO 8601 timestamp (for example, `2026-08-08T00:00:00Z`).
+const end: string = '2026-08-08T00:00:00Z';
+
+try {
+  const response = await apiInstance.getEmailProviderMetrics(appId, domain, start, end);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("getEmailProviderMetrics failed: HTTP " + e.code, e.errorMessages);
+  } else {
+    throw e;
+  }
+}
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **appId** | [**string**] | Your OneSignal App ID in UUID v4 format. | defaults to undefined
+ **domain** | [**string**] | The sending domain to report on. Must be an email domain configured for this app. | defaults to undefined
+ **start** | [**string**] | Start of the reporting window, as an ISO 8601 timestamp (for example, &#x60;2026-08-01T00:00:00Z&#x60;). | defaults to undefined
+ **end** | [**string**] | End of the reporting window, as an ISO 8601 timestamp (for example, &#x60;2026-08-08T00:00:00Z&#x60;). | defaults to undefined
+
+### Return type
+
+**EmailProviderMetricsResponse**
+
+### Authorization
+
+[rest_api_key](https://github.com/OneSignal/node-onesignal#configuration)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+**404** | Not Found |  -  |
+**429** | Rate Limit Exceeded |  -  |
+**0** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
+
+# **getEmailProviderMetricsTimeseries**
+> EmailProviderMetricsTimeseriesResponse getEmailProviderMetricsTimeseries(appId, domain, start, end, granularity, providers)
+
+Email delivery, opens, clicks, bounces, failures, and spam complaints for a sending domain over time, bucketed by hour, day, or month. Use `providers[]` to narrow the totals to specific inbox providers (Gmail, Outlook, Yahoo, Apple, and more) and track how deliverability to them changes. Each event\'s metrics are totaled across the requested providers, or across all providers when none are given. `start` must be before `end` and no more than 365 days ago, or 60 days ago for `hourly` granularity. `events` is empty when the domain is not found for the app or is not currently active for sending. 
+
+### Example
+
+
+```typescript
+import Onesignal from '@onesignal/node-onesignal';
+
+const configuration = Onesignal.createConfiguration({
+    restApiKey: 'YOUR_REST_API_KEY',
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
+
+// string | Your OneSignal App ID in UUID v4 format.
+const appId: string = "YOUR_APP_ID";
+// string | The sending domain to report on. Must be an email domain configured for this app.
+const domain: string = "mail.example.com";
+// string | Start of the reporting window, as an ISO 8601 timestamp (for example, `2026-08-01T00:00:00Z`).
+const start: string = '2026-08-01T00:00:00Z';
+// string | End of the reporting window, as an ISO 8601 timestamp (for example, `2026-08-08T00:00:00Z`).
+const end: string = '2026-08-08T00:00:00Z';
+// 'hourly' | 'daily' | 'monthly' | The size of each time bucket. Hourly data is only available for the last 60 days.
+const granularity: 'hourly' | 'daily' | 'monthly' = "daily";
+// Array<string> | Inbox providers to include in the totals. Omit to include all providers. Accepted values: `apple`, `att`, `canadian`, `chinese`, `comcast`, `free_fr`, `french`, `german`, `gmail`, `google_workspace`, `googlers`, `inbox_lv`, `italian`, `japanese`, `outlook_365`, `outlook_eu`, `outlook_us`, `proton`, `rackspace`, `russian`, `uk`, `united_online`, `yahoo_eu`, `yahoo_us`, `other_eu`, `other_us`, and `other`. Example: providers[]=gmail&providers[]=yahoo_us  (optional)
+const providers: Onesignal.Array<string> = [
+    "gmail",
+  ];
+
+try {
+  const response = await apiInstance.getEmailProviderMetricsTimeseries(appId, domain, start, end, granularity, providers);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("getEmailProviderMetricsTimeseries failed: HTTP " + e.code, e.errorMessages);
+  } else {
+    throw e;
+  }
+}
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **appId** | [**string**] | Your OneSignal App ID in UUID v4 format. | defaults to undefined
+ **domain** | [**string**] | The sending domain to report on. Must be an email domain configured for this app. | defaults to undefined
+ **start** | [**string**] | Start of the reporting window, as an ISO 8601 timestamp (for example, &#x60;2026-08-01T00:00:00Z&#x60;). | defaults to undefined
+ **end** | [**string**] | End of the reporting window, as an ISO 8601 timestamp (for example, &#x60;2026-08-08T00:00:00Z&#x60;). | defaults to undefined
+ **granularity** | [**&#39;hourly&#39; | &#39;daily&#39; | &#39;monthly&#39;**]**Array<&#39;hourly&#39; &#124; &#39;daily&#39; &#124; &#39;monthly&#39;>** | The size of each time bucket. Hourly data is only available for the last 60 days. | defaults to undefined
+ **providers** | **Array<string>** | Inbox providers to include in the totals. Omit to include all providers. Accepted values: &#x60;apple&#x60;, &#x60;att&#x60;, &#x60;canadian&#x60;, &#x60;chinese&#x60;, &#x60;comcast&#x60;, &#x60;free_fr&#x60;, &#x60;french&#x60;, &#x60;german&#x60;, &#x60;gmail&#x60;, &#x60;google_workspace&#x60;, &#x60;googlers&#x60;, &#x60;inbox_lv&#x60;, &#x60;italian&#x60;, &#x60;japanese&#x60;, &#x60;outlook_365&#x60;, &#x60;outlook_eu&#x60;, &#x60;outlook_us&#x60;, &#x60;proton&#x60;, &#x60;rackspace&#x60;, &#x60;russian&#x60;, &#x60;uk&#x60;, &#x60;united_online&#x60;, &#x60;yahoo_eu&#x60;, &#x60;yahoo_us&#x60;, &#x60;other_eu&#x60;, &#x60;other_us&#x60;, and &#x60;other&#x60;. Example: providers[]&#x3D;gmail&amp;providers[]&#x3D;yahoo_us  | (optional) defaults to undefined
+
+### Return type
+
+**EmailProviderMetricsTimeseriesResponse**
+
+### Authorization
+
+[rest_api_key](https://github.com/OneSignal/node-onesignal#configuration)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+**404** | Not Found |  -  |
 **429** | Rate Limit Exceeded |  -  |
 **0** | Unexpected error |  -  |
 

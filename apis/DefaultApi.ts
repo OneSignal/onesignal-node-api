@@ -23,6 +23,8 @@ import { CreateTemplateRequest } from '../models/CreateTemplateRequest';
 import { CreateUserConflictResponse } from '../models/CreateUserConflictResponse';
 import { CustomEventsRequest } from '../models/CustomEventsRequest';
 import { DuplicateJourneyRequest } from '../models/DuplicateJourneyRequest';
+import { EmailProviderMetricsResponse } from '../models/EmailProviderMetricsResponse';
+import { EmailProviderMetricsTimeseriesResponse } from '../models/EmailProviderMetricsTimeseriesResponse';
 import { EmailReputationResponse } from '../models/EmailReputationResponse';
 import { EstimateNotificationRecipientsRequest } from '../models/EstimateNotificationRecipientsRequest';
 import { EstimateNotificationRecipientsSuccessResponse } from '../models/EstimateNotificationRecipientsSuccessResponse';
@@ -99,7 +101,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
         // Query Params
         if (appId !== undefined) {
@@ -159,7 +161,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
         // Query Params
         if (appId !== undefined) {
@@ -238,7 +240,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         // Body Params
@@ -304,7 +306,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         // Body Params
@@ -363,7 +365,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         // Body Params
@@ -414,7 +416,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         // Body Params
@@ -473,7 +475,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         // Body Params
@@ -532,7 +534,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         // Body Params
@@ -583,7 +585,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         // Body Params
@@ -637,7 +639,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         // Body Params
@@ -711,7 +713,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         // Body Params
@@ -762,7 +764,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         // Body Params
@@ -820,7 +822,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         // Body Params
@@ -895,7 +897,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -944,7 +946,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -993,7 +995,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -1042,7 +1044,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -1090,7 +1092,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -1138,7 +1140,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
         // Query Params
         if (appId !== undefined) {
@@ -1199,7 +1201,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -1250,7 +1252,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         // Body Params
@@ -1301,7 +1303,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         // Body Params
@@ -1360,7 +1362,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
         // Query Params
         if (appId !== undefined) {
@@ -1408,7 +1410,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         // Body Params
@@ -1475,7 +1477,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -1523,7 +1525,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -1564,7 +1566,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -1597,12 +1599,185 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
         authMethod = _config.authMethods["organization_api_key"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Email delivery, opens, clicks, bounces, failures, and spam complaints broken down by inbox provider (Gmail, Outlook, Yahoo, Apple, and more) to pinpoint where deliverability problems are coming from. Metrics are reported for a single sending domain over the requested time range. `start` must be before `end` and no more than 365 days ago. `providers` is empty when the domain is not found for the app or is not currently active for sending. 
+     * Get email inbox provider metrics
+     * @param appId Your OneSignal App ID in UUID v4 format.
+     * @param domain The sending domain to report on. Must be an email domain configured for this app.
+     * @param start Start of the reporting window, as an ISO 8601 timestamp (for example, &#x60;2026-08-01T00:00:00Z&#x60;).
+     * @param end End of the reporting window, as an ISO 8601 timestamp (for example, &#x60;2026-08-08T00:00:00Z&#x60;).
+     */
+    public async getEmailProviderMetrics(appId: string, domain: string, start: string, end: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("DefaultApi", "getEmailProviderMetrics", "appId");
+        }
+
+
+        // verify required parameter 'domain' is not null or undefined
+        if (domain === null || domain === undefined) {
+            throw new RequiredError("DefaultApi", "getEmailProviderMetrics", "domain");
+        }
+
+
+        // verify required parameter 'start' is not null or undefined
+        if (start === null || start === undefined) {
+            throw new RequiredError("DefaultApi", "getEmailProviderMetrics", "start");
+        }
+
+
+        // verify required parameter 'end' is not null or undefined
+        if (end === null || end === undefined) {
+            throw new RequiredError("DefaultApi", "getEmailProviderMetrics", "end");
+        }
+
+
+        // Path Params
+        const localVarPath = '/apps/{app_id}/email_analytics/provider_metrics'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Always add the One Signal telemetry to the request.
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
+
+        // Query Params
+        if (domain !== undefined) {
+            requestContext.setQueryParam("domain", ObjectSerializer.serialize(domain, "string", ""));
+        }
+
+        // Query Params
+        if (start !== undefined) {
+            requestContext.setQueryParam("start", ObjectSerializer.serialize(start, "string", "date-time"));
+        }
+
+        // Query Params
+        if (end !== undefined) {
+            requestContext.setQueryParam("end", ObjectSerializer.serialize(end, "string", "date-time"));
+        }
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["rest_api_key"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Email delivery, opens, clicks, bounces, failures, and spam complaints for a sending domain over time, bucketed by hour, day, or month. Use `providers[]` to narrow the totals to specific inbox providers (Gmail, Outlook, Yahoo, Apple, and more) and track how deliverability to them changes. Each event\'s metrics are totaled across the requested providers, or across all providers when none are given. `start` must be before `end` and no more than 365 days ago, or 60 days ago for `hourly` granularity. `events` is empty when the domain is not found for the app or is not currently active for sending. 
+     * Get email inbox provider metrics over time
+     * @param appId Your OneSignal App ID in UUID v4 format.
+     * @param domain The sending domain to report on. Must be an email domain configured for this app.
+     * @param start Start of the reporting window, as an ISO 8601 timestamp (for example, &#x60;2026-08-01T00:00:00Z&#x60;).
+     * @param end End of the reporting window, as an ISO 8601 timestamp (for example, &#x60;2026-08-08T00:00:00Z&#x60;).
+     * @param granularity The size of each time bucket. Hourly data is only available for the last 60 days.
+     * @param providers Inbox providers to include in the totals. Omit to include all providers. Accepted values: &#x60;apple&#x60;, &#x60;att&#x60;, &#x60;canadian&#x60;, &#x60;chinese&#x60;, &#x60;comcast&#x60;, &#x60;free_fr&#x60;, &#x60;french&#x60;, &#x60;german&#x60;, &#x60;gmail&#x60;, &#x60;google_workspace&#x60;, &#x60;googlers&#x60;, &#x60;inbox_lv&#x60;, &#x60;italian&#x60;, &#x60;japanese&#x60;, &#x60;outlook_365&#x60;, &#x60;outlook_eu&#x60;, &#x60;outlook_us&#x60;, &#x60;proton&#x60;, &#x60;rackspace&#x60;, &#x60;russian&#x60;, &#x60;uk&#x60;, &#x60;united_online&#x60;, &#x60;yahoo_eu&#x60;, &#x60;yahoo_us&#x60;, &#x60;other_eu&#x60;, &#x60;other_us&#x60;, and &#x60;other&#x60;. Example: providers[]&#x3D;gmail&amp;providers[]&#x3D;yahoo_us 
+     */
+    public async getEmailProviderMetricsTimeseries(appId: string, domain: string, start: string, end: string, granularity: 'hourly' | 'daily' | 'monthly', providers?: Array<string>, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("DefaultApi", "getEmailProviderMetricsTimeseries", "appId");
+        }
+
+
+        // verify required parameter 'domain' is not null or undefined
+        if (domain === null || domain === undefined) {
+            throw new RequiredError("DefaultApi", "getEmailProviderMetricsTimeseries", "domain");
+        }
+
+
+        // verify required parameter 'start' is not null or undefined
+        if (start === null || start === undefined) {
+            throw new RequiredError("DefaultApi", "getEmailProviderMetricsTimeseries", "start");
+        }
+
+
+        // verify required parameter 'end' is not null or undefined
+        if (end === null || end === undefined) {
+            throw new RequiredError("DefaultApi", "getEmailProviderMetricsTimeseries", "end");
+        }
+
+
+        // verify required parameter 'granularity' is not null or undefined
+        if (granularity === null || granularity === undefined) {
+            throw new RequiredError("DefaultApi", "getEmailProviderMetricsTimeseries", "granularity");
+        }
+
+
+
+        // Path Params
+        const localVarPath = '/apps/{app_id}/email_analytics/provider_metrics_timeseries'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Always add the One Signal telemetry to the request.
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
+
+        // Query Params
+        if (domain !== undefined) {
+            requestContext.setQueryParam("domain", ObjectSerializer.serialize(domain, "string", ""));
+        }
+
+        // Query Params
+        if (start !== undefined) {
+            requestContext.setQueryParam("start", ObjectSerializer.serialize(start, "string", "date-time"));
+        }
+
+        // Query Params
+        if (end !== undefined) {
+            requestContext.setQueryParam("end", ObjectSerializer.serialize(end, "string", "date-time"));
+        }
+
+        // Query Params
+        if (granularity !== undefined) {
+            requestContext.setQueryParam("granularity", ObjectSerializer.serialize(granularity, "'hourly' | 'daily' | 'monthly'", ""));
+        }
+
+        // Query Params
+        if (providers !== undefined) {
+            requestContext.setQueryParam("providers[]", ObjectSerializer.serialize(providers, "Array<string>", ""));
+        }
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["rest_api_key"]
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
@@ -1638,7 +1813,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -1686,7 +1861,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
         // Query Params
         if (appId !== undefined) {
@@ -1739,7 +1914,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         // Body Params
@@ -1798,7 +1973,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
         // Query Params
         if (appId !== undefined) {
@@ -1879,7 +2054,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
         // Query Params
         if (outcomeNames !== undefined) {
@@ -1955,7 +2130,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
         // Query Params
         if (includeSegmentDetail !== undefined) {
@@ -2005,7 +2180,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
         // Query Params
         if (offset !== undefined) {
@@ -2071,7 +2246,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -2134,7 +2309,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
         // Query Params
         if (startTime !== undefined) {
@@ -2238,7 +2413,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -2294,7 +2469,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         // Body Params
@@ -2360,7 +2535,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         // Body Params
@@ -2427,7 +2602,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
         // Query Params
         if (token !== undefined) {
@@ -2488,7 +2663,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         // Body Params
@@ -2547,7 +2722,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         // Body Params
@@ -2614,7 +2789,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         // Body Params
@@ -2689,7 +2864,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         // Body Params
@@ -2756,7 +2931,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         // Body Params
@@ -2818,7 +2993,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         // Body Params
@@ -2884,7 +3059,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         // Body Params
@@ -2959,7 +3134,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         // Body Params
@@ -3025,7 +3200,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
         // Query Params
         if (appId !== undefined) {
@@ -3104,7 +3279,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         // Body Params
@@ -3156,7 +3331,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -3205,7 +3380,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -3254,7 +3429,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -3299,7 +3474,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
         // Query Params
         if (cursor !== undefined) {
@@ -3357,7 +3532,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
         // Query Params
         if (appId !== undefined) {
@@ -3408,7 +3583,7 @@ export class DefaultApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Always add the One Signal telemetry to the request.
-        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.20.0");
 
         // Query Params
         if (appId !== undefined) {
@@ -4990,6 +5165,120 @@ export class DefaultApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Array<App>", ""
             ) as Array<App>;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to getEmailProviderMetrics
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async getEmailProviderMetrics(response: ResponseContext): Promise<EmailProviderMetricsResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: EmailProviderMetricsResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "EmailProviderMetricsResponse", ""
+            ) as EmailProviderMetricsResponse;
+            return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("404", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(404, "Not Found", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimitError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimitError", ""
+            ) as RateLimitError;
+            throw new ApiException<RateLimitError>(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if (isCodeInRange("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: EmailProviderMetricsResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "EmailProviderMetricsResponse", ""
+            ) as EmailProviderMetricsResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to getEmailProviderMetricsTimeseries
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async getEmailProviderMetricsTimeseries(response: ResponseContext): Promise<EmailProviderMetricsTimeseriesResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: EmailProviderMetricsTimeseriesResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "EmailProviderMetricsTimeseriesResponse", ""
+            ) as EmailProviderMetricsTimeseriesResponse;
+            return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("404", response.httpStatusCode)) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(404, "Not Found", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: RateLimitError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "RateLimitError", ""
+            ) as RateLimitError;
+            throw new ApiException<RateLimitError>(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if (isCodeInRange("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body: GenericError = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "GenericError", ""
+            ) as GenericError;
+            throw new ApiException<GenericError>(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: EmailProviderMetricsTimeseriesResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "EmailProviderMetricsTimeseriesResponse", ""
+            ) as EmailProviderMetricsTimeseriesResponse;
             return body;
         }
 

@@ -430,6 +430,36 @@ class ObservableDefaultApi {
             return middlewarePostObservable.pipe((0, rxjsStub_2.map)((rsp) => this.responseProcessor.getApps(rsp)));
         }));
     }
+    getEmailProviderMetrics(appId, domain, start, end, _options) {
+        const requestContextPromise = this.requestFactory.getEmailProviderMetrics(appId, domain, start, end, _options);
+        let middlewarePreObservable = (0, rxjsStub_1.from)(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => middleware.pre(ctx)));
+        }
+        return middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => this.configuration.httpApi.send(ctx))).
+            pipe((0, rxjsStub_2.mergeMap)((response) => {
+            let middlewarePostObservable = (0, rxjsStub_1.of)(response);
+            for (let middleware of this.configuration.middleware) {
+                middlewarePostObservable = middlewarePostObservable.pipe((0, rxjsStub_2.mergeMap)((rsp) => middleware.post(rsp)));
+            }
+            return middlewarePostObservable.pipe((0, rxjsStub_2.map)((rsp) => this.responseProcessor.getEmailProviderMetrics(rsp)));
+        }));
+    }
+    getEmailProviderMetricsTimeseries(appId, domain, start, end, granularity, providers, _options) {
+        const requestContextPromise = this.requestFactory.getEmailProviderMetricsTimeseries(appId, domain, start, end, granularity, providers, _options);
+        let middlewarePreObservable = (0, rxjsStub_1.from)(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => middleware.pre(ctx)));
+        }
+        return middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => this.configuration.httpApi.send(ctx))).
+            pipe((0, rxjsStub_2.mergeMap)((response) => {
+            let middlewarePostObservable = (0, rxjsStub_1.of)(response);
+            for (let middleware of this.configuration.middleware) {
+                middlewarePostObservable = middlewarePostObservable.pipe((0, rxjsStub_2.mergeMap)((rsp) => middleware.post(rsp)));
+            }
+            return middlewarePostObservable.pipe((0, rxjsStub_2.map)((rsp) => this.responseProcessor.getEmailProviderMetricsTimeseries(rsp)));
+        }));
+    }
     getEmailReputation(appId, _options) {
         const requestContextPromise = this.requestFactory.getEmailReputation(appId, _options);
         let middlewarePreObservable = (0, rxjsStub_1.from)(requestContextPromise);
