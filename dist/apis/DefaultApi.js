@@ -797,6 +797,93 @@ class DefaultApiRequestFactory extends baseapi_1.BaseAPIRequestFactory {
         }
         return requestContext;
     }
+    async getEmailProviderMetrics(appId, domain, start, end, _options) {
+        let _config = _options || this.configuration;
+        if (appId === null || appId === undefined) {
+            throw new baseapi_1.RequiredError("DefaultApi", "getEmailProviderMetrics", "appId");
+        }
+        if (domain === null || domain === undefined) {
+            throw new baseapi_1.RequiredError("DefaultApi", "getEmailProviderMetrics", "domain");
+        }
+        if (start === null || start === undefined) {
+            throw new baseapi_1.RequiredError("DefaultApi", "getEmailProviderMetrics", "start");
+        }
+        if (end === null || end === undefined) {
+            throw new baseapi_1.RequiredError("DefaultApi", "getEmailProviderMetrics", "end");
+        }
+        const localVarPath = '/apps/{app_id}/email_analytics/provider_metrics'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)));
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        if (domain !== undefined) {
+            requestContext.setQueryParam("domain", ObjectSerializer_1.ObjectSerializer.serialize(domain, "string", ""));
+        }
+        if (start !== undefined) {
+            requestContext.setQueryParam("start", ObjectSerializer_1.ObjectSerializer.serialize(start, "string", "date-time"));
+        }
+        if (end !== undefined) {
+            requestContext.setQueryParam("end", ObjectSerializer_1.ObjectSerializer.serialize(end, "string", "date-time"));
+        }
+        let authMethod;
+        authMethod = _config.authMethods["rest_api_key"];
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        const defaultAuth = _options?.authMethods?.default || this.configuration?.authMethods?.default;
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+        return requestContext;
+    }
+    async getEmailProviderMetricsTimeseries(appId, domain, start, end, granularity, providers, _options) {
+        let _config = _options || this.configuration;
+        if (appId === null || appId === undefined) {
+            throw new baseapi_1.RequiredError("DefaultApi", "getEmailProviderMetricsTimeseries", "appId");
+        }
+        if (domain === null || domain === undefined) {
+            throw new baseapi_1.RequiredError("DefaultApi", "getEmailProviderMetricsTimeseries", "domain");
+        }
+        if (start === null || start === undefined) {
+            throw new baseapi_1.RequiredError("DefaultApi", "getEmailProviderMetricsTimeseries", "start");
+        }
+        if (end === null || end === undefined) {
+            throw new baseapi_1.RequiredError("DefaultApi", "getEmailProviderMetricsTimeseries", "end");
+        }
+        if (granularity === null || granularity === undefined) {
+            throw new baseapi_1.RequiredError("DefaultApi", "getEmailProviderMetricsTimeseries", "granularity");
+        }
+        const localVarPath = '/apps/{app_id}/email_analytics/provider_metrics_timeseries'
+            .replace('{' + 'app_id' + '}', encodeURIComponent(String(appId)));
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, http_1.HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+        requestContext.setHeaderParam("OS-Usage-Data", "kind=sdk, sdk-name=onesignal-typescript, version=5.19.0");
+        if (domain !== undefined) {
+            requestContext.setQueryParam("domain", ObjectSerializer_1.ObjectSerializer.serialize(domain, "string", ""));
+        }
+        if (start !== undefined) {
+            requestContext.setQueryParam("start", ObjectSerializer_1.ObjectSerializer.serialize(start, "string", "date-time"));
+        }
+        if (end !== undefined) {
+            requestContext.setQueryParam("end", ObjectSerializer_1.ObjectSerializer.serialize(end, "string", "date-time"));
+        }
+        if (granularity !== undefined) {
+            requestContext.setQueryParam("granularity", ObjectSerializer_1.ObjectSerializer.serialize(granularity, "'hourly' | 'daily' | 'monthly'", ""));
+        }
+        if (providers !== undefined) {
+            requestContext.setQueryParam("providers[]", ObjectSerializer_1.ObjectSerializer.serialize(providers, "Array<string>", ""));
+        }
+        let authMethod;
+        authMethod = _config.authMethods["rest_api_key"];
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        const defaultAuth = _options?.authMethods?.default || this.configuration?.authMethods?.default;
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+        return requestContext;
+    }
     async getEmailReputation(appId, _options) {
         let _config = _options || this.configuration;
         if (appId === null || appId === undefined) {
@@ -2472,6 +2559,62 @@ class DefaultApiResponseProcessor {
         }
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
             const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "Array<App>", "");
+            return body;
+        }
+        throw new exception_1.ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+    async getEmailProviderMetrics(response) {
+        const contentType = ObjectSerializer_1.ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if ((0, util_1.isCodeInRange)("200", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "EmailProviderMetricsResponse", "");
+            return body;
+        }
+        if ((0, util_1.isCodeInRange)("400", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(400, "Bad Request", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("404", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(404, "Not Found", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
+            throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "EmailProviderMetricsResponse", "");
+            return body;
+        }
+        throw new exception_1.ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+    async getEmailProviderMetricsTimeseries(response) {
+        const contentType = ObjectSerializer_1.ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if ((0, util_1.isCodeInRange)("200", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "EmailProviderMetricsTimeseriesResponse", "");
+            return body;
+        }
+        if ((0, util_1.isCodeInRange)("400", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(400, "Bad Request", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("404", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(404, "Not Found", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("429", response.httpStatusCode)) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "RateLimitError", "");
+            throw new exception_1.ApiException(429, "Rate Limit Exceeded", body, response.headers);
+        }
+        if ((0, util_1.isCodeInRange)("0", response.httpStatusCode) && response.httpStatusCode >= 300) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "GenericError", "");
+            throw new exception_1.ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body = ObjectSerializer_1.ObjectSerializer.deserialize(ObjectSerializer_1.ObjectSerializer.parse(await response.body.text(), contentType), "EmailProviderMetricsTimeseriesResponse", "");
             return body;
         }
         throw new exception_1.ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
