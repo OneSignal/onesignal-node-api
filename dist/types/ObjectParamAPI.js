@@ -90,6 +90,12 @@ class ObjectDefaultApi {
     getApps(param = {}, options) {
         return this.api.getApps(options).toPromise();
     }
+    getEmailProviderMetrics(param, options) {
+        return this.api.getEmailProviderMetrics(param.appId, param.domain, param.start, param.end, options).toPromise();
+    }
+    getEmailProviderMetricsTimeseries(param, options) {
+        return this.api.getEmailProviderMetricsTimeseries(param.appId, param.domain, param.start, param.end, param.granularity, param.providers, options).toPromise();
+    }
     getEmailReputation(param, options) {
         return this.api.getEmailReputation(param.appId, options).toPromise();
     }

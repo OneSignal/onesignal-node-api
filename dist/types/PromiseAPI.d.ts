@@ -12,6 +12,8 @@ import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResp
 import { CreateTemplateRequest } from '../models/CreateTemplateRequest';
 import { CustomEventsRequest } from '../models/CustomEventsRequest';
 import { DuplicateJourneyRequest } from '../models/DuplicateJourneyRequest';
+import { EmailProviderMetricsResponse } from '../models/EmailProviderMetricsResponse';
+import { EmailProviderMetricsTimeseriesResponse } from '../models/EmailProviderMetricsTimeseriesResponse';
 import { EmailReputationResponse } from '../models/EmailReputationResponse';
 import { EstimateNotificationRecipientsRequest } from '../models/EstimateNotificationRecipientsRequest';
 import { EstimateNotificationRecipientsSuccessResponse } from '../models/EstimateNotificationRecipientsSuccessResponse';
@@ -84,6 +86,8 @@ export declare class PromiseDefaultApi {
     getAliasesBySubscription(appId: string, subscriptionId: string, _options?: Configuration): Promise<UserIdentityBody>;
     getApp(appId: string, _options?: Configuration): Promise<App>;
     getApps(_options?: Configuration): Promise<Array<App>>;
+    getEmailProviderMetrics(appId: string, domain: string, start: string, end: string, _options?: Configuration): Promise<EmailProviderMetricsResponse>;
+    getEmailProviderMetricsTimeseries(appId: string, domain: string, start: string, end: string, granularity: 'hourly' | 'daily' | 'monthly', providers?: Array<string>, _options?: Configuration): Promise<EmailProviderMetricsTimeseriesResponse>;
     getEmailReputation(appId: string, _options?: Configuration): Promise<EmailReputationResponse>;
     getNotification(appId: string, notificationId: string, _options?: Configuration): Promise<NotificationWithMeta>;
     getNotificationHistory(notificationId: string, getNotificationHistoryRequestBody: GetNotificationHistoryRequestBody, _options?: Configuration): Promise<NotificationHistorySuccessResponse>;

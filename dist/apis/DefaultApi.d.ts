@@ -12,6 +12,8 @@ import { CreateSegmentSuccessResponse } from '../models/CreateSegmentSuccessResp
 import { CreateTemplateRequest } from '../models/CreateTemplateRequest';
 import { CustomEventsRequest } from '../models/CustomEventsRequest';
 import { DuplicateJourneyRequest } from '../models/DuplicateJourneyRequest';
+import { EmailProviderMetricsResponse } from '../models/EmailProviderMetricsResponse';
+import { EmailProviderMetricsTimeseriesResponse } from '../models/EmailProviderMetricsTimeseriesResponse';
 import { EmailReputationResponse } from '../models/EmailReputationResponse';
 import { EstimateNotificationRecipientsRequest } from '../models/EstimateNotificationRecipientsRequest';
 import { EstimateNotificationRecipientsSuccessResponse } from '../models/EstimateNotificationRecipientsSuccessResponse';
@@ -79,6 +81,8 @@ export declare class DefaultApiRequestFactory extends BaseAPIRequestFactory {
     getAliasesBySubscription(appId: string, subscriptionId: string, _options?: Configuration): Promise<RequestContext>;
     getApp(appId: string, _options?: Configuration): Promise<RequestContext>;
     getApps(_options?: Configuration): Promise<RequestContext>;
+    getEmailProviderMetrics(appId: string, domain: string, start: string, end: string, _options?: Configuration): Promise<RequestContext>;
+    getEmailProviderMetricsTimeseries(appId: string, domain: string, start: string, end: string, granularity: 'hourly' | 'daily' | 'monthly', providers?: Array<string>, _options?: Configuration): Promise<RequestContext>;
     getEmailReputation(appId: string, _options?: Configuration): Promise<RequestContext>;
     getNotification(appId: string, notificationId: string, _options?: Configuration): Promise<RequestContext>;
     getNotificationHistory(notificationId: string, getNotificationHistoryRequestBody: GetNotificationHistoryRequestBody, _options?: Configuration): Promise<RequestContext>;
@@ -138,6 +142,8 @@ export declare class DefaultApiResponseProcessor {
     getAliasesBySubscription(response: ResponseContext): Promise<UserIdentityBody>;
     getApp(response: ResponseContext): Promise<App>;
     getApps(response: ResponseContext): Promise<Array<App>>;
+    getEmailProviderMetrics(response: ResponseContext): Promise<EmailProviderMetricsResponse>;
+    getEmailProviderMetricsTimeseries(response: ResponseContext): Promise<EmailProviderMetricsTimeseriesResponse>;
     getEmailReputation(response: ResponseContext): Promise<EmailReputationResponse>;
     getNotification(response: ResponseContext): Promise<NotificationWithMeta>;
     getNotificationHistory(response: ResponseContext): Promise<NotificationHistorySuccessResponse>;

@@ -30,6 +30,11 @@ import { CustomEventsRequest } from '../models/CustomEventsRequest';
 import { DeliveryData } from '../models/DeliveryData';
 import { DuplicateJourneyOverrides } from '../models/DuplicateJourneyOverrides';
 import { DuplicateJourneyRequest } from '../models/DuplicateJourneyRequest';
+import { EmailMetrics } from '../models/EmailMetrics';
+import { EmailProviderMetrics } from '../models/EmailProviderMetrics';
+import { EmailProviderMetricsEvent } from '../models/EmailProviderMetricsEvent';
+import { EmailProviderMetricsResponse } from '../models/EmailProviderMetricsResponse';
+import { EmailProviderMetricsTimeseriesResponse } from '../models/EmailProviderMetricsTimeseriesResponse';
 import { EmailReputationResponse } from '../models/EmailReputationResponse';
 import { EmailReputationWindow } from '../models/EmailReputationWindow';
 import { EmailWarmUp } from '../models/EmailWarmUp';
@@ -823,6 +828,62 @@ export class ObservableDefaultApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getApps(rsp)));
+            }));
+    }
+
+    /**
+     * Email delivery, opens, clicks, bounces, failures, and spam complaints broken down by inbox provider (Gmail, Outlook, Yahoo, Apple, and more) to pinpoint where deliverability problems are coming from. Metrics are reported for a single sending domain over the requested time range. `start` must be before `end` and no more than 365 days ago. `providers` is empty when the domain is not found for the app or is not currently active for sending. 
+     * Get email inbox provider metrics
+     * @param appId Your OneSignal App ID in UUID v4 format.
+     * @param domain The sending domain to report on. Must be an email domain configured for this app.
+     * @param start Start of the reporting window, as an ISO 8601 timestamp (for example, &#x60;2026-08-01T00:00:00Z&#x60;).
+     * @param end End of the reporting window, as an ISO 8601 timestamp (for example, &#x60;2026-08-08T00:00:00Z&#x60;).
+     */
+    public getEmailProviderMetrics(appId: string, domain: string, start: string, end: string, _options?: Configuration): Observable<EmailProviderMetricsResponse> {
+        const requestContextPromise = this.requestFactory.getEmailProviderMetrics(appId, domain, start, end, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getEmailProviderMetrics(rsp)));
+            }));
+    }
+
+    /**
+     * Email delivery, opens, clicks, bounces, failures, and spam complaints for a sending domain over time, bucketed by hour, day, or month. Use `providers[]` to narrow the totals to specific inbox providers (Gmail, Outlook, Yahoo, Apple, and more) and track how deliverability to them changes. Each event\'s metrics are totaled across the requested providers, or across all providers when none are given. `start` must be before `end` and no more than 365 days ago, or 60 days ago for `hourly` granularity. `events` is empty when the domain is not found for the app or is not currently active for sending. 
+     * Get email inbox provider metrics over time
+     * @param appId Your OneSignal App ID in UUID v4 format.
+     * @param domain The sending domain to report on. Must be an email domain configured for this app.
+     * @param start Start of the reporting window, as an ISO 8601 timestamp (for example, &#x60;2026-08-01T00:00:00Z&#x60;).
+     * @param end End of the reporting window, as an ISO 8601 timestamp (for example, &#x60;2026-08-08T00:00:00Z&#x60;).
+     * @param granularity The size of each time bucket. Hourly data is only available for the last 60 days.
+     * @param providers Inbox providers to include in the totals. Omit to include all providers. Accepted values: &#x60;apple&#x60;, &#x60;att&#x60;, &#x60;canadian&#x60;, &#x60;chinese&#x60;, &#x60;comcast&#x60;, &#x60;free_fr&#x60;, &#x60;french&#x60;, &#x60;german&#x60;, &#x60;gmail&#x60;, &#x60;google_workspace&#x60;, &#x60;googlers&#x60;, &#x60;inbox_lv&#x60;, &#x60;italian&#x60;, &#x60;japanese&#x60;, &#x60;outlook_365&#x60;, &#x60;outlook_eu&#x60;, &#x60;outlook_us&#x60;, &#x60;proton&#x60;, &#x60;rackspace&#x60;, &#x60;russian&#x60;, &#x60;uk&#x60;, &#x60;united_online&#x60;, &#x60;yahoo_eu&#x60;, &#x60;yahoo_us&#x60;, &#x60;other_eu&#x60;, &#x60;other_us&#x60;, and &#x60;other&#x60;. Example: providers[]&#x3D;gmail&amp;providers[]&#x3D;yahoo_us 
+     */
+    public getEmailProviderMetricsTimeseries(appId: string, domain: string, start: string, end: string, granularity: 'hourly' | 'daily' | 'monthly', providers?: Array<string>, _options?: Configuration): Observable<EmailProviderMetricsTimeseriesResponse> {
+        const requestContextPromise = this.requestFactory.getEmailProviderMetricsTimeseries(appId, domain, start, end, granularity, providers, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getEmailProviderMetricsTimeseries(rsp)));
             }));
     }
 

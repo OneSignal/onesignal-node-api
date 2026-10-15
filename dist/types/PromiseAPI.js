@@ -123,6 +123,14 @@ class PromiseDefaultApi {
         const result = this.api.getApps(_options);
         return result.toPromise();
     }
+    getEmailProviderMetrics(appId, domain, start, end, _options) {
+        const result = this.api.getEmailProviderMetrics(appId, domain, start, end, _options);
+        return result.toPromise();
+    }
+    getEmailProviderMetricsTimeseries(appId, domain, start, end, granularity, providers, _options) {
+        const result = this.api.getEmailProviderMetricsTimeseries(appId, domain, start, end, granularity, providers, _options);
+        return result.toPromise();
+    }
     getEmailReputation(appId, _options) {
         const result = this.api.getEmailReputation(appId, _options);
         return result.toPromise();

@@ -42,6 +42,11 @@ __exportStar(require("./CustomEventsRequest"), exports);
 __exportStar(require("./DeliveryData"), exports);
 __exportStar(require("./DuplicateJourneyOverrides"), exports);
 __exportStar(require("./DuplicateJourneyRequest"), exports);
+__exportStar(require("./EmailMetrics"), exports);
+__exportStar(require("./EmailProviderMetrics"), exports);
+__exportStar(require("./EmailProviderMetricsEvent"), exports);
+__exportStar(require("./EmailProviderMetricsResponse"), exports);
+__exportStar(require("./EmailProviderMetricsTimeseriesResponse"), exports);
 __exportStar(require("./EmailReputationResponse"), exports);
 __exportStar(require("./EmailReputationWindow"), exports);
 __exportStar(require("./EmailWarmUp"), exports);
@@ -153,6 +158,11 @@ const CustomEventsRequest_1 = require("./CustomEventsRequest");
 const DeliveryData_1 = require("./DeliveryData");
 const DuplicateJourneyOverrides_1 = require("./DuplicateJourneyOverrides");
 const DuplicateJourneyRequest_1 = require("./DuplicateJourneyRequest");
+const EmailMetrics_1 = require("./EmailMetrics");
+const EmailProviderMetrics_1 = require("./EmailProviderMetrics");
+const EmailProviderMetricsEvent_1 = require("./EmailProviderMetricsEvent");
+const EmailProviderMetricsResponse_1 = require("./EmailProviderMetricsResponse");
+const EmailProviderMetricsTimeseriesResponse_1 = require("./EmailProviderMetricsTimeseriesResponse");
 const EmailReputationResponse_1 = require("./EmailReputationResponse");
 const EmailReputationWindow_1 = require("./EmailReputationWindow");
 const EmailWarmUp_1 = require("./EmailWarmUp");
@@ -331,6 +341,11 @@ let typeMap = {
     "DeliveryData": DeliveryData_1.DeliveryData,
     "DuplicateJourneyOverrides": DuplicateJourneyOverrides_1.DuplicateJourneyOverrides,
     "DuplicateJourneyRequest": DuplicateJourneyRequest_1.DuplicateJourneyRequest,
+    "EmailMetrics": EmailMetrics_1.EmailMetrics,
+    "EmailProviderMetrics": EmailProviderMetrics_1.EmailProviderMetrics,
+    "EmailProviderMetricsEvent": EmailProviderMetricsEvent_1.EmailProviderMetricsEvent,
+    "EmailProviderMetricsResponse": EmailProviderMetricsResponse_1.EmailProviderMetricsResponse,
+    "EmailProviderMetricsTimeseriesResponse": EmailProviderMetricsTimeseriesResponse_1.EmailProviderMetricsTimeseriesResponse,
     "EmailReputationResponse": EmailReputationResponse_1.EmailReputationResponse,
     "EmailReputationWindow": EmailReputationWindow_1.EmailReputationWindow,
     "EmailWarmUp": EmailWarmUp_1.EmailWarmUp,
