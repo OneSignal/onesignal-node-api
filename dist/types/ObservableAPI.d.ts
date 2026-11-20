@@ -25,6 +25,7 @@ import { GetSegmentSuccessResponse } from '../models/GetSegmentSuccessResponse';
 import { GetSegmentsSuccessResponse } from '../models/GetSegmentsSuccessResponse';
 import { Journey } from '../models/Journey';
 import { JourneyListResponse } from '../models/JourneyListResponse';
+import { JourneySchemaResponse } from '../models/JourneySchemaResponse';
 import { JourneyStats } from '../models/JourneyStats';
 import { ListAuditLogsSuccessResponse } from '../models/ListAuditLogsSuccessResponse';
 import { Notification } from '../models/Notification';
@@ -88,6 +89,7 @@ export declare class ObservableDefaultApi {
     getEmailProviderMetrics(appId: string, domain: string, start: string, end: string, _options?: Configuration): Observable<EmailProviderMetricsResponse>;
     getEmailProviderMetricsTimeseries(appId: string, domain: string, start: string, end: string, granularity: 'hourly' | 'daily' | 'monthly', providers?: Array<string>, _options?: Configuration): Observable<EmailProviderMetricsTimeseriesResponse>;
     getEmailReputation(appId: string, _options?: Configuration): Observable<EmailReputationResponse>;
+    getJourneySchema(operation: 'create' | 'duplicate' | 'update' | 'update_node', _options?: Configuration): Observable<JourneySchemaResponse>;
     getNotification(appId: string, notificationId: string, _options?: Configuration): Observable<NotificationWithMeta>;
     getNotificationHistory(notificationId: string, getNotificationHistoryRequestBody: GetNotificationHistoryRequestBody, _options?: Configuration): Observable<NotificationHistorySuccessResponse>;
     getNotifications(appId: string, limit?: number, offset?: number, kind?: 0 | 1 | 3, timeOffset?: string, _options?: Configuration): Observable<NotificationSlice>;
@@ -115,5 +117,5 @@ export declare class ObservableDefaultApi {
     viewJourneyStats(appId: string, journeyId: string, _options?: Configuration): Observable<JourneyStats>;
     viewJourneys(appId: string, cursor?: string, limit?: number, _options?: Configuration): Observable<JourneyListResponse>;
     viewTemplate(templateId: string, appId: string, _options?: Configuration): Observable<TemplateResource>;
-    viewTemplates(appId: string, limit?: number, offset?: number, channel?: 'push' | 'email' | 'sms', _options?: Configuration): Observable<TemplatesListResponse>;
+    viewTemplates(appId: string, limit?: number, offset?: number, channel?: 'push' | 'email' | 'sms', name?: string, _options?: Configuration): Observable<TemplatesListResponse>;
 }

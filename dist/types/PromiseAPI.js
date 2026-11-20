@@ -135,6 +135,10 @@ class PromiseDefaultApi {
         const result = this.api.getEmailReputation(appId, _options);
         return result.toPromise();
     }
+    getJourneySchema(operation, _options) {
+        const result = this.api.getJourneySchema(operation, _options);
+        return result.toPromise();
+    }
     getNotification(appId, notificationId, _options) {
         const result = this.api.getNotification(appId, notificationId, _options);
         return result.toPromise();
@@ -243,8 +247,8 @@ class PromiseDefaultApi {
         const result = this.api.viewTemplate(templateId, appId, _options);
         return result.toPromise();
     }
-    viewTemplates(appId, limit, offset, channel, _options) {
-        const result = this.api.viewTemplates(appId, limit, offset, channel, _options);
+    viewTemplates(appId, limit, offset, channel, name, _options) {
+        const result = this.api.viewTemplates(appId, limit, offset, channel, name, _options);
         return result.toPromise();
     }
 }

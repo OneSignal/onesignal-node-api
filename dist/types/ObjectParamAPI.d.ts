@@ -24,6 +24,7 @@ import { GetSegmentSuccessResponse } from '../models/GetSegmentSuccessResponse';
 import { GetSegmentsSuccessResponse } from '../models/GetSegmentsSuccessResponse';
 import { Journey } from '../models/Journey';
 import { JourneyListResponse } from '../models/JourneyListResponse';
+import { JourneySchemaResponse } from '../models/JourneySchemaResponse';
 import { JourneyStats } from '../models/JourneyStats';
 import { ListAuditLogsSuccessResponse } from '../models/ListAuditLogsSuccessResponse';
 import { Notification } from '../models/Notification';
@@ -184,6 +185,9 @@ export interface DefaultApiGetEmailProviderMetricsTimeseriesRequest {
 export interface DefaultApiGetEmailReputationRequest {
     appId: string;
 }
+export interface DefaultApiGetJourneySchemaRequest {
+    operation: 'create' | 'duplicate' | 'update' | 'update_node';
+}
 export interface DefaultApiGetNotificationRequest {
     appId: string;
     notificationId: string;
@@ -332,6 +336,7 @@ export interface DefaultApiViewTemplatesRequest {
     limit?: number;
     offset?: number;
     channel?: 'push' | 'email' | 'sms';
+    name?: string;
 }
 export declare class ObjectDefaultApi {
     private api;
@@ -367,6 +372,7 @@ export declare class ObjectDefaultApi {
     getEmailProviderMetrics(param: DefaultApiGetEmailProviderMetricsRequest, options?: Configuration): Promise<EmailProviderMetricsResponse>;
     getEmailProviderMetricsTimeseries(param: DefaultApiGetEmailProviderMetricsTimeseriesRequest, options?: Configuration): Promise<EmailProviderMetricsTimeseriesResponse>;
     getEmailReputation(param: DefaultApiGetEmailReputationRequest, options?: Configuration): Promise<EmailReputationResponse>;
+    getJourneySchema(param: DefaultApiGetJourneySchemaRequest, options?: Configuration): Promise<JourneySchemaResponse>;
     getNotification(param: DefaultApiGetNotificationRequest, options?: Configuration): Promise<NotificationWithMeta>;
     getNotificationHistory(param: DefaultApiGetNotificationHistoryRequest, options?: Configuration): Promise<NotificationHistorySuccessResponse>;
     getNotifications(param: DefaultApiGetNotificationsRequest, options?: Configuration): Promise<NotificationSlice>;

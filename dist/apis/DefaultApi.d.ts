@@ -26,6 +26,7 @@ import { GetSegmentSuccessResponse } from '../models/GetSegmentSuccessResponse';
 import { GetSegmentsSuccessResponse } from '../models/GetSegmentsSuccessResponse';
 import { Journey } from '../models/Journey';
 import { JourneyListResponse } from '../models/JourneyListResponse';
+import { JourneySchemaResponse } from '../models/JourneySchemaResponse';
 import { JourneyStats } from '../models/JourneyStats';
 import { ListAuditLogsSuccessResponse } from '../models/ListAuditLogsSuccessResponse';
 import { Notification } from '../models/Notification';
@@ -84,6 +85,7 @@ export declare class DefaultApiRequestFactory extends BaseAPIRequestFactory {
     getEmailProviderMetrics(appId: string, domain: string, start: string, end: string, _options?: Configuration): Promise<RequestContext>;
     getEmailProviderMetricsTimeseries(appId: string, domain: string, start: string, end: string, granularity: 'hourly' | 'daily' | 'monthly', providers?: Array<string>, _options?: Configuration): Promise<RequestContext>;
     getEmailReputation(appId: string, _options?: Configuration): Promise<RequestContext>;
+    getJourneySchema(operation: 'create' | 'duplicate' | 'update' | 'update_node', _options?: Configuration): Promise<RequestContext>;
     getNotification(appId: string, notificationId: string, _options?: Configuration): Promise<RequestContext>;
     getNotificationHistory(notificationId: string, getNotificationHistoryRequestBody: GetNotificationHistoryRequestBody, _options?: Configuration): Promise<RequestContext>;
     getNotifications(appId: string, limit?: number, offset?: number, kind?: 0 | 1 | 3, timeOffset?: string, _options?: Configuration): Promise<RequestContext>;
@@ -111,7 +113,7 @@ export declare class DefaultApiRequestFactory extends BaseAPIRequestFactory {
     viewJourneyStats(appId: string, journeyId: string, _options?: Configuration): Promise<RequestContext>;
     viewJourneys(appId: string, cursor?: string, limit?: number, _options?: Configuration): Promise<RequestContext>;
     viewTemplate(templateId: string, appId: string, _options?: Configuration): Promise<RequestContext>;
-    viewTemplates(appId: string, limit?: number, offset?: number, channel?: 'push' | 'email' | 'sms', _options?: Configuration): Promise<RequestContext>;
+    viewTemplates(appId: string, limit?: number, offset?: number, channel?: 'push' | 'email' | 'sms', name?: string, _options?: Configuration): Promise<RequestContext>;
 }
 export declare class DefaultApiResponseProcessor {
     cancelNotification(response: ResponseContext): Promise<GenericSuccessBoolResponse>;
@@ -145,6 +147,7 @@ export declare class DefaultApiResponseProcessor {
     getEmailProviderMetrics(response: ResponseContext): Promise<EmailProviderMetricsResponse>;
     getEmailProviderMetricsTimeseries(response: ResponseContext): Promise<EmailProviderMetricsTimeseriesResponse>;
     getEmailReputation(response: ResponseContext): Promise<EmailReputationResponse>;
+    getJourneySchema(response: ResponseContext): Promise<JourneySchemaResponse>;
     getNotification(response: ResponseContext): Promise<NotificationWithMeta>;
     getNotificationHistory(response: ResponseContext): Promise<NotificationHistorySuccessResponse>;
     getNotifications(response: ResponseContext): Promise<NotificationSlice>;

@@ -475,6 +475,21 @@ class ObservableDefaultApi {
             return middlewarePostObservable.pipe((0, rxjsStub_2.map)((rsp) => this.responseProcessor.getEmailReputation(rsp)));
         }));
     }
+    getJourneySchema(operation, _options) {
+        const requestContextPromise = this.requestFactory.getJourneySchema(operation, _options);
+        let middlewarePreObservable = (0, rxjsStub_1.from)(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => middleware.pre(ctx)));
+        }
+        return middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => this.configuration.httpApi.send(ctx))).
+            pipe((0, rxjsStub_2.mergeMap)((response) => {
+            let middlewarePostObservable = (0, rxjsStub_1.of)(response);
+            for (let middleware of this.configuration.middleware) {
+                middlewarePostObservable = middlewarePostObservable.pipe((0, rxjsStub_2.mergeMap)((rsp) => middleware.post(rsp)));
+            }
+            return middlewarePostObservable.pipe((0, rxjsStub_2.map)((rsp) => this.responseProcessor.getJourneySchema(rsp)));
+        }));
+    }
     getNotification(appId, notificationId, _options) {
         const requestContextPromise = this.requestFactory.getNotification(appId, notificationId, _options);
         let middlewarePreObservable = (0, rxjsStub_1.from)(requestContextPromise);
@@ -880,8 +895,8 @@ class ObservableDefaultApi {
             return middlewarePostObservable.pipe((0, rxjsStub_2.map)((rsp) => this.responseProcessor.viewTemplate(rsp)));
         }));
     }
-    viewTemplates(appId, limit, offset, channel, _options) {
-        const requestContextPromise = this.requestFactory.viewTemplates(appId, limit, offset, channel, _options);
+    viewTemplates(appId, limit, offset, channel, name, _options) {
+        const requestContextPromise = this.requestFactory.viewTemplates(appId, limit, offset, channel, name, _options);
         let middlewarePreObservable = (0, rxjsStub_1.from)(requestContextPromise);
         for (let middleware of this.configuration.middleware) {
             middlewarePreObservable = middlewarePreObservable.pipe((0, rxjsStub_2.mergeMap)((ctx) => middleware.pre(ctx)));

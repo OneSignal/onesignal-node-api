@@ -83,9 +83,12 @@ __exportStar(require("./JourneyNode"), exports);
 __exportStar(require("./JourneyNodeStats"), exports);
 __exportStar(require("./JourneyReentryRules"), exports);
 __exportStar(require("./JourneySchedule"), exports);
+__exportStar(require("./JourneySchemaResponse"), exports);
 __exportStar(require("./JourneyStats"), exports);
 __exportStar(require("./JourneyTimePoint"), exports);
 __exportStar(require("./JourneyTimeWindow"), exports);
+__exportStar(require("./JourneyValidationError"), exports);
+__exportStar(require("./JourneyValidationErrorResponse"), exports);
 __exportStar(require("./JourneyWaitUntilExpiration"), exports);
 __exportStar(require("./LanguageStringMap"), exports);
 __exportStar(require("./ListAuditLogsSuccessResponse"), exports);
@@ -199,9 +202,12 @@ const JourneyNode_1 = require("./JourneyNode");
 const JourneyNodeStats_1 = require("./JourneyNodeStats");
 const JourneyReentryRules_1 = require("./JourneyReentryRules");
 const JourneySchedule_1 = require("./JourneySchedule");
+const JourneySchemaResponse_1 = require("./JourneySchemaResponse");
 const JourneyStats_1 = require("./JourneyStats");
 const JourneyTimePoint_1 = require("./JourneyTimePoint");
 const JourneyTimeWindow_1 = require("./JourneyTimeWindow");
+const JourneyValidationError_1 = require("./JourneyValidationError");
+const JourneyValidationErrorResponse_1 = require("./JourneyValidationErrorResponse");
 const JourneyWaitUntilExpiration_1 = require("./JourneyWaitUntilExpiration");
 const LanguageStringMap_1 = require("./LanguageStringMap");
 const ListAuditLogsSuccessResponse_1 = require("./ListAuditLogsSuccessResponse");
@@ -292,6 +298,8 @@ let enumsMap = new Set([
     "JourneyNodeKindEnum",
     "JourneyNodeRelativeToEnum",
     "JourneyNodeStatsKindEnum",
+    "JourneySchemaResponseOperationEnum",
+    "JourneySchemaResponseDocumentEnum",
     "NotificationTargetChannelEnum",
     "NotificationAggregationEnum",
     "NotificationKindEnum",
@@ -382,9 +390,12 @@ let typeMap = {
     "JourneyNodeStats": JourneyNodeStats_1.JourneyNodeStats,
     "JourneyReentryRules": JourneyReentryRules_1.JourneyReentryRules,
     "JourneySchedule": JourneySchedule_1.JourneySchedule,
+    "JourneySchemaResponse": JourneySchemaResponse_1.JourneySchemaResponse,
     "JourneyStats": JourneyStats_1.JourneyStats,
     "JourneyTimePoint": JourneyTimePoint_1.JourneyTimePoint,
     "JourneyTimeWindow": JourneyTimeWindow_1.JourneyTimeWindow,
+    "JourneyValidationError": JourneyValidationError_1.JourneyValidationError,
+    "JourneyValidationErrorResponse": JourneyValidationErrorResponse_1.JourneyValidationErrorResponse,
     "JourneyWaitUntilExpiration": JourneyWaitUntilExpiration_1.JourneyWaitUntilExpiration,
     "LanguageStringMap": LanguageStringMap_1.LanguageStringMap,
     "ListAuditLogsSuccessResponse": ListAuditLogsSuccessResponse_1.ListAuditLogsSuccessResponse,

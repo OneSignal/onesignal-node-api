@@ -71,9 +71,12 @@ import { JourneyNode } from '../models/JourneyNode';
 import { JourneyNodeStats } from '../models/JourneyNodeStats';
 import { JourneyReentryRules } from '../models/JourneyReentryRules';
 import { JourneySchedule } from '../models/JourneySchedule';
+import { JourneySchemaResponse } from '../models/JourneySchemaResponse';
 import { JourneyStats } from '../models/JourneyStats';
 import { JourneyTimePoint } from '../models/JourneyTimePoint';
 import { JourneyTimeWindow } from '../models/JourneyTimeWindow';
+import { JourneyValidationError } from '../models/JourneyValidationError';
+import { JourneyValidationErrorResponse } from '../models/JourneyValidationErrorResponse';
 import { JourneyWaitUntilExpiration } from '../models/JourneyWaitUntilExpiration';
 import { LanguageStringMap } from '../models/LanguageStringMap';
 import { ListAuditLogsSuccessResponse } from '../models/ListAuditLogsSuccessResponse';
@@ -912,6 +915,30 @@ export class ObservableDefaultApi {
     }
 
     /**
+     * Retrieve the JSON Schema for a Journey authoring operation without authentication or app context. The response identifies the document to validate. Schema retrieval does not validate permissions or business rules for a later write.
+     * Get Journey schema
+     * @param operation The authoring operation whose schema you need.
+     */
+    public getJourneySchema(operation: 'create' | 'duplicate' | 'update' | 'update_node', _options?: Configuration): Observable<JourneySchemaResponse> {
+        const requestContextPromise = this.requestFactory.getJourneySchema(operation, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getJourneySchema(rsp)));
+            }));
+    }
+
+    /**
      * View the details of a single notification and outcomes associated with it
      * View notification
      * @param appId 
@@ -1624,9 +1651,10 @@ export class ObservableDefaultApi {
      * @param limit Maximum number of templates. Default and max is 50.
      * @param offset Pagination offset.
      * @param channel Filter by delivery channel.
+     * @param name Return only templates whose name contains this text, ignoring case.
      */
-    public viewTemplates(appId: string, limit?: number, offset?: number, channel?: 'push' | 'email' | 'sms', _options?: Configuration): Observable<TemplatesListResponse> {
-        const requestContextPromise = this.requestFactory.viewTemplates(appId, limit, offset, channel, _options);
+    public viewTemplates(appId: string, limit?: number, offset?: number, channel?: 'push' | 'email' | 'sms', name?: string, _options?: Configuration): Observable<TemplatesListResponse> {
+        const requestContextPromise = this.requestFactory.viewTemplates(appId, limit, offset, channel, name, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
