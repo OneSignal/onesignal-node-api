@@ -70,9 +70,12 @@ import { JourneyNode } from '../models/JourneyNode';
 import { JourneyNodeStats } from '../models/JourneyNodeStats';
 import { JourneyReentryRules } from '../models/JourneyReentryRules';
 import { JourneySchedule } from '../models/JourneySchedule';
+import { JourneySchemaResponse } from '../models/JourneySchemaResponse';
 import { JourneyStats } from '../models/JourneyStats';
 import { JourneyTimePoint } from '../models/JourneyTimePoint';
 import { JourneyTimeWindow } from '../models/JourneyTimeWindow';
+import { JourneyValidationError } from '../models/JourneyValidationError';
+import { JourneyValidationErrorResponse } from '../models/JourneyValidationErrorResponse';
 import { JourneyWaitUntilExpiration } from '../models/JourneyWaitUntilExpiration';
 import { LanguageStringMap } from '../models/LanguageStringMap';
 import { ListAuditLogsSuccessResponse } from '../models/ListAuditLogsSuccessResponse';
@@ -639,6 +642,15 @@ export interface DefaultApiGetEmailReputationRequest {
      * @memberof DefaultApigetEmailReputation
      */
     appId: string
+}
+
+export interface DefaultApiGetJourneySchemaRequest {
+    /**
+     * The authoring operation whose schema you need.
+     * @type &#39;create&#39; | &#39;duplicate&#39; | &#39;update&#39; | &#39;update_node&#39;
+     * @memberof DefaultApigetJourneySchema
+     */
+    operation: 'create' | 'duplicate' | 'update' | 'update_node'
 }
 
 export interface DefaultApiGetNotificationRequest {
@@ -1281,6 +1293,12 @@ export interface DefaultApiViewTemplatesRequest {
      * @memberof DefaultApiviewTemplates
      */
     channel?: 'push' | 'email' | 'sms'
+    /**
+     * Return only templates whose name contains this text, ignoring case.
+     * @type string
+     * @memberof DefaultApiviewTemplates
+     */
+    name?: string
 }
 
 export class ObjectDefaultApi {
@@ -1561,6 +1579,15 @@ export class ObjectDefaultApi {
     }
 
     /**
+     * Retrieve the JSON Schema for a Journey authoring operation without authentication or app context. The response identifies the document to validate. Schema retrieval does not validate permissions or business rules for a later write.
+     * Get Journey schema
+     * @param param the request object
+     */
+    public getJourneySchema(param: DefaultApiGetJourneySchemaRequest, options?: Configuration): Promise<JourneySchemaResponse> {
+        return this.api.getJourneySchema(param.operation,  options).toPromise();
+    }
+
+    /**
      * View the details of a single notification and outcomes associated with it
      * View notification
      * @param param the request object
@@ -1805,7 +1832,7 @@ export class ObjectDefaultApi {
      * @param param the request object
      */
     public viewTemplates(param: DefaultApiViewTemplatesRequest, options?: Configuration): Promise<TemplatesListResponse> {
-        return this.api.viewTemplates(param.appId, param.limit, param.offset, param.channel,  options).toPromise();
+        return this.api.viewTemplates(param.appId, param.limit, param.offset, param.channel, param.name,  options).toPromise();
     }
 
 }

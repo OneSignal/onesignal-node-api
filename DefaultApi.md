@@ -35,6 +35,7 @@ Method | HTTP request | Description
 [**getEmailProviderMetrics**](DefaultApi.md#getEmailProviderMetrics) | **GET** /apps/{app_id}/email_analytics/provider_metrics | Get email inbox provider metrics
 [**getEmailProviderMetricsTimeseries**](DefaultApi.md#getEmailProviderMetricsTimeseries) | **GET** /apps/{app_id}/email_analytics/provider_metrics_timeseries | Get email inbox provider metrics over time
 [**getEmailReputation**](DefaultApi.md#getEmailReputation) | **GET** /apps/{app_id}/email_analytics/delivery_metrics | Get email reputation statistics
+[**getJourneySchema**](DefaultApi.md#getJourneySchema) | **GET** /journeys/schema | Get Journey schema
 [**getNotification**](DefaultApi.md#getNotification) | **GET** /notifications/{notification_id} | View notification
 [**getNotificationHistory**](DefaultApi.md#getNotificationHistory) | **POST** /notifications/{notification_id}/history | Notification History
 [**getNotifications**](DefaultApi.md#getNotifications) | **GET** /notifications | View notifications
@@ -2334,6 +2335,69 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
+# **getJourneySchema**
+> JourneySchemaResponse getJourneySchema(operation)
+
+Retrieve the JSON Schema for a Journey authoring operation without authentication or app context. The response identifies the document to validate. Schema retrieval does not validate permissions or business rules for a later write.
+
+### Example
+
+
+```typescript
+import Onesignal from '@onesignal/node-onesignal';
+
+const configuration = Onesignal.createConfiguration({
+});
+const apiInstance = new Onesignal.DefaultApi(configuration);
+
+// 'create' | 'duplicate' | 'update' | 'update_node' | The authoring operation whose schema you need.
+const operation: 'create' | 'duplicate' | 'update' | 'update_node' = "create";
+
+try {
+  const response = await apiInstance.getJourneySchema(operation);
+  console.log(response);
+} catch (e) {
+  if (e instanceof Onesignal.ApiException) {
+    // `e.errorMessages` flattens any error-envelope shape to a `string[]`;
+    // the raw parsed body remains on `e.body`.
+    console.error("getJourneySchema failed: HTTP " + e.code, e.errorMessages);
+  } else {
+    throw e;
+  }
+}
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **operation** | [**&#39;create&#39; | &#39;duplicate&#39; | &#39;update&#39; | &#39;update_node&#39;**]**Array<&#39;create&#39; &#124; &#39;duplicate&#39; &#124; &#39;update&#39; &#124; &#39;update_node&#39;>** | The authoring operation whose schema you need. | defaults to undefined
+
+### Return type
+
+**JourneySchemaResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The schema and its applicability. |  -  |
+**400** | Missing or unsupported operation. |  -  |
+**429** | Rate Limit Exceeded |  -  |
+**0** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
+
 # **getNotification**
 > NotificationWithMeta getNotification(appId, notificationId)
 
@@ -4295,7 +4359,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](https://github.com/OneSignal/node-onesignal#full-api-reference) [[Back to README]](https://github.com/OneSignal/node-onesignal)
 
 # **viewTemplates**
-> TemplatesListResponse viewTemplates(appId, limit, offset, channel)
+> TemplatesListResponse viewTemplates(appId, limit, offset, channel, name)
 
 List templates for an app.
 
@@ -4318,9 +4382,11 @@ const limit: number = 10;
 const offset: number = 0;
 // 'push' | 'email' | 'sms' | Filter by delivery channel. (optional)
 const channel: 'push' | 'email' | 'sms' = "push";
+// string | Return only templates whose name contains this text, ignoring case. (optional)
+const name: string = "Welcome";
 
 try {
-  const response = await apiInstance.viewTemplates(appId, limit, offset, channel);
+  const response = await apiInstance.viewTemplates(appId, limit, offset, channel, name);
   console.log(response);
 } catch (e) {
   if (e instanceof Onesignal.ApiException) {
@@ -4342,6 +4408,7 @@ Name | Type | Description  | Notes
  **limit** | [**number**] | Maximum number of templates. Default and max is 50. | (optional) defaults to 50
  **offset** | [**number**] | Pagination offset. | (optional) defaults to 0
  **channel** | [**&#39;push&#39; | &#39;email&#39; | &#39;sms&#39;**]**Array<&#39;push&#39; &#124; &#39;email&#39; &#124; &#39;sms&#39;>** | Filter by delivery channel. | (optional) defaults to undefined
+ **name** | [**string**] | Return only templates whose name contains this text, ignoring case. | (optional) defaults to undefined
 
 ### Return type
 

@@ -72,9 +72,12 @@ import { JourneyNode } from '../models/JourneyNode';
 import { JourneyNodeStats } from '../models/JourneyNodeStats';
 import { JourneyReentryRules } from '../models/JourneyReentryRules';
 import { JourneySchedule } from '../models/JourneySchedule';
+import { JourneySchemaResponse } from '../models/JourneySchemaResponse';
 import { JourneyStats } from '../models/JourneyStats';
 import { JourneyTimePoint } from '../models/JourneyTimePoint';
 import { JourneyTimeWindow } from '../models/JourneyTimeWindow';
+import { JourneyValidationError } from '../models/JourneyValidationError';
+import { JourneyValidationErrorResponse } from '../models/JourneyValidationErrorResponse';
 import { JourneyWaitUntilExpiration } from '../models/JourneyWaitUntilExpiration';
 import { LanguageStringMap } from '../models/LanguageStringMap';
 import { ListAuditLogsSuccessResponse } from '../models/ListAuditLogsSuccessResponse';
@@ -489,6 +492,16 @@ export class PromiseDefaultApi {
     }
 
     /**
+     * Retrieve the JSON Schema for a Journey authoring operation without authentication or app context. The response identifies the document to validate. Schema retrieval does not validate permissions or business rules for a later write.
+     * Get Journey schema
+     * @param operation The authoring operation whose schema you need.
+     */
+    public getJourneySchema(operation: 'create' | 'duplicate' | 'update' | 'update_node', _options?: Configuration): Promise<JourneySchemaResponse> {
+        const result = this.api.getJourneySchema(operation, _options);
+        return result.toPromise();
+    }
+
+    /**
      * View the details of a single notification and outcomes associated with it
      * View notification
      * @param appId 
@@ -823,9 +836,10 @@ export class PromiseDefaultApi {
      * @param limit Maximum number of templates. Default and max is 50.
      * @param offset Pagination offset.
      * @param channel Filter by delivery channel.
+     * @param name Return only templates whose name contains this text, ignoring case.
      */
-    public viewTemplates(appId: string, limit?: number, offset?: number, channel?: 'push' | 'email' | 'sms', _options?: Configuration): Promise<TemplatesListResponse> {
-        const result = this.api.viewTemplates(appId, limit, offset, channel, _options);
+    public viewTemplates(appId: string, limit?: number, offset?: number, channel?: 'push' | 'email' | 'sms', name?: string, _options?: Configuration): Promise<TemplatesListResponse> {
+        const result = this.api.viewTemplates(appId, limit, offset, channel, name, _options);
         return result.toPromise();
     }
 

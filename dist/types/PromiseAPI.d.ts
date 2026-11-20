@@ -26,6 +26,7 @@ import { GetSegmentSuccessResponse } from '../models/GetSegmentSuccessResponse';
 import { GetSegmentsSuccessResponse } from '../models/GetSegmentsSuccessResponse';
 import { Journey } from '../models/Journey';
 import { JourneyListResponse } from '../models/JourneyListResponse';
+import { JourneySchemaResponse } from '../models/JourneySchemaResponse';
 import { JourneyStats } from '../models/JourneyStats';
 import { ListAuditLogsSuccessResponse } from '../models/ListAuditLogsSuccessResponse';
 import { Notification } from '../models/Notification';
@@ -89,6 +90,7 @@ export declare class PromiseDefaultApi {
     getEmailProviderMetrics(appId: string, domain: string, start: string, end: string, _options?: Configuration): Promise<EmailProviderMetricsResponse>;
     getEmailProviderMetricsTimeseries(appId: string, domain: string, start: string, end: string, granularity: 'hourly' | 'daily' | 'monthly', providers?: Array<string>, _options?: Configuration): Promise<EmailProviderMetricsTimeseriesResponse>;
     getEmailReputation(appId: string, _options?: Configuration): Promise<EmailReputationResponse>;
+    getJourneySchema(operation: 'create' | 'duplicate' | 'update' | 'update_node', _options?: Configuration): Promise<JourneySchemaResponse>;
     getNotification(appId: string, notificationId: string, _options?: Configuration): Promise<NotificationWithMeta>;
     getNotificationHistory(notificationId: string, getNotificationHistoryRequestBody: GetNotificationHistoryRequestBody, _options?: Configuration): Promise<NotificationHistorySuccessResponse>;
     getNotifications(appId: string, limit?: number, offset?: number, kind?: 0 | 1 | 3, timeOffset?: string, _options?: Configuration): Promise<NotificationSlice>;
@@ -116,5 +118,5 @@ export declare class PromiseDefaultApi {
     viewJourneyStats(appId: string, journeyId: string, _options?: Configuration): Promise<JourneyStats>;
     viewJourneys(appId: string, cursor?: string, limit?: number, _options?: Configuration): Promise<JourneyListResponse>;
     viewTemplate(templateId: string, appId: string, _options?: Configuration): Promise<TemplateResource>;
-    viewTemplates(appId: string, limit?: number, offset?: number, channel?: 'push' | 'email' | 'sms', _options?: Configuration): Promise<TemplatesListResponse>;
+    viewTemplates(appId: string, limit?: number, offset?: number, channel?: 'push' | 'email' | 'sms', name?: string, _options?: Configuration): Promise<TemplatesListResponse>;
 }

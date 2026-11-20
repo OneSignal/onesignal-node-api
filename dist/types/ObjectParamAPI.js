@@ -99,6 +99,9 @@ class ObjectDefaultApi {
     getEmailReputation(param, options) {
         return this.api.getEmailReputation(param.appId, options).toPromise();
     }
+    getJourneySchema(param, options) {
+        return this.api.getJourneySchema(param.operation, options).toPromise();
+    }
     getNotification(param, options) {
         return this.api.getNotification(param.appId, param.notificationId, options).toPromise();
     }
@@ -181,7 +184,7 @@ class ObjectDefaultApi {
         return this.api.viewTemplate(param.templateId, param.appId, options).toPromise();
     }
     viewTemplates(param, options) {
-        return this.api.viewTemplates(param.appId, param.limit, param.offset, param.channel, options).toPromise();
+        return this.api.viewTemplates(param.appId, param.limit, param.offset, param.channel, param.name, options).toPromise();
     }
 }
 exports.ObjectDefaultApi = ObjectDefaultApi;

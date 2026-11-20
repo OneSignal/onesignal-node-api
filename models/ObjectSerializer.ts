@@ -66,9 +66,12 @@ export * from './JourneyNode';
 export * from './JourneyNodeStats';
 export * from './JourneyReentryRules';
 export * from './JourneySchedule';
+export * from './JourneySchemaResponse';
 export * from './JourneyStats';
 export * from './JourneyTimePoint';
 export * from './JourneyTimeWindow';
+export * from './JourneyValidationError';
+export * from './JourneyValidationErrorResponse';
 export * from './JourneyWaitUntilExpiration';
 export * from './LanguageStringMap';
 export * from './ListAuditLogsSuccessResponse';
@@ -183,9 +186,12 @@ import { JourneyNode , JourneyNodeKindEnum     , JourneyNodeRelativeToEnum      
 import { JourneyNodeStats, JourneyNodeStatsKindEnum       } from './JourneyNodeStats';
 import { JourneyReentryRules } from './JourneyReentryRules';
 import { JourneySchedule } from './JourneySchedule';
+import { JourneySchemaResponse, JourneySchemaResponseOperationEnum  , JourneySchemaResponseDocumentEnum    } from './JourneySchemaResponse';
 import { JourneyStats } from './JourneyStats';
 import { JourneyTimePoint } from './JourneyTimePoint';
 import { JourneyTimeWindow } from './JourneyTimeWindow';
+import { JourneyValidationError } from './JourneyValidationError';
+import { JourneyValidationErrorResponse } from './JourneyValidationErrorResponse';
 import { JourneyWaitUntilExpiration } from './JourneyWaitUntilExpiration';
 import { LanguageStringMap } from './LanguageStringMap';
 import { ListAuditLogsSuccessResponse } from './ListAuditLogsSuccessResponse';
@@ -281,6 +287,8 @@ let enumsMap: Set<string> = new Set<string>([
     "JourneyNodeKindEnum",
     "JourneyNodeRelativeToEnum",
     "JourneyNodeStatsKindEnum",
+    "JourneySchemaResponseOperationEnum",
+    "JourneySchemaResponseDocumentEnum",
     "NotificationTargetChannelEnum",
     "NotificationAggregationEnum",
     "NotificationKindEnum",
@@ -372,9 +380,12 @@ let typeMap: {[index: string]: any} = {
     "JourneyNodeStats": JourneyNodeStats,
     "JourneyReentryRules": JourneyReentryRules,
     "JourneySchedule": JourneySchedule,
+    "JourneySchemaResponse": JourneySchemaResponse,
     "JourneyStats": JourneyStats,
     "JourneyTimePoint": JourneyTimePoint,
     "JourneyTimeWindow": JourneyTimeWindow,
+    "JourneyValidationError": JourneyValidationError,
+    "JourneyValidationErrorResponse": JourneyValidationErrorResponse,
     "JourneyWaitUntilExpiration": JourneyWaitUntilExpiration,
     "LanguageStringMap": LanguageStringMap,
     "ListAuditLogsSuccessResponse": ListAuditLogsSuccessResponse,
